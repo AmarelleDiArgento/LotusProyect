@@ -26,16 +26,16 @@
     </head>
     <body>
         <header>
-            <%@include file="menu.jsp" %>
+            <%@include file="Segmentos\menu.jsp" %>
         </header>
 
-        
+
         <div class="container">
             <h4>Main Mensaje:</h4>
             <%String msj = (String) Ses.getAttribute("msj");%>
             <p><%=msj%></p>
-            
-            
+
+
 
         </div>
 
@@ -50,32 +50,10 @@
             </div>
         </footer>
 
-        <!--Scripts-->
 
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-
-        <script language="JavaScript" type="text/JavaScript">
-            function msj(id) {
-            swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-            window.location = 'permisos.do?accion=Eliminar&Id=' + id;
-            }
-            });
-            }
-            ;
-        </script>
     </body>
+    <!--Scripts-->
+    <%@include file="Segmentos\scriptJs.jsp" %>%>
 </html>
 <%
     } else {

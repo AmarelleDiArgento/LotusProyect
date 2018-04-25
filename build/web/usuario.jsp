@@ -22,11 +22,11 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+        <link rel="stylesheet" href="sweetalert2.min.css">
     </head>
     <body>
         <header>
-            <%@include file="menu.jsp" %>
+            <%@include file="Segmentos\menu.jsp" %>
         </header>
 
 
@@ -82,7 +82,7 @@
                     <li><a href="#" class="btn-floating light-green tooltipped" data-position="left" data-tooltip="Nuevo Usuario"><i class="material-icons">person_add</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -98,35 +98,11 @@
             </div>
         </footer>
 
-        <!--Scripts-->
-
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-
-        <script language="JavaScript" type="text/JavaScript">
-            function msj(id) {
-            swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-            window.location = 'permisos.do?accion=Eliminar&Id=' + id;
-            }
-            });
-            }
-            ;
-        </script>
     </body>
+    <!--Scripts-->
+    <%@include file="Segmentos\scriptJs.jsp" %>%>   
 </html>
-<%
-    } else {
+<%    } else {
 
         response.sendRedirect("index.jsp");
     }
