@@ -1,0 +1,7 @@
+
+
+<%@page import="Modelo.Tabs.UsuarioTab"%>
+<%@page import="Modelo.Tabs.PermisoTab"%>
+<%@page import="java.util.List"%>
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
