@@ -7,6 +7,7 @@ package Modelo;
 
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
 import java.sql.SQLException;
 import java.util.List;  
@@ -74,11 +75,17 @@ public class Probador {
             }
             
              */
-            String Loger = "almoreno";
+            /*String Loger = "almoreno";
             String pass = "1234";
             
             UsuarioTab u = Asql.getUsuario().login(Loger, pass);
-            msj = u.toFullName();
+            msj = u.toFullName();*/
+            
+            List<RolTab> rlis = Asql.getRol().listar();
+            for (RolTab r : rlis) {
+                System.out.println(r.toString());
+            }
+            
             /*List<AsignaPerTab> apList = Asql.getAsignaPer().PerSession("1070949");
             
             

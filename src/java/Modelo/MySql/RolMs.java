@@ -8,8 +8,10 @@ package Modelo.MySql;
 import Modelo.Interface.Rol;
 import Modelo.Tabs.RolTab;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ public class RolMs implements Rol{
     final String Modificar = "";
     final String Eliminar = "";
     final String Consultar = "";
-    final String ListarTodos = "";
+    final String ListarTodos = "call LotusProyect.rolLi()";
 
     @Override
     public String insertar(RolTab o) {
@@ -47,7 +49,13 @@ public class RolMs implements Rol{
 
     @Override
     public RolTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
+        int Id = rs.getInt("RolId");
+        String nombre = rs.getString("RolNombre");
+        String Descripcion = rs.getString("RolDescripcion");
+        int st = rs.getInt("RolEstado");
+        boolean status = st == 1;
+        RolTab uTab = new RolTab(Id, nombre, Descripcion, status);
+        return uTab;
     }
 
     @Override
@@ -57,7 +65,37 @@ public class RolMs implements Rol{
 
     @Override
     public List<RolTab> listar() {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<RolTab> rTab = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    rTab.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return rTab;    
     }
     
 }

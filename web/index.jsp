@@ -42,7 +42,7 @@
                 <a href="#">olvidaste tu contraseña</a> <br>
                     <div class="modal-footer">
                         <input name="accion" value="Ingresar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar<i class="material-icons right">send</i></a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
                 </div>
                   </form>
         </div>
