@@ -183,8 +183,8 @@ begin
 Select p.PerNombre, p.PerUrl, p.PerIco
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
-inner join rolPermiso as rp on r.RolId = rp.RolId
-inner join permiso as p on rp.PerId = p.PerId
+inner join AsignaPermiso as ap on r.RolId = ap.RolId
+inner join permiso as p on ap.PerId = p.PerId
 where u.UsuCedula= uCedula and p.PerEstado=1;
 end $$
 delimiter $$
@@ -200,14 +200,14 @@ end $$
 delimiter $$d
 
 -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla RolPermiso
+-- Procedimientos LotusProyect Tabla AsignaPermiso
 -- Insertar
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolPerIn (in rpRol int(11), in rpPer int(11), in rpLeer boolean, in rpNuevo boolean, in rpEditar boolean, in rpEliminar boolean)
+create procedure AsgPerIn (in apRol int(11), in apPer int(11), in apLeer boolean, in apNuevo boolean, in apEditar boolean, in apEliminar boolean)
 begin
-insert into rolPermiso (RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar) values (rpRol,rpPer,rpLeer,rpNuevo,rpEditar,rpEliminar);
+insert into AsignaPermiso (RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar) values (apRol,apPer,apLeer,apNuevo,apEditar,apEliminar);
 end $$
 delimiter $$
 
@@ -216,9 +216,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolPerMo (in rpRol int(11), in rpPer int(11), in rpLeer boolean, in rpNuevo boolean, in rpEditar boolean, in rpEliminar boolean)
+create procedure AsgPerMo (in apRol int(11), in apPer int(11), in apLeer boolean, in apNuevo boolean, in apEditar boolean, in apEliminar boolean)
 begin
-update rolPermiso SET  RolId=rpRol,PerId=rpPer,rolperLeer=rpLeer,rolperNuevo=rpNuevo,rolperEditar=rpEditar,rolperEliminar=rpEliminar where RolId=rpRol and PerId=rpPer;
+update AsignaPermiso SET  RolId=apRol,PerId=apPer,rolperLeer=apLeer,rolperNuevo=apNuevo,rolperEditar=apEditar,rolperEliminar=apEliminar where RolId=apRol and PerId=apPer;
 end $$
 delimiter $$
 
@@ -227,9 +227,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolPerEl (in rpRol int(11), in rpPer int(11))
+create procedure AsgPerEl (in apRol int(11), in apPer int(11))
 begin
-delete from rolPermiso where RolId=rpRol and PerId=rpPer;
+delete from AsignaPermiso where RolId=apRol and PerId=apPer;
 end $$
 delimiter $$
 
@@ -238,13 +238,13 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolPerLi (in rpRol int(11))
+create procedure AsgPerLi (in apRol int(11))
 begin
-Select rp.RolId, r.RolNombre, rp.PerId, p.PerNombre, rp.rolperLeer ,rp.rolperNuevo ,rp.rolperEditar ,rp.rolperEliminar
+Select ap.RolId, r.RolNombre, ap.PerId, p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
 from rol as r
-inner join rolPermiso as rp on r.RolId = rp.RolId
-inner join permiso as p on rp.PerId = p.PerId
-where r.RolId = rpRol;
+inner join AsignaPermiso as ap on r.RolId = ap.RolId
+inner join permiso as p on ap.PerId = p.PerId
+where r.RolId = apRol;
 end $$
 delimiter $$usuarioLogin
 
@@ -253,13 +253,13 @@ delimiter $$usuarioLogin
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolPerSession (in uCedula int(11))
+create procedure AsgPerSession (in uCedula int(11))
 begin
-Select p.PerNombre, rp.rolperLeer ,rp.rolperNuevo ,rp.rolperEditar ,rp.rolperEliminar
+Select p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
-inner join rolPermiso as rp on r.RolId = rp.RolId
-inner join permiso as p on rp.PerId = p.PerId
+inner join AsignaPermiso as ap on r.RolId = ap.RolId
+inner join permiso as p on ap.PerId = p.PerId
 where u.UsuCedula = uCedula;
 end $$
 delimiter $$
@@ -269,8 +269,8 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolPerCo (in rpRol int(11), in rpPer int(11))
+create procedure AsgPerCo (in apRol int(11), in apPer int(11))
 begin
-select RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar from rolPermiso where RolId=rpRol and PerId=rpPer;
+select RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar from AsignaPermiso where RolId=apRol and PerId=apPer;
 end $$
 delimiter $$

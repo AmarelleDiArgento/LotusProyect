@@ -40,33 +40,33 @@ call LotusProyect.permisoIn('Armado', 'Armado', 'Permisos de armado', 'armado.js
 -- call LotusProyect.permisoLi();
 
 -- -----------------------------------------------------
--- Insertar LotusProyect.RolPer
+-- Insertar LotusProyect.AsgPer
 -- -----------------------------------------------------
 
-call LotusProyect.rolPerIn(1, 1, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(1, 2, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(1, 3, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(1, 4, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(1, 5, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(1, 6, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 1, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 2, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 3, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 4, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 5, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 6, 1, 1, 1, 1);
 
-call LotusProyect.rolPerIn(2, 1, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(2, 2, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(2, 3, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(2, 4, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(2, 5, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(2, 6, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(2, 1, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(2, 2, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(2, 3, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(2, 4, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(2, 5, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(2, 6, 1, 1, 1, 1);
 
-call LotusProyect.rolPerIn(3, 1, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(3, 2, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(3, 3, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(3, 4, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(3, 5, 1, 1, 1, 1);
-call LotusProyect.rolPerIn(3, 6, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(3, 1, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(3, 2, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(3, 3, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(3, 4, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(3, 5, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(3, 6, 1, 1, 1, 1);
 
--- call LotusProyect.rolPerLi(1);
--- call LotusProyect.rolPerMo(2, 1, 0, 0, 0, 0);
--- call LotusProyect.rolPerCo(1, 1);
--- call LotusProyect.rolPerSession(1070949);
--- call LotusProyect.rolPerEl(3, 6);
+-- call LotusProyect.AsgPerLi(1);
+-- call LotusProyect.AsgPerMo(2, 1, 0, 0, 0, 0);
+-- call LotusProyect.AsgPerCo(1, 1);
+-- call LotusProyect.AsgPerSession(1070949);
+-- call LotusProyect.AsgPerEl(3, 6);
 

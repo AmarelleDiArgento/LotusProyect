@@ -509,9 +509,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table LotusProyect AsigaPermisos
+-- Table LotusProyect AsignaPermiso
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS LotusProyect.AsigaPermisos (
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaPermiso (
   RolId INT(11) NOT NULL,
   PerId INT(11) NOT NULL,
   rolperLeer TINYINT(1) NOT NULL DEFAULT '0',
