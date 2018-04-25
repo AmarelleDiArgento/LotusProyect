@@ -28,12 +28,12 @@ public class AsignaPerMs implements AsignaPer{
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String PerSession = "call LotusProyect.rolPerSession(?);";
+    final String Insertar = "call LotusProyect.AsgPerIn(?, ?, ?, ?, ?, ?);";
+    final String Modificar = "call LotusProyect.AsgPerMo(?, ?, ?, ?, ?, ?);";
+    final String Eliminar = "call LotusProyect.AsgPerEl(?, ?)";
+    final String Consultar = "call LotusProyect.AsgPerCo(?, ?)";
+    final String ListarTodos = "call LotusProyect.AsgPerLi(?);";
+    final String PerSession = "call LotusProyect.AsgPerSession(?);";
 
     @Override
     public List<AsignaPerTab> PerSession(String cedula) {

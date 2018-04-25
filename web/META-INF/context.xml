@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/LotusProyect">
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="34" maxActive="377" maxIdle="233" minIdle="89" name="Pool" password="0000" removeAbandoned="true" removeAbandonedTimeout="55" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/LotusProyect" username="root">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="34" maxActive="377" maxIdle="233" minIdle="89" name="Pool" password="Arkangel" removeAbandoned="true" removeAbandonedTimeout="55" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/LotusProyect" username="root">
         
     </Resource>
 </Context>

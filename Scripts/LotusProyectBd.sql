@@ -1,27 +1,15 @@
--- MySQL Workbench Forward Engineering
+-- -----------------------------------------------------
+-- Schema LotusProyect
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS LotusProyect DEFAULT CHARACTER SET utf8 ;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema lotusproyect
--- -----------------------------------------------------
+USE LotusProyect ;
 
 -- -----------------------------------------------------
--- Schema lotusproyect
+-- Table LotusProyect armado
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS lotusproyect DEFAULT CHARACTER SET utf8 ;
-USE lotusproyect ;
-
--- -----------------------------------------------------
--- Table lotusproyect.armado
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.armado (
-  ArmId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.armado (
+  ArmId INT(11) NOT NULL AUTO_INCREMENT,
   ArmNombre VARCHAR(45) NULL DEFAULT NULL,
   ArmDescricion VARCHAR(45) NULL DEFAULT NULL,
   ArmEstado TINYINT(1) NOT NULL DEFAULT '0',
@@ -31,10 +19,10 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.controldecambios
+-- Table LotusProyect controldecambios
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.controldecambios (
-  CCId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.controldecambios (
+  CCId INT(11) NOT NULL AUTO_INCREMENT,
   CCAntes MEDIUMTEXT NOT NULL,
   CCDespues MEDIUMTEXT NOT NULL,
   CCUsuarios VARCHAR(10) NOT NULL,
@@ -44,9 +32,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.maestro
+-- Table LotusProyect maestro
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.maestro (
+CREATE TABLE IF NOT EXISTS LotusProyect.maestro (
   MaeId INT(11) NOT NULL AUTO_INCREMENT,
   MaeNombre VARCHAR(45) NOT NULL,
   MaeDescripcion VARCHAR(255) NULL DEFAULT NULL,
@@ -56,18 +44,18 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.productos
+-- Table LotusProyect productos
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.productos (
-  ProId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.productos (
+  ProId INT(11) NOT NULL AUTO_INCREMENT,
   ProNombre VARCHAR(45) NOT NULL,
   ProEstado TINYINT(1) NOT NULL DEFAULT '0',
-  maestro_MaeId INT(11) NOT NULL,
-  PRIMARY KEY (ProId, maestro_MaeId),
-  INDEX fk_productos_maestro1_idx (maestro_MaeId ASC),
+  MaeId INT(11) NOT NULL,
+  PRIMARY KEY (ProId, MaeId),
+  INDEX fk_productos_maestro1_idx (MaeId ASC),
   CONSTRAINT fk_productos_maestro1
-    FOREIGN KEY (maestro_MaeId)
-    REFERENCES lotusproyect.maestro (MaeId)
+    FOREIGN KEY (MaeId)
+    REFERENCES LotusProyect.maestro (MaeId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -75,20 +63,20 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.variedad
+-- Table LotusProyect variedad
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.variedad (
-  VarId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.variedad (
+  VarId INT(11) NOT NULL AUTO_INCREMENT,
   VarNombre VARCHAR(45) NOT NULL,
   VarEstado TINYINT(1) NOT NULL DEFAULT '0',
-  productos_ProId INT(11) NOT NULL,
+  ProId INT(11) NOT NULL,
   VarImagen VARCHAR(45) NULL DEFAULT NULL,
   VarColor VARCHAR(15) NULL DEFAULT NULL,
-  PRIMARY KEY (VarId, productos_ProId),
-  INDEX fk_Variedad_productos1 (productos_ProId ASC),
+  PRIMARY KEY (VarId, ProId),
+  INDEX fk_Variedad_productos1 (ProId ASC),
   CONSTRAINT fk_Variedad_productos1
-    FOREIGN KEY (productos_ProId)
-    REFERENCES lotusproyect.productos (ProId)
+    FOREIGN KEY (ProId)
+    REFERENCES LotusProyect.productos (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -96,10 +84,10 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.fitosanidad
+-- Table LotusProyect fitosanidad
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.fitosanidad (
-  FitId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.fitosanidad (
+  FitId INT(11) NOT NULL AUTO_INCREMENT,
   FitNombre VARCHAR(45) NOT NULL,
   FitDescripcion VARCHAR(45) NOT NULL,
   FitTipo ENUM('Plaga', 'Enfermedad') NULL DEFAULT NULL,
@@ -111,37 +99,37 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.fitoproducto
+-- Table LotusProyect fitoproducto
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.fitoproducto (
-  Fitosanidad_FitId INT(11) NOT NULL,
-  maestro_MaeId INT(11) NULL DEFAULT NULL,
-  productos_ProId INT(11) NULL DEFAULT NULL,
-  variedad_VarId INT(11) NULL DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.fitoproducto (
+  FitId INT(11) NOT NULL AUTO_INCREMENT,
+  MaeId INT(11) NULL DEFAULT NULL,
+  ProId INT(11) NULL DEFAULT NULL,
+  VarId INT(11) NULL DEFAULT NULL,
   FpArea VARCHAR(45) NOT NULL,
   FpImagen VARCHAR(45) NOT NULL,
-  PRIMARY KEY (Fitosanidad_FitId),
-  INDEX fk_fitoproducto_maestro1_idx (maestro_MaeId ASC),
-  INDEX fk_fitoproducto_productos1_idx (productos_ProId ASC),
-  INDEX fk_fitoproducto_variedad1_idx (variedad_VarId ASC),
+  PRIMARY KEY (FitId),
+  INDEX fk_fitoproducto_maestro1_idx (MaeId ASC),
+  INDEX fk_fitoproducto_productos1_idx (ProId ASC),
+  INDEX fk_fitoproducto_variedad1_idx (VarId ASC),
   CONSTRAINT fk_fitoproducto_maestro1
-    FOREIGN KEY (maestro_MaeId)
-    REFERENCES lotusproyect.maestro (MaeId)
+    FOREIGN KEY (MaeId)
+    REFERENCES LotusProyect.maestro (MaeId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_fitoproducto_productos1
-    FOREIGN KEY (productos_ProId)
-    REFERENCES lotusproyect.productos (ProId)
+    FOREIGN KEY (ProId)
+    REFERENCES LotusProyect.productos (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_fitoproducto_variedad1
-    FOREIGN KEY (variedad_VarId)
-    REFERENCES lotusproyect.variedad (VarId)
+    FOREIGN KEY (VarId)
+    REFERENCES LotusProyect.variedad (VarId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_productos_has_Fitosanidad_Fitosanidad1
-    FOREIGN KEY (Fitosanidad_FitId)
-    REFERENCES lotusproyect.fitosanidad (FitId)
+    FOREIGN KEY (FitId)
+    REFERENCES LotusProyect.fitosanidad (FitId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -149,10 +137,10 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.grados
+-- Table LotusProyect grados
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.grados (
-  GraID INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.grados (
+  GraID INT(11) NOT NULL AUTO_INCREMENT,
   GraNombre VARCHAR(45) NOT NULL,
   GraDetalles MEDIUMTEXT NULL DEFAULT NULL,
   GraEstado TINYINT(1) NOT NULL DEFAULT '0',
@@ -162,9 +150,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.poscosecha
+-- Table LotusProyect poscosecha
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.poscosecha (
+CREATE TABLE IF NOT EXISTS LotusProyect.poscosecha (
   PosId INT(11) NOT NULL AUTO_INCREMENT,
   PosNombre VARCHAR(45) NOT NULL,
   PosDireccion VARCHAR(90) NOT NULL,
@@ -176,17 +164,17 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.linea
+-- Table LotusProyect linea
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.linea (
-  LinId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.linea (
+  LinId INT(11) NOT NULL AUTO_INCREMENT,
   LinEstado TINYINT(1) NOT NULL DEFAULT '0',
-  poscosecha_PosId INT(11) NOT NULL,
-  PRIMARY KEY (LinId, poscosecha_PosId),
-  INDEX fk_linea_poscosecha1_idx (poscosecha_PosId ASC),
+  PosId INT(11) NOT NULL,
+  PRIMARY KEY (LinId, PosId),
+  INDEX fk_linea_poscosecha1_idx (PosId ASC),
   CONSTRAINT fk_linea_poscosecha1
-    FOREIGN KEY (poscosecha_PosId)
-    REFERENCES lotusproyect.poscosecha (PosId)
+    FOREIGN KEY (PosId)
+    REFERENCES LotusProyect.poscosecha (PosId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -194,9 +182,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.maegrados
+-- Table LotusProyect AsignaMaestro
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.maegrados (
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaMaestro (
   MaeId INT(11) NOT NULL,
   GraID INT(11) NOT NULL,
   PRIMARY KEY (MaeId, GraID),
@@ -204,12 +192,12 @@ CREATE TABLE IF NOT EXISTS lotusproyect.maegrados (
   INDEX fk_maestro_has_grados_maestro1_idx (MaeId ASC),
   CONSTRAINT fk_maestro_has_grados_grados1
     FOREIGN KEY (GraID)
-    REFERENCES lotusproyect.grados (GraID)
+    REFERENCES LotusProyect.grados (GraID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_maestro_has_grados_maestro1
     FOREIGN KEY (MaeId)
-    REFERENCES lotusproyect.maestro (MaeId)
+    REFERENCES LotusProyect.maestro (MaeId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -217,19 +205,19 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.marcacion
+-- Table LotusProyect marcacion
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.marcacion (
-  MarId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.marcacion (
+  MarId INT(11) NOT NULL AUTO_INCREMENT,
   MarNombre VARCHAR(45) NOT NULL,
   MarPortada MEDIUMTEXT NULL DEFAULT NULL,
   MarEstado TINYINT(1) NOT NULL DEFAULT '0',
-  Armado_ArmId INT(11) NOT NULL,
-  PRIMARY KEY (MarId, Armado_ArmId),
-  INDEX fk_marcacion_Armado1 (Armado_ArmId ASC),
+  ArmId INT(11) NOT NULL,
+  PRIMARY KEY (MarId, ArmId),
+  INDEX fk_marcacion_Armado1 (ArmId ASC),
   CONSTRAINT fk_marcacion_Armado1
-    FOREIGN KEY (Armado_ArmId)
-    REFERENCES lotusproyect.armado (ArmId)
+    FOREIGN KEY (ArmId)
+    REFERENCES LotusProyect.armado (ArmId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -237,10 +225,10 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.tipoms
+-- Table LotusProyect tipoms
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.tipoms (
-  TiMId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.tipoms (
+  TiMId INT(11) NOT NULL AUTO_INCREMENT,
   TiMNombre VARCHAR(45) NOT NULL,
   TiMDescripcion MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (TiMId))
@@ -249,11 +237,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.materialseco
+-- Table LotusProyect materialseco
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.materialseco (
-  MsId INT(11) NOT NULL,
-  TipoMs_TiMId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.materialseco (
+  MsId INT(11) NOT NULL AUTO_INCREMENT,
+  TiMId INT(11) NOT NULL,
   MsNombre VARCHAR(45) NOT NULL,
   MsImagen MEDIUMTEXT NULL DEFAULT NULL,
   MsDescripcion MEDIUMTEXT NOT NULL,
@@ -262,19 +250,19 @@ CREATE TABLE IF NOT EXISTS lotusproyect.materialseco (
   MsAncho INT(3) NOT NULL,
   MsProfundo INT(3) NOT NULL,
   PRIMARY KEY (MsId),
-  INDEX fk_MaterialSeco_TipoMs1 (TipoMs_TiMId ASC),
+  INDEX fk_MaterialSeco_TipoMs1 (TiMId ASC),
   CONSTRAINT fk_MaterialSeco_TipoMs1
-    FOREIGN KEY (TipoMs_TiMId)
-    REFERENCES lotusproyect.tipoms (TiMId))
+    FOREIGN KEY (TiMId)
+    REFERENCES LotusProyect.tipoms (TiMId))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.menu
+-- Table LotusProyect menu
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.menu (
-  MenuId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.menu (
+  MenuId INT(11) NOT NULL AUTO_INCREMENT,
   Marcacion_MarId INT(11) NOT NULL,
   MenPortada MEDIUMTEXT NULL DEFAULT NULL,
   MenSuperior MEDIUMTEXT NULL DEFAULT NULL,
@@ -286,37 +274,37 @@ CREATE TABLE IF NOT EXISTS lotusproyect.menu (
   INDEX fk_Menu_Marcacion1 (Marcacion_MarId ASC),
   CONSTRAINT fk_Menu_Marcacion1
     FOREIGN KEY (Marcacion_MarId)
-    REFERENCES lotusproyect.marcacion (MarId))
+    REFERENCES LotusProyect.marcacion (MarId))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.materialseco_has_menu
+-- Table LotusProyect AsignaMatSeco
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.materialseco_has_menu (
-  MaterialSeco_MsId INT(11) NOT NULL,
-  Menu_MenuId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaMatSeco (
+  MsId INT(11) NOT NULL AUTO_INCREMENT,
+  MenuId INT(11) NOT NULL,
   MsMenUbicacion VARCHAR(100) NULL DEFAULT NULL,
   MsMenImagen MEDIUMTEXT NULL DEFAULT NULL,
   MsMenCantidad INT(2) NULL DEFAULT NULL,
-  PRIMARY KEY (MaterialSeco_MsId, Menu_MenuId),
-  INDEX fk_MaterialSeco_has_Menu_Menu1 (Menu_MenuId ASC),
+  PRIMARY KEY (MsId, MenuId),
+  INDEX fk_MaterialSeco_has_Menu_Menu1 (MenuId ASC),
   CONSTRAINT fk_MaterialSeco_has_Menu_MaterialSeco1
-    FOREIGN KEY (MaterialSeco_MsId)
-    REFERENCES lotusproyect.materialseco (MsId),
+    FOREIGN KEY (MsId)
+    REFERENCES LotusProyect.materialseco (MsId),
   CONSTRAINT fk_MaterialSeco_has_Menu_Menu1
-    FOREIGN KEY (Menu_MenuId)
-    REFERENCES lotusproyect.menu (MenuId))
+    FOREIGN KEY (MenuId)
+    REFERENCES LotusProyect.menu (MenuId))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.parametros
+-- Table LotusProyect parametros
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.parametros (
-  ParId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.parametros (
+  ParId INT(11) NOT NULL AUTO_INCREMENT,
   ParNombre VARCHAR(45) NOT NULL,
   ParEstado TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (ParId))
@@ -325,37 +313,37 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.parproducto
+-- Table LotusProyect AsignaParametro
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.parproducto (
-  grados_GraID INT(11) NOT NULL,
-  parametros_ParId INT(11) NOT NULL,
-  productos_ProId INT(11) NULL DEFAULT NULL,
-  variedad_VarId INT(11) NULL DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaParametro (
+  GraID INT(11) NOT NULL,
+  ParId INT(11) NOT NULL,
+  ProId INT(11) NULL DEFAULT NULL,
+  VarId INT(11) NULL DEFAULT NULL,
   PaProDescripcion MEDIUMTEXT NULL DEFAULT NULL,
   PaProFoto VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (grados_GraID, parametros_ParId),
-  INDEX fk_grados_has_parametros_parametros1 (parametros_ParId ASC),
-  INDEX fk_parproducto_variedad1_idx (variedad_VarId ASC),
-  INDEX fk_parproducto_productos1_idx (productos_ProId ASC),
+  PRIMARY KEY (GraID, ParId),
+  INDEX fk_grados_has_parametros_parametros1 (ParId ASC),
+  INDEX fk_parproducto_variedad1_idx (VarId ASC),
+  INDEX fk_parproducto_productos1_idx (ProId ASC),
   CONSTRAINT fk_grados_has_parametros_grados1
-    FOREIGN KEY (grados_GraID)
-    REFERENCES lotusproyect.grados (GraID)
+    FOREIGN KEY (GraID)
+    REFERENCES LotusProyect.grados (GraID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_grados_has_parametros_parametros1
-    FOREIGN KEY (parametros_ParId)
-    REFERENCES lotusproyect.parametros (ParId)
+    FOREIGN KEY (ParId)
+    REFERENCES LotusProyect.parametros (ParId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_parproducto_productos1
-    FOREIGN KEY (productos_ProId)
-    REFERENCES lotusproyect.productos (ProId)
+    FOREIGN KEY (ProId)
+    REFERENCES LotusProyect.productos (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_parproducto_variedad1
-    FOREIGN KEY (variedad_VarId)
-    REFERENCES lotusproyect.variedad (VarId)
+    FOREIGN KEY (VarId)
+    REFERENCES LotusProyect.variedad (VarId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -363,19 +351,19 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.paso
+-- Table LotusProyect paso
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.paso (
-  PasId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.paso (
+  PasId INT(11) NOT NULL AUTO_INCREMENT,
   PasOrden INT(11) NOT NULL,
   PasDescripcion MEDIUMTEXT NOT NULL,
   PasImagen VARCHAR(45) NOT NULL,
-  armado_ArmId INT(11) NOT NULL,
-  PRIMARY KEY (PasId, armado_ArmId),
-  INDEX fk_paso_armado1_idx (armado_ArmId ASC),
+  ArmId INT(11) NOT NULL,
+  PRIMARY KEY (PasId, ArmId),
+  INDEX fk_paso_armado1_idx (ArmId ASC),
   CONSTRAINT fk_paso_armado1
-    FOREIGN KEY (armado_ArmId)
-    REFERENCES lotusproyect.armado (ArmId)
+    FOREIGN KEY (ArmId)
+    REFERENCES LotusProyect.armado (ArmId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -383,9 +371,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.permiso
+-- Table LotusProyect permiso
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.permiso (
+CREATE TABLE IF NOT EXISTS LotusProyect.permiso (
   PerId INT(11) NOT NULL AUTO_INCREMENT,
   PerNombre VARCHAR(45) NOT NULL,
   PerModulo VARCHAR(45) NOT NULL,
@@ -399,9 +387,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.rol
+-- Table LotusProyect rol
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.rol (
+CREATE TABLE IF NOT EXISTS LotusProyect.rol (
   RolId INT(11) NOT NULL AUTO_INCREMENT,
   RolNombre VARCHAR(45) NOT NULL,
   RolDescripcion MEDIUMTEXT NOT NULL,
@@ -412,9 +400,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.usuario
+-- Table LotusProyect usuario
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.usuario (
+CREATE TABLE IF NOT EXISTS LotusProyect.usuario (
   UsuCedula VARCHAR(10) NOT NULL,
   UsuNombre VARCHAR(45) NOT NULL,
   UsuApellido VARCHAR(45) NOT NULL,
@@ -430,7 +418,7 @@ CREATE TABLE IF NOT EXISTS lotusproyect.usuario (
   INDEX fk_usuario_rol1_idx (RolId ASC),
   CONSTRAINT fk_usuario_rol1
     FOREIGN KEY (RolId)
-    REFERENCES lotusproyect.rol (RolId)
+    REFERENCES LotusProyect.rol (RolId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -438,22 +426,22 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.poscusuario
+-- Table LotusProyect AsignaPoscosecha
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.poscusuario (
-  PosId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaPoscosecha (
+  PosId INT(11) NOT NULL AUTO_INCREMENT,
   UsuCedula VARCHAR(10) NOT NULL,
   PRIMARY KEY (PosId, UsuCedula),
   INDEX fk_poscosecha_has_usuario_usuario1_idx (UsuCedula ASC),
   INDEX fk_poscosecha_has_usuario_poscosecha1_idx (PosId ASC),
   CONSTRAINT fk_poscosecha_has_usuario_poscosecha1
     FOREIGN KEY (PosId)
-    REFERENCES lotusproyect.poscosecha (PosId)
+    REFERENCES LotusProyect.poscosecha (PosId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_poscosecha_has_usuario_usuario1
     FOREIGN KEY (UsuCedula)
-    REFERENCES lotusproyect.usuario (UsuCedula)
+    REFERENCES LotusProyect.usuario (UsuCedula)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -461,56 +449,59 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.preliminar
+-- Table LotusProyect preliminar
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.preliminar (
-  PreId INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS LotusProyect.preliminar (
+  PreId INT(11) NOT NULL AUTO_INCREMENT,
   PreFecha DATETIME NOT NULL,
   PreEstado ENUM('Pendiente', 'En Curso', 'Finalizada') NOT NULL DEFAULT 'Pendiente',
-  Poscosecha_PosNombre INT(11) NOT NULL,
-  PRIMARY KEY (PreId),
-  INDEX fk_Preliminar_Poscosecha1 (Poscosecha_PosNombre ASC),
-  CONSTRAINT fk_Preliminar_Poscosecha1
-    FOREIGN KEY (Poscosecha_PosNombre)
-    REFERENCES lotusproyect.poscosecha (PosId))
+  PosId INT(11) NOT NULL,
+  PRIMARY KEY (PreId, PosId),
+  INDEX fk_preliminar_poscosecha1_idx (PosId ASC),
+  CONSTRAINT fk_preliminar_poscosecha1
+    FOREIGN KEY (PosId)
+    REFERENCES LotusProyect.poscosecha (PosId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.preliminar_has_marcacion
+-- Table LotusProyect AsignaMarcacion
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.preliminar_has_marcacion (
-  Preliminar_PreId INT(11) NOT NULL,
-  Marcacion_MarId INT(11) NOT NULL,
-  PRIMARY KEY (Preliminar_PreId, Marcacion_MarId),
-  INDEX fk_Preliminar_has_Marcacion_Marcacion1 (Marcacion_MarId ASC),
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaMarcacion (
+  PreId INT(11) NOT NULL,
+  MarId INT(11) NOT NULL,
+  PRIMARY KEY (PreId, MarId),
+  INDEX fk_Preliminar_has_Marcacion_Marcacion1 (MarId ASC),
   CONSTRAINT fk_Preliminar_has_Marcacion_Marcacion1
-    FOREIGN KEY (Marcacion_MarId)
-    REFERENCES lotusproyect.marcacion (MarId),
+    FOREIGN KEY (MarId)
+    REFERENCES LotusProyect.marcacion (MarId),
   CONSTRAINT fk_Preliminar_has_Marcacion_Preliminar1
-    FOREIGN KEY (Preliminar_PreId)
-    REFERENCES lotusproyect.preliminar (PreId))
+    FOREIGN KEY (PreId)
+    REFERENCES LotusProyect.preliminar (PreId))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.productos_has_menu
+-- Table LotusProyect AsignaProducto
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.productos_has_menu (
-  productos_ProId INT(11) NOT NULL,
-  menu_MenuId INT(11) NOT NULL,
-  PRIMARY KEY (productos_ProId, menu_MenuId),
-  INDEX fk_productos_has_menu_menu1 (menu_MenuId ASC),
+CREATE TABLE IF NOT EXISTS LotusProyect.AsignaProducto (
+  ProId INT(11) NOT NULL,
+  MenuId INT(11) NOT NULL,
+  Tallos INT(11) NULL,
+  PRIMARY KEY (ProId, MenuId),
+  INDEX fk_productos_has_menu_menu1 (MenuId ASC),
   CONSTRAINT fk_productos_has_menu_menu1
-    FOREIGN KEY (menu_MenuId)
-    REFERENCES lotusproyect.menu (MenuId)
+    FOREIGN KEY (MenuId)
+    REFERENCES LotusProyect.menu (MenuId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_productos_has_menu_productos1
-    FOREIGN KEY (productos_ProId)
-    REFERENCES lotusproyect.productos (ProId)
+    FOREIGN KEY (ProId)
+    REFERENCES LotusProyect.productos (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -518,9 +509,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table lotusproyect.rolpermiso
+-- Table LotusProyect AsigaPermisos
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS lotusproyect.rolpermiso (
+CREATE TABLE IF NOT EXISTS LotusProyect.AsigaPermisos (
   RolId INT(11) NOT NULL,
   PerId INT(11) NOT NULL,
   rolperLeer TINYINT(1) NOT NULL DEFAULT '0',
@@ -531,14 +522,9 @@ CREATE TABLE IF NOT EXISTS lotusproyect.rolpermiso (
   INDEX fk_Rol_has_Permiso_Permiso1 (PerId ASC),
   CONSTRAINT fk_Rol_has_Permiso_Permiso1
     FOREIGN KEY (PerId)
-    REFERENCES lotusproyect.permiso (PerId),
+    REFERENCES LotusProyect.permiso (PerId),
   CONSTRAINT fk_Rol_has_Permiso_Rol1
     FOREIGN KEY (RolId)
-    REFERENCES lotusproyect.rol (RolId))
+    REFERENCES LotusProyect.rol (RolId))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

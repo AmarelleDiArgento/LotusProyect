@@ -34,7 +34,7 @@ public class PermisoMs implements Permiso {
     final String Eliminar = "call LotusProyect.permisoEl(?);";
     final String Consultar = "call LotusProyect.permisoCo(?);";
     final String ListarTodos = "call LotusProyect.permisoLi();";
-    final String Menu = "call lotusproyect.perMenu(?);";
+    final String Menu = "call LotusProyect.perMenu(?);";
     @Override
     public String insertar(PermisoTab o) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
