@@ -39,7 +39,7 @@ delimiter $$
 delimiter $$
 create procedure rolLi ()
 begin
-select RolNombre,RolDescripcion,RolEstado from rol;
+select RolId,RolNombre,RolDescripcion,RolEstado from rol;
 end $$
 delimiter $$
 
