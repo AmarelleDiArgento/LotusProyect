@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/LotusProyect/web/META-INF/context.xml</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/LotusProyect/web/index.jsp</file>
+            <file>file:/C:/Users/Amarelle/Documents/GitHub/LotusProyect/src/java/Control/UsuarioServ.java</file>
+            <file>file:/C:/Users/Amarelle/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/UsuarioMs.java</file>
+            <file>file:/C:/Users/Amarelle/Documents/GitHub/LotusProyect/web/usuario.jsp</file>
         </group>
     </open-files>
 </project-private>

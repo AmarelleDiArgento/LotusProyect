@@ -7,6 +7,7 @@ package Control;
 
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.UsuarioTab;
+import Servicios.Mensajes;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -39,8 +40,10 @@ public class UsuarioServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-
+        Mensajes m = null;
         String msj;
+        String Tipo;
+        String Detalles;
         String ruta;
 
         //if (Ses.getAttribute("log") != null) {

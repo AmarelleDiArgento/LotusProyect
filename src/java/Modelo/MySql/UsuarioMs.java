@@ -3,12 +3,14 @@ package Modelo.MySql;
 
 import Modelo.Interface.Usuario;
 import Modelo.Tabs.UsuarioTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
@@ -17,6 +19,7 @@ import java.util.List;
 public class UsuarioMs implements Usuario {
 
     private final Connection con;
+    Mensajes mjs = null;
 
     public UsuarioMs(Connection con) {
 

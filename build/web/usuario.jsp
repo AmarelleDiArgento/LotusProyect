@@ -24,7 +24,9 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link rel="stylesheet" href="sweetalert2.min.css">
     </head>
-    <body>
+    
+    
+    <body onload="msjError('')">
         <header>
             <%@include file="Segmentos\menu.jsp" %>
         </header>
@@ -74,6 +76,12 @@
             <%} else {
                     response.sendRedirect("usuarios.do?accion=Listar");
                 }%>
+
+            <button type="button" onload="msjError('')" value="Activar Función">Error</button><br>
+            <button type="button" onload="msjConf('')" value="Activar Función">Confirmación</button><br>
+            <button type="button" onload="msjMsj('')" value="Activar Función">Mensaje</button><br>
+            <button type="button" onload="msjMsj('')" value="Activar Función">Mensaje</button><br>
+
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
                     <i class="large material-icons">settings</i>
@@ -100,7 +108,7 @@
 
     </body>
     <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jsp" %>%>   
+    <%@include file="Segmentos\scriptJs.jsp" %>
 </html>
 <%    } else {
 

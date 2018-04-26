@@ -15,20 +15,48 @@
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/init.js"></script>
-        <script src="sweetalert2.min.js"></script>
+        <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script language="JavaScript" type="text/JavaScript">
-            function error() {
-            swal({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href>Why do I have this issue?</a>',
-            })};
 
-                
+        <script type="text/javascript">
+
+
+            function msjError(Msj)
+            {
+                swal({
+                    title: "¡Error!",
+                    text: "Detalles: " + Msj,
+                    icon: "error"
+                });
+            }
+            ;
+            function msjConf(id)
+            {
+                swal({
+                    title: "¿Estas seguro?",
+                    text: "Se eliminara el registro con el ID: " + id,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
+                            }
+                        });
+            }
+            ;
+
+            function msjMsj(Msj)
+            {
+                swal({
+                    title: "¡Excelente!",
+                    text: "Detalles: " + Msj,
+                    icon: "success"
+                });
+            }
+            ;
         </script>
-
     </body>
 </html>
 <%--
