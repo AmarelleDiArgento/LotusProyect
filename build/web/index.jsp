@@ -19,11 +19,11 @@
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
             </div>
             <div>
-                <a style="z-index: 99;" class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#buscar"><i class="material-icons">search</i></a>
-                <a style="z-index: 99;" class="btn-floating btn-large waves-effect waves-light  modal-trigger" href="#sesion"><i class="material-icons">person</i></a>
+                <a class=" btn-session btn-floating btn-large waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons green-text darken-3">search</i></a>
+                <a class=" btn-session btn-floating btn-large  modal-trigger" href="#sesion"><i class="material-icons green-text darken-4 ">person</i></a>
             </div>
         </header>
-        <div id="sesion" class="modal">
+        <div id="sesion" class="modal modal-session">
             <div class="modal-content center-align">
                 <form class="col s12" method="get" action="usuarios.do">
                     <div class="row">
@@ -39,8 +39,8 @@
                             <label for="password">Password</label>
                         </div>
                     </div>
-                    <a href="#">¿olvidaste tu contraseña?</a> <br>
-                    <div class="modal-footer">
+                    <a href="#" class="text-hover">¿olvidaste tu contraseña?</a> <br>
+                    <div class="modal-footer text-center">
                         <input name="accion" value="Ingresar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
                     </div>

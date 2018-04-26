@@ -69,3 +69,33 @@ footer.page-footer {
  display: flex !important;
  justify-content: space-between !important;
 }
+.modal-session{
+  width: 40%;
+}
+.text-center{
+  text-align: center!important;
+}
+.text-hover {
+  color:#039be5 !important;
+}
+.text-hover:hover{
+  color: #ff6348 !important;
+}
+.btn-session{
+    z-index: 99;
+    background: none;
+}
+.btn-floating:hover {
+    background-color: #ffffff59;
+}
+@media only screen and (max-width: 900px){
+  .modal-session{
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 660px){
+  .modal-session{
+    width: 100%;
+  }
+}

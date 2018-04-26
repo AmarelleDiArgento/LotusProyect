@@ -10,7 +10,7 @@
       minIdle="89" 
       name="Pool" 
       username="root"
-      password="0000" 
+      password="camilo123" 
       removeAbandoned="true" 
       removeAbandonedTimeout="55" 
       type="javax.sql.DataSource" 
