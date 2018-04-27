@@ -103,7 +103,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
