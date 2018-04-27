@@ -3,6 +3,7 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="UTF-16">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
         <title>Lotus QA - Elite Flower</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
@@ -19,8 +20,8 @@
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
             </div>
             <div>
-                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons large green-text darken-3">search</i></a>
-                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons large green-text darken-4 ">person</i></a>
+                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons medium grey-text darken-4">search</i></a>
+                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons medium grey-text darken-4 ">person</i></a>
             </div>
         </header>
         <div id="sesion" class="modal modal-session">
@@ -39,7 +40,7 @@
                             <label for="password">Password</label>
                         </div>
                     </div>
-                    <a href="#" class="text-hover">ï¿½olvidaste tu contraseï¿½a?</a> <br>
+                    <a href="#" class="text-hover">¿olvidaste tu contraseña?</a> <br>
                     <div class="modal-footer text-center">
                         <input name="accion" value="Ingresar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
