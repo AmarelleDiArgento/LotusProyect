@@ -40,7 +40,7 @@
                             <label for="password">Password</label>
                         </div>
                     </div>
-                    <a href="#" class="text-hover">¿olvidaste tu contraseña?</a> <br>
+                    <a href="#" class="text-hover">Â¿olvidaste tu contraseÃ±a?</a> <br>
                     <div class="modal-footer text-center">
                         <input name="accion" value="Ingresar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
