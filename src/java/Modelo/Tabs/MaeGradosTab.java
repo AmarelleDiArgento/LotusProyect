@@ -16,25 +16,41 @@ public class MaeGradosTab {
     public MaeGradosTab(int MaeId, int GraID) {
         this.MaeId = MaeId;
         this.GraID = GraID;
-    }
-
-    public int getMaeId() {
-        return MaeId;
-    }
-
-    public void setMaeId(int MaeId) {
-        this.MaeId = MaeId;
-    }
-
-    public int getGraID() {
-        return GraID;
-    }
-
-    public void setGraID(int GraID) {
-        this.GraID = GraID;
-    }
-   
    
     
     
 }
+
+    /**
+     * @return the MaeId
+     */
+    public int getMaeId() {
+        return MaeId;
+    }
+
+    /**
+     * @param MaeId the MaeId to set
+     */
+    public void setMaeId(int MaeId) {
+        this.MaeId = MaeId;
+    }
+
+    /**
+     * @return the GraID
+     */
+    public int getGraID() {
+        return GraID;
+    }
+
+    /**
+     * @param GraID the GraID to set
+     */
+    public void setGraID(int GraID) {
+        this.GraID = GraID;
+    }
+
+    @Override
+    public String toString() {
+        return "MaeGradosTab{" + "MaeId=" + MaeId + ", GraID=" + GraID + '}';
+    }
+    }
