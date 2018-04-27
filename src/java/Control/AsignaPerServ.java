@@ -8,6 +8,7 @@ package Control;
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.AsignaPerTab;
 import Modelo.Tabs.UsuarioTab;
+import Servicios.Mensajes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -42,7 +43,13 @@ public class AsignaPerServ extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession Ses = request.getSession(true);
-        String msj = "";
+
+        Mensajes m = new Mensajes();
+        if (Ses.getAttribute("msj") != null) {
+            m = (Mensajes) Ses.getAttribute("msj");
+        }
+
+
         String ruta = "";
         String Dato = "";
         String Accion = request.getParameter("accion");
@@ -87,7 +94,7 @@ public class AsignaPerServ extends HttpServlet {
                             }
                         }
                         AsignaPerTab aps = new AsignaPerTab(Rol, P, L, N, M, E);
-                        msj = msj + Asql.getAsignaPer().modificar(aps);
+                        //msj = msj + Asql.getAsignaPer().modificar(aps);
                         P++;
                     }
                     ruta = "rol.jsp";
@@ -101,25 +108,28 @@ public class AsignaPerServ extends HttpServlet {
                     List<AsignaPerTab> apli = Asql.getAsignaPer().listar(rol);
                     Ses.setAttribute("Aprr", apli);
                     ruta = "rol.jsp";
-                    msj = "Cargado";
                     break;
                 case "session":
                     UsuarioTab u = (UsuarioTab) Ses.getAttribute("log");
                     List<AsignaPerTab> apl = Asql.getAsignaPer().PerSession(u.getCedula());
                     Ses.setAttribute("ApSes", apl);
-                    ruta = "Segmentos/menu.jsp";
+                    ruta = "main.jsp";
 
                     break;
                 default:
             }
         } catch (SQLException ex) {
-            msj = "Error sql: " + ex;
-            ruta = "main.jsp";
+                        m.setTipo("Error");
+                        m.setMsj("MySql Error");
+                        m.setDetalles("Detalles: " +ex);
+
         } catch (Exception ex) {
-            msj = "Servlet Error : " + ex;
-            ruta = "main.jsp";
-        }
-        Ses.setAttribute("msj", msj);
+                        m.setTipo("Error");
+                        m.setMsj("Error");
+                        m.setDetalles("Detalles: " +ex);
+            }
+        
+        Ses.setAttribute("msj", m);
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 

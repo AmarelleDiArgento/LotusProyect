@@ -40,20 +40,22 @@ public class UsuarioServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        Mensajes m = new Mensajes();
+
         String ruta;
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
 
-        if (Ses.getAttribute("msj") != null) {
-            m = (Mensajes) Ses.getAttribute("msj");
-        }
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "usuario.jsp";
         }
+        Mensajes m = new Mensajes();
+        if (Ses.getAttribute("msj") != null) {
+            m = (Mensajes) Ses.getAttribute("msj");
+        }
+
         UsuarioTab u = null;
 
         String Cedula;
@@ -162,20 +164,20 @@ public class UsuarioServ extends HttpServlet {
 
                 default:
 
-                    m.setTipo("No se que paso o_oU");
                     m.setTipo("Error");
+                    m.setMsj("No se que paso o_oU");
                     ruta = "usuario.jsp";
             }
 
         } catch (SQLException ex) {
             m.setTipo("Error");
-            m.setTipo("Error SQL");
-            m.setDetalles("Detalles: "+ex);
+            m.setMsj("Error SQL");
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
-            m.setTipo("Error");
-            m.setDetalles("Detalles: "+ex);
+            m.setMsj("Error");
+            m.setDetalles("Detalles: " + ex);
         }
         //} else {
         //    ruta = "index.jsp";

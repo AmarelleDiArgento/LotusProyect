@@ -1,4 +1,5 @@
 
+<%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
@@ -6,6 +7,7 @@
     String jsp = "main.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
+    Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
@@ -24,16 +26,24 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
     </head>
+
+    <%        if (Ses.getAttribute("msj") != null) {
+
+            msj = (Mensajes) Ses.getAttribute("msj");
+
+            out.println(msj.toBody());
+        } else {%>
     <body>
+
+
+        <%}%>
+        
         <header>
-            <%@include file="Segmentos\menu.jsp" %>
+            <%@include file="Segmentos\menu.jspf" %>
         </header>
 
 
         <div class="container">
-            <h4>Main Mensaje:</h4>
-            <%String msj = (String) Ses.getAttribute("msj");%>
-            <p><%=msj%></p>
 
 
 
@@ -53,11 +63,12 @@
 
     </body>
     <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jsp" %>%>
+    <%@include file="Segmentos\scriptJs.jspf" %>
 </html>
 <%
-    } else {
 
+        Ses.setAttribute("msj", null);
+    } else {
         response.sendRedirect("index.jsp");
     }
 %>
