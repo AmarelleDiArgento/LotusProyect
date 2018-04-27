@@ -20,8 +20,13 @@
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
             </div>
             <div>
+<<<<<<< Updated upstream
                 <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons medium grey-text darken-4">search</i></a>
                 <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons medium grey-text darken-4 ">person</i></a>
+=======
+                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons medium black-text darken-3">search</i></a>
+                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons medium black-text darken-5 ">person</i></a>
+>>>>>>> Stashed changes
             </div>
         </header>
         <div id="sesion" class="modal modal-session">

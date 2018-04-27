@@ -23,6 +23,7 @@ private Boolean Estado;
 private int  RolId;
 private String nRol;
 
+
     public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, Boolean Estado, int RolId, String nRol) {
         this.Cedula = Cedula;
         this.Nombre = Nombre;

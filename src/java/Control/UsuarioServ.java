@@ -40,19 +40,14 @@ public class UsuarioServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        Mensajes m = null;
-        String msj;
-        String Tipo;
-        String Detalles;
+        Mensajes m = new Mensajes();
         String ruta;
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
 
         if (Ses.getAttribute("msj") != null) {
-            msj = (String) Ses.getAttribute("msj");
-        } else {
-            msj = "";
+            m = (Mensajes) Ses.getAttribute("msj");
         }
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
@@ -99,7 +94,8 @@ public class UsuarioServ extends HttpServlet {
                         RolId = 3;
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Loger, Password, Extencion, Telefono, Email, Estado, RolId);
-                    msj = Asql.getUsuario().insertar(u);
+                    m.setMsj(Asql.getUsuario().insertar(u));
+                    m.setTipo("Ok");
                     break;
 
                 case "Modificar":
@@ -124,19 +120,24 @@ public class UsuarioServ extends HttpServlet {
                         RolId = 3;
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Loger, Password, Extencion, Telefono, Email, Estado, RolId);
-                    msj = Asql.getUsuario().modificar(u);
+                    m.setMsj(Asql.getUsuario().modificar(u));
+                    m.setTipo("Ok");
                     break;
+
                 case "Eliminar":
                     Cedula = request.getParameter("Id");
-                    msj = Asql.getUsuario().eliminar(Cedula);
+                    m.setMsj(Asql.getUsuario().eliminar(Cedula));
+                    m.setTipo("Ok");
                     break;
+
                 case "Obtener":
                     Cedula = request.getParameter("Cedula");
                     u = Asql.getUsuario().obtener(Cedula);
                     Ses.setAttribute("Usu", u);
-                    msj = "Se ha obtenido el usuario con cedula: " + u.getCedula();
-
+                    m.setMsj("Se ha obtenido el usuario con cedula: " + u.getCedula());
+                    m.setTipo("Ok");
                     break;
+
                 case "Listar":
                     List<UsuarioTab> ul = Asql.getUsuario().listar();
                     Ses.setAttribute("lisU", ul);
@@ -148,32 +149,40 @@ public class UsuarioServ extends HttpServlet {
                     UsuarioTab Us = Asql.getUsuario().login(Loger, Password);
                     if (Us != null) {
                         Ses.setAttribute("log", Us);
+                        m.setMsj("Bienvenido " + Us.toFullName());
+                        m.setTipo("Ok");
                         ruta = "asignapers.do?accion=session";
                     } else {
-                        msj = "Usuario o contraseña invalidos";
+                        m.setMsj("Bienvenido " + Us.toFullName());
+                        m.setTipo("Usuario o contraseña invalidos");
+                        m.setTipo("Error");
                         ruta = "index.jsp";
                     }
                     break;
 
                 default:
-                    msj = "No se que paso o_oU";
+
+                    m.setTipo("No se que paso o_oU");
+                    m.setTipo("Error");
                     ruta = "usuario.jsp";
             }
 
         } catch (SQLException ex) {
-            msj = "Error " + ex;
-            ruta = "main.jsp";
+            m.setTipo("Error");
+            m.setTipo("Error SQL");
+            m.setDetalles("Detalles: "+ex);
 
         } catch (Exception ex) {
-            msj = "Error " + ex;
-            ruta = "main.jsp";
+            m.setTipo("Error");
+            m.setTipo("Error");
+            m.setDetalles("Detalles: "+ex);
         }
         //} else {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
 
         //}
-        Ses.setAttribute("msj", msj);
+        Ses.setAttribute("msj", m);
         request.getRequestDispatcher(ruta).forward(request, response);
 
     }

@@ -14,6 +14,10 @@ public class Mensajes {
     private String tipo;
     private String msj;
     private String detalles;
+    
+
+    public Mensajes() {
+    }
 
     public Mensajes(String tipo, String msj, String detalles) {
         this.tipo = tipo;
@@ -26,6 +30,9 @@ public class Mensajes {
         this.msj = msj;
     }
 
+    
+    
+    
     /**
      * @return the tipo
      */
@@ -68,4 +75,14 @@ public class Mensajes {
         this.detalles = detalles;
     }
 
+    
+    public String toBody() {
+    if (tipo.equals("Ok")){
+        
+    }    
+        
+        return "Mensajes{" + "tipo=" + tipo + ", msj=" + msj + ", detalles=" + detalles + '}';
+    }
+    
+    
 }
