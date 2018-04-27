@@ -1,7 +1,7 @@
 -- -----------------------------------------------------
 -- Schema LotusProyect
 -- CREATE USER 'lotusproyect'@'localhost' IDENTIFIED BY '1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF';
--- GRANT ALL PRIVILEGES ON * . * TO 'nombre_usuario'@'localhost';
+-- GRANT ALL PRIVILEGES ON * . * TO 'lotusproyect'@'localhost';
 -- FLUSH PRIVILEGES;
 -- -----------------------------------------------------
 

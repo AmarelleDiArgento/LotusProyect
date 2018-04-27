@@ -20,13 +20,9 @@
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
             </div>
             <div>
-<<<<<<< Updated upstream
                 <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons medium grey-text darken-4">search</i></a>
                 <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons medium grey-text darken-4 ">person</i></a>
-=======
-                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons medium black-text darken-3">search</i></a>
-                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons medium black-text darken-5 ">person</i></a>
->>>>>>> Stashed changes
+
             </div>
         </header>
         <div id="sesion" class="modal modal-session">
@@ -45,7 +41,7 @@
                             <label for="password">Password</label>
                         </div>
                     </div>
-                    <a href="#" class="text-hover">Â¿olvidaste tu contraseÃ±a?</a> <br>
+                    <a href="#" class="text-hover">¿Olvidaste tu contraseña?</a> <br>
                     <div class="modal-footer text-center">
                         <input name="accion" value="Ingresar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
@@ -109,6 +105,6 @@
 
     </body>
     <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jsp" %>%>
+    <%@include file="Segmentos\scriptJs.jspf" %>%>
 
 </html>

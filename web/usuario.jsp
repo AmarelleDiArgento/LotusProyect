@@ -1,4 +1,5 @@
 
+<%@page import="Modelo.Tabs.UsuarioTab"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
@@ -6,6 +7,7 @@
     String jsp = "usuario.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
+    Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
@@ -24,19 +26,26 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link rel="stylesheet" href="sweetalert2.min.css">
     </head>
-    
-    
-    <body onload="msjError('')">
+
+
+
+    <%        if (Ses.getAttribute("msj") != null) {
+
+            msj = (Mensajes) Ses.getAttribute("msj");
+
+            out.println(msj.toBody());
+        } else {%>
+    <body>
+
+
+        <%}%>
         <header>
-            <%@include file="Segmentos\menu.jsp" %>
+            <%@include file="Segmentos\menu.jspf" %>
         </header>
 
 
         <div class="container">
-            <h4>Usuario Mensaje:</h4>
-            <%String msj = (String) Ses.getAttribute("msj");%>
-            <p><%=msj%></p>
-            <br>
+
             <% if (Ses.getAttribute("lisU") != null) {
                     List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
 
@@ -75,13 +84,7 @@
             </table>
             <%} else {
                     response.sendRedirect("usuarios.do?accion=Listar");
-                }%>
-
-            <button type="button" onload="msjError('')" value="Activar Función">Error</button><br>
-            <button type="button" onload="msjConf('')" value="Activar Función">Confirmación</button><br>
-            <button type="button" onload="msjMsj('')" value="Activar Función">Mensaje</button><br>
-            <button type="button" onload="msjMsj('')" value="Activar Función">Mensaje</button><br>
-
+                }%> 
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
                     <i class="large material-icons">settings</i>
@@ -100,7 +103,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -108,7 +111,7 @@
 
     </body>
     <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jsp" %>
+    <%@include file="Segmentos\scriptJs.jspf" %>
 </html>
 <%    } else {
 
