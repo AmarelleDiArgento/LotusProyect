@@ -23,37 +23,67 @@ public class PasoTab {
         this.Imagen = Imagen;
     }
 
+    /**
+     * @return the PasId
+     */
     public int getPasId() {
         return PasId;
     }
 
+    /**
+     * @param PasId the PasId to set
+     */
     public void setPasId(int PasId) {
         this.PasId = PasId;
     }
 
+    /**
+     * @return the Pasorden
+     */
     public int getPasorden() {
         return Pasorden;
     }
 
+    /**
+     * @param Pasorden the Pasorden to set
+     */
     public void setPasorden(int Pasorden) {
         this.Pasorden = Pasorden;
     }
 
+    /**
+     * @return the PasDescripcion
+     */
     public String getPasDescripcion() {
         return PasDescripcion;
     }
 
+    /**
+     * @param PasDescripcion the PasDescripcion to set
+     */
     public void setPasDescripcion(String PasDescripcion) {
         this.PasDescripcion = PasDescripcion;
     }
 
+    /**
+     * @return the Imagen
+     */
     public String getImagen() {
         return Imagen;
     }
 
+    /**
+     * @param Imagen the Imagen to set
+     */
     public void setImagen(String Imagen) {
         this.Imagen = Imagen;
     }
-    
+
+    @Override
+    public String toString() {
+        return "PasoTab{" + "PasId=" + PasId + ", Pasorden=" + Pasorden + ", PasDescripcion=" + PasDescripcion + ", Imagen=" + Imagen + '}';
+    }
+
+   
     
 }

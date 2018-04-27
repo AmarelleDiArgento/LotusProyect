@@ -25,46 +25,87 @@ public class VariedadTab {
         this.VarColor = VarColor;
     }
 
+    public VariedadTab(int VarId, String VarNombre, Boolean VarEstado, String Varimagen) {
+        this.VarId = VarId;
+        this.VarNombre = VarNombre;
+        this.VarEstado = VarEstado;
+        this.Varimagen = Varimagen;
+    }
+
+    /**
+     * @return the VarId
+     */
     public int getVarId() {
         return VarId;
     }
 
+    /**
+     * @param VarId the VarId to set
+     */
     public void setVarId(int VarId) {
         this.VarId = VarId;
     }
 
+    /**
+     * @return the VarNombre
+     */
     public String getVarNombre() {
         return VarNombre;
     }
 
+    /**
+     * @param VarNombre the VarNombre to set
+     */
     public void setVarNombre(String VarNombre) {
         this.VarNombre = VarNombre;
     }
 
+    /**
+     * @return the VarEstado
+     */
     public Boolean getVarEstado() {
         return VarEstado;
     }
 
+    /**
+     * @param VarEstado the VarEstado to set
+     */
     public void setVarEstado(Boolean VarEstado) {
         this.VarEstado = VarEstado;
     }
 
+    /**
+     * @return the Varimagen
+     */
     public String getVarimagen() {
         return Varimagen;
     }
 
+    /**
+     * @param Varimagen the Varimagen to set
+     */
     public void setVarimagen(String Varimagen) {
         this.Varimagen = Varimagen;
     }
 
+    /**
+     * @return the VarColor
+     */
     public String getVarColor() {
         return VarColor;
     }
 
+    /**
+     * @param VarColor the VarColor to set
+     */
     public void setVarColor(String VarColor) {
         this.VarColor = VarColor;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", Varimagen=" + Varimagen + ", VarColor=" + VarColor + '}';
+    }
+
+ 
 }
