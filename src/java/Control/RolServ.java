@@ -8,6 +8,7 @@ package Control;
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.AsignaPerTab;
 import Modelo.Tabs.RolTab;
+import Servicios.Mensajes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -41,7 +42,11 @@ public class RolServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        String msj;
+
+        Mensajes m = new Mensajes();
+        if (Ses.getAttribute("msj") != null) {
+            m = (Mensajes) Ses.getAttribute("msj");
+        }
         String ruta;
 
         //if (Ses.getAttribute("log") != null) {
@@ -54,11 +59,7 @@ public class RolServ extends HttpServlet {
                 acc = a;
             }
         }
-        if (Ses.getAttribute("msj") != null) {
-            msj = (String) Ses.getAttribute("msj");
-        } else {
-            msj = "";
-        }
+
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
@@ -82,10 +83,12 @@ public class RolServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         r = new RolTab(Nombre, Descripcion, Estado);
-                        msj = Asql.getRol().insertar(r);
+                        m.setMsj(Asql.getRol().insertar(r));
+                        m.setTipo("Ok");
 
                     } else {
-                        msj = "No tienes permisos para hacer registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para hacer registros");
                     }
 
                     break;
@@ -98,17 +101,22 @@ public class RolServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         r = new RolTab(Id, Nombre, Descripcion, Estado);
-                        msj = Asql.getRol().modificar(r);
+                        m.setMsj(Asql.getRol().modificar(r));
+                        m.setTipo("Ok");
+
                     } else {
-                        msj = "No tienes permisos para hacer modificaciones";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        msj = Asql.getRol().eliminar(Id);
+                        m.setMsj(Asql.getRol().eliminar(Id));
+                        m.setTipo("Ok");
                     } else {
-                        msj = "No tienes permisos para eliminar registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
                 case "obtener":
@@ -116,9 +124,11 @@ public class RolServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         r = Asql.getRol().obtener(Id);
                         Ses.setAttribute("Rol", r);
-                        msj = "Se ha obtenido el rol con id: " + r.getRolId();
+                        m.setMsj("Se ha obtenido el rol con id: " + r.getRolId());
+                        m.setTipo("Ok");
                     } else {
-                        msj = "No tienes permisos para consultar registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para consultar registros");
                     }
 
                     break;
@@ -127,7 +137,7 @@ public class RolServ extends HttpServlet {
                     List<RolTab> rl = Asql.getRol().listar();
                     Ses.setAttribute("lisR", rl);
                     //} else {
-                    msj = "No tienes permisos para consultar registros";
+                    // msj = "No tienes permisos para consultar registros";
                     //}
                     break;
 
@@ -135,16 +145,21 @@ public class RolServ extends HttpServlet {
                     ruta = "rol.jsp";
             }
         } catch (SQLException ex) {
-            msj = "MySql Error: " + ex;
+            m.setTipo("Error");
+            m.setMsj("MySql Error");
+            m.setDetalles("Detalles" + ex);
 
         } catch (Exception ex) {
-            msj = "Error: " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error");
+            m.setDetalles("Detalles" + ex);
+
         }
         //}else{
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        Ses.setAttribute("msj", msj);
+        Ses.setAttribute("msj", m);
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 

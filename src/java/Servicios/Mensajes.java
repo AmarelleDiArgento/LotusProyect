@@ -14,7 +14,6 @@ public class Mensajes {
     private String tipo;
     private String msj;
     private String detalles;
-    
 
     public Mensajes() {
     }
@@ -30,9 +29,6 @@ public class Mensajes {
         this.msj = msj;
     }
 
-    
-    
-    
     /**
      * @return the tipo
      */
@@ -75,14 +71,18 @@ public class Mensajes {
         this.detalles = detalles;
     }
 
-    
     public String toBody() {
-    if (tipo.equals("Ok")){
+        String body;
+        if (tipo.equals("Ok")) {
+            body = "<body onload=\"msjMsj()\">";
         
-    }    
-        
-        return "Mensajes{" + "tipo=" + tipo + ", msj=" + msj + ", detalles=" + detalles + '}';
+        }else if(tipo.equals("Error")){
+            body = "<body onload=\"msjError()\">";
+        }else{
+            body = "<body>";
+        }
+
+        return body;
     }
-    
-    
+
 }

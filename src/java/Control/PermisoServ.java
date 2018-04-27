@@ -9,6 +9,7 @@ import Modelo.MySql.AdminMs;
 import Modelo.Tabs.PermisoTab;
 import Modelo.Tabs.AsignaPerTab;
 import Modelo.Tabs.UsuarioTab;
+import Servicios.Mensajes;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -41,7 +42,11 @@ public class PermisoServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        String msj;
+
+        Mensajes m = new Mensajes();
+        if (Ses.getAttribute("msj") != null) {
+            m = (Mensajes) Ses.getAttribute("msj");
+        }
         String ruta;
 
         //if (Ses.getAttribute("log") != null) {
@@ -55,11 +60,7 @@ public class PermisoServ extends HttpServlet {
                 acc = a;
             }
         }
-        if (Ses.getAttribute("msj") != null) {
-            msj = (String) Ses.getAttribute("msj");
-        } else {
-            msj = "";
-        }
+
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
@@ -89,10 +90,11 @@ public class PermisoServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         p = new PermisoTab(Nombre, Modulo, Descripcion, Ico, Url, Estado);
-                        msj = Asql.getPermiso().insertar(p);
-
+                        m.setMsj(Asql.getPermiso().insertar(p));
+                        m.setTipo("Ok");
                     } else {
-                        msj = "No tienes permisos para hacer registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para hacer registros\"");
                     }
 
                     break;
@@ -108,17 +110,21 @@ public class PermisoServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         p = new PermisoTab(Id, Nombre, Modulo, Descripcion, Ico, Url, Estado);
-                        msj = Asql.getPermiso().modificar(p);
+                        m.setMsj(Asql.getPermiso().modificar(p));
+                        m.setTipo("Ok");
                     } else {
-                        msj = "No tienes permisos para hacer modificaciones";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        msj = Asql.getPermiso().eliminar(Id);
+                        m.setMsj(Asql.getPermiso().eliminar(Id));
+                        m.setTipo("Ok");
                     } else {
-                        msj = "No tienes permisos para eliminar registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
                 case "obtener":
@@ -126,9 +132,11 @@ public class PermisoServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         p = Asql.getPermiso().obtener(Id);
                         Ses.setAttribute("Per", p);
-                        msj = "Se ha obtenido el Permiso con id: " + p.getPerId();
+                        m.setMsj("Se ha obtenido el Permiso con id: " + p.getPerId());
+                        m.setTipo("Ok");
                     } else {
-                        msj = "No tienes permisos para consultar registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para consultar registros");
                     }
 
                     break;
@@ -137,14 +145,16 @@ public class PermisoServ extends HttpServlet {
                         List<PermisoTab> pl = Asql.getPermiso().listar();
                         Ses.setAttribute("arrPer", pl);
                     } else {
-                        msj = "No tienes permisos para consultar registros";
+                        m.setTipo("Error");
+                        m.setMsj("No tienes permisos para consultar estos registros");
                     }
                     break;
                 case "menu":
 
                     List<PermisoTab> menu = Asql.getPermiso().menu(uSes.getCedula());
                     Ses.setAttribute("Menu", menu);
-                    msj = "Bienvenido " + uSes.toFullName();
+                        m.setTipo("Ok");
+                        m.setMsj("Bienvenido " + uSes.toFullName());
                     ruta = "main.jsp";
 
                     break;
@@ -153,16 +163,20 @@ public class PermisoServ extends HttpServlet {
                     ruta = "permiso.jsp";
             }
         } catch (SQLException ex) {
-            msj = "MySql Error: " + ex;
+                        m.setTipo("Error");
+                        m.setMsj("MySql Error");
+                        m.setDetalles("Detalles: " +ex);
 
         } catch (Exception ex) {
-            msj = "Error: " + ex;
-        }
+                        m.setTipo("Error");
+                        m.setMsj("Error");
+                        m.setDetalles("Detalles: " +ex);
+            }
         //}else{
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        Ses.setAttribute("msj", msj);
+        Ses.setAttribute("msj", m);
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 
