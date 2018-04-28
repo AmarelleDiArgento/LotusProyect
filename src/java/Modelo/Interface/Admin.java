@@ -19,4 +19,5 @@ public interface Admin {
 
     AsignaPer getAsignaPer();
 
+    Armado getArmado();
 }

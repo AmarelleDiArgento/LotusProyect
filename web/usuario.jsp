@@ -7,7 +7,6 @@
     String jsp = "usuario.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
-    Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
@@ -29,10 +28,11 @@
 
 
 
-    <%        if (Ses.getAttribute("msj") != null) {
+    <%        
+        
+        if (Ses.getAttribute("msj") != null) {
 
-            msj = (Mensajes) Ses.getAttribute("msj");
-
+            Mensajes msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.toBody());
         } else {%>
     <body>

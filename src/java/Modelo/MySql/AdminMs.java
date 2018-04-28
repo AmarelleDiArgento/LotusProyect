@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import Modelo.Interface.Admin;
+import Modelo.Interface.Armado;
 import Modelo.Interface.Permiso;
 import Modelo.Interface.Rol;
 import javax.sql.DataSource;
@@ -47,7 +48,8 @@ public class AdminMs implements Admin {
     private Usuario Usu = null;
     private Permiso Per = null;
     private Rol Rol = null;
-    private AsignaPer RolPer = null;
+    private AsignaPer AsgPer = null;
+    private Armado Arm = null;
 
     @Override
     public Usuario getUsuario() {
@@ -75,9 +77,17 @@ public class AdminMs implements Admin {
 
     @Override
     public AsignaPer getAsignaPer() {
-        if (RolPer == null) {
-            RolPer = new AsignaPerMs(con);
+        if (AsgPer == null) {
+            AsgPer = new AsignaPerMs(con);
         }
-        return RolPer;
+        return AsgPer;
+    }
+
+    @Override
+    public Armado getArmado() {
+        if (Arm == null) {
+            Arm = new ArmadoMs(con);
+        }
+        return Arm;
     }
 }

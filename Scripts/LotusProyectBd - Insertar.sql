@@ -9,7 +9,7 @@
  call LotusProyect.rolIn('Supervisor', 'Encargado del negocio', 1);
  call LotusProyect.rolIn('Estandar', 'Encargado del negocio', 1);
 -- call LotusProyect.rolMo(1, 'Admin', 'El puto amo', 1);
-call LotusProyect.rolLi();
+-- call LotusProyect.rolLi();
 -- call LotusProyect.rolEl(1);
 -- call LotusProyect.rolCo(1);
 

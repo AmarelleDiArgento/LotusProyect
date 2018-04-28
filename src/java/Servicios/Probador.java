@@ -85,7 +85,7 @@ public class Probador {
             for (RolTab r : rlis) {
                 System.out.println(r.toString());
             }
-            
+            //Asql.getArmado().insertar(o)
             /*List<AsignaPerTab> apList = Asql.getAsignaPer().PerSession("1070949");
             
             
