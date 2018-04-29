@@ -99,3 +99,7 @@ footer.page-footer {
     width: 100%;
   }
 }
+
+.swal-overlay {
+  background-color: #c4deea78;
+}

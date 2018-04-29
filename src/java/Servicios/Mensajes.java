@@ -73,13 +73,26 @@ public class Mensajes {
 
     public String toBody() {
         String body;
-        if (tipo.equals("Ok")) {
-            body = "<body onload=\"msjMsj()\">";
-        
-        }else if(tipo.equals("Error")){
-            body = "<body onload=\"msjError()\">";
-        }else{
-            body = "<body>";
+        if (tipo == null) {
+            tipo = "Vacio";
+        }
+        switch (tipo.toLowerCase()) {
+            case "Ok":
+                body = "<body onload=\"msjMsj()\">";
+                break;
+            case "Error":
+                body = "<body onload=\"msjError()\">";
+                break;
+            case "Mod":
+                body = "<body onload=\"modalMod();\">";
+                break;
+            case "Vacio":
+                body = "<body>";
+                break;
+                
+            default:
+                body = "<body>";
+                break;
         }
 
         return body;

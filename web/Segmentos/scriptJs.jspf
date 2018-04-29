@@ -3,63 +3,14 @@
 <%@ page pageEncoding="UTF-8" %>
 
 
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/init.js"></script>
-<script type="text/javascript" src="js/sweetalert.min.js"></script>
+
 
 <%
 
     HttpSession s = request.getSession(true);
     if (s.getAttribute("msj") != null) {
 
-        Mensajes m = (Mensajes) s.getAttribute("msj");
+        
 
-
-%>
-<script type="text/javascript">
-
-
-    function msjError(Msj)
-    {
-        swal({
-            title: "<%=m.getMsj()%>",
-            text: "<%=m.getDetalles()%>",
-            icon: "error"
-        });
-    }
-    ;
-    function msjConf(id)
-    {
-        swal({
-            title: "¿Estas seguro?",
-            text: "Se eliminara el registro con el ID: " + id,
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
-                    }
-                });
-    }
-    ;
-
-    function msjMsj()
-    {
-        swal({
-            
-            title: "¡Excelente!",
-            text: "<%=m.getMsj()%>",
-            icon: "success"
-        });
-    }
-    ;
-</script>
- <%   }
-
-
-        s.setAttribute("msj",null);
 
 %>

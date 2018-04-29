@@ -1,4 +1,5 @@
 
+<%@page import="Servicios.Mensajes"%>
 <%@page import="Modelo.Tabs.UsuarioTab"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -7,9 +8,12 @@
     String jsp = "usuario.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
+    Mensajes msj = new Mensajes();
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
+        if (Ses.getAttribute("lisU") != null) {
+
 
 %>
 <html lang="es">
@@ -17,38 +21,32 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
         <title>Lotus QA - Usuario</title>
-        <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
+        <link rel="shortcut icon" href="img/favicon" type="image/x-icon"/>
 
         <!-- CSS  -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link rel="stylesheet" href="sweetalert2.min.css">
     </head>
 
 
 
-    <%        
-        
-        if (Ses.getAttribute("msj") != null) {
-
-            Mensajes msj = (Mensajes) Ses.getAttribute("msj");
+    <%        if (Ses.getAttribute("msj") != null) {
+            msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.toBody());
-        } else {%>
-    <body>
+
+        } else {%><body><%}%>
 
 
-        <%}%>
-        <header>
+        <header">
             <%@include file="Segmentos\menu.jspf" %>
         </header>
 
 
         <div class="container">
 
-            <% if (Ses.getAttribute("lisU") != null) {
-                    List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
-
+            <%
+                List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
             %>
             <table class="centered striped">
                 <thead>
@@ -76,21 +74,28 @@
                         <td><%=ut.getTelefono()%></td>
                         <td><%=ut.getEmail()%></td>
                         <td><%=ut.getnRol()%></td>
-                        <td><i class="material-icons">edit</i></td>
-                        <td><i class="material-icons">delete</i></td>
+                        <td>
+                            <form action="usuarios.do" method="post">
+                                <input type="text" name="accion" value="Obtener" hidden />
+                                <input type="text" name="Cedula" value="<%=ut.getCedula()%>" hidden />
+                                <a><input type="submit" class="waves-effect waves-blue material-icons" value="edit"></a>
+                            </form>
+                        </td>
+                        <td><a href="#"><i class="material-icons purple-text" onclick="msjConf(<%=ut.getCedula()%>)">delete</i></a></td>
+
                     </tr>
                     <%}%>
                 </tbody>
             </table>
-            <%} else {
-                    response.sendRedirect("usuarios.do?accion=Listar");
-                }%> 
+            <%
+
+            %> 
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#" class="btn-floating light-green tooltipped" data-position="left" data-tooltip="Nuevo Usuario"><i class="material-icons">person_add</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Usuario"><i class="material-icons">person_add</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
 
@@ -99,21 +104,206 @@
         </div>
 
 
+        <a href="#">  <i class="material-icons" onclick="modalMod();">edit</i></a>
+
         <footer class="footer">
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
         </footer>
 
     </body>
+    <!-- Modal Insertar Nuevo registro -->
+    <div id="modalNuevo" class="modal modal-fixed-footer">
+        <form method="get" action="usuarios.do">
+            <div class="modal-content">
+                <h4><i class="material-icons medium">face</i> Nuevo Usuario</h4>
+                <p>Registra la informacion del nuevo usuario</p>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Cedula" type="text" name="Cedula" class="validate">
+                        <label for="Cedula">Cedula</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Nombre" type="text" name="Nombre" class="validate">
+                        <label for="Nombre">Nombre</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Apellido" type="text" name="Apellido" class="validate">
+                        <label for="Apellido">Apellido</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Usuario" type="text" name="Usuario" class="validate">
+                        <label for="Usuario">Usuario</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Password" type="Password" name="Password" class="validate">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
+                        <label for="Extencion">Extencion</label>
+                        <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
+                        <label for="Celular">Celular</label>
+                        <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Email" type="Email" name="Email" class="validate">
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="switch">
+                        <label>
+                            Inactivo
+                            <input type="checkbox" name="Estado">
+                            <span class="lever"></span>
+                            Activo
+                        </label>
+                    </div>
+
+                </div>    
+            </div>
+
+
+            <div class="modal-footer">
+                <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Modal Insertar Nuevo registro -->
+    <%if (Ses.getAttribute("Usu") != null) {
+            UsuarioTab uS = (UsuarioTab) Ses.getAttribute("Usu");
+    %>
+    <div id="modalModificar" class="modal modal-fixed-footer">
+        <form method="get" action="usuarios.do">
+            <div class="modal-content">
+                <h4><i class="material-icons medium">face</i> Modificar Usuario</h4>
+                <p>Modifica la informacion del usuario</p>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Cedula" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
+                        <label for="Cedula">Cedula</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Nombre" type="text" name="Nombre" class="validate">
+                        <label for="Nombre">Nombre</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Apellido" type="text" name="Apellido" class="validate">
+                        <label for="Apellido">Apellido</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Usuario" type="text" name="Usuario" class="validate">
+                        <label for="Usuario">Usuario</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Password" type="Password" name="Password" class="validate">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
+                        <label for="Extencion">Extencion</label>
+                        <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
+                        <label for="Celular">Celular</label>
+                        <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Email" type="Email" name="Email" class="validate">
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="switch">
+                        <label>
+                            Inactivo
+                            <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">
+                            <span class="lever"></span>
+                            Activo
+                        </label>
+                    </div>
+
+                </div>    
+            </div>
+
+
+            <div class="modal-footer">
+                <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+            </div>
+        </form>
+    </div>
+    <%}%>
     <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jspf" %>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+            window.onload = modalMod()
+            function modalMod() {
+                $('#modalModificar').modal('open');
+            }
+            ;
+            function msjConf(id)
+            {
+                swal({
+                    title: "¿Estas seguro?",
+                    text: "Se eliminara el registro con el ID: " + id,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
+                            }
+                        });
+            }
+            ;
+
+        <%if (Ses.getAttribute("msj") != null) {%>
+        <%if (msj.getTipo().equals("Error")) {%>
+            function msjError(Msj) {
+                swal({
+                    title: "<%=msj.getMsj()%>",
+                    text: "<%=msj.getDetalles()%>",
+                    icon: "error"
+                });
+            }
+            ;
+        <% } else if (msj.getTipo().equals("Conf")) {
+
+        %>
+        <%} else if (msj.getTipo().equals("Ok")) {%>
+            function msjMsj()
+            {
+                swal({
+                    title: "¡Excelente!",
+                    text: "<%=msj.getMsj()%>",
+                    icon: "success"
+                });
+            }
+            ;
+        <%}
+            }%>
+    </script>
+
 </html>
 <%    } else {
+            response.sendRedirect("usuarios.do?accion=Listar");
+        }
+        Ses.setAttribute("msj", null);
+        Ses.setAttribute("lisU", null);
+//        Ses.setAttribute("Usu", null);
+    } else {
 
         response.sendRedirect("index.jsp");
     }

@@ -15,7 +15,7 @@
         <h1>Hello World!</h1>
         <%
         session.invalidate();
-        response.sendRedirect("index.jsp?msj=Vuelve pronto"); 
+        response.sendRedirect("index.jsp"); 
         %> 
     </body>
 </html>

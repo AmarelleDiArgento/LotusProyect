@@ -1,5 +1,12 @@
+<%@page import="Servicios.Mensajes"%>
 <!DOCTYPE html>
-
+<%
+// nombrar jsp de estancia
+    String jsp = "index.jsp";
+    HttpSession Ses = request.getSession(true);
+    Ses.setAttribute("jsp", jsp);
+    Mensajes msj = null;
+%>
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,13 +15,22 @@
         <title>Lotus QA - Elite Flower</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
         <!-- CSS  -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 
     </head>
+    <%
+        if (Ses.getAttribute("msj") != null) {
+
+            msj = (Mensajes) Ses.getAttribute("msj");
+            out.println(msj.toBody());
+        } else {%>
     <body>
+
+
+        <%}%>
         <header class="header">
             <div>
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
@@ -31,7 +47,7 @@
                     <div class="row">
                         <h2>Iniciar sesion</h2>
                         <div class="input-field col s12">
-                            <input id="text" type="text" name="Loger" class="validate">
+                            <input id="text" type="text" name="Usuario" class="validate">
                             <label for="text">Usuario</label>
                         </div>
                     </div>
@@ -105,6 +121,60 @@
 
     </body>
     <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jspf" %>%>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <%
+        if (msj != null) {
+    %>
+    <script type="text/javascript">
+
+        <%if (msj.getTipo().equals("Error")) {%>
+        function msjError(Msj) {
+            swal({
+                title: "<%=msj.getMsj()%>",
+                text: "<%=msj.getDetalles()%>",
+                icon: "error"
+            });
+        }
+        ;
+        <% } else if (msj.getTipo().equals("Conf")) {
+
+                    %>
+        function msjConf(id)
+        {
+            swal({
+                title: "¿Estas seguro?",
+                text: "Se eliminara el registro con el ID: " + id,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
+                        }
+                    });
+        }
+        ;
+        <%} else if (msj.getTipo().equals("Ok")) {%>
+        function msjMsj()
+        {
+            swal({
+
+                title: "¡Excelente!",
+                text: "<%=msj.getMsj()%>",
+                icon: "success"
+            });
+        }
+        ;
+        <%}%>
+    </script>
+    <%
+
+        Ses.setAttribute("msj", null);
+}
+    %>
 
 </html>

@@ -61,10 +61,10 @@ public class UsuarioServ extends HttpServlet {
         String Cedula;
         String Nombre;
         String Apellido;
-        String Loger;
+        String Usuario;
         String Password;
         String Extencion;
-        String Telefono;
+        String Celular;
         String Email;
         Boolean Estado;
         int RolId;
@@ -78,7 +78,7 @@ public class UsuarioServ extends HttpServlet {
                     Cedula = request.getParameter("Cedula");
                     Nombre = request.getParameter("Nombre");
                     Apellido = request.getParameter("Apellido");
-                    Loger = request.getParameter("Loger");
+                    Usuario = request.getParameter("Usuario");
 
                     if (request.getParameter("Password") != null) {
                         Password = request.getParameter("Password");
@@ -86,7 +86,7 @@ public class UsuarioServ extends HttpServlet {
                         Password = "1234";
                     }
                     Extencion = request.getParameter("Extencion");
-                    Telefono = request.getParameter("Telefono");
+                    Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
                     String E = request.getParameter("Estado");
                     Estado = E.equals("on");
@@ -95,7 +95,7 @@ public class UsuarioServ extends HttpServlet {
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Loger, Password, Extencion, Telefono, Email, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
                     m.setMsj(Asql.getUsuario().insertar(u));
                     m.setTipo("Ok");
                     break;
@@ -104,7 +104,7 @@ public class UsuarioServ extends HttpServlet {
                     Cedula = request.getParameter("Cedula");
                     Nombre = request.getParameter("Nombre");
                     Apellido = request.getParameter("Apellido");
-                    Loger = request.getParameter("Loger");
+                    Usuario = request.getParameter("Usuario");
 
                     if (request.getParameter("Password") != null) {
                         Password = request.getParameter("Password");
@@ -112,7 +112,7 @@ public class UsuarioServ extends HttpServlet {
                         Password = "1234";
                     }
                     Extencion = request.getParameter("Extencion");
-                    Telefono = request.getParameter("Telefono");
+                    Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
                     String Em = request.getParameter("Estado");
                     Estado = Em.equals("on");
@@ -121,7 +121,7 @@ public class UsuarioServ extends HttpServlet {
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Loger, Password, Extencion, Telefono, Email, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
                     m.setMsj(Asql.getUsuario().modificar(u));
                     m.setTipo("Ok");
                     break;
@@ -137,7 +137,7 @@ public class UsuarioServ extends HttpServlet {
                     u = Asql.getUsuario().obtener(Cedula);
                     Ses.setAttribute("Usu", u);
                     m.setMsj("Se ha obtenido el usuario con cedula: " + u.getCedula());
-                    m.setTipo("Ok");
+                    m.setTipo("Mod");
                     break;
 
                 case "Listar":
@@ -146,17 +146,17 @@ public class UsuarioServ extends HttpServlet {
                     break;
 
                 case "Ingresar":
-                    Loger = request.getParameter("Loger");
+                    Usuario = request.getParameter("Usuario");
                     Password = request.getParameter("Password");
-                    UsuarioTab Us = Asql.getUsuario().login(Loger, Password);
+                    UsuarioTab Us = Asql.getUsuario().login(Usuario, Password);
                     if (Us != null) {
                         Ses.setAttribute("log", Us);
                         m.setMsj("Bienvenido " + Us.toFullName());
                         m.setTipo("Ok");
                         ruta = "asignapers.do?accion=session";
                     } else {
-                        m.setMsj("Bienvenido " + Us.toFullName());
-                        m.setTipo("Usuario o contraseña invalidos");
+                        m.setDetalles("Usuario o contraseña invalidos");
+                        m.setMsj("Error de usuario");
                         m.setTipo("Error");
                         ruta = "index.jsp";
                     }
@@ -184,7 +184,11 @@ public class UsuarioServ extends HttpServlet {
         //    msj = "No has iniciado sesión";
 
         //}
-        Ses.setAttribute("msj", m);
+        
+        if (m.getTipo() != null){
+            m.setTipo("Vacio");
+        }
+        Ses.setAttribute("msj",m);
         request.getRequestDispatcher(ruta).forward(request, response);
 
     }
