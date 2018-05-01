@@ -29,9 +29,12 @@
 
     <%        if (Ses.getAttribute("msj") != null) {
             msj = (Mensajes) Ses.getAttribute("msj");
-            out.println(msj.toBody());
+            out.println(msj.getBody());
 
         } else {%><body><%}%>
+        <%=msj.getTipo()%>
+        <%=msj.getDetalles()%>
+        <%=msj.getMsj()%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -49,7 +52,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -68,7 +71,7 @@
     <script type="text/javascript">
 
         <%if (msj.getTipo().equals("Error")) {%>
-        function msjError(Msj) {
+        function msjError() {
             swal({
                 title: "<%=msj.getMsj()%>",
                 text: "<%=msj.getDetalles()%>",
@@ -76,13 +79,32 @@
             });
         }
         ;
-        <% } else if (msj.getTipo().equals("Conf")) {
 
-        %>
+
+        <%} else if (msj.getTipo().equals("Msj")) {%>
+        function msjMsj() {
+
+            swal("<%=msj.getMsj()%>", {
+                button: false
+            });
+        }
+        ;
+
+        <%} else if (msj.getTipo().equals("Ok")) {%>
+        function msjOk()
+        {
+            swal({
+                title: "ï¿½Excelente!",
+                text: "<%=msj.getMsj()%>",
+                icon: "success"
+            });
+        }
+        ;
+        <%}%>
         function msjConf(id)
         {
             swal({
-                title: "¿Estas seguro?",
+                title: "ï¿½Estas seguro?",
                 text: "Se eliminara el registro con el ID: " + id,
                 icon: "warning",
                 buttons: true,
@@ -95,17 +117,6 @@
                     });
         }
         ;
-        <%} else if (msj.getTipo().equals("Ok")) {%>
-        function msjMsj()
-        {
-            swal({
-                title: "¡Excelente!",
-                text: "<%=msj.getMsj()%>",
-                icon: "success"
-            });
-        }
-        ;
-        <%}%>
     </script>
     <%
 

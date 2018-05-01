@@ -24,11 +24,6 @@ public class Mensajes {
         this.detalles = detalles;
     }
 
-    public Mensajes(String tipo, String msj) {
-        this.tipo = tipo;
-        this.msj = msj;
-    }
-
     /**
      * @return the tipo
      */
@@ -71,30 +66,24 @@ public class Mensajes {
         this.detalles = detalles;
     }
 
-    public String toBody() {
+    /**
+     * @return the body
+     */
+    public String getBody() {
         String body;
-        if (tipo == null) {
-            tipo = "Vacio";
-        }
-        switch (tipo.toLowerCase()) {
-            case "Ok":
-                body = "<body onload=\"msjMsj()\">";
-                break;
-            case "Error":
-                body = "<body onload=\"msjError()\">";
-                break;
-            case "Mod":
-                body = "<body onload=\"modalMod();\">";
-                break;
-            case "Vacio":
-                body = "<body>";
-                break;
-                
-            default:
-                body = "<body>";
-                break;
-        }
 
+        if (tipo.equals("Mod")) {
+            body = "<body onload=\"modalMod()\">";
+        } else if (tipo.equals("Error")) {
+            body = "<body onload=\"msjError()\">";
+        } else if (tipo.equals("Msj")) {
+            body = "<body onload=\"msjMsj()\">";
+        } else if (tipo.equals("Ok")) {
+            body = "<body onload=\"msjOk()\">   ";
+        } else {
+            body = "<body>";
+        }
+        System.out.println(tipo);
         return body;
     }
 

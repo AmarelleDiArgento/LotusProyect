@@ -153,7 +153,7 @@ public class PermisoServ extends HttpServlet {
 
                     List<PermisoTab> menu = Asql.getPermiso().menu(uSes.getCedula());
                     Ses.setAttribute("Menu", menu);
-                        m.setTipo("Ok");
+                        m.setTipo("Msj");
                         m.setMsj("Bienvenido " + uSes.toFullName());
                     ruta = "main.jsp";
 

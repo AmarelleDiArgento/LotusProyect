@@ -25,7 +25,7 @@
         if (Ses.getAttribute("msj") != null) {
 
             msj = (Mensajes) Ses.getAttribute("msj");
-            out.println(msj.toBody());
+            out.println(msj.getBody());
         } else {%>
     <body>
 

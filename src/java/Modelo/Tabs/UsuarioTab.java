@@ -6,11 +6,13 @@
 
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Amarelle
  */
-public class UsuarioTab {
+public class UsuarioTab implements Serializable{
 private String Cedula; 
 private String Nombre; 
 private String  Apellido;

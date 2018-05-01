@@ -113,6 +113,8 @@ public class AsignaPerServ extends HttpServlet {
                     UsuarioTab u = (UsuarioTab) Ses.getAttribute("log");
                     List<AsignaPerTab> apl = Asql.getAsignaPer().PerSession(u.getCedula());
                     Ses.setAttribute("ApSes", apl);
+                    m.setMsj("Bienvenido " + u.toFullName());
+                    m.setTipo("Msj");
                     ruta = "main.jsp";
 
                     break;

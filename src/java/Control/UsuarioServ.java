@@ -51,10 +51,6 @@ public class UsuarioServ extends HttpServlet {
         } else {
             ruta = "usuario.jsp";
         }
-        Mensajes m = new Mensajes();
-        if (Ses.getAttribute("msj") != null) {
-            m = (Mensajes) Ses.getAttribute("msj");
-        }
 
         UsuarioTab u = null;
 
@@ -69,6 +65,10 @@ public class UsuarioServ extends HttpServlet {
         Boolean Estado;
         int RolId;
         String nRol;
+
+        String Tipo = null;
+        String Msj = null;
+        String Det = null;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -96,8 +96,9 @@ public class UsuarioServ extends HttpServlet {
                         RolId = 3;
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
-                    m.setMsj(Asql.getUsuario().insertar(u));
-                    m.setTipo("Ok");
+                    Det = Asql.getUsuario().insertar(u);
+                    Msj = "Inserar usuario";
+                    Tipo = "Ok";
                     break;
 
                 case "Modificar":
@@ -122,22 +123,24 @@ public class UsuarioServ extends HttpServlet {
                         RolId = 3;
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
-                    m.setMsj(Asql.getUsuario().modificar(u));
-                    m.setTipo("Ok");
+                    Det = Asql.getUsuario().modificar(u);
+                    Msj = "Usuario modificado";
+                    Tipo = "Ok";
                     break;
 
                 case "Eliminar":
                     Cedula = request.getParameter("Id");
-                    m.setMsj(Asql.getUsuario().eliminar(Cedula));
-                    m.setTipo("Ok");
+                    Det = Asql.getUsuario().eliminar(Cedula);
+                    Tipo = "Ok";
+                    Msj = "¡Excelente!";
+                    Det = "Se ha eliminado exitosamente el usuario con la cedula: " + Cedula;
                     break;
 
                 case "Obtener":
                     Cedula = request.getParameter("Cedula");
                     u = Asql.getUsuario().obtener(Cedula);
                     Ses.setAttribute("Usu", u);
-                    m.setMsj("Se ha obtenido el usuario con cedula: " + u.getCedula());
-                    m.setTipo("Mod");
+                    Tipo = "Mod";
                     break;
 
                 case "Listar":
@@ -151,44 +154,45 @@ public class UsuarioServ extends HttpServlet {
                     UsuarioTab Us = Asql.getUsuario().login(Usuario, Password);
                     if (Us != null) {
                         Ses.setAttribute("log", Us);
-                        m.setMsj("Bienvenido " + Us.toFullName());
-                        m.setTipo("Ok");
                         ruta = "asignapers.do?accion=session";
                     } else {
-                        m.setDetalles("Usuario o contraseña invalidos");
-                        m.setMsj("Error de usuario");
-                        m.setTipo("Error");
+                        Det = "Usuario o contraseña invalidos";
+                        Msj = "Error de usuario";
+                        Tipo = "Error";
                         ruta = "index.jsp";
                     }
                     break;
 
                 default:
 
-                    m.setTipo("Error");
-                    m.setMsj("No se que paso o_oU");
+                    Tipo = "Error";
+                    Msj = "No se que paso o_oU";
                     ruta = "usuario.jsp";
             }
 
         } catch (SQLException ex) {
-            m.setTipo("Error");
-            m.setMsj("Error SQL");
-            m.setDetalles("Detalles: " + ex);
+            Tipo = "Error";
+            Msj = "Error SQL";
+            Det = "Detalles: " + ex;
 
         } catch (Exception ex) {
-            m.setTipo("Error");
-            m.setMsj("Error");
-            m.setDetalles("Detalles: " + ex);
+            Tipo = "Error";
+            Msj = "Error";
+            Det = "Detalles: " + ex;
         }
         //} else {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
 
         //}
-        
-        if (m.getTipo() != null){
-            m.setTipo("Vacio");
+        Mensajes m;
+        if (Tipo != null) {
+            m = new Mensajes(Tipo, Msj, Det);
+            Ses.setAttribute("msj", m);
+        } else if (Ses.getAttribute("msj") != null) {
+            m = (Mensajes) Ses.getAttribute("msj");
         }
-        Ses.setAttribute("msj",m);
+
         request.getRequestDispatcher(ruta).forward(request, response);
 
     }
