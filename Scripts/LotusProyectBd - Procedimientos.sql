@@ -185,7 +185,7 @@ from usuario as u
 inner join rol as r on u.RolId = r.RolId
 inner join AsignaPermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
-where u.UsuCedula= uCedula and p.PerEstado=1;
+where u.UsuCedula= uCedula and p.PerEstado=1 and ap.rolperLeer = 1;
 end $$
 delimiter $$
 -- -----------------------------------------------------
