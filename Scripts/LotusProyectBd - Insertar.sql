@@ -70,3 +70,24 @@ call LotusProyect.AsgPerIn(3, 6, 1, 1, 1, 1);
 -- call LotusProyect.AsgPerSession(1070949);
 -- call LotusProyect.AsgPerEl(3, 6);
 
+
+
+-- erika
+-- -----------------------------------------------------
+-- Procedimientos LotusProyect Tabla armado
+
+call lotusproyect.armadoIn('rosa', 'verde', 1);
+-- call lotusproyect.armadoMo(1, 'rosa', 'amarilla', 1);
+-- call lotusproyect.armadoLi();
+-- call lotusproyect.armadoCo(2);
+-- call lotusproyect.armadoEl(2);
+
+
+-- -----------------------------------------------------
+-- Procedimientos LotusProyect Tabla marcacion
+-- Insertar
+
+call lotusproyect.marcacionIn('rosa', 'sahda', 1, 3);
+-- call lotusproyect.maestroMo(1, 'rosa', 'amarilla');
+
+

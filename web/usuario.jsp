@@ -35,7 +35,7 @@
             msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.getBody());
 
-        } else {%><body><%}%>
+    } else {%><body onload="modalMod()"><%}%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -44,6 +44,7 @@
 
         <div class="container">
 
+                                <button onclick="modalMod()"> Enviar </button>
             <%
                 List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
             %>
@@ -106,7 +107,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -174,7 +175,7 @@
         </div>
 
 
-        <!-- Modal Insertar Nuevo registro -->
+        <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Usu") != null) {
                 UsuarioTab uS = (UsuarioTab) Ses.getAttribute("Usu");
         %>
@@ -185,38 +186,38 @@
                     <p>Modifica la informacion del usuario</p>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="Cedula" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
-                            <label for="Cedula">Cedula</label>
+                            <input id="CedulaM" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
+                            <label for="CedulaM">Cedula</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate">
-                            <label for="Nombre">Nombre</label>
+                            <input id="NombreM" type="text" name="Nombre" class="validate">
+                            <label for="NombreM">Nombre</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Apellido" type="text" name="Apellido" class="validate">
-                            <label for="Apellido">Apellido</label>
+                            <input id="ApellidoM" type="text" name="Apellido" class="validate">
+                            <label for="ApellidoM">Apellido</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Usuario" type="text" name="Usuario" class="validate">
-                            <label for="Usuario">Usuario</label>
+                            <input id="UsuarioM" type="text" name="Usuario" class="validate">
+                            <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Password" type="Password" name="Password" class="validate">
-                            <label for="Password">Password</label>
+                            <input id="PasswordM" type="Password" name="Password" class="validate">
+                            <label for="PasswordM">Password</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
-                            <label for="Extencion">Extencion</label>
+                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
+                            <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
-                            <label for="Celular">Celular</label>
+                            <input id="CelularM" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
+                            <label for="CelularM">Celular</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Email" type="Email" name="Email" class="validate">
-                            <label for="Email">Email</label>
+                            <input id="EmailM" type="Email" name="Email" class="validate">
+                            <label for="EmailM">Email</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -229,7 +230,6 @@
 
                     </div>    
                 </div>
-
 
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
@@ -246,10 +246,8 @@
         <script type="text/javascript">
                                     function modalMod() {
                                         $('#modalModificar').modal('open');
-                                    }
-                                    ;
-                                    function msjConf(id)
-                                    {
+                                    };
+                                    function msjConf(id){
                                         swal({
                                             title: "ï¿½Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
@@ -262,15 +260,14 @@
                                                         window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
-                                    }
-                                    ;
+                                    };
                                     function consultar(id) {
                                         var url = 'usuarios.do';
-                                        var form = ('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="Cedula" value="' + id + '" />' +
                                                 '<input type="text" name="accion" value="Obtener" />' +
                                                 '</form>');
-                                        ('body').append(form);
+                                        $('body').append(form);
                                         (form).submit();
                                     }
             <% if (msj != null) {%>

@@ -19,7 +19,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
         <title>Lotus QA - Elite Flower</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
-
         <!-- CSS  -->
         <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -52,7 +51,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
