@@ -51,7 +51,7 @@ public class PoscosechaMs implements Poscosecha {
             if (stat.executeUpdate() == 0) {
                 msj = "Error al ingresar los datos";
             } else {
-                msj = a.getArmNombre() + " agregado exitosamente";
+                msj = p.getPosNombre() + " agregado exitosamente";
             }
 
         } catch (SQLException ex) {
@@ -69,10 +69,7 @@ public class PoscosechaMs implements Poscosecha {
         return msj;
     }
 
-    @Override
-    public String insertar(PoscosechaTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
     @Override
     public String modificar(PoscosechaTab o) {

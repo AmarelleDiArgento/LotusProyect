@@ -72,4 +72,8 @@ public class ProductoTab {
     public String toString() {
         return "ProductoTab{" + "ProId=" + ProId + ", ProNombre=" + ProNombre + ", ProEstado=" + ProEstado + '}';
     }
+
+    public boolean isProEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     }

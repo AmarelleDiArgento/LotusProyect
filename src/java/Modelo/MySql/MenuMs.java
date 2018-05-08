@@ -41,12 +41,10 @@ public class MenuMs implements Menu {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, a.getMenPortada());
             stat.setString(2, a.getMenSuperior());
-            stat.setString(2, a.getMenLongitud());
-            stat.setString(2, a.getMenCauchos());
-            stat.setString(2, a.getMenDescripcion());
+            stat.setString(3, a.getMenLongitud());
+            stat.setString(4, a.getMenCauchos());
+            stat.setString(5, a.getMenDescripcion());
 
-
-          
             if (a.isMenEstado()) {
                 stat.setInt(3, 1);
             } else {

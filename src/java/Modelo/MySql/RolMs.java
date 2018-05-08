@@ -31,12 +31,41 @@ public class RolMs implements Rol{
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "call LotusProyect.rolLi()";
-
+    
     @Override
-    public String insertar(RolTab o) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+    public String insertar(RolTab r) {
+        String msj = "";
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            stat.setString(1, r.getRolNombre());
+            stat.setString(2, r.getRolDescripcion());
+          
+            if (r.isRolEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(9, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+                msj = "Error al ingresar los datos";
+            } else {
+                msj = r.getRolNombre() + " agregado exitosamente";
+            }
 
+        } catch (SQLException ex) {
+            msj = "Error de SQL " + ex;
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    msj = "Error de SQL " + ex;
+                }
+            }
+
+        }
+        return msj;
+    }
     @Override
     public String modificar(RolTab o) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.

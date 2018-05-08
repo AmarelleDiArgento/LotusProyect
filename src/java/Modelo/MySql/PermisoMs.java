@@ -35,9 +35,43 @@ public class PermisoMs implements Permiso {
     final String Consultar = "call LotusProyect.permisoCo(?);";
     final String ListarTodos = "call LotusProyect.permisoLi();";
     final String Menu = "call LotusProyect.perMenu(?);";
+    
     @Override
-    public String insertar(PermisoTab o) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public String insertar(PermisoTab p) {
+        String msj = "";
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            stat.setString(1, p.getPerNombre());
+            stat.setString(2, p.getPerModulo());
+            stat.setString(3, p.getPerDescripcion());
+            stat.setString(4, p.getPerIco());
+            stat.setString(5, p.getPerUrl());
+
+            if (p.isPerEstado()) {
+                stat.setInt(6, 1);
+            } else {
+                stat.setInt(9, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+                msj = "Error al ingresar los datos";
+            } else {
+                msj = p.getPerNombre() + " agregado exitosamente";
+            }
+
+        } catch (SQLException ex) {
+            msj = "Error de SQL " + ex;
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    msj = "Error de SQL " + ex;
+                }
+            }
+
+        }
+        return msj;
     }
 
     @Override

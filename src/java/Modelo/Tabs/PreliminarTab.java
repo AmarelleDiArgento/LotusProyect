@@ -5,6 +5,8 @@
  */
 package Modelo.Tabs;
 
+import java.sql.Date;
+
 /**
  *
  * @author ALEJANDRA MEDINA
@@ -12,11 +14,13 @@ package Modelo.Tabs;
 public class PreliminarTab {
    
     private int PreId;
+    private Date PreFecha;
     private Boolean Estado;
     private int Poscosecha_Posnombre;
 
-    public PreliminarTab(int PreId, Boolean Estado, int Poscosecha_Posnombre) {
+    public PreliminarTab(int PreId, Date PreFecha, Boolean Estado, int Poscosecha_Posnombre) {
         this.PreId = PreId;
+        this.PreFecha = PreFecha;
         this.Estado = Estado;
         this.Poscosecha_Posnombre = Poscosecha_Posnombre;
     }
@@ -33,6 +37,20 @@ public class PreliminarTab {
      */
     public void setPreId(int PreId) {
         this.PreId = PreId;
+    }
+
+    /**
+     * @return the PreFecha
+     */
+    public Date getPreFecha() {
+        return PreFecha;
+    }
+
+    /**
+     * @param PreFecha the PreFecha to set
+     */
+    public void setPreFecha(Date PreFecha) {
+        this.PreFecha = PreFecha;
     }
 
     /**
@@ -65,7 +83,11 @@ public class PreliminarTab {
 
     @Override
     public String toString() {
-        return "PreliminarTab{" + "PreId=" + PreId + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + '}';
+        return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + '}';
+    }
+
+    public boolean isPreEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
-    
+   
