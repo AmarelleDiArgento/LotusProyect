@@ -7,7 +7,7 @@ package Control;
 
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.PermisoTab;
-import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.UsuarioTab;
 import Servicios.Mensajes;
 import java.io.IOException;
@@ -53,9 +53,9 @@ public class PermisoServ extends HttpServlet {
         String Accion = request.getParameter("accion");
         UsuarioTab uSes = (UsuarioTab) Ses.getAttribute("log");
 
-        List<AsignaPerTab> ap = (List<AsignaPerTab>) Ses.getAttribute("ApSes");
-        AsignaPerTab acc = null;
-        for (AsignaPerTab a : ap) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
             if (a.getnPermiso().equalsIgnoreCase("Permiso")) {
                 acc = a;
             }

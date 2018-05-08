@@ -9,7 +9,7 @@ package Modelo.Tabs;
  *
  * @author Amarelle
  */
-public class AsignaPerTab {
+public class AsignaPermisoTab {
     private int RolId;
     private String Roln; 
     private int PerId;
@@ -19,7 +19,7 @@ public class AsignaPerTab {
     private boolean rpEditar;
     private boolean rpEliminar;
 
-    public AsignaPerTab(int RolId, int PerId, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
+    public AsignaPermisoTab(int RolId, int PerId, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
         this.RolId = RolId;
         this.PerId = PerId;
         this.rpLeer = rpLeer;
@@ -28,7 +28,7 @@ public class AsignaPerTab {
         this.rpEliminar = rpEliminar;
     }
 
-    public AsignaPerTab(int RolId, String Roln, int PerId, String nPermiso, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
+    public AsignaPermisoTab(int RolId, String Roln, int PerId, String nPermiso, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
         this.RolId = RolId;
         this.Roln = Roln;
         this.PerId = PerId;
@@ -39,7 +39,7 @@ public class AsignaPerTab {
         this.rpEliminar = rpEliminar;
     }
 
-    public AsignaPerTab(String nPermiso, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
+    public AsignaPermisoTab(String nPermiso, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
         this.nPermiso = nPermiso;
         this.rpLeer = rpLeer;
         this.rpNuevo = rpNuevo;

@@ -12,17 +12,22 @@ package Modelo.Tabs;
 public class PoscosechaTab {
     
   private int Idposcosecha;  
-  private String Nombre;
-  private String Direccion;
-  private String Telefono;
-  private Boolean Estado;
+  private String PosNombre;
+  private String PosDireccion;
+  private String PosTelefono;
+  private Boolean PosEstado;
 
-    public PoscosechaTab(int Idposcosecha, String Nombre, String Direccion, String Telefono, Boolean Estado) {
+    public PoscosechaTab(int Idposcosecha, String PosNombre, String PosDireccion, String PosTelefono, Boolean PosEstado) {
         this.Idposcosecha = Idposcosecha;
-        this.Nombre = Nombre;
-        this.Direccion = Direccion;
-        this.Telefono = Telefono;
-        this.Estado = Estado;
+        this.PosNombre = PosNombre;
+        this.PosDireccion = PosDireccion;
+        this.PosTelefono = PosTelefono;
+        this.PosEstado = PosEstado;
+    }
+
+
+    public boolean isPosEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -40,69 +45,68 @@ public class PoscosechaTab {
     }
 
     /**
-     * @return the Nombre
+     * @return the PosNombre
      */
-    public String getNombre() {
-        return Nombre;
+    public String getPosNombre() {
+        return PosNombre;
     }
 
     /**
-     * @param Nombre the Nombre to set
+     * @param PosNombre the PosNombre to set
      */
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setPosNombre(String PosNombre) {
+        this.PosNombre = PosNombre;
     }
 
     /**
-     * @return the Direccion
+     * @return the PosDireccion
      */
-    public String getDireccion() {
-        return Direccion;
+    public String getPosDireccion() {
+        return PosDireccion;
     }
 
     /**
-     * @param Direccion the Direccion to set
+     * @param PosDireccion the PosDireccion to set
      */
-    public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
+    public void setPosDireccion(String PosDireccion) {
+        this.PosDireccion = PosDireccion;
     }
 
     /**
-     * @return the Telefono
+     * @return the PosTelefono
      */
-    public String getTelefono() {
-        return Telefono;
+    public String getPosTelefono() {
+        return PosTelefono;
     }
 
     /**
-     * @param Telefono the Telefono to set
+     * @param PosTelefono the PosTelefono to set
      */
-    public void setTelefono(String Telefono) {
-        this.Telefono = Telefono;
+    public void setPosTelefono(String PosTelefono) {
+        this.PosTelefono = PosTelefono;
     }
 
     /**
-     * @return the Estado
+     * @return the PosEstado
      */
-    public Boolean getEstado() {
-        return Estado;
+    public Boolean getPosEstado() {
+        return PosEstado;
     }
 
     /**
-     * @param Estado the Estado to set
+     * @param PosEstado the PosEstado to set
      */
-    public void setEstado(Boolean Estado) {
-        this.Estado = Estado;
-    }
-
-    @Override
-    public String toString() {
-        return "PoscosechaTab{" + "Idposcosecha=" + Idposcosecha + ", Nombre=" + Nombre + ", Direccion=" + Direccion + ", Telefono=" + Telefono + ", Estado=" + Estado + '}';
+    public void setPosEstado(Boolean PosEstado) {
+        this.PosEstado = PosEstado;
     }
     
 
-}
 
+    @Override
+    public String toString() {
+        return "PoscosechaTab{" + "Idposcosecha=" + Idposcosecha + ", PosNombre=" + PosNombre + ", PosDireccion=" + PosDireccion + ", PosTelefono=" + PosTelefono + ", PosEstado=" + PosEstado + '}';
+    }
+}
   
     
    

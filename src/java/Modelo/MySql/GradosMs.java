@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.Grados;
 import Modelo.Tabs.GradosTab;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,10 +33,42 @@ public class GradosMs implements Grados{
     final String ListarTodos = "";
     final String Login = "";
 
-    @Override
-    public String insertar(GradosTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    
+     @Override
+    public String insertar(GradosTab g) {
+        String msj = "";
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            stat.setString(1, g.getGraNombre());
+            stat.setString(2, g.getGraDetalles());
+          
+            if (g.isGraEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(9, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+                msj = "Error al ingresar los datos";
+            } else {
+                msj = g.getGraNombre() + " agregado exitosamente";
+            }
+
+        } catch (SQLException ex) {
+            msj = "Error de SQL " + ex;
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    msj = "Error de SQL " + ex;
+                }
+            }
+
+        }
+        return msj;
     }
+
 
     @Override
     public String modificar(GradosTab o) {

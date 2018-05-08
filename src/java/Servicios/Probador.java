@@ -6,7 +6,7 @@
 package Servicios;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
 import java.sql.SQLException;
@@ -89,7 +89,7 @@ public class Probador {
             /*List<AsignaPerTab> apList = Asql.getAsignaPer().PerSession("1070949");
             
             
-            for (AsignaPerTab ap : apList) {
+            for (AsignaPermisoTab ap : apList) {
                 System.out.println(ap.toString());
             }*/
 

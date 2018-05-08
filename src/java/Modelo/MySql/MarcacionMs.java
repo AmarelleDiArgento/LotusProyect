@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.Marcacion;
 import Modelo.Tabs.MarcacionTab;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,12 +32,41 @@ public class MarcacionMs implements Marcacion {
     final String Consultar = "";
     final String ListarTodos = "";
     final String Login = "";
-
+    
     @Override
-    public String insertar(MarcacionTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+    public String insertar(MarcacionTab m) {
+        String msj = "";
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            stat.setString(1, m.getMarNombre());
+            stat.setString(2, m.getMarPortada());
+          
+            if (m.isMarEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(9, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+                msj = "Error al ingresar los datos";
+            } else {
+                msj =m.getMarNombre() + " agregado exitosamente";
+            }
 
+        } catch (SQLException ex) {
+            msj = "Error de SQL " + ex;
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    msj = "Error de SQL " + ex;
+                }
+            }
+
+        }
+        return msj;
+    }
     @Override
     public String modificar(MarcacionTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.

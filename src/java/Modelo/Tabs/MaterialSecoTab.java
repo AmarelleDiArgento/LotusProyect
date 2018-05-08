@@ -14,15 +14,19 @@ public class MaterialSecoTab {
     private int MsId;
     private int TipoMs_TimId;
     private String MsNombre;
+    private String MsImagen;
+    private String MsDescripcion;
     private Boolean Estado;
     private  int MsAlto;
     private int MsAncho;
     private int MsProfundo;
 
-    public MaterialSecoTab(int MsId, int TipoMs_TimId, String MsNombre, Boolean Estado, int MsAlto, int MsAncho, int MsProfundo) {
+    public MaterialSecoTab(int MsId, int TipoMs_TimId, String MsNombre,String MsImagen,String MsDescripcion, Boolean Estado, int MsAlto, int MsAncho, int MsProfundo) {
         this.MsId = MsId;
         this.TipoMs_TimId = TipoMs_TimId;
         this.MsNombre = MsNombre;
+        this.MsImagen = MsImagen;
+        this.MsImagen = MsDescripcion;
         this.Estado = Estado;
         this.MsAlto = MsAlto;
         this.MsAncho = MsAncho;
@@ -69,6 +73,34 @@ public class MaterialSecoTab {
      */
     public void setMsNombre(String MsNombre) {
         this.MsNombre = MsNombre;
+    }
+
+    /**
+     * @return the MsImagen
+     */
+    public String getMsImagen() {
+        return MsImagen;
+    }
+
+    /**
+     * @param MsImagen the MsImagen to set
+     */
+    public void setMsImagen(String MsImagen) {
+        this.MsImagen = MsImagen;
+    }
+
+    /**
+     * @return the MsDescripcion
+     */
+    public String getMsDescripcion() {
+        return MsDescripcion;
+    }
+
+    /**
+     * @param MsDescripcion the MsDescripcion to set
+     */
+    public void setMsDescripcion(String MsDescripcion) {
+        this.MsDescripcion = MsDescripcion;
     }
 
     /**
@@ -126,10 +158,13 @@ public class MaterialSecoTab {
     public void setMsProfundo(int MsProfundo) {
         this.MsProfundo = MsProfundo;
     }
-
     @Override
     public String toString() {
-        return "MaterialSecoTab{" + "MsId=" + MsId + ", TipoMs_TimId=" + TipoMs_TimId + ", MsNombre=" + MsNombre + ", Estado=" + Estado + ", MsAlto=" + MsAlto + ", MsAncho=" + MsAncho + ", MsProfundo=" + MsProfundo + '}';
+        return "MaterialSecoTab{" + "MsId=" + getMsId() + ", TipoMs_TimId=" + getTipoMs_TimId() + ", MsNombre=" + getMsNombre() + ", Estado=" + getEstado() + ", MsAlto=" + getMsAlto() + ", MsAncho=" + getMsAncho() + ", MsProfundo=" + getMsProfundo() + '}';
+    }
+
+    public boolean isMsEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
     

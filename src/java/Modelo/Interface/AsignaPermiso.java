@@ -6,13 +6,17 @@
 package Modelo.Interface;
 
 import Modelo.Dao.DAO;
-import Modelo.Tabs.MaeGradosTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import java.sql.ResultSet;
+import java.util.List;
 
 /**
  *
- * @author ALEJANDRA MEDINA
+ * @author Amarelle
  */
-public interface MaeGrados extends DAO<ResultSet, MaeGradosTab, String> {
+public interface AsignaPermiso extends DAO<ResultSet, AsignaPermisoTab, Integer>{
+
+    List<AsignaPermisoTab> PerSession(String cedula);
+    public List<AsignaPermisoTab> listar(Integer rol);    
     
 }

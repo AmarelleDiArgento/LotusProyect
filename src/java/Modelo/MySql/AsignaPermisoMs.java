@@ -5,25 +5,25 @@
  */
 package Modelo.MySql;
 
-import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import Modelo.Interface.AsignaPer;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Modelo.Interface.AsignaPermiso;
 
 /**
  *
  * @author Amarelle
  */
-public class AsignaPerMs implements AsignaPer{
+public class AsignaPermisoMs implements AsignaPermiso{
     private final Connection con;
 
-    public AsignaPerMs(Connection con) {
+    public AsignaPermisoMs(Connection con) {
 
         this.con = con;
     }
@@ -36,10 +36,10 @@ public class AsignaPerMs implements AsignaPer{
     final String PerSession = "call LotusProyect.AsgPerSession(?);";
 
     @Override
-    public List<AsignaPerTab> PerSession(String cedula) {
+    public List<AsignaPermisoTab> PerSession(String cedula) {
         PreparedStatement stat = null;
         ResultSet rs = null;
-        List<AsignaPerTab> apModel = new ArrayList<>();
+        List<AsignaPermisoTab> apModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(PerSession);
@@ -53,35 +53,35 @@ public class AsignaPerMs implements AsignaPer{
                     try {
                         rs.close();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AsignaPerMs.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AsignaPermisoMs.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 if (stat != null) {
                     try {
                         stat.close();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AsignaPerMs.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AsignaPermisoMs.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AsignaPerMs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AsignaPermisoMs.class.getName()).log(Level.SEVERE, null, ex);
         }
         return apModel;
     }
 
     @Override
-    public List<AsignaPerTab> listar(Integer rol) {
+    public List<AsignaPermisoTab> listar(Integer rol) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String insertar(AsignaPerTab o) {
+    public String insertar(AsignaPermisoTab o) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String modificar(AsignaPerTab o) {
+    public String modificar(AsignaPermisoTab o) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -91,11 +91,11 @@ public class AsignaPerMs implements AsignaPer{
     }
 
     @Override
-    public AsignaPerTab convertir(ResultSet rs) throws SQLException {
+    public AsignaPermisoTab convertir(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
     
-        public AsignaPerTab coSession(ResultSet rs) throws SQLException {
+        public AsignaPermisoTab coSession(ResultSet rs) throws SQLException {
 
         String Permiso = rs.getString("PerNombre");
         int l = rs.getInt("rolperLeer");
@@ -106,17 +106,17 @@ public class AsignaPerMs implements AsignaPer{
         boolean modificar = m == 1;
         int e = rs.getInt("rolperEliminar");
         boolean eliminar = e == 1;
-        AsignaPerTab apModel = new AsignaPerTab(Permiso, leer, nuevo, modificar, eliminar);
+        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, leer, nuevo, modificar, eliminar);
         return apModel;
     }
 
     @Override
-    public AsignaPerTab obtener(Integer id) {
+    public AsignaPermisoTab obtener(Integer id) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<AsignaPerTab> listar() {
+    public List<AsignaPermisoTab> listar() {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 }

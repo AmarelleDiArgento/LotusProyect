@@ -6,7 +6,7 @@
 package Control;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.UsuarioTab;
 import Servicios.Mensajes;
 import java.io.IOException;
@@ -66,10 +66,10 @@ public class AsignaPerServ extends HttpServlet {
                      M,
                      E;
                     List<String> msjs = null;
-                    List<AsignaPerTab> li = (List<AsignaPerTab>) Ses.getAttribute("Aprr");
+                    List<AsignaPermisoTab> li = (List<AsignaPermisoTab>) Ses.getAttribute("Aprr");
                     int Rol = li.get(1).getRolId();
 
-                    for (AsignaPerTab ap : li) {
+                    for (AsignaPermisoTab ap : li) {
                         int P = ap.getPerId();
                         String[] cap = request.getParameterValues(ap.getnPermiso());
                         L = false;
@@ -93,7 +93,7 @@ public class AsignaPerServ extends HttpServlet {
 
                             }
                         }
-                        AsignaPerTab aps = new AsignaPerTab(Rol, P, L, N, M, E);
+                        AsignaPermisoTab aps = new AsignaPermisoTab(Rol, P, L, N, M, E);
                         //msj = msj + Asql.getAsignaPer().modificar(aps);
                         P++;
                     }
@@ -105,13 +105,13 @@ public class AsignaPerServ extends HttpServlet {
 
                 case "Obtener":
                     int rol = Integer.parseInt(request.getParameter("rol"));
-                    List<AsignaPerTab> apli = Asql.getAsignaPer().listar(rol);
+                    List<AsignaPermisoTab> apli = Asql.getAsignaPer().listar(rol);
                     Ses.setAttribute("Aprr", apli);
                     ruta = "rol.jsp";
                     break;
                 case "session":
                     UsuarioTab u = (UsuarioTab) Ses.getAttribute("log");
-                    List<AsignaPerTab> apl = Asql.getAsignaPer().PerSession(u.getCedula());
+                    List<AsignaPermisoTab> apl = Asql.getAsignaPer().PerSession(u.getCedula());
                     Ses.setAttribute("ApSes", apl);
                     m.setMsj("Bienvenido " + u.toFullName());
                     m.setTipo("Msj");
