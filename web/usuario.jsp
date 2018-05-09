@@ -35,7 +35,7 @@
             msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.getBody());
 
-    } else {%><body onload="modalMod()"><%}%>
+} else {%><body><%}%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -44,7 +44,7 @@
 
         <div class="container">
 
-                                <button onclick="modalMod()"> Enviar </button>
+            <button onclick="modalMod()"> Enviar </button>
             <%
                 List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
             %>
@@ -190,33 +190,33 @@
                             <label for="CedulaM">Cedula</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="NombreM" type="text" name="Nombre" class="validate">
+                            <input id="NombreM" type="text" name="Nombre" class="validate" value="<%=uS.getNombre()%>">
                             <label for="NombreM">Nombre</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="ApellidoM" type="text" name="Apellido" class="validate">
+                            <input id="ApellidoM" type="text" name="Apellido" class="validate" value="<%=uS.getApellido()%>">
                             <label for="ApellidoM">Apellido</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="UsuarioM" type="text" name="Usuario" class="validate">
+                            <input id="UsuarioM" type="text" name="Usuario" class="validate" value="<%=uS.getLoger()%>">
                             <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="PasswordM" type="Password" name="Password" class="validate">
+                            <input id="PasswordM" type="Password" name="Password" class="validate"value="<%=uS.getPassword()%>">
                             <label for="PasswordM">Password</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
+                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
                             <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="CelularM" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
+                            <input id="CelularM" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate" value="<%=uS.getTelefono()%>">
                             <label for="CelularM">Celular</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="EmailM" type="Email" name="Email" class="validate">
+                            <input id="EmailM" type="Email" name="Email" class="validate" value="<%=uS.getEmail()%>">
                             <label for="EmailM">Email</label>
                         </div>
                         <div class="switch">
@@ -243,13 +243,17 @@
         <script type="text/javascript" src="js/init.js"></script>
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
+        <script type="text/javascript"> 
                                     function modalMod() {
-                                        $('#modalModificar').modal('open');
-                                    };
-                                    function msjConf(id){
+
+                                        var elem = document.querySelector('#modalModificar');
+                                        var instance = M.Modal.init(elem);
+                                        instance.open();
+                                    }
+                                    ;
+                                    function msjConf(id) {
                                         swal({
-                                            title: "ï¿½Estas seguro?",
+                                            title: "¿Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
@@ -260,7 +264,8 @@
                                                         window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
-                                    };
+                                    }
+                                    ;
                                     function consultar(id) {
                                         var url = 'usuarios.do';
                                         var form = $('<form action="' + url + '" method="get">' +
@@ -316,8 +321,8 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="usuarios.do" method="post">
-            <input name="accion" value="Listar">
+        <form id="lista" action="usuarios.do" method="post" >
+            <input name="accion" value="Listar" hidden/>
         </form>
     </body>
 </html>
