@@ -31,9 +31,6 @@
             out.println(msj.getBody());
 
         } else {%><body><%}%>
-        <%=msj.getTipo()%>
-        <%=msj.getDetalles()%>
-        <%=msj.getMsj()%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -41,7 +38,7 @@
 
 
         <div class="container">
-
+            <h1>Hola</h1>
 
 
         </div>

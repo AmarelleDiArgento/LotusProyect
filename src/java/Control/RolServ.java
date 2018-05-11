@@ -10,7 +10,6 @@ import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.RolTab;
 import Servicios.Mensajes;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.Resource;

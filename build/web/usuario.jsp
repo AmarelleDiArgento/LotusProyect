@@ -21,7 +21,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
         <title>Lotus QA - Usuario</title>
-        <link rel="shortcut icon" href="img/favicon" type="image/x-icon"/>
+        <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
         <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -35,7 +35,7 @@
             msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.getBody());
 
-} else {%><body><%}%>
+        } else {%><body><%}%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -232,7 +232,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
@@ -243,7 +243,7 @@
         <script type="text/javascript" src="js/init.js"></script>
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script type="text/javascript"> 
+        <script type="text/javascript">
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');
@@ -269,8 +269,8 @@
                                     function consultar(id) {
                                         var url = 'usuarios.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="Cedula" value="' + id + '" />' +
-                                                '<input type="text" name="accion" value="Obtener" />' +
+                                                '<input type="text" name="Cedula" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
                                         (form).submit();
@@ -317,7 +317,7 @@
 
     Ses.setAttribute("lisU", null);
     Ses.setAttribute("Usu", null);
-
+    Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
@@ -328,11 +328,8 @@
 </html>
 <%
 
-            //Ses.setAttribute("msj", msj);
-            //response.sendRedirect("usuarios.do?accion=Listar");
-        }
+            }
 
-        //Ses.setAttribute("msj", null);
     } else {
 
         response.sendRedirect("index.jsp");
