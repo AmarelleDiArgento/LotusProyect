@@ -13,7 +13,7 @@
     if (Ses.getAttribute("log") != null) {
 
 %>
-<html lang="es">
+<html lang="es" style="height: 100%;">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -31,18 +31,32 @@
             msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.getBody());
 
-        } else {%><body><%}%>
-        <%=msj.getTipo()%>
+        } else {%><body style="height: 100%;display: flex;flex-direction: column;justify-content: space-between;"><%}%>
+        <!-- <%=msj.getTipo()%>
         <%=msj.getDetalles()%>
-        <%=msj.getMsj()%>
+        <%=msj.getMsj()%> -->
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
         </header>
-
-
-        <div class="container">
-
+        
+        <div class="container" style="width: 100%;">
+         <div class="slider" >
+            <ul class="slides">
+              <li>
+                <img src="img/pexels-photo-135224.jpeg">
+                
+              </li>
+              <li>
+                <img src="img/pexels-photo-135224.jpeg">
+                
+              </li>
+              <li>
+                <img src="img/pexels-photo-135224.jpeg">
+                
+              </li>
+            </ul>
+          </div>
 
 
         </div>
