@@ -16,12 +16,12 @@
 
 
 %>
-<html lang="es">
+<html lang="es" >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
         <title>Lotus QA - Usuario</title>
-        <link rel="shortcut icon" href="img/favicon" type="image/x-icon"/>
+        <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
         <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -35,7 +35,7 @@
             msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.getBody());
 
-        } else {%><body><%}%>
+        } else {%><body class="bodyfull"><%}%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -44,6 +44,7 @@
 
         <div class="container">
 
+            <button onclick="modalMod()"> Enviar </button>
             <%
                 List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
             %>
@@ -106,7 +107,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -174,7 +175,7 @@
         </div>
 
 
-        <!-- Modal Insertar Nuevo registro -->
+        <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Usu") != null) {
                 UsuarioTab uS = (UsuarioTab) Ses.getAttribute("Usu");
         %>
@@ -185,38 +186,38 @@
                     <p>Modifica la informacion del usuario</p>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="Cedula" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
-                            <label for="Cedula">Cedula</label>
+                            <input id="CedulaM" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
+                            <label for="CedulaM">Cedula</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate">
-                            <label for="Nombre">Nombre</label>
+                            <input id="NombreM" type="text" name="Nombre" class="validate" value="<%=uS.getNombre()%>">
+                            <label for="NombreM">Nombre</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Apellido" type="text" name="Apellido" class="validate">
-                            <label for="Apellido">Apellido</label>
+                            <input id="ApellidoM" type="text" name="Apellido" class="validate" value="<%=uS.getApellido()%>">
+                            <label for="ApellidoM">Apellido</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Usuario" type="text" name="Usuario" class="validate">
-                            <label for="Usuario">Usuario</label>
+                            <input id="UsuarioM" type="text" name="Usuario" class="validate" value="<%=uS.getLoger()%>">
+                            <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Password" type="Password" name="Password" class="validate">
-                            <label for="Password">Password</label>
+                            <input id="PasswordM" type="Password" name="Password" class="validate"value="<%=uS.getPassword()%>">
+                            <label for="PasswordM">Password</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
-                            <label for="Extencion">Extencion</label>
+                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
+                            <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
-                            <label for="Celular">Celular</label>
+                            <input id="CelularM" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate" value="<%=uS.getTelefono()%>">
+                            <label for="CelularM">Celular</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="Email" type="Email" name="Email" class="validate">
-                            <label for="Email">Email</label>
+                            <input id="EmailM" type="Email" name="Email" class="validate" value="<%=uS.getEmail()%>">
+                            <label for="EmailM">Email</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -230,9 +231,8 @@
                     </div>    
                 </div>
 
-
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
@@ -245,13 +245,15 @@
 
         <script type="text/javascript">
                                     function modalMod() {
-                                        $('#modalModificar').modal('open');
+
+                                        var elem = document.querySelector('#modalModificar');
+                                        var instance = M.Modal.init(elem);
+                                        instance.open();
                                     }
                                     ;
-                                    function msjConf(id)
-                                    {
+                                    function msjConf(id) {
                                         swal({
-                                            title: "ï¿½Estas seguro?",
+                                            title: "¿Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
@@ -266,11 +268,11 @@
                                     ;
                                     function consultar(id) {
                                         var url = 'usuarios.do';
-                                        var form = ('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="Cedula" value="' + id + '" />' +
-                                                '<input type="text" name="accion" value="Obtener" />' +
+                                        var form = $('<form action="' + url + '" method="get">' +
+                                                '<input type="text" name="Cedula" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
-                                        ('body').append(form);
+                                        $('body').append(form);
                                         (form).submit();
                                     }
             <% if (msj != null) {%>
@@ -315,22 +317,19 @@
 
     Ses.setAttribute("lisU", null);
     Ses.setAttribute("Usu", null);
-
+    Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="usuarios.do" method="post">
-            <input name="accion" value="Listar">
+        <form id="lista" action="usuarios.do" method="post" >
+            <input name="accion" value="Listar" hidden/>
         </form>
     </body>
 </html>
 <%
 
-            //Ses.setAttribute("msj", msj);
-            //response.sendRedirect("usuarios.do?accion=Listar");
-        }
+            }
 
-        //Ses.setAttribute("msj", null);
     } else {
 
         response.sendRedirect("index.jsp");

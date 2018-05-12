@@ -19,9 +19,7 @@ public class MaestroTab {
         this.MaeId = MaeId;
         this.MaeNombre = MaeNombre;
         this.MaeDescripcion = MaeDescripcion;
-   
-    
-    
+  
 }
 
     /**

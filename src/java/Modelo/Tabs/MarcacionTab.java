@@ -131,5 +131,9 @@ public class MarcacionTab {
         return "MarcacionTab{" + "MarId=" + MarId + ", MarNombre=" + MarNombre + ", MarPortada=" + MarPortada + ", MarEstado=" + MarEstado + ", ArmNombre=" + ArmNombre + '}';
     }
 
+    public boolean isMarEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

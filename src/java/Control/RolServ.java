@@ -6,11 +6,10 @@
 package Control;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.RolTab;
 import Servicios.Mensajes;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.Resource;
@@ -52,9 +51,9 @@ public class RolServ extends HttpServlet {
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
 
-        List<AsignaPerTab> ap = (List<AsignaPerTab>) Ses.getAttribute("ApSes");
-        AsignaPerTab acc = null;
-        for (AsignaPerTab a : ap) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
             if (a.getnPermiso().equalsIgnoreCase("Rol")) {
                 acc = a;
             }

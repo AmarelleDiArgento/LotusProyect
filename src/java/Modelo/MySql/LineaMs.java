@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.Linea;
 import Modelo.Tabs.LineaTab;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,12 +32,40 @@ public class LineaMs implements Linea {
     final String Consultar = "";
     final String ListarTodos = "";
     final String Login = "";
+    
+     @Override
+    public String insertar(LineaTab l) {
+        String msj = "";
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            
+          
+            if (l.isLinEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(9, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+                msj = "Error al ingresar los datos";
+            } else {
+                msj =  " agregado exitosamente";
+            }
 
-    @Override
-    public String insertar(LineaTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+        } catch (SQLException ex) {
+            msj = "Error de SQL " + ex;
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    msj = "Error de SQL " + ex;
+                }
+            }
 
+        }
+        return msj;
+    }  
     @Override
     public String modificar(LineaTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.

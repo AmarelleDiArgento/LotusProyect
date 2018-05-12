@@ -68,6 +68,10 @@ public class ParametrosTab {
         return "ParametrosTab{" + "ParId=" + ParId + ", ParNombre=" + ParNombre + ", ParEstado=" + ParEstado + '}';
     }
 
+    public boolean isParEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    
     
 }

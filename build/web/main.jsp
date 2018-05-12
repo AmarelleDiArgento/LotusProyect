@@ -19,7 +19,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
         <title>Lotus QA - Elite Flower</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
-
         <!-- CSS  -->
         <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -31,10 +30,7 @@
             msj = (Mensajes) Ses.getAttribute("msj");
             out.println(msj.getBody());
 
-        } else {%><body style="height: 100%;display: flex;flex-direction: column;justify-content: space-between;"><%}%>
-        <!-- <%=msj.getTipo()%>
-        <%=msj.getDetalles()%>
-        <%=msj.getMsj()%> -->
+        } else {%><body><%}%>
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -57,6 +53,10 @@
               </li>
             </ul>
           </div>
+
+
+        <div class="container">
+            <h1>Hola</h1>
 
 
         </div>

@@ -184,6 +184,10 @@ public class MenuTab {
     public String toString() {
         return "MenuTab{" + "MenuId=" + MenuId + ", MenPortada=" + MenPortada + ", MenSuperior=" + MenSuperior + ", MenLongitud=" + MenLongitud + ", MenCauchos=" + MenCauchos + ", MenEstado=" + MenEstado + ", MenDescripcion=" + MenDescripcion + ", MarId=" + MarId + ", Marcacion=" + Marcacion + '}';
     }
+
+    public boolean isMenEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     }
 

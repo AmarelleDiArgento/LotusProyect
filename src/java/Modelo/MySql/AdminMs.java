@@ -14,7 +14,7 @@ import Modelo.Interface.Armado;
 import Modelo.Interface.Permiso;
 import Modelo.Interface.Rol;
 import javax.sql.DataSource;
-import Modelo.Interface.AsignaPer;
+import Modelo.Interface.AsignaPermiso;
 
 /**
  *
@@ -48,7 +48,7 @@ public class AdminMs implements Admin {
     private Usuario Usu = null;
     private Permiso Per = null;
     private Rol Rol = null;
-    private AsignaPer AsgPer = null;
+    private AsignaPermiso AsgPer = null;
     private Armado Arm = null;
 
     @Override
@@ -76,9 +76,9 @@ public class AdminMs implements Admin {
     }
 
     @Override
-    public AsignaPer getAsignaPer() {
+    public AsignaPermiso getAsignaPer() {
         if (AsgPer == null) {
-            AsgPer = new AsignaPerMs(con);
+            AsgPer = new AsignaPermisoMs(con);
         }
         return AsgPer;
     }

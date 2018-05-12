@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.Producto;
 import Modelo.Tabs.ProductoTab;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,14 +31,42 @@ public class ProductoMs implements Producto {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = ""; {
+    final String Login = "";
     
-}
+       @Override
+    public String insertar(ProductoTab p) {
+        String msj = "";
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            stat.setString(1, p.getProNombre());
+          
+            if (p.isProEstado()) {
+                stat.setInt(2, 1);
+            } else {
+                stat.setInt(9, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+                msj = "Error al ingresar los datos";
+            } else {
+                msj = p.getProNombre() + " agregado exitosamente";
+            }
 
-    @Override
-    public String insertar(ProductoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } catch (SQLException ex) {
+            msj = "Error de SQL " + ex;
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    msj = "Error de SQL " + ex;
+                }
+            }
+
+        }
+        return msj;
     }
+   
 
     @Override
     public String modificar(ProductoTab o) {
@@ -64,3 +93,4 @@ public class ProductoMs implements Producto {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
+    

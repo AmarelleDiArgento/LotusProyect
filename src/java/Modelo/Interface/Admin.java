@@ -17,7 +17,7 @@ public interface Admin {
 
     Permiso getPermiso();
 
-    AsignaPer getAsignaPer();
+    AsignaPermiso getAsignaPer();
 
     Armado getArmado();
 }

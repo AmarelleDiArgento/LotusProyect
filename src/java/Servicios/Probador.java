@@ -6,11 +6,11 @@
 package Servicios;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.AsignaPerTab;
+import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
 import java.sql.SQLException;
-import java.util.List;  
+import java.util.List;
 
 /**
  *
@@ -25,7 +25,6 @@ public class Probador {
         String msj = "";
         try {
             AdminMs Asql = new AdminMs();
-
             //Insertar usuario
             /*
             String Cedula = "1013579";
@@ -75,24 +74,52 @@ public class Probador {
             }
             
              */
-            /*String Loger = "almoreno";
+ /*String Loger = "almoreno";
             String pass = "1234";
             
             UsuarioTab u = Asql.getUsuario().login(Loger, pass);
             msj = u.toFullName();*/
-            
-            List<RolTab> rlis = Asql.getRol().listar();
+ /*List<RolTab> rlis = Asql.getRol().listar();
             for (RolTab r : rlis) {
                 System.out.println(r.toString());
-            }
+            }*/
             //Asql.getArmado().insertar(o)
             /*List<AsignaPerTab> apList = Asql.getAsignaPer().PerSession("1070949");
             
             
-            for (AsignaPerTab ap : apList) {
+            for (AsignaPermisoTab ap : apList) {
                 System.out.println(ap.toString());
             }*/
-
+ /*
+            String nombre = "Queso";
+            String descrip = "Quesito Coteño, ajá!";
+            Boolean est = true;
+            RolTab r = new RolTab(nombre, descrip, est);
+            msj = Asql.getRol().insertar(r);
+             */
+ /*
+            int id = 7;
+            String nombre = "Queso";
+            String descrip = "Quesito Coteño, ajá!";
+            Boolean est = true;
+            RolTab r = new RolTab(id, nombre, descrip, est);
+            msj = Asql.getRol().modificar(r);
+             */
+ /*
+            int id = 7;
+            msj = Asql.getRol().eliminar(id);
+             */
+ /*
+            int id = 7
+            RolTab r = Asql.getRol().obtener(id);
+            msj = r.toString();
+             */
+ /*
+            List<RolTab> rl = Asql.getRol().listar();
+            for (RolTab r : rl) {
+                System.out.println(r.toString());
+            }
+             */
         } catch (SQLException ex) {
             msj = "Error sql: " + ex;
         }

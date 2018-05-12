@@ -89,5 +89,9 @@ public class GradosTab {
     public String toString() {
         return "GradosTab{" + "GradId=" + GradId + ", GraNombre=" + GraNombre + ", GraDetalles=" + GraDetalles + ", GraEstado=" + GraEstado + '}';
     }
+
+    public boolean isGraEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
      
 }

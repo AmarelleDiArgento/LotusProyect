@@ -14,13 +14,13 @@ public class PasoTab {
     private int PasId;
     private int Pasorden;
     private String PasDescripcion;
-    private String Imagen;
+    private String PasImagen;
 
-    public PasoTab(int PasId, int Pasorden, String PasDescripcion, String Imagen) {
+    public PasoTab(int PasId, int Pasorden, String PasDescripcion, String PasImagen) {
         this.PasId = PasId;
         this.Pasorden = Pasorden;
         this.PasDescripcion = PasDescripcion;
-        this.Imagen = Imagen;
+        this.PasImagen = PasImagen;
     }
 
     /**
@@ -68,20 +68,20 @@ public class PasoTab {
     /**
      * @return the Imagen
      */
-    public String getImagen() {
-        return Imagen;
+    public String getPasImagen() {
+        return PasImagen;
     }
 
     /**
-     * @param Imagen the Imagen to set
+     * @param PasImagen the Imagen to set
      */
-    public void setImagen(String Imagen) {
-        this.Imagen = Imagen;
+    public void setPasImagen(String PasImagen) {
+        this.PasImagen = PasImagen;
     }
 
     @Override
     public String toString() {
-        return "PasoTab{" + "PasId=" + PasId + ", Pasorden=" + Pasorden + ", PasDescripcion=" + PasDescripcion + ", Imagen=" + Imagen + '}';
+        return "PasoTab{" + "PasId=" + PasId + ", Pasorden=" + Pasorden + ", PasDescripcion=" + PasDescripcion + ", PasImagen=" + PasImagen + '}';
     }
 
    

@@ -107,5 +107,9 @@ public class VariedadTab {
         return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", Varimagen=" + Varimagen + ", VarColor=" + VarColor + '}';
     }
 
+    public boolean isVarEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
  
 }

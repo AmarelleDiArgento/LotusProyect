@@ -123,6 +123,10 @@ public class FitosanidadTab {
     public String toString() {
         return "FitosanidadTab{" + "FitId=" + FitId + ", FitNombre=" + FitNombre + ", FitDescripcion=" + FitDescripcion + ", FitTipo=" + FitTipo + ", FitImagen=" + FitImagen + ", FitEstado=" + FitEstado + '}';
     }
+
+    public boolean isFitEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     

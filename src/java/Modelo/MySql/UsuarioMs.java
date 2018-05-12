@@ -199,6 +199,7 @@ public class UsuarioMs implements Usuario {
     public UsuarioTab obtener(String id) {
         PreparedStatement stat = null;
         ResultSet rs = null;
+
         UsuarioTab uModel = null;
         try {
             stat = con.prepareCall(Consultar);

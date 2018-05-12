@@ -146,5 +146,9 @@ public class PermisoTab {
         return "PermisoTab{" + "PerId=" + PerId + ", PerNombre=" + PerNombre + ", PerModulo=" + PerModulo + ", PerDescripcion=" + PerDescripcion + ", PerIco=" + PerIco + ", PerUrl=" + PerUrl + ", PerEstado=" + PerEstado + '}';
     }
 
+    public boolean isPerEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

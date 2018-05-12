@@ -112,6 +112,10 @@ public class LineaTab {
     public String toString() {
         return "LineaTab{" + "LinId=" + LinId + ", Estado=" + Estado + ", poscosecha_PosId=" + poscosecha_PosId + ", PosId=" + PosId + ", PosNombre=" + PosNombre + '}';
     }
+
+    public boolean isLinEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
    
