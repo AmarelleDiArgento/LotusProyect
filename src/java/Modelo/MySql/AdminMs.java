@@ -34,7 +34,7 @@ public class AdminMs implements Admin {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LotusProyect", "root", "0000");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LotusProyect", "lotusproyect", "1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF");
         } catch (ClassNotFoundException ex) {
             System.out.print("Class for name " + ex);
         }

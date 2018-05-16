@@ -8,21 +8,26 @@ package Control;
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.UsuarioTab;
 import Servicios.Mensajes;
+import Servicios.AdminFile;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
 /**
  *
  * @author Amarelle
  */
+@MultipartConfig
+
 public class UsuarioServ extends HttpServlet {
 
     @Resource(name = "Pool")
@@ -163,6 +168,18 @@ public class UsuarioServ extends HttpServlet {
                     }
                     break;
 
+                case "Subir":
+                    Mensajes ms = new Mensajes();
+                    Part arc = request.getPart("imagen");
+                    AdminFile af = new AdminFile();
+                    String Url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/Test/" + arc.getSubmittedFileName();
+                    ms = af.subirImg(arc, Url);
+                    Tipo = ms.getTipo();
+                    Msj = ms.getMsj();
+                    Det = ms.getDetalles();
+
+                    break;
+
                 default:
 
                     Tipo = "Error";
@@ -178,7 +195,7 @@ public class UsuarioServ extends HttpServlet {
         } catch (Exception ex) {
             Tipo = "Error";
             Msj = "Error";
-            Det = "Detalles: " + ex;
+            Det = "Serv Detalles: " + ex;
         }
         //} else {
         //    ruta = "index.jsp";

@@ -150,16 +150,21 @@ public class PermisoServ extends HttpServlet {
                     }
                     break;
                 case "menu":
-
-                    List<PermisoTab> menu = Asql.getPermiso().menu(uSes.getCedula());
-                    Ses.setAttribute("Menu", menu);
+                    if (uSes.getCedula() != null) {
+                        List<PermisoTab> menu = Asql.getPermiso().menu(uSes.getCedula());
+                        Ses.setAttribute("Menu", menu);
                         m.setTipo("Msj");
                         m.setMsj("Bienvenido " + uSes.toFullName());
-                    ruta = "main.jsp";
+                        ruta = "main.jsp";
+                    }else{
+                        m.setTipo("Error");
+                        m.setMsj("No has iniciado sesión");
+                        ruta = "index.jsp";
+                    }
+                        break;
 
-                    break;
-
-                default:
+                    
+            default:
                     ruta = "permiso.jsp";
             }
         } catch (SQLException ex) {
@@ -167,56 +172,60 @@ public class PermisoServ extends HttpServlet {
                         m.setMsj("MySql Error");
                         m.setDetalles("Detalles: " +ex);
 
-        } catch (Exception ex) {
+        }catch (Exception ex) {
                         m.setTipo("Error");
                         m.setMsj("Error");
                         m.setDetalles("Detalles: " +ex);
             }
-        //}else{
-        //    ruta = "index.jsp";
-        //    msj = "No has iniciado sesión";
-        //}
-        Ses.setAttribute("msj", m);
-        request.getRequestDispatcher(ruta).forward(request, response);
-    }
+            //}else{
+            //    ruta = "index.jsp";
+            //    msj = "No has iniciado sesión";
+            //}
+            Ses.setAttribute("msj", m);
+            request.getRequestDispatcher(ruta).forward(request, response);
+        }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }
