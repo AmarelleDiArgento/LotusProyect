@@ -120,6 +120,7 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
+
         } catch (SQLException ex) {
             msj = "Error sql: " + ex;
         }

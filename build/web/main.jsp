@@ -39,7 +39,7 @@
 
         <div class="container">
             <h1>Hola</h1>
-
+            <a href="test.jsp">Test</a>
 
         </div>
 
@@ -90,34 +90,18 @@
         function msjOk()
         {
             swal({
-                title: "ï¿½Excelente!",
+                title: "¡Excelente!",
                 text: "<%=msj.getMsj()%>",
                 icon: "success"
             });
         }
         ;
         <%}%>
-        function msjConf(id)
-        {
-            swal({
-                title: "ï¿½Estas seguro?",
-                text: "Se eliminara el registro con el ID: " + id,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
-                        }
-                    });
-        }
-        ;
     </script>
     <%
 
-            Ses.setAttribute("msj", null);
         }
+        Ses.setAttribute("msj", null);
     %>
 </html>
 <%
