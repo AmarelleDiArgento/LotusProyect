@@ -83,7 +83,7 @@ public class Mensajes {
         } else {
             body = "<body>";
         }
-        System.out.println(tipo);
+        System.out.println(tipo + " "  + msj  + " "  +  detalles) ;
         return body;
     }
 
