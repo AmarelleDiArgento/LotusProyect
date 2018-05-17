@@ -57,6 +57,7 @@
                             <label for="password">Password</label>
                         </div>
                     </div>
+
                     <a href="#" class="text-hover">¿Olvidaste tu contraseña?</a> <br>
 
                     <div class="modal-footer text-center">

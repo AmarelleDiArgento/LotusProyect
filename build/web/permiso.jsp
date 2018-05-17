@@ -100,8 +100,7 @@
 
 
     </body>
-    <!--Scripts-->
-    <%@include file="Segmentos\scriptJs.jsp" %>%>
+    <!--Scripts-->%>
 </html>
 <%
     } else {

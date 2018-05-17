@@ -61,17 +61,24 @@
                 </thead>
 
                 <tbody>
-                    <%                        for (RolTab rt : LisR) {
-                    %>
+                    <% for (RolTab rt : LisR) {%>
                     <tr>
                         <td><%=rt.getRolId()%></td>
                         <td><%=rt.getRolNombre()%></td>
                         <td><%=rt.getRolDescripcion()%></td>
-                        <td><%=rt.isRolEstado()%></td>
                         <td>
-                            <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=rt.getRolId()%>)">edit</i>
-                            </a>
+      <label>
+        <input type="checkbox" <% if(rt.isRolEstado()) {%> checked="checked" <% }%></td> 
+        <span></span>
+      </label></td>
+
+
+                        <td>
+                             <a href="permiso.jsp">
+                                <i class="material-icons purple-text" >edit</i><!-- onclick="consultar(<%=rt.getRolId()%>)" -->
+                             </a>
+
+  
                         </td>
                         <td>
                             <a href="#">
