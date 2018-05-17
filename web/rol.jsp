@@ -1,6 +1,5 @@
 <%@page import="Modelo.Tabs.RolTab"%>
 <%@page import="Servicios.Mensajes"%>
-<%@page import="Modelo.Tabs.UsuarioTab"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
@@ -31,11 +30,13 @@
 
 
 
-    <%        if (Ses.getAttribute("msj") != null) {
-            msj = (Mensajes) Ses.getAttribute("msj");
-            out.println(msj.getBody());
+    <body
+        <%        if (Ses.getAttribute("msj") != null) {
+                msj = (Mensajes) Ses.getAttribute("msj");
+                out.println(msj.getBody());
 
-        } else {%><body><%}%>
+            } %> class="bodyfull"
+        >
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
@@ -44,7 +45,6 @@
 
         <div class="container">
 
-            <button onclick="modalMod()"> Enviar </button>
             <%
                 List<RolTab> LisR = (List<RolTab>) Ses.getAttribute("lisR");
             %>
@@ -67,26 +67,23 @@
                         <td><%=rt.getRolNombre()%></td>
                         <td><%=rt.getRolDescripcion()%></td>
                         <td>
-      <label>
-        <input type="checkbox" <% if(rt.isRolEstado()) {%> checked="checked" <% }%></td> 
-        <span></span>
-      </label></td>
-
-
-                        <td>
-                             <a href="permiso.jsp">
-                                <i class="material-icons purple-text" >edit</i><!-- onclick="consultar(<%=rt.getRolId()%>)" -->
-                             </a>
-
-  
+                            <label>
+                                <input type="checkbox" <% if (rt.isRolEstado()) {%> checked="checked" <% }%> /> 
+                                <span></span>
+                            </label>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=rt.getRolId()%>)">delete</i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=rt.getRolId()%>)" > edit </i>
                             </a>
                         </td>
-
+                        <td>
+                            <a href="#">
+                                <i class="material-icons purple-text" onclick="msjConf(<%=rt.getRolId()%>)"> delete </i>
+                            </a>
+                        </td>
                     </tr>
+
                     <%}%>
                 </tbody>
             </table>
@@ -96,9 +93,10 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Usuario"><i class="material-icons">person_add</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
+                    <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
+                    <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
 
                 </ul>
             </div>
@@ -117,44 +115,18 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="usuarios.do">
+            <form method="get" action="rols.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">face</i> Nuevo Usuario</h4>
-                    <p>Registra la informacion del nuevo usuario</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Rol</h4>
+                    <p>Registra la informacion del nuevo rol</p>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="Cedula" type="text" name="Cedula" class="validate">
-                            <label for="Cedula">Cedula</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s6">
-                            <input id="Apellido" type="text" name="Apellido" class="validate">
-                            <label for="Apellido">Apellido</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Usuario" type="text" name="Usuario" class="validate">
-                            <label for="Usuario">Usuario</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Password" type="Password" name="Password" class="validate">
-                            <label for="Password">Password</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
-                            <label for="Extencion">Extencion</label>
-                            <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
-                            <label for="Celular">Celular</label>
-                            <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Email" type="Email" name="Email" class="validate">
-                            <label for="Email">Email</label>
+                        <div class="input-field col s12">
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <label for="Descripcion">Descripción</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -177,74 +149,18 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Usu") != null) {
-                UsuarioTab uS = (UsuarioTab) Ses.getAttribute("Usu");
+        <%if (Ses.getAttribute("Rol") != null) {
+                RolTab uS = (RolTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="usuarios.do">
-                <div class="modal-content">
-                    <h4><i class="material-icons medium">face</i> Modificar Usuario</h4>
-                    <p>Modifica la informacion del usuario</p>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="CedulaM" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
-                            <label for="CedulaM">Cedula</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="NombreM" type="text" name="Nombre" class="validate" value="<%=uS.getNombre()%>">
-                            <label for="NombreM">Nombre</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="ApellidoM" type="text" name="Apellido" class="validate" value="<%=uS.getApellido()%>">
-                            <label for="ApellidoM">Apellido</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="UsuarioM" type="text" name="Usuario" class="validate" value="<%=uS.getLoger()%>">
-                            <label for="UsuarioM">Usuario</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="PasswordM" type="Password" name="Password" class="validate"value="<%=uS.getPassword()%>">
-                            <label for="PasswordM">Password</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
-                            <label for="ExtencionM">Extencion</label>
-                            <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="CelularM" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate" value="<%=uS.getTelefono()%>">
-                            <label for="CelularM">Celular</label>
-                            <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="EmailM" type="Email" name="Email" class="validate" value="<%=uS.getEmail()%>">
-                            <label for="EmailM">Email</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+            <%}%>
+            <!--Scripts-->
+            <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="js/materialize.min.js"></script>
+            <script type="text/javascript" src="js/init.js"></script>
+            <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-                    </div>    
-                </div>
-
-                <div class="modal-footer">
-                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
-        </div>
-        <%}%>
-        <!--Scripts-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/sweetalert.min.js"></script>
-
-        <script type="text/javascript">
+            <script type="text/javascript">
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');
@@ -262,23 +178,23 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'usuarios.do';
+                                        var url = 'rols.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="Cedula" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
                                         (form).submit();
                                     }
-            <% if (msj != null) {%>
+                <% if (msj != null) {%>
 
-            <%if (msj.getTipo().equals("Error")) {%>
+                <%if (msj.getTipo().equals("Error")) {%>
                                     function msjError() {
                                         swal({
                                             title: "<%=msj.getMsj()%>",
@@ -289,7 +205,7 @@
                                     ;
 
 
-            <%} else if (msj.getTipo().equals("Msj")) {%>
+                <%} else if (msj.getTipo().equals("Msj")) {%>
                                     function msjMsj() {
 
                                         swal("<%=msj.getMsj()%>", {
@@ -298,7 +214,7 @@
                                     }
                                     ;
 
-            <%} else if (msj.getTipo().equals("Ok")) {%>
+                <%} else if (msj.getTipo().equals("Ok")) {%>
                                     function msjOk()
                                     {
                                         swal({
@@ -308,16 +224,16 @@
                                         });
                                     }
                                     ;
-            <%}
-                }%>
+                <%}
+                    }%>
 
-        </script>
+            </script>
     </body>
 </html>
 <%
 
-    Ses.setAttribute("lisU", null);
-    Ses.setAttribute("Usu", null);
+    Ses.setAttribute("lisR", null);
+    Ses.setAttribute("Rol", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>

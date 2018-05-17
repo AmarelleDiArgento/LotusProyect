@@ -444,7 +444,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitosanidadEl (in fId INT)
+create procedure fitoproductoEl (in fId INT)
 begin
 delete from fitosanidad where FitId = fId;
 end $$
@@ -711,7 +711,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure marcacionMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
 begin
 update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
 end $$
@@ -722,7 +722,7 @@ delimiter $$
 -- ----------------------------------------- ------------
 
 delimiter $$
-create procedure maestroLi ()
+create procedure marcacionLi ()
 begin
 select MaeNombre,MaeDescripcion from maestro;
 end $$
@@ -733,7 +733,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroCo (in maId INT)
+create procedure marcacionCo (in maId INT)
 begin
 select MaeNombre,MaeDescripcion from maestro where MaeId = maId;
 end $$
@@ -744,7 +744,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroEl (in maId INT)
+create procedure marcacionEl (in maId INT)
 begin
 delete from maestro where MaeId = maId;
 end $$
@@ -919,65 +919,6 @@ end $$
 delimiter $$
 
 
-
--- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla permiso
--- Insertar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoIn (in peNombre varchar(45), in peModulo varchar(45), in peDescripcion mediumtext, in peIco varchar(20), in peUrl varchar(100), in peEstado tinyint(1))
-begin
-insert into permiso (PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado) values (peNombre,peModulo,peDescripcion,peIco,peUrl,peEstado);
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Modificar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoMo (in peId int(11),in peNombre varchar(45), in peModulo varchar(45),in peDescripcion mediumtext,in peIco varchar(20), in peUrl varchar(100), in peEstado tinyint(1))
-begin
-update permiso SET PerNombre=peNombre, PerModulo=peModulo,PerDescripcion=peDescripcion,PerIco=peIco,PerUrl=peUrl,PerEstado=peEstado where PerId=peId;
-end $$
-delimiter $$
- 
- -- -----------------------------------------------------
--- Listar todos
--- ----------------------------------------- ------------
-
-delimiter $$
-create procedure permisoLi ()
-begin
-select PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado from permiso;
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Consultar x id
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoCo (in peId INT)
-begin
-select CCAntes,CCDespues,CCUsuarios from controldecambios where CCId=cCId;
-end $$
-delimiter $$ 
-
-
--- -----------------------------------------------------
--- Eliminar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoEl (in peId INT)
-begin
-delete from permiso where  PerId = peId;
-end $$
-delimiter $$
-
-
  -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla poscosecha
 -- Insertar
@@ -1145,51 +1086,6 @@ delimiter $$
 create procedure productosEl (in prId INT)
 begin
 delete from productos where  ProId = prId;
-end $$
-delimiter $$
-
- -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla rol
--- Insertar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure rolIn (in rNombre varchar(45), in rDescripcion mediumtext, in rEstado tinyint(1))
-begin
-insert into rol (RolNombre,RolDescripcion,RolEstado) values (rNombre,rDescripcion,rEstado);
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Modificar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure rolMo (in rId int(11),in RolNombre varchar(45), in RolDescripcion mediumtext, in RolEstado tinyint(1))
-begin
-update rol SET RolNombre=rNombre, RolDescripcion=rDescripcion, RolEstado= rEstado where RolId=rId;
-end $$
-delimiter $$
- 
--- -----------------------------------------------------
--- Listar todos
--- ----------------------------------------- ------------
-
-delimiter $$
-create procedure rolLi ()
-begin
-select RolNombre,RolDescripcion,RolEstado from rol;
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Consultar x id
--- -----------------------------------------------------
-
-delimiter $$
-create procedure rolCo (in rId INT)
-begin
-select RolNombre,RolDescripcion,RolEstado from rol where RolId = rId;
 end $$
 delimiter $$
 

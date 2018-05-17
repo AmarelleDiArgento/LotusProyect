@@ -7,7 +7,7 @@
     String jsp = "main.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
-    Mensajes msj = new Mensajes();
+    Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
@@ -25,52 +25,51 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
     </head>
+    <body
+        <%        if (Ses.getAttribute("msj") != null) {
+                msj = (Mensajes) Ses.getAttribute("msj");
+                out.println(msj.getBody());
 
-    <%        if (Ses.getAttribute("msj") != null) {
-            msj = (Mensajes) Ses.getAttribute("msj");
-            out.println(msj.getBody());
-
-        } else {%><body><%}%>
+            } %> class="bodyfull"
+        >
 
         <header>
             <%@include file="Segmentos\menu.jspf" %>
         </header>
-        
+
         <div class="container" style="width: 100%;">
-         <div class="slider" >
-            <ul class="slides">
-              <li>
-                <img src="img/pexels-photo-135224.jpeg">
-                
-              </li>
-              <li>
-                <img src="img/pexels-photo-135224.jpeg">
-                
-              </li>
-              <li>
-                <img src="img/pexels-photo-135224.jpeg">
-                
-              </li>
-            </ul>
-          </div>
+            <div class="slider" >
+                <ul class="slides">
+                    <li>
+                        <img src="img/pexels-photo-135224.jpeg">
 
+                    </li>
+                    <li>
+                        <img src="img/pexels-photo-135224.jpeg">
 
-        <div class="container">
-            <h1>Hola</h1>
-            <a href="test.jsp">Test</a>
+                    </li>
+                    <li>
+                        <img src="img/pexels-photo-135224.jpeg">
 
-        </div>
-
-
-        <footer class="footer">
-            <div>
-                <div>
-                    <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
-                    </p>
-                </div>
+                    </li>
+                </ul>
             </div>
-        </footer>
+
+
+            
+                <%--<a href="test.jsp">Test</a>--%>
+
+            
+
+            <footer class="footer">
+                <div>
+                    <div>
+                        <p class="center-align">
+                            LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        </p>
+                    </div>
+                </div>
+            </footer>
 
 
     </body>
@@ -117,9 +116,9 @@
         <%}%>
     </script>
     <%
+            Ses.setAttribute("msj", null);
 
         }
-        Ses.setAttribute("msj", null);
     %>
 </html>
 <%
