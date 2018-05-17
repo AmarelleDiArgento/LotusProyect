@@ -21,16 +21,13 @@
 
 
     </head>
-    <%
-        if (Ses.getAttribute("msj") != null) {
+    <body
+        <%        if (Ses.getAttribute("msj") != null) {
+                msj = (Mensajes) Ses.getAttribute("msj");
+                out.println(msj.getBody());
 
-            msj = (Mensajes) Ses.getAttribute("msj");
-            out.println(msj.getBody());
-        } else {%>
-    <body>
-
-
-        <%}%>
+            } %> class="bodyfull"
+        >
         <header class="header">
             <div>
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
@@ -143,7 +140,7 @@
         ;
         <% } else if (msj.getTipo().equals("Conf")) {
 
-                    %>
+        %>
         function msjConf(id)
         {
             swal({
@@ -175,8 +172,8 @@
     </script>
     <%
 
-        Ses.setAttribute("msj", null);
-}
+            Ses.setAttribute("msj", null);
+        }
     %>
 
 </html>

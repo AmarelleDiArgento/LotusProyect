@@ -70,18 +70,18 @@ public class Mensajes {
      * @return the body
      */
     public String getBody() {
-        String body;
+        String body = "<body>";
 
         if (tipo.equals("Mod")) {
-            body = "<body onload=\"modalMod()\">";
+            body = "onload=\"modalMod()\"";
         } else if (tipo.equals("Error")) {
-            body = "<body onload=\"msjError()\">";
+            body = "onload=\"msjError()\"";
         } else if (tipo.equals("Msj")) {
-            body = "<body onload=\"msjMsj()\">";
+            body = "onload=\"msjMsj()\"";
         } else if (tipo.equals("Ok")) {
-            body = "<body onload=\"msjOk()\">   ";
+            body = "onload=\"msjOk()\"";
         } else {
-            body = "<body>";
+            body = "";
         }
         System.out.println(tipo + " "  + msj  + " "  +  detalles) ;
         return body;

@@ -29,6 +29,8 @@ call LotusProyect.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234'
 -- -----------------------------------------------------
 
 call LotusProyect.permisoIn('Usuario', 'Usuario', 'Permisos de usuario', 'usuario.jsp', 'face', 1);
+call LotusProyect.permisoIn('Rol', 'Usuario', 'Permisos de usuario', 'rol.jsp', 'assignment_ind', 1);
+call LotusProyect.permisoIn('Permiso', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
 call LotusProyect.permisoIn('Postcosecha', 'Postcosecha', 'Permisos de postcosecha', 'postcosecha.jsp', 'business', 1);
 call LotusProyect.permisoIn('Cliente', 'Cliente', 'Permisos de cliente', 'cliente.jsp', 'local_mall', 1);
 call LotusProyect.permisoIn('Producto', 'Producto', 'Permisos de producto', 'producto.jsp', 'local_florist', 1);
@@ -49,6 +51,8 @@ call LotusProyect.AsgPerIn(1, 3, 1, 1, 1, 1);
 call LotusProyect.AsgPerIn(1, 4, 1, 1, 1, 1);
 call LotusProyect.AsgPerIn(1, 5, 1, 1, 1, 1);
 call LotusProyect.AsgPerIn(1, 6, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 7, 1, 1, 1, 1);
+call LotusProyect.AsgPerIn(1, 8, 1, 1, 1, 1);
 
 call LotusProyect.AsgPerIn(2, 1, 1, 1, 1, 1);
 call LotusProyect.AsgPerIn(2, 2, 1, 1, 1, 1);

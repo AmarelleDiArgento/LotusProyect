@@ -158,7 +158,9 @@ public class RolServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        Ses.setAttribute("msj", m);
+        if (m.getTipo() != null) {
+            Ses.setAttribute("msj", m);
+        }
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 
