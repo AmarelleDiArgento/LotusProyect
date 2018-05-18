@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MenuMs implements Menu {
+public abstract class MenuMs implements Menu {
 
     private final Connection con;
     Mensajes m = null;
@@ -79,8 +80,56 @@ public class MenuMs implements Menu {
         }
         return m;
   }
+    
+     @Override
+    public MenuTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("MenuId");
+        String nombre = rs.getString("MenPortada");
+        String superior = rs.getString("MenSuperior");
+        String longitud = rs.getString("MenLongitud");
+        String cauchos = rs.getString("MenCauchos");
+        String descripcion = rs.getString("MenDescripcion");
+        int st = rs.getInt("MenEstado");
+        boolean status = st == 1;
+        MenuTab mTab = new MenuTab (Id, nombre, superior,longitud,cauchos,descripcion,status);
+        return mTab;
+    }
 
     
+   @Override
+     public List<MenuTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<MenuTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
     @Override
     public Mensajes modificar(MenuTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
@@ -92,17 +141,8 @@ public class MenuMs implements Menu {
     }
 
     @Override
-    public MenuTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public MenuTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<MenuTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 }

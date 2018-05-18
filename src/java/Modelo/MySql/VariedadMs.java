@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class VariedadMs implements Variedad{
+public abstract class VariedadMs implements Variedad{
 
     private final Connection con;
     Mensajes m = null;
@@ -78,20 +79,65 @@ public class VariedadMs implements Variedad{
         }
         return m;
     }
-
-   
     @Override
+    public VariedadTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("VarId");
+        String nombre = rs.getString("VarNombre");
+        String imagen = rs.getString("VarImagen");
+        String color = rs.getString("VarColor");
+        int st = rs.getInt("VarEstado");
+        boolean status = st == 1;
+        VariedadTab aTab = new VariedadTab (Id, nombre, imagen,color,status);
+        return aTab;
     public Mensajes modificar(VariedadTab o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+  @Override
+     public List<VariedadTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<VariedadTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
     @Override
     public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public VariedadTab convertir(ResultSet rs) throws SQLException {
+    public String modificar(VariedadTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -99,9 +145,5 @@ public class VariedadMs implements Variedad{
     public VariedadTab obtener(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<VariedadTab> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
+

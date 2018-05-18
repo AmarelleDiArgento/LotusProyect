@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MaterialSecoMs implements MaterialSeco {
+public abstract class MaterialSecoMs implements MaterialSeco {
 
     private final Connection con;
     Mensajes m = null;
@@ -81,6 +82,58 @@ public class MaterialSecoMs implements MaterialSeco {
         return m;
 
     }
+    
+     @Override
+    public MaterialSecoTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("MsId");
+        String nombre = rs.getString("MsNombre");
+        String imagen = rs.getString("MsImagen");
+        String descripcion = rs.getString("MsDescripcion");
+        int alto = rs.getInt("MsAlto");
+        int ancho = rs.getInt("MsAncho");
+        String profundo = rs.getString("MsProfundo");
+
+        
+        int st = rs.getInt("MsEstado");
+        boolean status = st == 1;
+        MaterialSecoTab mTab = new MaterialSecoTab (Id, nombre, descripcion,imagen, status,alto,ancho,profundo);
+        return mTab;
+    }
+    
+ @Override
+     public List<MaterialSecoTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<MaterialSecoTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
 
     @Override
     public Mensajes modificar(MaterialSecoTab o) {
@@ -93,17 +146,9 @@ public class MaterialSecoMs implements MaterialSeco {
     }
 
     @Override
-    public MaterialSecoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public MaterialSecoTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<MaterialSecoTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }

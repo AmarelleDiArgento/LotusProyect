@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class LineaMs implements Linea {
+public abstract class LineaMs implements Linea {
     
      private final Connection con;
     Mensajes m = null;
@@ -75,6 +76,50 @@ public class LineaMs implements Linea {
         }
         return m;
     }  
+     @Override
+    public LineaTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("LinId");
+        int st = rs.getInt("LinEstado");
+        boolean status = st == 1;
+        LineaTab lTab = new LineaTab (Id,status);
+        return lTab;
+    }
+        
+ @Override
+     public List<LineaTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<LineaTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+     }
+
     @Override
     public Mensajes modificar(LineaTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
@@ -86,20 +131,8 @@ public class LineaMs implements Linea {
     }
 
     @Override
-    public LineaTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public LineaTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<LineaTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
 }

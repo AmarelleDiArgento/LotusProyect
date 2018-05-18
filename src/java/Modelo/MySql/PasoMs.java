@@ -6,19 +6,21 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Paso;
+import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.PasoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class PasoMs  implements Paso{
+public abstract class PasoMs  implements Paso{
 
     private final Connection con;
     Mensajes m = null;
@@ -73,6 +75,51 @@ public class PasoMs  implements Paso{
         }
         return m;
     }
+     @Override
+    public PasoTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("PasId");
+        int orden = rs.getInt("PasOrden");
+        String descripcion = rs.getString("PasDescripcion");
+        String imagen = rs.getString("PasImagen");
+        PasoTab pTab = new PasoTab (Id, orden, descripcion, imagen);
+        return pTab;
+    }
+
+  @Override
+     public List<PasoTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<PasoTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
+
 
     @Override
     public Mensajes modificar(PasoTab o) {
@@ -85,17 +132,8 @@ public class PasoMs  implements Paso{
     }
 
     @Override
-    public PasoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public PasoTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<PasoTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 }

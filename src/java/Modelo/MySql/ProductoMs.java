@@ -6,19 +6,21 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Producto;
+import Modelo.Tabs.PreliminarTab;
 import Modelo.Tabs.ProductoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class ProductoMs implements Producto {
+public abstract class ProductoMs implements Producto {
 
     private final Connection con;
     Mensajes m = null;
@@ -75,7 +77,51 @@ public class ProductoMs implements Producto {
         }
         return m;
     }
+    @Override
+    public ProductoTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("ProId");
+        String nombre = rs.getString("ProNombre");
+        int st = rs.getInt("ProEstado");
+        boolean status = st == 1;
+        ProductoTab pTab = new ProductoTab (Id, nombre,status);
+        return pTab;
+    }
    
+
+   @Override
+     public List<ProductoTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<ProductoTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
 
     @Override
     public Mensajes modificar(ProductoTab o) {
@@ -88,17 +134,7 @@ public class ProductoMs implements Producto {
     }
 
     @Override
-    public ProductoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ProductoTab obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<ProductoTab> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

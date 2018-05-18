@@ -6,6 +6,7 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Tipo;
+import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.TipoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import java.util.List;
  * @author ale-j
  */
     
-    public class TipomsMs implements Tipo{
+    public abstract class TipomsMs implements Tipo{
     private final Connection con;
     Mensajes m = null;
 
@@ -74,17 +75,57 @@ import java.util.List;
         return m;
     }
     @Override
+    public TipoTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("TiMId");
+        String nombre = rs.getString("TiMNombre");
+        String descripcion = rs.getString("TiMDescripcion");
+        TipoTab tTab = new TipoTab (Id, nombre, descripcion);
+        return tTab;
     public Mensajes modificar(TipoTab o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
+     public List<TipoTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<TipoTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
+    @Override
+    public String modificar(TipoTab o) {
     public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TipoTab convertir(ResultSet rs) throws SQLException {
+    public String eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -93,8 +134,4 @@ import java.util.List;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<TipoTab> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } 
 }

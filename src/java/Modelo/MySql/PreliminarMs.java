@@ -9,16 +9,18 @@ import Modelo.Interface.Preliminar;
 import Modelo.Tabs.PreliminarTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class PreliminarMs implements Preliminar {
+public abstract class PreliminarMs implements Preliminar {
 
     private final Connection con;
     Mensajes m = null;
@@ -75,6 +77,49 @@ public class PreliminarMs implements Preliminar {
         }
         return m;
     }
+    @Override
+    public PreliminarTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("PreId");
+        Date fecha = rs.getDate("PreFecha");
+        int st = rs.getInt("PreEstado");
+        boolean status = st == 1;
+        PreliminarTab aTab = new PreliminarTab (Id, fecha,status);
+        return aTab;
+    }
+   @Override
+     public List<PreliminarTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<PreliminarTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
 
     @Override
     public Mensajes modificar(PreliminarTab o) {
@@ -87,17 +132,8 @@ public class PreliminarMs implements Preliminar {
     }
 
     @Override
-    public PreliminarTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public PreliminarTab obtener(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<PreliminarTab> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

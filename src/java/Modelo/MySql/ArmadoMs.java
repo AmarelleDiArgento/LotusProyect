@@ -98,11 +98,6 @@ public class ArmadoMs implements Armado {
     }
 
     @Override
-    public ArmadoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<ArmadoTab> listar() {
         PreparedStatement stat = null;
         ResultSet rs = null;
