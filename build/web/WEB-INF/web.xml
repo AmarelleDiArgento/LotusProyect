@@ -16,6 +16,10 @@
         <servlet-name>AsignaPerServ</servlet-name>
         <servlet-class>Control.AsignaPerServ</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ArmadoServ</servlet-name>
+        <servlet-class>Control.ArmadoServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioServ</servlet-name>
         <url-pattern>/usuarios.do</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>AsignaPerServ</servlet-name>
         <url-pattern>/asignapers.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArmadoServ</servlet-name>
+        <url-pattern>/armados.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

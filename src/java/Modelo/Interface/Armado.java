@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Armado extends DAO<ResultSet, ArmadoTab, String>{
+public interface Armado extends DAO<ResultSet, ArmadoTab, Integer>{
     
 }

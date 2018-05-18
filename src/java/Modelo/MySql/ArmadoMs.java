@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +27,12 @@ public class ArmadoMs implements Armado {
         this.con = con;
     }
 
-    final String Insertar = "";
+    final String Insertar = "call lotusproyect.armadoIn(?, ?, ?);";
     final String Modificar = "";
     final String Eliminar = "";
     final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = "";
-
+    final String ListarTodos = "call lotusproyect.armadoLi();";
+    
     @Override
     public String insertar(ArmadoTab a) {
         String msj = "";
@@ -74,23 +74,58 @@ public class ArmadoMs implements Armado {
     }
 
     @Override
-    public String eliminar(String id) {
+    public String eliminar(Integer id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ArmadoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+        int Id = rs.getInt("ArmId");
+        String nombre = rs.getString("ArmNombre");
+        String Descripcion = rs.getString("ArmDescripcion");
+        int st = rs.getInt("ArmEstado");
+        boolean status = st == 1;
+        ArmadoTab uTab = new ArmadoTab(Id, nombre, Descripcion, status);
+        return uTab;}
 
     @Override
-    public ArmadoTab obtener(String id) {
+    public ArmadoTab obtener(Integer id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<ArmadoTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<ArmadoTab> aTab = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    aTab.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return aTab;
     }
 
     

@@ -10,21 +10,24 @@ package Modelo.Tabs;
  * @author ALEJANDRA MEDINA
  */
 public class ArmadoTab {
-    
+
     private int ArmId;
     private String ArmNombre;
     private String ArmDescripcion;
     private Boolean ArmEstado;
-    private int Paso_PasId;
 
-    public ArmadoTab(int ArmId, String ArmNombre, String ArmDescripcion, Boolean Estado, int Paso_PasId) {
+    public ArmadoTab(String ArmNombre, String ArmDescripcion, Boolean ArmEstado) {
+        this.ArmNombre = ArmNombre;
+        this.ArmDescripcion = ArmDescripcion;
+        this.ArmEstado = ArmEstado;
+    }
+
+    public ArmadoTab(int ArmId, String ArmNombre, String ArmDescripcion, Boolean Estado) {
         this.ArmId = ArmId;
         this.ArmNombre = ArmNombre;
         this.ArmDescripcion = ArmDescripcion;
         this.ArmEstado = Estado;
-        this.Paso_PasId = Paso_PasId;
     }
-
 
     /**
      * @return the ArmId
@@ -74,34 +77,22 @@ public class ArmadoTab {
     public void setArmEstado(Boolean ArmEstado) {
         this.ArmEstado = ArmEstado;
     }
+
     /**
      * @return the ArmEstado
      */
-        public Boolean isArmEstado() {
+    public Boolean isArmEstado() {
         return ArmEstado;
     }
 
-    /**
-     * @return the Paso_PasId
-     */
-    public int getPaso_PasId() {
-        return Paso_PasId;
-    }
-
-    /**
-     * @param Paso_PasId the Paso_PasId to set
-     */
-    public void setPaso_PasId(int Paso_PasId) {
-        this.Paso_PasId = Paso_PasId;
-    }
- @Override
-    public String toString() {
-        return "ArmadoTab{" + "ArmId=" + getArmId() + ", ArmNombre=" + getArmNombre() + ", ArmDescripcion=" + getArmDescripcion() + ", Estado=" + getArmEstado() + ", Paso_PasId=" + getPaso_PasId() + '}';
-    }
 
     private String getArmEstado() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
+    @Override
+    public String toString() {
+        return "ArmadoTab{" + "ArmId=" + ArmId + ", ArmNombre=" + ArmNombre + ", ArmDescripcion=" + ArmDescripcion + ", ArmEstado=" + ArmEstado + '}';
+    }
+
 }

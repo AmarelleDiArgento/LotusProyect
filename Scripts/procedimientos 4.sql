@@ -6,7 +6,7 @@
 delimiter $$
 create procedure armadoIn (in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
 begin
-insert into armado (ArmNombre,ArmDescripcion,ArmEstado) values (aNombre,aDescripcion,aEstado);
+insert into armado (ArmNombre,ArmDescricion,ArmEstado) values (aNombre,aDescripcion,aEstado);
 end $$ArmId
 delimiter $$
 
@@ -53,28 +53,24 @@ delete from armado where  ArmId = aId;
 end $$
 delimiter $$
 
-
-
-
-
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla controldecambios
 -- Insertar
 -- -----------------------------------------------------
 
-delimiter $$
-create procedure controldecambiosIn (in cCAntes mediumtext, in cCDespues mediumtext, in cCUsuarios varchar(10))
-begin
-insert into controldecambios (CCAntes,CCDespues,CCUsuarios) values (cCAntes,cCDespues,cCUsuarios);
-end $$CCId
-delimiter $$
+	delimiter $$
+	create procedure controldecambiosIn (in cCAntes mediumtext, in cCDespues mediumtext, in cCUsuarios varchar(10))
+	begin
+	insert into controldecambios (CCAntes,CCDespues,CCUsuarios) values (cCAntes,cCDespues,cCUsuarios);
+	end $$CCId
+	delimiter $$
 
 -- -----------------------------------------------------
 -- Modificar
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure controldecambiosMo (in cCId int(11),in cCAntes mediumtext, in cCDespues mediumtext,cCUsuarios varchar(10))
+create procedure controldecambiosMo (in cCId int(11),in cCAntes mediumtext, in cCDespues mediumtext,in cCUsuarios varchar(10))
 begin
 update controldecambios SET CCAntes=cCAntes, CCDespues=cCDespues,CCUsuarios=cCUsuarios where CCId=cCId;
 end $$
@@ -88,7 +84,7 @@ delimiter $$
 delimiter $$
 create procedure controldecambiosLi ()
 begin
-select CCAntes,CCDespues,CCUsuarios from controldecambios;
+select CCId,CCAntes,CCDespues,CCUsuarios from controldecambios;
 end $$
 delimiter $$
 
@@ -104,7 +100,7 @@ end $$
 delimiter $$
 
 -- -----------------------------------------------------
--- Eliminar controldecambiosMo
+-- Eliminar controldecambios
 -- -----------------------------------------------------
 
 delimiter $$
@@ -114,19 +110,15 @@ delete from controldecambios where  CCId = cCId;
 end $$
 delimiter $$
 
-
-
-
-
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla fitoproducto
 -- Insertar
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitoproductoIn (in fpArea varchar(45), in fpImagen varchar(45))
+create procedure fitoproductoIn (in fpArea varchar(45), in fpImagen varchar(45),in maeId int(11),in proId int(11),in varId int(11))
 begin
-insert into fitoproducto (FpArea,FpImagen) values (fpArea,fpImagen);
+insert into fitoproducto (FpArea,FpImagen,MaeId,ProId,VarId) values (fpArea,fpImagen,maeId,proId,varId);
 end $$FitId
 delimiter $$
 
@@ -135,9 +127,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitoproductoMo (in fitId int(11),in fpArea varchar(45), in fpImagen varchar(45))
+create procedure fitoproductoMo (in fpArea varchar(45), in fpImagen varchar(45),in maeId int(11),in proId int(11),in varId int(11))
 begin
-update fitoproducto SET FpArea=fpArea, FpImagen=fpImagen where FitId=fitId;
+update fitoproducto SET FpArea=fpArea, FpImagen=fpImagen,MaeId=maeId,ProId=proId,VarId=varId  where FitId=fitId;
 end $$
 delimiter $$
 
@@ -148,7 +140,7 @@ delimiter $$
 delimiter $$
 create procedure fitoproductoLi ()
 begin
-select FpArea,FpImagen from fitoproducto;
+select FpArea,FpImagen,MaeId,ProId,VarId from fitoproducto;
 end $$
 delimiter $$
 
@@ -167,14 +159,15 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitosanidadEl (in fId INT)
+create procedure fitoproductoEl (in fitId INT)
 begin
-delete from fitosanidad where FitId = fId;
+delete from fitoproducto where FitId = fitId;
 end $$
 delimiter $$
 
 
--
+
+
 
 
 -- -----------------------------------------------------
@@ -184,7 +177,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure fitosanidadIn (in FitNombre varchar(45), in FitDescripcion varchar(45),in FitTipo enum ('Plaga','Enfermedad'), in FitImagen varchar (45),in FitEstado tinyint(1))
+create procedure fitosanidadIn (in fNombre varchar(45), in fDescripcion varchar(45),in fTipo enum ('Plaga','Enfermedad'), in fImagen varchar (45),in fEstado tinyint(1))
 begin
 insert into fitosanidad(FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado) values (fNombre,fDescripcion,fTipo,fImagen,fEstado);
 end $$FitId
@@ -208,7 +201,7 @@ delimiter $$
 delimiter $$
 create procedure fitosanidadLi ()
 begin
-select FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado from fitosanidad;
+select FitId,FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado from fitosanidad;
 end $$
 delimiter $$
 
@@ -236,6 +229,9 @@ end $$
 delimiter $$
 
 
+
+
+
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla grados
 -- Insertar
@@ -244,7 +240,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure gradosIn (in GraNombre varchar(45), in GraDetalles mediumtext,in GraEstado tinyint(1))
+create procedure gradosIn (in gNombre varchar(45), in gDetalles mediumtext,in gEstado tinyint(1))
 begin
 insert into grados (GraNombre,GraDetalles,GraEstado) values (gNombre,gDetalles,gEstado);
 end $$GraID
@@ -255,7 +251,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure gradosMo(in gId int(11),in gNombre varchar(45), in gDetalles mediumtext,in GraEstado tinyint(1))
+create procedure gradosMo(in gId int(11),in gNombre varchar(45), in gDetalles mediumtext,in gEstado tinyint(1))
 begin
 update grados SET GraNombre=gNombre, GraDetalles=gDetalles, GraEstado=gEstado where GraID=gID;
 end $$
@@ -268,7 +264,7 @@ delimiter $$
 delimiter $$
 create procedure gradosLi ()
 begin
-select GraNombre,GraDetalles,GraEstado from grados;
+select GraID,GraNombre,GraDetalles,GraEstado from grados;
 end $$
 delimiter $$
 
@@ -297,17 +293,18 @@ end $$
 delimiter $$
 
 
+
+
 - -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla linea
 -- Insertar
 -- ---------
 
---------------------------------------------
 
 delimiter $$
-create procedure lineaIn (in lnEstado tinyint(1))
+create procedure lineaIn (in lnEstado tinyint(1), in lPosId int(11))
 begin
-insert into linea(LinEstado) values (lnEstado);
+insert into linea(LinEstado,PosId) values (lnEstado,lPosId);
 end $$
 delimiter $$
 
@@ -318,7 +315,7 @@ delimiter $$
 delimiter $$
 create procedure lineaMo(in lnId int(11),in lnEstado tinyint(1))
 begin
-update linea SET LinEstado=lnEstado where LinId=lnId;
+update linea SET LinEstado=lnEstado,PosId=lPosId where LinId=lnId;
 end $$
 delimiter $$
 
@@ -329,10 +326,24 @@ delimiter $$
 delimiter $$
 create procedure lineaLi ()
 begin
-select LinEstado from linea;
+select *
+from linea as li inner join poscosecha as po on li.PosId = po.PosId;
 end $$
 delimiter $$
--- ----------
+
+
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure lineaCo (in liId INT)
+begin
+select *
+from linea as li inner join poscosecha as po on li.PosId=po.PosId;
+end $$
+delimiter $$
+
 -------------------------------------------
 -- Eliminar
 -- -----------------------------------------------------
@@ -344,16 +355,7 @@ delete from linea where LinId = lnId;
 end $$
 delimiter $$
 
--- -----------------------------------------------------
--- Consultar x id
--- -----------------------------------------------------
 
-delimiter $$
-create procedure lineaCo (in liId INT)
-begin
-select LinEstado,PosId,FitTipo from linea where LinId = liId;
-end $$
-delimiter $$
 
 
 
@@ -365,7 +367,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure maestroIn(in MaeNombre varchar(45), in MaeDescripcion varchar(255))
+create procedure maestroIn(in mNombre varchar(45), in mDescripcion varchar(255))
 begin
 insert into maestro(MaeNombre,MaeDescripcion) values (mNombre,mDescripcion);
 end $$
@@ -389,7 +391,7 @@ delimiter $$
 delimiter $$
 create procedure maestroLi ()
 begin
-select MaeNombre,MaeDescripcion from maestro;
+select MaeId,MaeNombre,MaeDescripcion from maestro;
 end $$
 delimiter $$
 
@@ -416,16 +418,16 @@ delete from maestro where MaeId = maId;
 end $$
 delimiter $$
 
+
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla marcacion
 -- Insertar
 -- ---------
 
---------------------------------------------
 delimiter $$
- create procedure marcacionIn(in MarNombre varchar(45), in MarPortada mediumtext,in MarEstado tinyint(1))
+ create procedure marcacionIn(in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1), in armId int(11))
  begin
- insert into marcacion (MarNombre,MarPortada,MarEstado) values (maNombre,maPortada,maEstado);
+ insert into marcacion (MarNombre,MarPortada,MarEstado,ArmId) values (marNombre,marPortada,marEstado,armId);
  end $$
  delimiter $$
  
@@ -434,9 +436,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure marcacionMo(in marId int(11),in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1),in armId int(11))
 begin
-update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
+update marcacion SET MarNombre=marNombre, MarPortada=marPortada,MarEstado=marEstado, ArmId=armId where MaeId=maId;
 end $$
 delimiter $$
 
@@ -445,9 +447,10 @@ delimiter $$
 -- ----------------------------------------- ------------
 
 delimiter $$
-create procedure maestroLi ()
+create procedure marcacionLi ()
 begin
-select MaeNombre,MaeDescripcion from maestro;
+select *
+from marcacion as ma inner join armado as ar on ma.ArmId = ar.ArmId;
 end $$
 delimiter $$
 
@@ -456,9 +459,10 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroCo (in maId INT)
+create procedure marcacionCo (in marId INT)
 begin
-select MaeNombre,MaeDescripcion from maestro where MaeId = maId;
+select *
+from marcacion as ma inner join armado as a on ma.ArmId = a.ArmId;
 end $$
 delimiter $$
 -- ----------
@@ -467,19 +471,77 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroEl (in maId INT)
+create procedure marcacionEl (in marId INT)
 begin
-delete from maestro where MaeId = maId;
+delete from marcacion where MarId = marId;
 end $$
 delimiter $$
+
+
+
+-- -----------------------------------------------------
+-- Procedimientos LotusProyect Tabla materialseco
+-- Insertar
+-- ---------
+
+delimiter $$
+ create procedure materialsecoIn(in msNombre varchar(45), in msImagen mediumtext,in msDescripcion mediumtext, in msEstado tinyint(1), in msAlto int(3),in msAncho int(3),in msProfundo int(3),in TiMId int(11))
+ begin
+ insert into materialseco (MsNombre,MsImagen,MsDescripcion,MsEstado,MsAlto,MsAncho,MsProfundo,TiMId) values (msNombre,msImagen, msDescripcion,msEstado,msAlto,msAncho,msProfundo,TiMId);
+ end $$
+ delimiter $$
+ 
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure materialsecoMo(in marId int(11),in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1),in armId int(11))
+begin
+update materialseco SET MsNombre=msNombre, MsImagen=msImagen,MsDescripcion=msDescripcion, MsEstado=msEstado,MsAlto=msAlto,MsAncho=msAncho,MsProfundo=msProfundo where MsId=msId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure materialsecoLi ()
+begin
+select *
+from materialseco as ma inner join armado as a on ma.ArmId = a.ArmId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure materialsecoCo (in msId INT)
+begin
+select *
+from materialseco as m inner join armado as a on ma.ArmId = a.ArmId;end $$
+delimiter $$
+-- ----------
+-------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure materialsecoEl (in msId INT)
+begin
+delete from materialseco where MsId = msId;
+end $$
+delimiter $$
+
 
 
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla menu
 -- Insertar
 -- --------- 
-
---------------------------------------------
 
 delimiter $$
  create procedure menuIn(in mPortada mediumtext, in mSuperior mediumtext,in mLongitud mediumtext,in mCauchos mediumtext,in mEstado tinyint(1),in mDescripcion mediumtext)
@@ -503,9 +565,10 @@ delimiter $$
 -- ----------------------------------------- ------------
 
 delimiter $$
-create procedure MenuLi ()
+create procedure menuLi ()
 begin
-select MenPortada,MenSuperior,MenLongitud,MenCauchos,MenEstado,MenDescripcion from menu;
+select *
+from menu as me inner join marcacion as mar on me.MarId = mar.MarId;
 end $$
 delimiter $$
 
@@ -515,8 +578,8 @@ delimiter $$
 delimiter $$
 create procedure menuCo (in menuId INT)
 begin
-select Marcacion_MarId,MenPortada,MenSuperior,MenLongitud,MenCauchos,MenEstado,MenDescripcion from maestro where MenuId = menuId;
-end $$
+select *
+from menu as me inner join marcacion as mar on me.MarId = mar.MarId;
 delimiter $$
 
 -------------------------------------------
@@ -537,7 +600,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
- create procedure parametrosIn(in pNombre varchar(45), in pEstado tinyint(1), in MaeId int(11), in ProId int(11),in VarId int(11))
+ create procedure parametrosIn(in pNombre varchar(45), in pEstado tinyint(1))
  begin
  insert into parametros (ParNombre,ParEstado) values (pNombre,pEstado);
  end $$ 
@@ -561,7 +624,7 @@ delimiter $$
 delimiter $$
 create procedure parametrosLi ()
 begin
-select ParNombre,ParEstado from parametros;
+select ParId,ParNombre,ParEstado from parametros;
 end $$
 delimiter $$
 
@@ -585,6 +648,8 @@ begin
 delete from parametros where ParId=pId;
 end $$
 delimiter $$
+
+
 
 - -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla paso
@@ -617,7 +682,8 @@ delimiter $$
 delimiter $$
 create procedure pasoLi ()
 begin
-select PasOrden,PasDescripcion,PasImagen from paso;
+select *
+from paso as ps inner join armado as ar on ps.ArmId = ar.ArmId;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -626,7 +692,8 @@ delimiter $$
 delimiter $$
 create procedure pasoCo (in psId INT)
 begin
-select PasOrden,PasDescripcion,PasImagen,ArmId from paso where PasId = psId;
+select *
+from paso as ps inner join armado as ar on ps.ArmId = ar.ArmId;
 end $$
 delimiter $$
 
@@ -642,72 +709,13 @@ end $$
 delimiter $$
 
 
-
--- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla permiso
--- Insertar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoIn (in peNombre varchar(45), in peModulo varchar(45), in peDescripcion mediumtext, in peIco varchar(20), in peUrl varchar(100), in peEstado tinyint(1))
-begin
-insert into permiso (PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado) values (peNombre,peModulo,peDescripcion,peIco,peUrl,peEstado);
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Modificar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoMo (in peId int(11),in peNombre varchar(45), in peModulo varchar(45),in peDescripcion mediumtext,in peIco varchar(20), in peUrl varchar(100), in peEstado tinyint(1))
-begin
-update permiso SET PerNombre=peNombre, PerModulo=peModulo,PerDescripcion=peDescripcion,PerIco=peIco,PerUrl=peUrl,PerEstado=peEstado where PerId=peId;
-end $$
-delimiter $$
- 
- -- -----------------------------------------------------
--- Listar todos
--- ----------------------------------------- ------------
-
-delimiter $$
-create procedure permisoLi ()
-begin
-select PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado from permiso;
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Consultar x id
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoCo (in peId INT)
-begin
-select CCAntes,CCDespues,CCUsuarios from controldecambios where CCId=cCId;
-end $$
-delimiter $$ 
-
-
--- -----------------------------------------------------
--- Eliminar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure permisoEl (in peId INT)
-begin
-delete from permiso where  PerId = peId;
-end $$
-delimiter $$
-
-
  -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla poscosecha
 -- Insertar
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure poscosechaIn (in psNombre varchar(45), in psDireccion varchar(90), in psTelefono varchar(10), in PosEstado tinyint(1))
+create procedure poscosechaIn (in psNombre varchar(45), in psDireccion varchar(90), in psTelefono varchar(10), in psEstado tinyint(1))
 begin
 insert into poscosecha (PosNombre,PosDireccion,PosTelefono,PosEstado) values (psNombre,psDireccion,psTelefono,psEstado);
 end $$
@@ -732,7 +740,7 @@ delimiter $$
 delimiter $$
 create procedure poscosechaLi ()
 begin
-select PosNombre,PosDireccion,PosTelefono,PosEstado from poscosecha;
+select PosId,PosNombre,PosDireccion,PosTelefono,PosEstado from poscosecha;
 end $$
 delimiter $$
 
@@ -788,7 +796,8 @@ delimiter $$
 delimiter $$
 create procedure preliminarLi ()
 begin
-select PreFecha,PreEstado from preliminar;
+select *
+from preliminar as pr inner join poscosecha as ps on pr.PosId = ps.PosId;
 end $$
 delimiter $$
 
@@ -799,7 +808,8 @@ delimiter $$
 delimiter $$
 create procedure preliminarCo (in prId INT)
 begin
-select PreFecha,PreEstado,PosId from preliminar where PreId=prId;
+select *
+from preliminar as pr inner join poscosecha as ps on pr.PosId = ps.PosId;
 end $$
 delimiter $$ 
 -- -----------------------------------------------------
@@ -821,9 +831,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosIn (in prNombre varchar(45), in prEstado tinyint(1))
+create procedure productosIn (in prNombre varchar(45), in prEstado tinyint(1),in maeId int(11))
 begin
-insert into productos (ProNombre,ProEstado) values (prNombre,prEstado);
+insert into productos (ProNombre,ProEstado,MaeId) values (prNombre,prEstado,maeId);
 end $$
 delimiter $$
 
@@ -832,9 +842,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosMo (in prId int(11),in prNombre varchar(45), in prEstado tinyint(1))
+create procedure productosMo (in prId int(11),in prNombre varchar(45), in prEstado tinyint(1),in maeId int(11))
 begin
-update productos SET ProNombre=prNombre, ProEstado=prEstado where ProId=prId;
+update productos SET ProNombre=prNombre, ProEstado=prEstado,MaeId=maeId where ProId=prId;
 end $$
 delimiter $$
  -- -----------------------------------------------------
@@ -844,7 +854,8 @@ delimiter $$
 delimiter $$
 create procedure productosLi ()
 begin
-select ProNombre,ProEstado from productos;
+select *
+from productos as pro inner join maestro as mae on pro.MaeId = mae.MaeId;
 end $$
 delimiter $$
 
@@ -855,7 +866,8 @@ delimiter $$
 delimiter $$
 create procedure productosCo (in prId INT)
 begin
-select ProNombre,ProEstado,MaeId from producto where ProId=prId;
+select *
+from productos as pro inner join maestro as mae on pro.MaeId = mae.MaeId;
 end $$
 delimiter $$ 
 
@@ -868,51 +880,6 @@ delimiter $$
 create procedure productosEl (in prId INT)
 begin
 delete from productos where  ProId = prId;
-end $$
-delimiter $$
-
- -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla rol
--- Insertar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure rolIn (in rNombre varchar(45), in rDescripcion mediumtext, in rEstado tinyint(1))
-begin
-insert into rol (RolNombre,RolDescripcion,RolEstado) values (rNombre,rDescripcion,rEstado);
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Modificar
--- -----------------------------------------------------
-
-delimiter $$
-create procedure rolMo (in rId int(11),in RolNombre varchar(45), in RolDescripcion mediumtext, in RolEstado tinyint(1))
-begin
-update rol SET RolNombre=rNombre, RolDescripcion=rDescripcion, RolEstado= rEstado where RolId=rId;
-end $$
-delimiter $$
- 
--- -----------------------------------------------------
--- Listar todos
--- ----------------------------------------- ------------
-
-delimiter $$
-create procedure rolLi ()
-begin
-select RolNombre,RolDescripcion,RolEstado from rol;
-end $$
-delimiter $$
-
--- -----------------------------------------------------
--- Consultar x id
--- -----------------------------------------------------
-
-delimiter $$
-create procedure rolCo (in rId INT)
-begin
-select RolNombre,RolDescripcion,RolEstado from rol where RolId = rId;
 end $$
 delimiter $$
 
@@ -949,7 +916,7 @@ delimiter $$
 delimiter $$
 create procedure tipomsLi ()
 begin
-select TiMNombre,TiMDescripcion from tipoms;
+select TiMId,TiMNombre,TiMDescripcion from tipoms;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -968,12 +935,68 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure tipomsEl (in rId INT)
+create procedure tipomsEl (in tiMId INT)
 begin
-delete from rol where  RolId = rId;
+delete from tipoms where  TiMId = tiMId;
+end $$
+delimiter $$
+variedad
+
+
+
+ -- -----------------------------------------------------
+-- Procedimientos LotusProyect Tabla variedad
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadIn (in varNombre varchar(45), in varEstado tinyint(1),in proId int(11),in varImagen varchar(45),in varColor varchar(15))
+begin
+insert into variedad (VarNombre,VarEstado,ProId,VarImagen,VarColor) values (varNombre,varEstado,proId,varImagen,varColor);
 end $$
 delimiter $$
 
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11),in VarImagen varchar(45),in VarColor varchar(15))
+begin
+update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarImagen=varImagen,VarColor=varColor where VarId=varId;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure variedadLi ()
+begin
+select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadCo (in tId INT)
+begin
+select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad where VarId = varId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadEl (in vId INT)
+begin
+delete from variedad where  VarId = rId;
+end $$
+delimiter $$
 
 
 

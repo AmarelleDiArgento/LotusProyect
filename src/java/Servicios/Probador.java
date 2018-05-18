@@ -6,6 +6,7 @@
 package Servicios;
 
 import Modelo.MySql.AdminMs;
+import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
@@ -120,7 +121,11 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
+            List<ArmadoTab> al = Asql.getArmado().listar();
+            for (ArmadoTab a : al) {
+                System.out.println(a.toString());
 
+            }
         } catch (SQLException ex) {
             msj = "Error sql: " + ex;
         }
