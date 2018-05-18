@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.MaterialSeco;
 import Modelo.Tabs.MaterialSecoTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MaterialSecoMs implements MaterialSeco {
 
     private final Connection con;
+    Mensajes m = null;
 
     public MaterialSecoMs(Connection con) {
 
@@ -31,55 +33,62 @@ public class MaterialSecoMs implements MaterialSeco {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = ""; 
-    
+    final String Login = "";
+
     @Override
-    public String insertar(MaterialSecoTab m) {
+    public Mensajes insertar(MaterialSecoTab ms) {
         String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
-            stat.setString(1, m.getMsNombre());
-            stat.setString(2, m.getMsImagen());
-            stat.setString(3, m.getMsDescripcion());
-            stat.setInt(4, m.getMsAlto());
-            stat.setInt(5, m.getMsAncho());
-            stat.setInt(6, m.getMsProfundo());
+            stat.setString(1, ms.getMsNombre());
+            stat.setString(2, ms.getMsImagen());
+            stat.setString(3, ms.getMsDescripcion());
+            stat.setInt(4, ms.getMsAlto());
+            stat.setInt(5, ms.getMsAncho());
+            stat.setInt(6, ms.getMsProfundo());
 
-            if (m.isMsEstado()) {
+            if (ms.isMsEstado()) {
                 stat.setInt(7, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(7, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = m.getMsNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(ms.getMsNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
+
     }
-    
 
     @Override
-    public String modificar(MaterialSecoTab o) {
+    public Mensajes modificar(MaterialSecoTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(String id) {
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 

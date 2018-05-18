@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Fitosanidad;
 import Modelo.Tabs.FitosanidadTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import java.util.List;
 public class FitosanidadMs implements Fitosanidad {
     
      private final Connection con;
+    Mensajes m = null;
 
     public FitosanidadMs(Connection con) {
 
@@ -34,7 +36,7 @@ public class FitosanidadMs implements Fitosanidad {
     final String Login = "";
     
     @Override
-    public String insertar(FitosanidadTab f) {
+    public Mensajes insertar(FitosanidadTab f) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -47,36 +49,43 @@ public class FitosanidadMs implements Fitosanidad {
             if (f.isFitEstado()) {
                 stat.setInt(3, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(3, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = f.getFitNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(f.getFitNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
     
     @Override
-    public String modificar(FitosanidadTab o) {
+    public Mensajes modificar(FitosanidadTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(String id) {
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Poscosecha;
 import Modelo.Tabs.PoscosechaTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import java.util.List;
 public class PoscosechaMs implements Poscosecha {
 
     private final Connection con;
+    Mensajes m = null;
 
     public PoscosechaMs(Connection con) {
 
@@ -34,7 +36,7 @@ public class PoscosechaMs implements Poscosecha {
     final String Login = "";  
     
     @Override
-    public String insertar(PoscosechaTab p) {
+    public Mensajes insertar(PoscosechaTab p) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -49,35 +51,42 @@ public class PoscosechaMs implements Poscosecha {
                 stat.setInt(9, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = p.getPosNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(p.getPosNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
 
   
 
     @Override
-    public String modificar(PoscosechaTab o) {
+    public Mensajes modificar(PoscosechaTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(String id) {
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 

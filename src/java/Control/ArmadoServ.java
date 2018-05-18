@@ -83,8 +83,7 @@ public class ArmadoServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         a = new ArmadoTab(Nombre, Descripcion, Estado);
-                        m.setMsj(Asql.getArmado().insertar(a));
-                        m.setTipo("Ok");
+                        m = Asql.getArmado().insertar(a);
 
                     } else {
                         m.setTipo("Error");
@@ -101,8 +100,7 @@ public class ArmadoServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         a = new ArmadoTab(Id, Nombre, Descripcion, Estado);
-                        m.setMsj(Asql.getArmado().modificar(a));
-                        m.setTipo("Ok");
+                        m = Asql.getArmado().modificar(a);
 
                     } else {
                         m.setTipo("Error");
@@ -112,8 +110,7 @@ public class ArmadoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getRol().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");

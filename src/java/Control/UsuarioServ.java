@@ -46,6 +46,11 @@ public class UsuarioServ extends HttpServlet {
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
 
+        Mensajes m = new Mensajes();
+        if (Ses.getAttribute("msj") != null) {
+            m = (Mensajes) Ses.getAttribute("msj");
+        }
+
         String ruta;
 
         //if (Ses.getAttribute("log") != null) {
@@ -70,10 +75,6 @@ public class UsuarioServ extends HttpServlet {
         Boolean Estado;
         int RolId;
         String nRol;
-
-        String Tipo = null;
-        String Msj = null;
-        String Det = null;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -101,9 +102,8 @@ public class UsuarioServ extends HttpServlet {
                         RolId = 3;
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
-                    Det = Asql.getUsuario().insertar(u);
-                    Msj = "Inserar usuario";
-                    Tipo = "Ok";
+                    m = Asql.getUsuario().insertar(u);
+
                     break;
 
                 case "Modificar":
@@ -128,24 +128,19 @@ public class UsuarioServ extends HttpServlet {
                         RolId = 3;
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
-                    Det = Asql.getUsuario().modificar(u);
-                    Msj = "Usuario modificado";
-                    Tipo = "Ok";
+                    m = Asql.getUsuario().modificar(u);
                     break;
 
                 case "Eliminar":
                     Cedula = request.getParameter("Id");
-                    Det = Asql.getUsuario().eliminar(Cedula);
-                    Tipo = "Ok";
-                    Msj = "¡Excelente!";
-                    Det = "Se ha eliminado exitosamente el usuario con la cedula: " + Cedula;
+                    m = Asql.getUsuario().eliminar(Cedula);
                     break;
 
                 case "Obtener":
                     Cedula = request.getParameter("Cedula");
                     u = Asql.getUsuario().obtener(Cedula);
                     Ses.setAttribute("Usu", u);
-                    Tipo = "Mod";
+                    m.setTipo("Mod");
                     break;
 
                 case "Listar":
@@ -161,53 +156,40 @@ public class UsuarioServ extends HttpServlet {
                         Ses.setAttribute("log", Us);
                         ruta = "asignapers.do?accion=session";
                     } else {
-                        Det = "Usuario o contraseña invalidos";
-                        Msj = "Error de usuario";
-                        Tipo = "Error";
+                        m.setDetalles("Usuario o contraseña invalidos");
+                        m.setMsj("Error de usuario");
+                        m.setTipo("Error");
                         ruta = "index.jsp";
                     }
                     break;
 
                 case "Subir":
-                    Mensajes ms = new Mensajes();
                     Part arc = request.getPart("imagen");
                     AdminFile af = new AdminFile();
                     String Url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/Test/" + arc.getSubmittedFileName();
-                    ms = af.subirImg(arc, Url);
-                    Tipo = ms.getTipo();
-                    Msj = ms.getMsj();
-                    Det = ms.getDetalles();
+                    m = af.subirImg(arc, Url);
 
                     break;
 
                 default:
+                    m.setTipo("Error");
+                    m.setMsj("Error desconocido");
+                    m.setDetalles("No se que paso o_oU");
 
-                    Tipo = "Error";
-                    Msj = "No se que paso o_oU";
-                    ruta = "usuario.jsp";
             }
-
         } catch (SQLException ex) {
-            Tipo = "Error";
-            Msj = "Error SQL";
-            Det = "Detalles: " + ex;
+            m.setTipo("Error");
+            m.setMsj("MySql Error");
+            m.setDetalles("Detalles" + ex);
 
         } catch (Exception ex) {
-            Tipo = "Error";
-            Msj = "Error";
-            Det = "Serv Detalles: " + ex;
-        }
-        //} else {
-        //    ruta = "index.jsp";
-        //    msj = "No has iniciado sesión";
+            m.setTipo("Error");
+            m.setMsj("Error");
+            m.setDetalles("Detalles " + ex.toString());
 
-        //}
-        Mensajes m;
-        if (Tipo != null) {
-            m = new Mensajes(Tipo, Msj, Det);
+        }
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
-        } else if (Ses.getAttribute("msj") != null) {
-            m = (Mensajes) Ses.getAttribute("msj");
         }
 
         request.getRequestDispatcher(ruta).forward(request, response);

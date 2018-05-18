@@ -5,6 +5,7 @@
  */
 package Modelo.Dao;
 
+import Servicios.Mensajes;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,11 +15,11 @@ import java.util.List;
  */
 public interface DAO <R, O, I> {
 
-    String insertar(O o);
+    Mensajes insertar(O o);
 
-    String modificar(O o);
+    Mensajes modificar(O o);
 
-    String eliminar(I id);
+    Mensajes eliminar(I id);
 
     O convertir(R rs) throws SQLException;
 

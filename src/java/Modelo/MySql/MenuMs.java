@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Menu;
 import Modelo.Tabs.MenuTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MenuMs implements Menu {
 
     private final Connection con;
+    Mensajes m = null;
 
     public MenuMs(Connection con) {
 
@@ -34,7 +36,7 @@ public class MenuMs implements Menu {
     final String Login = ""; 
     
     @Override
-    public String insertar(MenuTab a) {
+    public Mensajes insertar(MenuTab a) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -51,34 +53,41 @@ public class MenuMs implements Menu {
                 stat.setInt(9, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = a.getMenPortada() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj("Agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
   }
 
     
     @Override
-    public String modificar(MenuTab o) {
+    public Mensajes modificar(MenuTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(String id) {
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 

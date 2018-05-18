@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Tipo;
 import Modelo.Tabs.TipoTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ import java.util.List;
     
     public class TipomsMs implements Tipo{
     private final Connection con;
+    Mensajes m = null;
 
     public TipomsMs(Connection con) {
 
@@ -35,7 +37,7 @@ import java.util.List;
     final String ListarTodos = "";
     
     @Override
-    public String insertar(TipoTab t) {
+    public Mensajes insertar(TipoTab t) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -45,32 +47,39 @@ import java.util.List;
           
 
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = t.getTiMNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(t.getTiMNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
     @Override
-    public String modificar(TipoTab o) {
+    public Mensajes modificar(TipoTab o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(String id) {
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Preliminar;
 import Modelo.Tabs.PreliminarTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import java.util.List;
 public class PreliminarMs implements Preliminar {
 
     private final Connection con;
+    Mensajes m = null;
 
     public PreliminarMs(Connection con) {
 
@@ -31,50 +33,56 @@ public class PreliminarMs implements Preliminar {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = ""; 
-    
-    
+    final String Login = "";
+
     @Override
-    public String insertar(PreliminarTab p) {
+    public Mensajes insertar(PreliminarTab p) {
         String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setDate(1, p.getPreFecha());
-          
+
             if (p.isPreEstado()) {
                 stat.setInt(2, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(2, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = p.getPreFecha() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj("Agregada exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
 
     @Override
-    public String modificar(PreliminarTab o) {
+    public Mensajes modificar(PreliminarTab o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(String id) {
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
