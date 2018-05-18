@@ -1146,3 +1146,39 @@ begin
 delete from rol where  RolId = rId;
 end $$
 delimiter $$
+
+
+
+-- -----------------------------------------------------
+-- Listar Parametros de producto
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignaParXProLi (in apProID INT)
+begin
+SELECT ap.GraID, g.GraNombre, ap.ParId, pa.ParNombre, ap.ProId, pr.ProNombre, ap.VarId, v.VarEstado, ap.PaProDescripcion, ap.PaProFoto
+FROM AsignaParametro AS ap
+INNER JOIN grados AS g ON ap.GraID = g.GraID
+INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
+INNER JOIN productos AS pr ON ap.ProId = pr.ProId
+INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
+WHERE ap.ProId = apProID;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Listar Parametros de variedad
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignaParXVarLi (in apVarID INT)
+begin
+SELECT ap.GraID, g.GraNombre, ap.ParId, pa.ParNombre, ap.ProId, pr.ProNombre, ap.VarId, v.VarEstado, ap.PaProDescripcion, ap.PaProFoto
+FROM AsignaParametro AS ap
+INNER JOIN grados AS g ON ap.GraID = g.GraID
+INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
+INNER JOIN productos AS pr ON ap.ProId = pr.ProId
+INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
+WHERE ap.VarId = apVarID;
+end $$
+delimiter $$
