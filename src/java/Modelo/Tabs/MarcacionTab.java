@@ -42,6 +42,10 @@ public class MarcacionTab {
         this.ArmNombre = ArmNombre;
     }
 
+    public MarcacionTab(int Id, String nombre, String portada, boolean status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @return the MarId
      */
@@ -85,17 +89,17 @@ public class MarcacionTab {
     }
 
     /**
-     * @return the MarEstado
-     */
-    public Boolean getMarEstado() {
-        return MarEstado;
-    }
-
-    /**
-     * @param MarEstado the MarEstado to set
+     * @param MarEstado the ArmEstado to set
      */
     public void setMarEstado(Boolean MarEstado) {
         this.MarEstado = MarEstado;
+    }
+
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isMarEstado() {
+        return MarEstado;
     }
 
     /**
@@ -130,10 +134,5 @@ public class MarcacionTab {
     public String toString() {
         return "MarcacionTab{" + "MarId=" + MarId + ", MarNombre=" + MarNombre + ", MarPortada=" + MarPortada + ", MarEstado=" + MarEstado + ", ArmNombre=" + ArmNombre + '}';
     }
-
-    public boolean isMarEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
 }

@@ -48,7 +48,7 @@ public abstract class MenuMs implements Menu {
             stat.setString(4, a.getMenCauchos());
             stat.setString(5, a.getMenDescripcion());
 
-            if (a.isMenEstado()) {
+            if (a.isEstado()) {
                 stat.setInt(3, 1);
             } else {
                 stat.setInt(9, 0);
@@ -84,14 +84,14 @@ public abstract class MenuMs implements Menu {
      @Override
     public MenuTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("MenuId");
-        String nombre = rs.getString("MenPortada");
+        String portada= rs.getString("MenPortada");
         String superior = rs.getString("MenSuperior");
         String longitud = rs.getString("MenLongitud");
         String cauchos = rs.getString("MenCauchos");
         String descripcion = rs.getString("MenDescripcion");
         int st = rs.getInt("MenEstado");
         boolean status = st == 1;
-        MenuTab mTab = new MenuTab (Id, nombre, superior,longitud,cauchos,descripcion,status);
+        MenuTab mTab = new MenuTab (Id, portada, superior,longitud,cauchos,descripcion,status);
         return mTab;
     }
 

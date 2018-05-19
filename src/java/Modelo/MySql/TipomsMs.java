@@ -81,9 +81,8 @@ import java.util.List;
         String descripcion = rs.getString("TiMDescripcion");
         TipoTab tTab = new TipoTab (Id, nombre, descripcion);
         return tTab;
-    public Mensajes modificar(TipoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     @Override
      public List<TipoTab> listar() {
     PreparedStatement stat = null;
@@ -117,16 +116,6 @@ import java.util.List;
             System.out.println("Error sql: " + ex);
         }
         return uModel;    
-    }
-    @Override
-    public String modificar(TipoTab o) {
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

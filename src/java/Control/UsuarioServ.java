@@ -166,8 +166,8 @@ public class UsuarioServ extends HttpServlet {
                 case "Subir":
                     Part arc = request.getPart("imagen");
                     AdminFile af = new AdminFile();
-                    String Url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/Test/" + arc.getSubmittedFileName();
-                    m = af.subirImg(arc, Url);
+//                    String Url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/Test/" + arc.getSubmittedFileName();
+//                    m = af.subirImg(arc, Url);
 
                     break;
 

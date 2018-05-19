@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class VariedadMs implements Variedad{
+public abstract class VariedadMs implements Variedad {
 
     private final Connection con;
     Mensajes m = null;
@@ -34,10 +34,9 @@ public abstract class VariedadMs implements Variedad{
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = ""; 
-    
+    final String Login = "";
 
-      @Override
+    @Override
     public Mensajes insertar(VariedadTab v) {
         String msj = "";
         PreparedStatement stat = null;
@@ -46,7 +45,7 @@ public abstract class VariedadMs implements Variedad{
             stat.setString(1, v.getVarNombre());
             stat.setString(2, v.getVarimagen());
             stat.setString(2, v.getVarColor());
-            
+
             if (v.isVarEstado()) {
                 stat.setInt(3, 1);
             } else {
@@ -79,6 +78,7 @@ public abstract class VariedadMs implements Variedad{
         }
         return m;
     }
+
     @Override
     public VariedadTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("VarId");
@@ -87,15 +87,14 @@ public abstract class VariedadMs implements Variedad{
         String color = rs.getString("VarColor");
         int st = rs.getInt("VarEstado");
         boolean status = st == 1;
-        VariedadTab aTab = new VariedadTab (Id, nombre, imagen,color,status);
+        VariedadTab aTab = new VariedadTab(Id, nombre, imagen, color, status);
         return aTab;
-    public Mensajes modificar(VariedadTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
-  @Override
-     public List<VariedadTab> listar() {
-    PreparedStatement stat = null;
+    @Override
+    public List<VariedadTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<VariedadTab> uModel = new ArrayList<>();
         try {
@@ -125,25 +124,7 @@ public abstract class VariedadMs implements Variedad{
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
-    @Override
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return uModel;
 
-    @Override
-    public String modificar(VariedadTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public VariedadTab obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
-

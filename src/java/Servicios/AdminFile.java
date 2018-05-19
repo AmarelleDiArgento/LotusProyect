@@ -59,7 +59,7 @@ public class AdminFile {
         }
 
         msj.setTipo("Ok");
-        msj.setMsj(img.getSubmittedFileName());
+        msj.setMsj(img.getName());
         msj.setDetalles("Subido exitosamente");
         return msj;
     }

@@ -49,7 +49,7 @@ public abstract class MaterialSecoMs implements MaterialSeco {
             stat.setInt(5, ms.getMsAncho());
             stat.setInt(6, ms.getMsProfundo());
 
-            if (ms.isMsEstado()) {
+            if (ms.isEstado()) {
                 stat.setInt(7, 1);
             } else {
                 stat.setInt(7, 0);

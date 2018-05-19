@@ -85,11 +85,6 @@ public class ArmadoTab {
         return ArmEstado;
     }
 
-
-    private String getArmEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public String toString() {
         return "ArmadoTab{" + "ArmId=" + ArmId + ", ArmNombre=" + ArmNombre + ", ArmDescripcion=" + ArmDescripcion + ", ArmEstado=" + ArmEstado + '}';

@@ -45,7 +45,7 @@ public abstract class PreliminarMs implements Preliminar {
             stat = con.prepareStatement(Insertar);
             stat.setDate(1, p.getPreFecha());
 
-            if (p.isPreEstado()) {
+            if (p.isEstado()) {
                 stat.setInt(2, 1);
             } else {
                 stat.setInt(2, 0);

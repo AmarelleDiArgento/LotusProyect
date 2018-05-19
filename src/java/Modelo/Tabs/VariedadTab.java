@@ -30,6 +30,10 @@ public class VariedadTab {
         this.VarNombre = VarNombre;
         this.VarEstado = VarEstado;
         this.Varimagen = Varimagen;
+
+    }
+    public VariedadTab(int Id, String nombre, String imagen, String color, boolean status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -59,21 +63,19 @@ public class VariedadTab {
     public void setVarNombre(String VarNombre) {
         this.VarNombre = VarNombre;
     }
-
-    /**
-     * @return the VarEstado
-     */
-    public Boolean getVarEstado() {
-        return VarEstado;
-    }
-
-    /**
-     * @param VarEstado the VarEstado to set
+ /**
+     * @param VarEstado the ArmEstado to set
      */
     public void setVarEstado(Boolean VarEstado) {
         this.VarEstado = VarEstado;
     }
 
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isVarEstado() {
+        return VarEstado;
+    }
     /**
      * @return the Varimagen
      */
@@ -107,9 +109,4 @@ public class VariedadTab {
         return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", Varimagen=" + Varimagen + ", VarColor=" + VarColor + '}';
     }
 
-    public boolean isVarEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
- 
 }

@@ -33,6 +33,10 @@ public class MaterialSecoTab {
         this.MsProfundo = MsProfundo;
     }
 
+    public MaterialSecoTab(int Id, String nombre, String descripcion, String imagen, boolean status, int alto, int ancho, String profundo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @return the MsId
      */
@@ -102,19 +106,18 @@ public class MaterialSecoTab {
     public void setMsDescripcion(String MsDescripcion) {
         this.MsDescripcion = MsDescripcion;
     }
-
-    /**
-     * @return the Estado
-     */
-    public Boolean getEstado() {
-        return Estado;
-    }
-
-    /**
-     * @param Estado the Estado to set
+   /**
+     * @param Estado the ArmEstado to set
      */
     public void setEstado(Boolean Estado) {
         this.Estado = Estado;
+    }
+
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isEstado() {
+        return Estado;
     }
 
     /**
@@ -160,12 +163,9 @@ public class MaterialSecoTab {
     }
     @Override
     public String toString() {
-        return "MaterialSecoTab{" + "MsId=" + getMsId() + ", TipoMs_TimId=" + getTipoMs_TimId() + ", MsNombre=" + getMsNombre() + ", Estado=" + getEstado() + ", MsAlto=" + getMsAlto() + ", MsAncho=" + getMsAncho() + ", MsProfundo=" + getMsProfundo() + '}';
+        return "MaterialSecoTab{" + "MsId=" + getMsId() + ", TipoMs_TimId=" + getTipoMs_TimId() + ", MsNombre=" + getMsNombre() + ", Estado=" + isEstado() + ", MsAlto=" + getMsAlto() + ", MsAncho=" + getMsAncho() + ", MsProfundo=" + getMsProfundo() + '}';
     }
 
-    public boolean isMsEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
     
     

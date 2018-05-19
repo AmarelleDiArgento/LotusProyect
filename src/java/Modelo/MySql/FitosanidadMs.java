@@ -94,8 +94,6 @@ public abstract class FitosanidadMs implements Fitosanidad {
         boolean status = st == 1;
         FitosanidadTab fTab = new FitosanidadTab (Id, nombre, descripcion,tipo,imagen,status);
         return fTab;
-    public Mensajes modificar(FitosanidadTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
         
@@ -140,10 +138,6 @@ public abstract class FitosanidadMs implements Fitosanidad {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public FitosanidadTab obtener(String id) {

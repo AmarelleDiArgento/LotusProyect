@@ -23,9 +23,6 @@ import java.util.List;
 public abstract class MaestroMs implements Maestro {
     
      private final Connection con;
-public class MaestroMs implements Maestro {
-
-    private final Connection con;
     Mensajes m = null;
 
     public MaestroMs(Connection con) {
@@ -137,9 +134,5 @@ public class MaestroMs implements Maestro {
     }
 
     
-    @Override
-    public List<MaestroTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

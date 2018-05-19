@@ -22,6 +22,7 @@ import java.util.List;
 public class ArmadoMs implements Armado {
 
     private final Connection con;
+    Mensajes m;
 
     public ArmadoMs(Connection con) {
 
@@ -36,7 +37,7 @@ public class ArmadoMs implements Armado {
 
     @Override
     public Mensajes insertar(ArmadoTab a) {
-        Mensajes m = null;
+
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -77,23 +78,13 @@ public class ArmadoMs implements Armado {
     }
 
     @Override
-    public Mensajes modificar(ArmadoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ArmadoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("ArmId");
         String nombre = rs.getString("ArmNombre");
-        String Descripcion = rs.getString("ArmDescripcion");
+        String descripcion = rs.getString("ArmDescripcion");
         int st = rs.getInt("ArmEstado");
         boolean status = st == 1;
-        ArmadoTab uTab = new ArmadoTab(Id, nombre, Descripcion, status);
+        ArmadoTab uTab = new ArmadoTab(Id, nombre, descripcion, status);
         return uTab;
     }
 
@@ -130,6 +121,20 @@ public class ArmadoMs implements Armado {
             System.out.println("Error sql: " + ex);
         }
         return aTab;
+    }
+
+    @Override
+    public ArmadoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   @Override
+    public Mensajes modificar(ArmadoTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -38,6 +38,12 @@ public class LineaTab {
         this.PosNombre = PosNombre;
     }
 
+    public LineaTab(int LinId, Boolean Estado) {
+        this.LinId = LinId;
+        this.Estado = Estado;
+    }
+    
+
     /**
      * @return the LinId
      */
