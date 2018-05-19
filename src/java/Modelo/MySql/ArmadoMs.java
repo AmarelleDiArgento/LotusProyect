@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Armado;
 import Modelo.Tabs.ArmadoTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,76 +22,70 @@ import java.util.List;
 public class ArmadoMs implements Armado {
 
     private final Connection con;
+    Mensajes m;
 
     public ArmadoMs(Connection con) {
 
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.armadoIn(?, ?, ?);";
+    final String Insertar = "call LotusProyect.armadoIn(?, ?, ?);";
     final String Modificar = "";
     final String Eliminar = "";
     final String Consultar = "";
-    final String ListarTodos = "call lotusproyect.armadoLi();";
-    
+    final String ListarTodos = "call LotusProyect.armadoLi();";
+
     @Override
-    public String insertar(ArmadoTab a) {
-        String msj = "";
+    public Mensajes insertar(ArmadoTab a) {
+
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, a.getArmNombre());
             stat.setString(2, a.getArmDescripcion());
-          
+
             if (a.isArmEstado()) {
                 stat.setInt(3, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(3, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = a.getArmNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(a.getArmNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
 
         }
-        return msj;
-    }
-
-    @Override
-    public String modificar(ArmadoTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+        return m;
     }
 
     @Override
     public ArmadoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("ArmId");
         String nombre = rs.getString("ArmNombre");
-        String Descripcion = rs.getString("ArmDescripcion");
+        String descripcion = rs.getString("ArmDescripcion");
         int st = rs.getInt("ArmEstado");
         boolean status = st == 1;
-        ArmadoTab uTab = new ArmadoTab(Id, nombre, Descripcion, status);
-        return uTab;}
-
-    @Override
-    public ArmadoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+        ArmadoTab uTab = new ArmadoTab(Id, nombre, descripcion, status);
+        return uTab;
     }
 
     @Override
@@ -128,5 +123,18 @@ public class ArmadoMs implements Armado {
         return aTab;
     }
 
-    
+    @Override
+    public ArmadoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   @Override
+    public Mensajes modificar(ArmadoTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

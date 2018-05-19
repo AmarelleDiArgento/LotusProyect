@@ -16,7 +16,7 @@ public class MenuTab {
     private String MenSuperior;
     private String MenLongitud;
     private String MenCauchos;
-    private Boolean MenEstado;
+    private Boolean Estado;
     private String MenDescripcion;
     private int MarId;
     private String Marcacion;
@@ -26,7 +26,7 @@ public class MenuTab {
         this.MenSuperior = MenSuperior;
         this.MenLongitud = MenLongitud;
         this.MenCauchos = MenCauchos;
-        this.MenEstado = MenEstado;
+        this.Estado = MenEstado;
         this.MenDescripcion = MenDescripcion;
         this.MarId = MarId;
     }
@@ -37,21 +37,24 @@ public class MenuTab {
         this.MenSuperior = MenSuperior;
         this.MenLongitud = MenLongitud;
         this.MenCauchos = MenCauchos;
-        this.MenEstado = MenEstado;
+        this.Estado = MenEstado;
         this.MenDescripcion = MenDescripcion;
         this.MarId = MarId;
     }
 
-    public MenuTab(int MenuId, String MenPortada, String MenSuperior, String MenLongitud, String MenCauchos, Boolean MenEstado, String MenDescripcion, int MarId, String Marcacion) {
-        this.MenuId = MenuId;
+    public MenuTab(String MenPortada, String MenSuperior, String MenLongitud, String MenCauchos, Boolean Estado, String MenDescripcion, int MarId, String Marcacion) {
         this.MenPortada = MenPortada;
         this.MenSuperior = MenSuperior;
         this.MenLongitud = MenLongitud;
         this.MenCauchos = MenCauchos;
-        this.MenEstado = MenEstado;
+        this.Estado = Estado;
         this.MenDescripcion = MenDescripcion;
         this.MarId = MarId;
         this.Marcacion = Marcacion;
+    }
+
+    public MenuTab(int Id, String portada, String superior, String longitud, String cauchos, String descripcion, boolean status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -125,17 +128,17 @@ public class MenuTab {
     }
 
     /**
-     * @return the MenEstado
+     * @param Estado the ArmEstado to set
      */
-    public Boolean getMenEstado() {
-        return MenEstado;
+    public void setEstado(Boolean Estado) {
+        this.Estado = Estado;
     }
 
     /**
-     * @param MenEstado the MenEstado to set
+     * @return the ArmEstado
      */
-    public void setMenEstado(Boolean MenEstado) {
-        this.MenEstado = MenEstado;
+    public Boolean isEstado() {
+        return Estado;
     }
 
     /**
@@ -182,13 +185,9 @@ public class MenuTab {
 
     @Override
     public String toString() {
-        return "MenuTab{" + "MenuId=" + MenuId + ", MenPortada=" + MenPortada + ", MenSuperior=" + MenSuperior + ", MenLongitud=" + MenLongitud + ", MenCauchos=" + MenCauchos + ", MenEstado=" + MenEstado + ", MenDescripcion=" + MenDescripcion + ", MarId=" + MarId + ", Marcacion=" + Marcacion + '}';
+        return "MenuTab{" + "MenuId=" + MenuId + ", MenPortada=" + MenPortada + ", MenSuperior=" + MenSuperior + ", MenLongitud=" + MenLongitud + ", MenCauchos=" + MenCauchos + ", Estado=" + Estado + ", MenDescripcion=" + MenDescripcion + ", MarId=" + MarId + ", Marcacion=" + Marcacion + '}';
     }
 
-    public boolean isMenEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     }
 
 

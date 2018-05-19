@@ -82,8 +82,7 @@ public class RolServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         r = new RolTab(Nombre, Descripcion, Estado);
-                        m.setMsj(Asql.getRol().insertar(r));
-                        m.setTipo("Ok");
+                        m = Asql.getRol().insertar(r);
 
                     } else {
                         m.setTipo("Error");
@@ -100,8 +99,7 @@ public class RolServ extends HttpServlet {
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         r = new RolTab(Id, Nombre, Descripcion, Estado);
-                        m.setMsj(Asql.getRol().modificar(r));
-                        m.setTipo("Ok");
+                        m = Asql.getRol().modificar(r);
 
                     } else {
                         m.setTipo("Error");
@@ -111,8 +109,7 @@ public class RolServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getRol().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");

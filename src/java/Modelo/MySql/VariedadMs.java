@@ -7,19 +7,22 @@ package Modelo.MySql;
 
 import Modelo.Interface.Variedad;
 import Modelo.Tabs.VariedadTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class VariedadMs implements Variedad{
+public abstract class VariedadMs implements Variedad {
 
     private final Connection con;
+    Mensajes m = null;
 
     public VariedadMs(Connection con) {
 
@@ -31,11 +34,10 @@ public class VariedadMs implements Variedad{
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = ""; 
-    
+    final String Login = "";
 
-      @Override
-    public String insertar(VariedadTab v) {
+    @Override
+    public Mensajes insertar(VariedadTab v) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -43,56 +45,86 @@ public class VariedadMs implements Variedad{
             stat.setString(1, v.getVarNombre());
             stat.setString(2, v.getVarimagen());
             stat.setString(2, v.getVarColor());
-            
+
             if (v.isVarEstado()) {
                 stat.setInt(3, 1);
             } else {
                 stat.setInt(9, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = v.getVarNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(v.getVarNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
-    }
-
-   
-    @Override
-    public String modificar(VariedadTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return m;
     }
 
     @Override
     public VariedadTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        int Id = rs.getInt("VarId");
+        String nombre = rs.getString("VarNombre");
+        String imagen = rs.getString("VarImagen");
+        String color = rs.getString("VarColor");
+        int st = rs.getInt("VarEstado");
+        boolean status = st == 1;
+        VariedadTab aTab = new VariedadTab(Id, nombre, imagen, color, status);
+        return aTab;
 
-    @Override
-    public VariedadTab obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<VariedadTab> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<VariedadTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;
+
     }
 }

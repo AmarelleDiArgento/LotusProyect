@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Rol;
 import Modelo.Tabs.RolTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ import java.util.List;
 public class RolMs implements Rol {
 
     private final Connection con;
+    Mensajes m = null;
 
     public RolMs(Connection con) {
 
@@ -34,8 +36,7 @@ public class RolMs implements Rol {
     final String ListarTodos = "call LotusProyect.rolLi()";
 
     @Override
-    public String insertar(RolTab r) {
-        String msj = "";
+    public Mensajes insertar(RolTab r) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -48,83 +49,104 @@ public class RolMs implements Rol {
                 stat.setInt(3, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = r.getRolNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(r.getRolNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
 
     @Override
-    public String modificar(RolTab o) {
-        String msj = "";
+    public Mensajes modificar(RolTab r) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Modificar);
-            stat.setInt(1, o.getRolId());
-            stat.setString(2, o.getRolNombre());
-            stat.setString(3, o.getRolDescripcion());
-            if (o.isRolEstado()) {
+            stat.setInt(1, r.getRolId());
+            stat.setString(2, r.getRolNombre());
+            stat.setString(3, r.getRolDescripcion());
+            if (r.isRolEstado()) {
                 stat.setInt(4, 1);
             } else {
                 stat.setInt(4, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al modificar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
             } else {
-                msj = o.getRolNombre() + " modificado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(r.getRolNombre() + " modificado exitosamente");
             }
+
         } catch (SQLException ex) {
-            msj = "Error de SQL" + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL" + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
         }
-        return msj;
+        return m;
     }
 
     @Override
-    public String eliminar(Integer id) {
-        String msj = "";
+    public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Eliminar);
             stat.setInt(1, id);
             if (stat.executeUpdate() == 0) {
-                msj = "Error al eliminar los datos";
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
             } else {
-                msj = id + " eliminado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
             }
+
         } catch (SQLException ex) {
-            msj = "Error de SQL" + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL" + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
         }
-        return msj;
+        return m;
     }
 
     @Override

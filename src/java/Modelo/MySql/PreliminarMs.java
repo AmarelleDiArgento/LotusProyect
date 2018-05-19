@@ -7,19 +7,23 @@ package Modelo.MySql;
 
 import Modelo.Interface.Preliminar;
 import Modelo.Tabs.PreliminarTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class PreliminarMs implements Preliminar {
+public abstract class PreliminarMs implements Preliminar {
 
     private final Connection con;
+    Mensajes m = null;
 
     public PreliminarMs(Connection con) {
 
@@ -31,55 +35,99 @@ public class PreliminarMs implements Preliminar {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = ""; 
-    
-    
+    final String Login = "";
+
     @Override
-    public String insertar(PreliminarTab p) {
+    public Mensajes insertar(PreliminarTab p) {
         String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setDate(1, p.getPreFecha());
-          
-            if (p.isPreEstado()) {
+
+            if (p.isEstado()) {
                 stat.setInt(2, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(2, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = p.getPreFecha() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj("Agregada exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
-
-    @Override
-    public String modificar(PreliminarTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public PreliminarTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("PreId");
+        Date fecha = rs.getDate("PreFecha");
+        int st = rs.getInt("PreEstado");
+        boolean status = st == 1;
+        PreliminarTab aTab = new PreliminarTab (Id, fecha,status);
+        return aTab;
+    }
+   @Override
+     public List<PreliminarTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<PreliminarTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
+
+    @Override
+    public Mensajes modificar(PreliminarTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -88,8 +136,4 @@ public class PreliminarMs implements Preliminar {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<PreliminarTab> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

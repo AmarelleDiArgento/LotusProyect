@@ -25,6 +25,10 @@ public class PreliminarTab {
         this.Poscosecha_Posnombre = Poscosecha_Posnombre;
     }
 
+    public PreliminarTab(int Id, Date fecha, boolean status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @return the PreId
      */
@@ -53,18 +57,18 @@ public class PreliminarTab {
         this.PreFecha = PreFecha;
     }
 
-    /**
-     * @return the Estado
-     */
-    public Boolean getEstado() {
-        return Estado;
-    }
-
-    /**
-     * @param Estado the Estado to set
+      /**
+     * @param ArmEstado the ArmEstado to set
      */
     public void setEstado(Boolean Estado) {
         this.Estado = Estado;
+    }
+
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isEstado() {
+        return Estado;
     }
 
     /**
@@ -85,9 +89,6 @@ public class PreliminarTab {
     public String toString() {
         return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + '}';
     }
-
-    public boolean isPreEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
+
    

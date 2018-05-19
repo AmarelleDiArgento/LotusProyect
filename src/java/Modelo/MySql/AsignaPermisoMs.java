@@ -15,12 +15,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Modelo.Interface.AsignaPermiso;
+import Servicios.Mensajes;
 
 /**
  *
  * @author Amarelle
  */
-public class AsignaPermisoMs implements AsignaPermiso{
+public class AsignaPermisoMs implements AsignaPermiso {
+
     private final Connection con;
 
     public AsignaPermisoMs(Connection con) {
@@ -34,6 +36,56 @@ public class AsignaPermisoMs implements AsignaPermiso{
     final String Consultar = "call LotusProyect.AsgPerCo(?, ?)";
     final String ListarTodos = "call LotusProyect.AsgPerLi(?);";
     final String PerSession = "call LotusProyect.AsgPerSession(?);";
+
+    @Override
+    public List<AsignaPermisoTab> listar(Integer rol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes insertar(AsignaPermisoTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes modificar(AsignaPermisoTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public AsignaPermisoTab convertir(ResultSet rs) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public AsignaPermisoTab coSession(ResultSet rs) throws SQLException {
+
+        String Permiso = rs.getString("PerNombre");
+        int l = rs.getInt("rolperLeer");
+        boolean leer = l == 1;
+        int n = rs.getInt("rolperNuevo");
+        boolean nuevo = n == 1;
+        int m = rs.getInt("rolperEditar");
+        boolean modificar = m == 1;
+        int e = rs.getInt("rolperEliminar");
+        boolean eliminar = e == 1;
+        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, leer, nuevo, modificar, eliminar);
+        return apModel;
+    }
+
+    @Override
+    public AsignaPermisoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<AsignaPermisoTab> listar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public List<AsignaPermisoTab> PerSession(String cedula) {
@@ -70,53 +122,4 @@ public class AsignaPermisoMs implements AsignaPermiso{
         return apModel;
     }
 
-    @Override
-    public List<AsignaPermisoTab> listar(Integer rol) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String insertar(AsignaPermisoTab o) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String modificar(AsignaPermisoTab o) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(Integer id) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public AsignaPermisoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-        public AsignaPermisoTab coSession(ResultSet rs) throws SQLException {
-
-        String Permiso = rs.getString("PerNombre");
-        int l = rs.getInt("rolperLeer");
-        boolean leer = l == 1;
-        int n = rs.getInt("rolperNuevo");
-        boolean nuevo = n == 1;
-        int m = rs.getInt("rolperEditar");
-        boolean modificar = m == 1;
-        int e = rs.getInt("rolperEliminar");
-        boolean eliminar = e == 1;
-        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, leer, nuevo, modificar, eliminar);
-        return apModel;
-    }
-
-    @Override
-    public AsignaPermisoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<AsignaPermisoTab> listar() {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 }
