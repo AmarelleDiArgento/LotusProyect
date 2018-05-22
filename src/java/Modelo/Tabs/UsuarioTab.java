@@ -3,30 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Modelo.Tabs;
 
 import java.io.Serializable;
 
 /**
- * 
+ *
  * @author Amarelle
  */
-public class UsuarioTab implements Serializable{
-private String Cedula; 
-private String Nombre; 
-private String  Apellido;
-private String Loger; 
-private String Password;
-private String Extencion;
-private String Telefono;
-private String Email;
-private Boolean Estado;
-private int  RolId;
-private String nRol;
+public class UsuarioTab implements Serializable {
 
+    private String Cedula;
+    private String Nombre;
+    private String Apellido;
+    private String Loger;
+    private String Password;
+    private String Extencion;
+    private String Telefono;
+    private String Email;
+    private String Avatar;
+    private Boolean Estado;
+    private int RolId;
+    private String nRol;
 
-    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, Boolean Estado, int RolId, String nRol) {
+    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, String Avatar, Boolean Estado, int RolId, String nRol) {
         this.Cedula = Cedula;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -35,12 +35,13 @@ private String nRol;
         this.Extencion = Extencion;
         this.Telefono = Telefono;
         this.Email = Email;
+        this.Avatar = Avatar;
         this.Estado = Estado;
         this.RolId = RolId;
         this.nRol = nRol;
     }
 
-    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, Boolean Estado, int RolId) {
+    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, String Avatar, Boolean Estado, int RolId) {
         this.Cedula = Cedula;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -49,10 +50,10 @@ private String nRol;
         this.Extencion = Extencion;
         this.Telefono = Telefono;
         this.Email = Email;
+        this.Avatar = Avatar;
         this.Estado = Estado;
         this.RolId = RolId;
     }
-    
 
     /**
      * @return the Cedula
@@ -167,6 +168,20 @@ private String nRol;
     }
 
     /**
+     * @return the Avatar
+     */
+    public String getAvatar() {
+        return Avatar;
+    }
+
+    /**
+     * @param Avatar the Avatar to set
+     */
+    public void setAvatar(String Avatar) {
+        this.Avatar = Avatar;
+    }
+
+    /**
      * @return the Estado
      */
     public Boolean getEstado() {
@@ -213,7 +228,7 @@ private String nRol;
         return "UsuarioTab{" + "Cedula=" + Cedula + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Loger=" + Loger + ", Password=" + Password + ", Extencion=" + Extencion + ", Telefono=" + Telefono + ", Email=" + Email + ", Estado=" + Estado + ", RolId=" + RolId + ", nRol=" + nRol + '}';
     }
 
-    public String toFullName(){
-     return Nombre + " " +Apellido;
+    public String toFullName() {
+        return Nombre + " " + Apellido;
     }
 }
