@@ -72,6 +72,7 @@ public class UsuarioServ extends HttpServlet {
         String Extencion;
         String Celular;
         String Email;
+        String Avatar;
         Boolean Estado;
         int RolId;
         String nRol;
@@ -94,6 +95,7 @@ public class UsuarioServ extends HttpServlet {
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
+                    Avatar = request.getParameter("Avatar");
                     String E = request.getParameter("Estado");
                     Estado = E.equals("on");
                     if (request.getParameter("Rol") != null) {
@@ -101,7 +103,7 @@ public class UsuarioServ extends HttpServlet {
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Avatar, Estado, RolId);
                     m = Asql.getUsuario().insertar(u);
 
                     break;
@@ -120,6 +122,7 @@ public class UsuarioServ extends HttpServlet {
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
+                    Avatar = Usuario + request.getParameter("Avatar");
                     String Em = request.getParameter("Estado");
                     Estado = Em.equals("on");
                     if (request.getParameter("Rol") != null) {
@@ -127,7 +130,7 @@ public class UsuarioServ extends HttpServlet {
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Avatar, Estado, RolId);
                     m = Asql.getUsuario().modificar(u);
                     break;
 

@@ -70,12 +70,10 @@
                         <td><%=pt.getPerDescripcion()%></td>
                         <td><i class="material-icons gray-text"><%=pt.getPerIco()%></i></td>
                         <td><%=pt.getPerUrl()%></td>
-                        <td><%=pt.getPerEstado()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (pt.isPerEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
+                            <input class="switchstad" type="checkbox" id="switch<%=pt.getPerId()%>" <%if (pt.getPerEstado()) {%>checked <%}%>/><label class="labelstad" for="switch<%=pt.getPerId()%>">Toggle</label>    
+
+
                         </td>
                         <td>
                             <a href="#">

@@ -35,7 +35,7 @@ public class PermisoMs implements Permiso {
     final String Modificar = "call LotusProyect.permisoMo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     final String Eliminar = "call LotusProyect.permisoEl(?);";
     final String Consultar = "call LotusProyect.permisoCo(?);";
-    final String ListarTodos = "call lotusproyect.permisoLi();";
+    final String ListarTodos = "call LotusProyect.permisoLi();";
     final String Menu = "call LotusProyect.perMenu(?);";
 
     @Override
@@ -49,7 +49,7 @@ public class PermisoMs implements Permiso {
             stat.setString(4, p.getPerIco());
             stat.setString(5, p.getPerUrl());
 
-            if (p.isPerEstado()) {
+            if (p.getPerEstado()) {
                 stat.setInt(6, 1);
             } else {
                 stat.setInt(6, 0);

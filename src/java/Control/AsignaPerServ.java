@@ -49,7 +49,6 @@ public class AsignaPerServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
 
-
         String ruta = "";
         String Dato = "";
         String Accion = request.getParameter("accion");
@@ -121,17 +120,19 @@ public class AsignaPerServ extends HttpServlet {
                 default:
             }
         } catch (SQLException ex) {
-                        m.setTipo("Error");
-                        m.setMsj("MySql Error");
-                        m.setDetalles("Detalles: " +ex);
+            m.setTipo("Error");
+            m.setMsj("MySql Error");
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
-                        m.setTipo("Error");
-                        m.setMsj("Error");
-                        m.setDetalles("Detalles: " +ex);
-            }
-        
-        Ses.setAttribute("msj", m);
+            m.setTipo("Error");
+            m.setMsj("Error");
+            m.setDetalles("Detalles: " + ex);
+        }
+
+        if (m.getTipo() != null) {
+            Ses.setAttribute("msj", m);
+        }
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 

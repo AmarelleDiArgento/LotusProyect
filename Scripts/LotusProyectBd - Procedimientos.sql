@@ -59,9 +59,9 @@ delimiter $$
 -- Insertar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioIn (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(45),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uEstado VARCHAR(10), in RolId INT)
+create procedure usuarioIn (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(45),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(100), in uEstado VARCHAR(10), in RolId INT)
 begin
-insert into usuario (UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,RolId) values (uCedula,uNombre,uApellido,uLoger,SHA(uPass),uExt,uTel,uEmail,uEstado,RolId);
+insert into usuario (UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuAvatar,UsuEstado,RolId) values (uCedula,uNombre,uApellido,uLoger,SHA(uPass),uExt,uTel,uEmail,uAvatar,uEstado,RolId);
 end $$
 delimiter $$
 
@@ -69,9 +69,9 @@ delimiter $$
 -- Modificar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uEstado VARCHAR(10), in RolId INT)
+create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(100),in uEstado VARCHAR(10), in RolId INT)
 begin
-update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuPassword=uPass,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
+update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuPassword=uPass,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuAvatar=uAvatar,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
 end $$
 delimiter $$
 
@@ -93,7 +93,7 @@ delimiter $$
 delimiter $$
 create procedure usuarioLi ()
 begin
-Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,u.RolId,RolNombre
+Select u.UsuCedula,u.UsuNombre,u.UsuApellido,u.UsuLoger,u.UsuPassword,u.UsuExtencion,u.UsuTelefono,u.UsuEmail,u.UsuAvatar,u.UsuEstado,u.RolId,r.RolNombre
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 order by u.UsuNombre;
@@ -107,7 +107,7 @@ delimiter $$
 delimiter $$
 create procedure usuarioCo (in uCedula VARCHAR(10))
 begin
-Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,u.RolId,RolNombre
+Select u.UsuCedula,u.UsuNombre,u.UsuApellido,u.UsuLoger,u.UsuPassword,u.UsuExtencion,u.UsuTelefono,u.UsuEmail,u.UsuAvatar,u.UsuEstado,u.RolId,r.RolNombre
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 where u.UsuCedula=uCedula;
@@ -121,7 +121,7 @@ delimiter $$
 delimiter $$
 create procedure usuarioLogin (in uLoger VARCHAR(15), in uPass VARCHAR(45))
 begin
-Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,u.RolId, RolNombre
+Select u.UsuCedula,u.UsuNombre,u.UsuApellido,u.UsuLoger,u.UsuPassword,u.UsuExtencion,u.UsuTelefono,u.UsuEmail,u.UsuAvatar,u.UsuEstado,u.RolId,r.RolNombre
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 where u.UsuLoger=uLoger and UsuPassword=SHA(uPass);

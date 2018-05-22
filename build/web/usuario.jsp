@@ -50,6 +50,7 @@
             <table class="centered striped">
                 <thead>
                     <tr>
+                        <th>Avatar</th>
                         <th>Cedula</th>
                         <th>Nombre</th>
                         <th>Usuario</th>
@@ -66,6 +67,12 @@
                     <%                        for (UsuarioTab ut : LisU) {
                     %>
                     <tr>
+                        <td><div class="user-view">
+                                <a href="#">
+                                    <img class="circle" style="height: 3.5rem" src="img\<%=ut.getAvatar()%>">
+                                </a>
+                            </div>
+                        </td>
                         <td><%=ut.getCedula()%></td>
                         <td><%=ut.toFullName()%></td>
                         <td><%=ut.getLoger()%></td>
@@ -154,6 +161,15 @@
                         <div class="input-field col s6">
                             <input id="Email" type="Email" name="Email" class="validate">
                             <label for="Email">Email</label>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Avatar</span>
+                                <input type="file" name="img" accept="image/*"">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" name="Avatar" type="text">
+                            </div>
                         </div>
                         <div class="switch">
                             <label>

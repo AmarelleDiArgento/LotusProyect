@@ -23,8 +23,8 @@ public class UsuarioMs implements Usuario {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProyect.usuarioIn(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    final String Modificar = "call LotusProyect.usuarioMo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    final String Insertar = "call LotusProyect.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
+    final String Modificar = "call LotusProyect.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
     final String Eliminar = "call LotusProyect.usuarioEl(?);";
     final String Consultar = "call LotusProyect.usuarioCo(?);";
     final String ListarTodos = "call LotusProyect.usuarioLi();";
@@ -86,7 +86,8 @@ public class UsuarioMs implements Usuario {
             } else {
                 stat.setInt(9, 0);
             }
-            stat.setInt(10, u.getRolId());
+            stat.setString(10, u.getAvatar());
+            stat.setInt(11, u.getRolId());
 
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");
@@ -135,7 +136,9 @@ public class UsuarioMs implements Usuario {
             } else {
                 stat.setInt(9, 0);
             }
-            stat.setInt(10, u.getRolId());
+            stat.setString(10, u.getAvatar());
+            stat.setInt(11, u.getRolId());
+            
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");
                 m.setMsj("Error Mysql");
@@ -212,11 +215,12 @@ public class UsuarioMs implements Usuario {
         String ext = rs.getString("UsuExtencion");
         String tel = rs.getString("UsuTelefono");
         String email = rs.getString("UsuEmail");
+        String avatar = rs.getString("UsuAvatar");
         int st = rs.getInt("UsuEstado");
         boolean status = st == 1;
         int rol_id = rs.getInt("RolId");
         String rol_n = rs.getString("RolNombre");
-        UsuarioTab uTab = new UsuarioTab(cedula, nombre, apellido, loger, pass, ext, tel, email, status, rol_id, rol_n);
+        UsuarioTab uTab = new UsuarioTab(cedula, nombre, apellido, loger, pass, ext, tel, email, avatar, status, rol_id, rol_n);
         return uTab;
     }
 
