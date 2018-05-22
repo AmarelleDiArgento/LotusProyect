@@ -8,6 +8,7 @@ package Servicios;
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
+import Modelo.Tabs.PermisoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
 import java.sql.SQLException;
@@ -121,8 +122,8 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            List<ArmadoTab> al = Asql.getArmado().listar();
-            for (ArmadoTab a : al) {
+            List<PermisoTab> al = Asql.getPermiso().listar();
+            for (PermisoTab a : al) {
                 System.out.println(a.toString());
 
             }

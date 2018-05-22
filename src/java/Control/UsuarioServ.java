@@ -179,13 +179,13 @@ public class UsuarioServ extends HttpServlet {
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
-            m.setMsj("MySql Error");
+            m.setMsj("MySql Servlet Error");
             m.setDetalles("Detalles" + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
-            m.setMsj("Error");
-            m.setDetalles("Detalles " + ex.toString());
+            m.setMsj("Error Servlet");
+            m.setDetalles("Detalles " + ex);
 
         }
         if (m.getTipo() != null) {

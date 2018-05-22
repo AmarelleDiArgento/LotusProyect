@@ -52,7 +52,7 @@ public class PermisoServ extends HttpServlet {
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
         UsuarioTab uSes = (UsuarioTab) Ses.getAttribute("log");
-
+        /*
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
@@ -60,7 +60,7 @@ public class PermisoServ extends HttpServlet {
                 acc = a;
             }
         }
-
+         */
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
@@ -81,71 +81,73 @@ public class PermisoServ extends HttpServlet {
 
             switch (Accion) {
                 case "Insertar":
-                    if (acc.isRpNuevo()) {
-                        Nombre = request.getParameter("Nombre");
-                        Modulo = request.getParameter("Modulo");
-                        Descripcion = request.getParameter("Descripcion");
-                        Ico = request.getParameter("Ico");
-                        Url = request.getParameter("Url");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
-                        p = new PermisoTab(Nombre, Modulo, Descripcion, Ico, Url, Estado);
-                        m = Asql.getPermiso().insertar(p);
-                    } else {
-                        m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer registros\"");
-                    }
+                    //                  if (acc.isRpNuevo()) {
+                    Nombre = request.getParameter("Nombre");
+                    Modulo = request.getParameter("Modulo");
+                    Descripcion = request.getParameter("Descripcion");
+                    Ico = request.getParameter("Ico");
+                    Url = request.getParameter("Url");
+                    E = request.getParameter("Estado");
+                    Estado = E.equals("on");
+                    p = new PermisoTab(Nombre, Modulo, Descripcion, Ico, Url, Estado);
+                    m = Asql.getPermiso().insertar(p);
+//                    } else {
+//                        m.setTipo("Error");
+//                        m.setMsj("No tienes permisos para hacer registros\"");
+//                    }
 
                     break;
 
                 case "modificar":
-                    if (acc.isRpEditar()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        Nombre = request.getParameter("Nombre");
-                        Modulo = request.getParameter("Modulo");
-                        Descripcion = request.getParameter("Descripcion");
-                        Ico = request.getParameter("Ico");
-                        Url = request.getParameter("Url");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
-                        p = new PermisoTab(Id, Nombre, Modulo, Descripcion, Ico, Url, Estado);
-                        m = Asql.getPermiso().modificar(p);
-                    } else {
+                    //                   if (acc.isRpEditar()) {
+                    Id = Integer.parseInt(request.getParameter("Id"));
+                    Nombre = request.getParameter("Nombre");
+                    Modulo = request.getParameter("Modulo");
+                    Descripcion = request.getParameter("Descripcion");
+                    Ico = request.getParameter("Ico");
+                    Url = request.getParameter("Url");
+                    E = request.getParameter("Estado");
+                    Estado = E.equals("on");
+                    p = new PermisoTab(Id, Nombre, Modulo, Descripcion, Ico, Url, Estado);
+                    m = Asql.getPermiso().modificar(p);
+                    /*                   } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
-                    break;
+                     */ break;
                 case "eliminar":
-                    if (acc.isRpEliminar()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getPermiso().eliminar(Id);
-                        m.setTipo("Ok");
-                    } else {
+                    //                   if (acc.isRpEliminar()) {
+                    Id = Integer.parseInt(request.getParameter("Id"));
+                    m = Asql.getPermiso().eliminar(Id);
+                    m.setTipo("Ok");
+                    /*                    } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
-                    break;
+                     */ break;
                 case "obtener":
-                    if (acc.isRpLeer()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getPermiso().obtener(Id);
-                        Ses.setAttribute("Per", p);
-                        m.setMsj("Se ha obtenido el Permiso con id: " + p.getPerId());
-                        m.setTipo("Ok");
-                    } else {
+//                    if (acc.isRpLeer()) {
+                    Id = Integer.parseInt(request.getParameter("Id"));
+                    p = Asql.getPermiso().obtener(Id);
+                    Ses.setAttribute("Per", p);
+                    m.setMsj("Se ha obtenido el Permiso con id: " + p.getPerId());
+                    m.setTipo("Ok");
+                    /*                   } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
                     }
 
-                    break;
+                     */ break;
                 case "Listar":
-                    if (acc.isRpLeer()) {
-                        List<PermisoTab> pl = Asql.getPermiso().listar();
-                        Ses.setAttribute("arrPer", pl);
+//                    if (acc.isRpLeer()) {
+                    List<PermisoTab> pl = Asql.getPermiso().listar();
+                    Ses.setAttribute("lisP", pl);
+                    /*                    
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar estos registros");
                     }
+                     */ 
                     break;
                 case "menu":
                     if (uSes.getCedula() != null) {

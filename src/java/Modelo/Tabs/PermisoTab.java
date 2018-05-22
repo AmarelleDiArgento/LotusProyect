@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Amarelle
  */
-public class PermisoTab {
+public class PermisoTab implements Serializable{
 
     private int PerId;
     private String PerNombre;

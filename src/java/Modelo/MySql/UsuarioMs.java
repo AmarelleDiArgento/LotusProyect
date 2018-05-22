@@ -15,9 +15,8 @@ import java.util.List;
  * @author Amarelle
  */
 public class UsuarioMs implements Usuario {
-
+    Mensajes m = new Mensajes();
     private final Connection con;
-    Mensajes m;
 
     public UsuarioMs(Connection con) {
 
@@ -70,7 +69,7 @@ public class UsuarioMs implements Usuario {
 
     @Override
     public Mensajes insertar(UsuarioTab u) {
-
+        
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -88,6 +87,7 @@ public class UsuarioMs implements Usuario {
                 stat.setInt(9, 0);
             }
             stat.setInt(10, u.getRolId());
+
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");
                 m.setMsj("Error Mysql");
@@ -113,6 +113,7 @@ public class UsuarioMs implements Usuario {
                 }
             }
         }
+        System.out.println(m.getTipo());
         return m;
     }
 
@@ -197,6 +198,7 @@ public class UsuarioMs implements Usuario {
             }
         }
 
+        System.out.println(m.getTipo());
         return m;
     }
 
