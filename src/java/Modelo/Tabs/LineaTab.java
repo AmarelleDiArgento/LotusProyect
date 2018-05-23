@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class LineaTab {
+public class LineaTab implements Serializable{
     
     private int LinId;
     private Boolean Estado;

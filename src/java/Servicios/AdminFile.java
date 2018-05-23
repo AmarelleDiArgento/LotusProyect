@@ -39,6 +39,7 @@ public class AdminFile {
     }
 
     public Mensajes subirImg(Part img, String url) {
+        url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/" + url;
         Mensajes msj = new Mensajes();
         try {
             in = img.getInputStream();

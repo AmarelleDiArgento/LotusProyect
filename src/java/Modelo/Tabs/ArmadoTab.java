@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class ArmadoTab {
+public class ArmadoTab implements Serializable {
 
     private int ArmId;
     private String ArmNombre;

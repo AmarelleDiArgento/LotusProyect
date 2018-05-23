@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class PoscosechaTab {
+public class PoscosechaTab implements Serializable{
     
   private int Idposcosecha;  
   private String PosNombre;

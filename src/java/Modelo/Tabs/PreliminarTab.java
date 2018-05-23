@@ -5,13 +5,14 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class PreliminarTab {
+public class PreliminarTab implements Serializable{
    
     private int PreId;
     private Date PreFecha;

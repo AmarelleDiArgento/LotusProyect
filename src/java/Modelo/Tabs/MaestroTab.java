@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MaestroTab {
+public class MaestroTab implements Serializable {
     
     private int MaeId;
     private String MaeNombre;

@@ -69,7 +69,7 @@
                     <tr>
                         <td><div class="user-view">
                                 <a href="#">
-                                    <img class="circle" style="height: 3.5rem" src="img\<%=ut.getAvatar()%>">
+                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="img\<%=ut.getAvatar()%>">
                                 </a>
                             </div>
                         </td>
@@ -123,7 +123,11 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="usuarios.do">
+            <form method="post" action="usuarios.do" enctype="multipart/form-data">
+                
+
+            
+                
                 <div class="modal-content">
                     <h4><i class="material-icons medium">face</i> Nuevo Usuario</h4>
                     <p>Registra la informacion del nuevo usuario</p>
@@ -165,10 +169,10 @@
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>Avatar</span>
-                                <input type="file" name="img" accept="image/*"">
+                                <input type="file" name="imagen" accept="image/*">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" name="Avatar" type="text">
+                                <input class="file-path validate" type="text">
                             </div>
                         </div>
                         <div class="switch">

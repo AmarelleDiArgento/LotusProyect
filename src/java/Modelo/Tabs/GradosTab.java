@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class GradosTab {
+public class GradosTab implements Serializable{
     
     private int GradId;
    private String GraNombre;

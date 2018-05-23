@@ -5,10 +5,12 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ale-j
  */
-public class AsignaProductoTab {
+public class AsignaProductoTab implements Serializable{
     
 }

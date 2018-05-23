@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class TipoTab {
+public class TipoTab implements Serializable{
     
     private int TiMId;
     private String TiMNombre;

@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MaterialSecoTab {
+public class MaterialSecoTab implements Serializable {
     
     private int MsId;
     private int TipoMs_TimId;

@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class FitosanidadTab {
+public class FitosanidadTab implements Serializable{
   
     private int FitId;
     private String FitNombre;

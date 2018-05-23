@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class PasoTab {
+public class PasoTab implements Serializable{
     
     private int PasId;
     private int Pasorden;

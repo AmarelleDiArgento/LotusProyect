@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class VariedadTab {
+public class VariedadTab implements Serializable{
     
     private int VarId;
     private String VarNombre;

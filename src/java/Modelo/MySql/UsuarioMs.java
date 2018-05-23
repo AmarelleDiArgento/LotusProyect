@@ -81,12 +81,12 @@ public class UsuarioMs implements Usuario {
             stat.setString(6, u.getExtencion());
             stat.setString(7, u.getTelefono());
             stat.setString(8, u.getEmail());
+            stat.setString(9, u.getAvatar());
             if (u.getEstado()) {
-                stat.setInt(9, 1);
+                stat.setInt(10, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(10, 0);
             }
-            stat.setString(10, u.getAvatar());
             stat.setInt(11, u.getRolId());
 
             if (stat.executeUpdate() == 0) {

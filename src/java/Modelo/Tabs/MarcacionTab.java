@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MarcacionTab {
+public class MarcacionTab implements Serializable{
     
     private int MarId;
     private String MarNombre;

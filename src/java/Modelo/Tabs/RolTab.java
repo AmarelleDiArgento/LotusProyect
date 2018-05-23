@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Amarelle
  */
-public class RolTab {
+public class RolTab implements Serializable{
 
     private int RolId;
     private String RolNombre;

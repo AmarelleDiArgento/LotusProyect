@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class ParametrosTab {
+public class ParametrosTab implements Serializable{
     
     private int ParId;
     private String ParNombre;

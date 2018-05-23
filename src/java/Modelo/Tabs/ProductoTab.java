@@ -5,12 +5,14 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class ProductoTab {
-    
+public class ProductoTab implements Serializable {
+
     private int ProId;
     private String ProNombre;
     private Boolean ProEstado;
@@ -19,8 +21,9 @@ public class ProductoTab {
         this.ProId = ProId;
         this.ProNombre = ProNombre;
         this.ProEstado = ProEstado;
-  
-}
+
+    }
+
     public ProductoTab(int ProId, Boolean ProEstado) {
         this.ProId = ProId;
         this.ProEstado = ProEstado;
@@ -76,4 +79,4 @@ public class ProductoTab {
     public boolean isProEstado() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    }
+}

@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MenuTab {
+public class MenuTab implements Serializable{
     
     private int MenuId;
     private String MenPortada;
