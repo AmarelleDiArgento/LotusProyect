@@ -20,6 +20,42 @@
         <servlet-name>ArmadoServ</servlet-name>
         <servlet-class>Control.ArmadoServ</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TipomsServ</servlet-name>
+        <servlet-class>Control.TipomsServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VariedadServ</servlet-name>
+        <servlet-class>Control.VariedadServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductosServ</servlet-name>
+        <servlet-class>Control.ProductosServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PreliminarServ</servlet-name>
+        <servlet-class>Control.PreliminarServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PoscosechaServ</servlet-name>
+        <servlet-class>Control.PoscosechaServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasoServ</servlet-name>
+        <servlet-class>Control.PasoServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ParametrosServ</servlet-name>
+        <servlet-class>Control.ParametrosServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MenuServ</servlet-name>
+        <servlet-class>Control.MenuServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MaterialsecoServ</servlet-name>
+        <servlet-class>Control.MaterialsecoServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioServ</servlet-name>
         <url-pattern>/usuarios.do</url-pattern>
@@ -39,6 +75,42 @@
     <servlet-mapping>
         <servlet-name>ArmadoServ</servlet-name>
         <url-pattern>/armados.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipomsServ</servlet-name>
+        <url-pattern>/tipoms.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VariedadServ</servlet-name>
+        <url-pattern>/variedad.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductosServ</servlet-name>
+        <url-pattern>/productos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PreliminarServ</servlet-name>
+        <url-pattern>/preliminar.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PoscosechaServ</servlet-name>
+        <url-pattern>/poscosecha.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasoServ</servlet-name>
+        <url-pattern>/paso.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParametrosServ</servlet-name>
+        <url-pattern>/parametros.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenuServ</servlet-name>
+        <url-pattern>/menu.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaterialsecoServ</servlet-name>
+        <url-pattern>/materialseco.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

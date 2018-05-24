@@ -6,18 +6,20 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Grados;
+import Modelo.Tabs.FitosanidadTab;
 import Modelo.Tabs.GradosTab;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class GradosMs implements Grados{
+public abstract class GradosMs implements Grados{
     
     private final Connection con;
 
@@ -68,8 +70,52 @@ public class GradosMs implements Grados{
         }
         return msj;
     }
+@Override
+    public GradosTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("GraID");
+        String nombre = rs.getString("GraNombre");
+        String descripcion = rs.getString("GraDetalles");
+        int st = rs.getInt("GraEstado");
+        boolean status = st == 1;
+        GradosTab gTab = new GradosTab (Id, nombre, descripcion, status);
+        return gTab;
+    }
 
+        
+ @Override
+     public List<GradosTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<GradosTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
 
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
     @Override
     public String modificar(GradosTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
@@ -79,20 +125,10 @@ public class GradosMs implements Grados{
     public String eliminar(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public GradosTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public GradosTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<GradosTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

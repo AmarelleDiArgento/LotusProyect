@@ -6,18 +6,20 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Parametros;
+import Modelo.Tabs.MenuTab;
 import Modelo.Tabs.ParametrosTab;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class ParametrosMs implements Parametros{
+public abstract class ParametrosMs implements Parametros{
 
     private final Connection con;
 
@@ -67,6 +69,50 @@ public class ParametrosMs implements Parametros{
         return msj;
     }
     
+     @Override
+    public ParametrosTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("ParId");
+        String nombre = rs.getString("ParNombre");
+        int st = rs.getInt("ParEstado");
+        boolean status = st == 1;
+        ParametrosTab pTab = new ParametrosTab (Id, nombre,status);
+        return pTab;
+    }
+
+  @Override
+     public List<ParametrosTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<ParametrosTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
     @Override
     public String modificar(ParametrosTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
@@ -78,17 +124,8 @@ public class ParametrosMs implements Parametros{
     }
 
     @Override
-    public ParametrosTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ParametrosTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<ParametrosTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 }

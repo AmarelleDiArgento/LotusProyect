@@ -15,6 +15,16 @@ import Modelo.Interface.Permiso;
 import Modelo.Interface.Rol;
 import javax.sql.DataSource;
 import Modelo.Interface.AsignaPermiso;
+import Modelo.Interface.Menu;
+import Modelo.Interface.Parametros;
+import Modelo.Interface.Paso;
+import Modelo.Interface.Poscosecha;
+import Modelo.Interface.Preliminar;
+import Modelo.Interface.Producto;
+import Modelo.Interface.Tipo;
+import Modelo.Interface.Variedad;
+import Modelo.Tabs.VariedadTab;
+import javafx.geometry.Pos;
 
 /**
  *
@@ -50,6 +60,7 @@ public class AdminMs implements Admin {
     private Rol Rol = null;
     private AsignaPermiso AsgPer = null;
     private Armado Arm = null;
+    private Variedad Var =null;
 
     @Override
     public Usuario getUsuario() {
@@ -90,4 +101,81 @@ public class AdminMs implements Admin {
         }
         return Arm;
     }
+    @Override
+    public Variedad getVariedad() {
+        if (Var == null) {
+            Var = new VariedadMs(con) {
+                @Override
+                public String eliminar(Integer id) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public VariedadTab obtener(Integer id) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            };
+        }
+        return Var;
+    }
+    @Override
+    public Tipo getTipo() {
+        if (Ti == null) {
+            Ti = new TipoMs(con);
+        }
+        return Ti;
+    }
+    @Override
+    public Producto getProducto() {
+        if (Pro == null) {
+            Pro = new ProductoMs(con);
+        }
+        return Pro;
+    }
+   
+    @Override
+    public Preliminar getPreliminar() {
+        if (Pre == null) {
+            Pre = new PreliminarsMs(con);
+        }
+        return Pre;
+   
+    }
+    @Override
+    public Poscosecha getPoscosecha() {
+        if (Pos == null) {
+            Pos = new PoscosechaMs(con);
+        }
+        return Pos;
+    }
+    @Override
+    public Paso getPaso() {
+        if (Pas == null) {
+            Pas = new PasoMs(con);
+        }
+        return Pas;
+}
+ @Override
+    public Parametros getParametros() {
+        if (Par == null) {
+            Par = new ParametrosMs(con);
+        }
+        return Par;
+}
+
+ @Override
+    public Menu getMenu() {
+        if (Me == null) {
+            Me = new MenuMs(con);
+        }
+        return Me;
+}
+
+ @Override
+    public Menu getMenu() {
+        if (Me == null) {
+            Me = new MenuMs(con);
+        }
+        return Me;
+}
 }

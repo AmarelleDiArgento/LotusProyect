@@ -6,18 +6,20 @@
 package Modelo.MySql;
 
 import Modelo.Interface.ControlCambios;
+import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.ControlCambioTab;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ale-j
  */
-public class ControlCambiosMs  implements ControlCambios{
+public abstract class ControlCambiosMs  implements ControlCambios{
     private final Connection con;
 
     public ControlCambiosMs(Connection con) {
@@ -63,6 +65,53 @@ public class ControlCambiosMs  implements ControlCambios{
         }
         return msj;
         }
+    
+    @Override
+    public ControlCambioTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("CCId");
+        String Antes = rs.getString("CCAntes");
+        String Despues = rs.getString("CCDespues");
+        String Usuarios = rs.getString("CCUsuarios");
+        ControlCambioTab cTab = new ControlCambioTab(Id, Antes, Despues, Usuarios);
+        return cTab;
+    }
+
+
+   @Override
+     public List<ControlCambioTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<ControlCambioTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
+    
  
 
     @Override
@@ -75,19 +124,10 @@ public class ControlCambiosMs  implements ControlCambios{
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public ControlCambioTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public ControlCambioTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<ControlCambioTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 }
-  

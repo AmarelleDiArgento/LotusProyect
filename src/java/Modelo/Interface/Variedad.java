@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Variedad extends DAO<ResultSet, VariedadTab, String> {
+public interface Variedad extends DAO<ResultSet, VariedadTab, Integer> {
     
 }

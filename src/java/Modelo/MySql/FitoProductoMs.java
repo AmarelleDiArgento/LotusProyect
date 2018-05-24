@@ -6,18 +6,20 @@
 package Modelo.MySql;
 
 import Modelo.Interface.FitoProducto;
+import Modelo.Tabs.ControlCambioTab;
 import Modelo.Tabs.FitoProductoTab;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class FitoProductoMs implements FitoProducto {
+public abstract class FitoProductoMs implements FitoProducto {
 
     private final Connection con;
 
@@ -65,6 +67,46 @@ public class FitoProductoMs implements FitoProducto {
         return msj;
     }
     
+ @Override
+     public List<FitoProductoTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<FitoProductoTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
+
+    @Override
+    public FitoProductoTab convertir(ResultSet rs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     @Override
     public String modificar(FitoProductoTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
@@ -75,18 +117,11 @@ public class FitoProductoMs implements FitoProducto {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public FitoProductoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
     @Override
     public FitoProductoTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<FitoProductoTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 }

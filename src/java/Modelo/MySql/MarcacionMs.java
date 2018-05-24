@@ -6,18 +6,20 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Marcacion;
+import Modelo.Tabs.MaestroTab;
 import Modelo.Tabs.MarcacionTab;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public class MarcacionMs implements Marcacion {
+public abstract class MarcacionMs implements Marcacion {
     
      private final Connection con;
 
@@ -67,6 +69,51 @@ public class MarcacionMs implements Marcacion {
         }
         return msj;
     }
+    
+     @Override
+    public MarcacionTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("MarId");
+        String nombre = rs.getString("MarNombre");
+        String portada= rs.getString("MarPortada");
+        int st = rs.getInt("MarEstado");
+        boolean status = st == 1;
+        MarcacionTab mTab = new MarcacionTab (Id, nombre, portada, status);
+        return mTab;
+    }
+  @Override
+     public List<MarcacionTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<MarcacionTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+    }
     @Override
     public String modificar(MarcacionTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
@@ -78,18 +125,8 @@ public class MarcacionMs implements Marcacion {
     }
 
     @Override
-    public MarcacionTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public MarcacionTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<MarcacionTab> listar() {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

@@ -6,14 +6,14 @@
 package Modelo.Interface;
 
 import Modelo.Dao.DAO;
-import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.PasoTab;
 import java.sql.ResultSet;
+
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Paso extends DAO<ResultSet, PasoTab, String> {
+public interface Paso extends DAO<ResultSet, PasoTab, Integer> {
     
 }

@@ -20,4 +20,13 @@ public interface Admin {
     AsignaPermiso getAsignaPer();
 
     Armado getArmado();
+    Variedad getVariedad();
+    Tipo getTipo();
+    Producto getProductos();
+    Preliminar getPreliminar();
+    Poscosecha getPoscosecha();
+    Paso getPaso();
+    Parametros getParametros();
+    Menu getMenu();
+    
 }

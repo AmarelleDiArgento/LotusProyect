@@ -32,6 +32,14 @@ public class VariedadTab {
         this.Varimagen = Varimagen;
     }
 
+    public VariedadTab(String VarNombre, Boolean VarEstado, String Varimagen, String VarColor) {
+        this.VarNombre = VarNombre;
+        this.VarEstado = VarEstado;
+        this.Varimagen = Varimagen;
+        this.VarColor = VarColor;
+    }
+
+    
     /**
      * @return the VarId
      */
@@ -105,10 +113,6 @@ public class VariedadTab {
     @Override
     public String toString() {
         return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", Varimagen=" + Varimagen + ", VarColor=" + VarColor + '}';
-    }
-
-    public boolean isVarEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  

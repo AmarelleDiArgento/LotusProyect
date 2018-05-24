@@ -68,15 +68,6 @@ public class ArmadoMs implements Armado {
         return msj;
     }
 
-    @Override
-    public String modificar(ArmadoTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String eliminar(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public ArmadoTab convertir(ResultSet rs) throws SQLException {
@@ -87,11 +78,6 @@ public class ArmadoMs implements Armado {
         boolean status = st == 1;
         ArmadoTab uTab = new ArmadoTab(Id, nombre, Descripcion, status);
         return uTab;}
-
-    @Override
-    public ArmadoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List<ArmadoTab> listar() {
@@ -128,5 +114,18 @@ public class ArmadoMs implements Armado {
         return aTab;
     }
 
+  @Override
+    public ArmadoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    } 
     
+    @Override
+    public String modificar(ArmadoTab o) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String eliminar(Integer id) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    }
 }
