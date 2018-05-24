@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.ControlCambios;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.ControlCambioTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,23 +20,27 @@ import java.util.List;
  *
  * @author ale-j
  */
+<<<<<<< HEAD
 public abstract class ControlCambiosMs  implements ControlCambios{
+=======
+public abstract class ControlCambiosMs implements ControlCambios {
+
+>>>>>>> master
     private final Connection con;
+    Mensajes m = null;
 
     public ControlCambiosMs(Connection con) {
 
         this.con = con;
     }
-     final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = "";
-    
-    
-  @Override
-    public String insertar(ControlCambioTab c) {
+    final String Insertar = "call LotusProyect.controldecambiosIn(?,?,?)";
+    final String Modificar = "call LotusProyect.contrroldecambiosMo(?,?,?,?);";
+    final String Eliminar = "call lotusproyect.controldecambiosEl(?);";
+    final String Consultar = "call lotusproyect.controldecambiosCo(?);";
+    final String ListarTodos = "call LotusProyect.controldecambiosLi();";
+
+    @Override
+    public Mensajes insertar(ControlCambioTab c) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -44,25 +49,32 @@ public abstract class ControlCambiosMs  implements ControlCambios{
             stat.setString(2, c.getCCDespues());
             stat.setString(2, c.getCCUsuarios());
 
-          
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = c.getCCUsuarios() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(c.getCCUsuarios() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
+<<<<<<< HEAD
         return msj;
         }
     
@@ -113,21 +125,169 @@ public abstract class ControlCambiosMs  implements ControlCambios{
     }
     
  
+=======
+        return m;
+    }
+>>>>>>> master
 
     @Override
-    public String modificar(ControlCambioTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public ControlCambioTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("CCId");
+        String Antes = rs.getString("CCAntes");
+        String Despues = rs.getString("CCDespues");
+        String Usuarios = rs.getString("CCUsuarios");
+        ControlCambioTab cTab = new ControlCambioTab(Id, Antes, Despues, Usuarios);
+        return cTab;
     }
 
     @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public List<ControlCambioTab> listar() {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<ControlCambioTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public ControlCambioTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+
+        ControlCambioTab cMod = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                cMod = convertir(rs);
+            } else {
+                throw new SQLException("Error, control de cambios no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return cMod;
+    }
+>>>>>>> master
 
     @Override
-    public ControlCambioTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes modificar(ControlCambioTab c) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, c.getCCId());
+            stat.setString(2, c.getCCAntes());
+            stat.setString(3, c.getCCDespues());
+            stat.setString(4, c.getCCUsuarios());
+
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(c.getCCAntes() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
+
+<<<<<<< HEAD
+}
+=======
+    @Override
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
 }
+>>>>>>> master

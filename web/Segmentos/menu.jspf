@@ -48,7 +48,7 @@
             <div class="background">
                 <img src="img\LotoLila.jpg">
             </div>
-            <a href="#"><img class="circle" src="img\Usuario.jpg"></a>
+            <a href="#"><img class="circle" src="img\<%=u.getAvatar()%>"></a>
             <a href="#!name"><span class="white-text name"><%=u.toFullName()%></span></a>
             <a href="#!email"><span class="white-text email"><%=u.getnRol()%></span></a>
         </div>

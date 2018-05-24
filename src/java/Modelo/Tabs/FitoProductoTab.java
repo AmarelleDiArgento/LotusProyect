@@ -12,15 +12,15 @@ package Modelo.Tabs;
 public class FitoProductoTab {
     
     
-    private int Fitosanidad_FitId;
+    private int FitId;
     private int maestro_MaeId;
     private int productos_ProId;
     private int variedad_VarId;
     private String FpArea;
     private String FpImagen;
 
-    public FitoProductoTab(int Fitosanidad_FitId, int maestro_MaeId, int productos_ProId, int variedad_VarId, String FpArea, String FpImagen) {
-        this.Fitosanidad_FitId = Fitosanidad_FitId;
+    public FitoProductoTab(int FitId, int maestro_MaeId, int productos_ProId, int variedad_VarId, String FpArea, String FpImagen) {
+        this.FitId = FitId;
         this.maestro_MaeId = maestro_MaeId;
         this.productos_ProId = productos_ProId;
         this.variedad_VarId = variedad_VarId;
@@ -28,18 +28,30 @@ public class FitoProductoTab {
         this.FpImagen = FpImagen;
     }
 
+    public FitoProductoTab(String FpArea, String FpImagen) {
+        this.FpArea = FpArea;
+        this.FpImagen = FpImagen;
+    }
+
+    public FitoProductoTab(int FitId, String FpArea, String FpImagen) {
+        this.FitId = FitId;
+        this.FpArea = FpArea;
+        this.FpImagen = FpImagen;
+    }
+    
+   
     /**
-     * @return the Fitosanidad_FitId
+     * @return the FitId
      */
-    public int getFitosanidad_FitId() {
-        return Fitosanidad_FitId;
+    public int getFitId() {
+        return FitId;
     }
 
     /**
-     * @param Fitosanidad_FitId the Fitosanidad_FitId to set
+     * @param FitId the Fitoproducto_FitId to set
      */
-    public void setFitosanidad_FitId(int Fitosanidad_FitId) {
-        this.Fitosanidad_FitId = Fitosanidad_FitId;
+    public void setFitId(int FitId) {
+        this.FitId = FitId;
     }
 
     /**
@@ -114,7 +126,7 @@ public class FitoProductoTab {
 
     @Override
     public String toString() {
-        return "FitoProductoTab{" + "Fitosanidad_FitId=" + Fitosanidad_FitId + ", maestro_MaeId=" + maestro_MaeId + ", productos_ProId=" + productos_ProId + ", variedad_VarId=" + variedad_VarId + ", FpArea=" + FpArea + ", FpImagen=" + FpImagen + '}';
+        return "FitoProductoTab{" + "FitId=" + FitId + ", maestro_MaeId=" + maestro_MaeId + ", productos_ProId=" + productos_ProId + ", variedad_VarId=" + variedad_VarId + ", FpArea=" + FpArea + ", FpImagen=" + FpImagen + '}';
     }
     
 

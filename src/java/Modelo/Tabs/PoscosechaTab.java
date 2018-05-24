@@ -25,11 +25,6 @@ public class PoscosechaTab {
         this.PosEstado = PosEstado;
     }
 
-
-    public boolean isPosEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * @return the Idposcosecha
      */
@@ -86,22 +81,20 @@ public class PoscosechaTab {
         this.PosTelefono = PosTelefono;
     }
 
-    /**
-     * @return the PosEstado
-     */
-    public Boolean getPosEstado() {
-        return PosEstado;
-    }
-
-    /**
+  /**
      * @param PosEstado the PosEstado to set
      */
     public void setPosEstado(Boolean PosEstado) {
         this.PosEstado = PosEstado;
     }
-    
 
-
+    /**
+     * @return the PosEstado
+     */
+    public Boolean isPosEstado() {
+        return PosEstado;
+    }
+  
     @Override
     public String toString() {
         return "PoscosechaTab{" + "Idposcosecha=" + Idposcosecha + ", PosNombre=" + PosNombre + ", PosDireccion=" + PosDireccion + ", PosTelefono=" + PosTelefono + ", PosEstado=" + PosEstado + '}';

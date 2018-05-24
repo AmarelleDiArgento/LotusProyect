@@ -54,26 +54,22 @@ public class ProductoTab {
         this.ProNombre = ProNombre;
     }
 
-    /**
-     * @return the ProEstado
+   /**
+     * @param ProEstado the ProEstado to set
      */
-    public Boolean getProEstado() {
-        return ProEstado;
+    public void setArmEstado(Boolean ProEstado) {
+        this.ProEstado = ProEstado;
     }
 
     /**
-     * @param ProEstado the ProEstado to set
+     * @return the ProEstado
      */
-    public void setProEstado(Boolean ProEstado) {
-        this.ProEstado = ProEstado;
+    public Boolean isProEstado() {
+        return ProEstado;
     }
 
     @Override
     public String toString() {
         return "ProductoTab{" + "ProId=" + ProId + ", ProNombre=" + ProNombre + ", ProEstado=" + ProEstado + '}';
-    }
-
-    public boolean isProEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     }

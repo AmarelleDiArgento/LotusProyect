@@ -18,13 +18,11 @@ public class PreliminarTab {
     private Boolean Estado;
     private int Poscosecha_Posnombre;
 
-    public PreliminarTab(int PreId, Date PreFecha, Boolean Estado, int Poscosecha_Posnombre) {
+    public PreliminarTab(int PreId, Date PreFecha, Boolean Estado) {
         this.PreId = PreId;
         this.PreFecha = PreFecha;
         this.Estado = Estado;
-        this.Poscosecha_Posnombre = Poscosecha_Posnombre;
     }
-
     /**
      * @return the PreId
      */
@@ -53,18 +51,18 @@ public class PreliminarTab {
         this.PreFecha = PreFecha;
     }
 
-    /**
-     * @return the Estado
-     */
-    public Boolean getEstado() {
-        return Estado;
-    }
-
-    /**
+      /**
      * @param Estado the Estado to set
      */
     public void setEstado(Boolean Estado) {
         this.Estado = Estado;
+    }
+
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isEstado() {
+        return Estado;
     }
 
     /**
@@ -85,9 +83,6 @@ public class PreliminarTab {
     public String toString() {
         return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + '}';
     }
-
-    public boolean isPreEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
+
    

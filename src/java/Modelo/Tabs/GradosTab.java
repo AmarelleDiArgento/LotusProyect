@@ -11,13 +11,13 @@ package Modelo.Tabs;
  */
 public class GradosTab {
     
-    private int GradId;
+    private int GraId;
    private String GraNombre;
    private String GraDetalles;
    private Boolean GraEstado;
 
-    public GradosTab(int GradId, String GraNombre, String GraDetalles, Boolean GraEstado) {
-        this.GradId = GradId;
+    public GradosTab(int GraId, String GraNombre, String GraDetalles, Boolean GraEstado) {
+        this.GraId = GraId;
         this.GraNombre = GraNombre;
         this.GraDetalles = GraDetalles;
         this.GraEstado = GraEstado;
@@ -30,17 +30,17 @@ public class GradosTab {
     }
 
     /**
-     * @return the GradId
+     * @return the GraId
      */
-    public int getGradId() {
-        return GradId;
+    public int getGraId() {
+        return GraId;
     }
 
     /**
-     * @param GradId the GradId to set
+     * @param GraId the GraId to set
      */
-    public void setGradId(int GradId) {
-        this.GradId = GradId;
+    public void setGraId(int GraId) {
+        this.GraId = GraId;
     }
 
     /**
@@ -71,27 +71,22 @@ public class GradosTab {
         this.GraDetalles = GraDetalles;
     }
 
-    /**
-     * @return the GraEstado
+   /**
+     * @param GraEstado the GraEstado to set
      */
-    public Boolean getGraEstado() {
-        return GraEstado;
+    public void setArmEstado(Boolean GraEstado) {
+        this.GraEstado = GraEstado;
     }
 
     /**
-     * @param GraEstado the GraEstado to set
+     * @return the GraEstado
      */
-    public void setGraEstado(Boolean GraEstado) {
-        this.GraEstado = GraEstado;
+    public Boolean isGraEstado() {
+        return GraEstado;
     }
 
     @Override
     public String toString() {
-        return "GradosTab{" + "GradId=" + GradId + ", GraNombre=" + GraNombre + ", GraDetalles=" + GraDetalles + ", GraEstado=" + GraEstado + '}';
-    }
-
-    public boolean isGraEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-     
+        return "GradosTab{" + "GraId=" + GraId + ", GraNombre=" + GraNombre + ", GraDetalles=" + GraDetalles + ", GraEstado=" + GraEstado + '}';
+    }   
 }

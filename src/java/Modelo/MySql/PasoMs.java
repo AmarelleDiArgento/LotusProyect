@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.Paso;
 import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.PasoTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ import java.util.List;
 public abstract class PasoMs  implements Paso{
 
     private final Connection con;
+    Mensajes m = null;
 
     public PasoMs(Connection con) {
 
@@ -33,10 +35,9 @@ public abstract class PasoMs  implements Paso{
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";  
     
     @Override
-    public String insertar(PasoTab p) {
+    public Mensajes insertar(PasoTab p) {
         String msj = "";
         PreparedStatement stat = null;
         try {
@@ -47,24 +48,31 @@ public abstract class PasoMs  implements Paso{
 
          
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = p.getPasorden() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(p.getPasorden() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
     }
      @Override
     public PasoTab convertir(ResultSet rs) throws SQLException {
@@ -117,8 +125,9 @@ public abstract class PasoMs  implements Paso{
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
-    public String eliminar(String id) {
+    public Mensajes modificar(PasoTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 

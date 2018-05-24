@@ -7,6 +7,7 @@ package Modelo.MySql;
 
 import Modelo.Interface.Permiso;
 import Modelo.Tabs.PermisoTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 public class PermisoMs implements Permiso {
 
     private final Connection con;
+    Mensajes m = null;
 
     public PermisoMs(Connection con) {
 
@@ -35,10 +37,9 @@ public class PermisoMs implements Permiso {
     final String Consultar = "call LotusProyect.permisoCo(?);";
     final String ListarTodos = "call LotusProyect.permisoLi();";
     final String Menu = "call LotusProyect.perMenu(?);";
-    
+
     @Override
-    public String insertar(PermisoTab p) {
-        String msj = "";
+    public Mensajes insertar(PermisoTab p) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -48,45 +49,61 @@ public class PermisoMs implements Permiso {
             stat.setString(4, p.getPerIco());
             stat.setString(5, p.getPerUrl());
 
-            if (p.isPerEstado()) {
+            if (p.getPerEstado()) {
                 stat.setInt(6, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(6, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = p.getPerNombre() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(p.getPerNombre() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
+
     }
 
     @Override
-    public String modificar(PermisoTab o) {
+    public Mensajes modificar(PermisoTab o) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String eliminar(Integer id) {
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public PermisoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
+        int Id = rs.getInt("PerId");
+        String nombre = rs.getString("PerNombre");
+        String modulo = rs.getString("PerModulo");
+        String descripcion = rs.getString("PerDescripcion");
+        String ico = rs.getString("PerIco");
+        String url = rs.getString("PerUrl");
+        int st = rs.getInt("PerEstado");
+        boolean status = st == 1;
+        PermisoTab pTab = new PermisoTab(Id, nombre, modulo, descripcion, ico, url, status);
+        return pTab;
     }
 
     @Override
@@ -96,7 +113,37 @@ public class PermisoMs implements Permiso {
 
     @Override
     public List<PermisoTab> listar() {
-        throw new UnsupportedOperationException("Métodos en proceso"); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<PermisoTab> rTab = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    rTab.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return rTab;
     }
 
     private PermisoTab conMenu(ResultSet rs) throws SQLException {

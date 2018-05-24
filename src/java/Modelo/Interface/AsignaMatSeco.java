@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ale-j
  */
-public interface AsignaMatSeco extends DAO<ResultSet, AsignaMatSecoTab, String>  {
+public interface AsignaMatSeco extends DAO<ResultSet, AsignaMatSecoTab, Integer>  {
     
 }

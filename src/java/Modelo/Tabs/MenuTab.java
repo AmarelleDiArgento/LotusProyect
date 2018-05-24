@@ -11,145 +11,145 @@ package Modelo.Tabs;
  */
 public class MenuTab {
     
-    private int MenuId;
-    private String MenPortada;
-    private String MenSuperior;
-    private String MenLongitud;
-    private String MenCauchos;
-    private Boolean MenEstado;
-    private String MenDescripcion;
+    private int Id;
+    private String Portada;
+    private String Superior;
+    private String Longitud;
+    private String Cauchos;
+    private Boolean Estado;
+    private String Descripcion;
     private int MarId;
     private String Marcacion;
 
-    public MenuTab(String MenPortada, String MenSuperior, String MenLongitud, String MenCauchos, Boolean MenEstado, String MenDescripcion, int MarId) {
-        this.MenPortada = MenPortada;
-        this.MenSuperior = MenSuperior;
-        this.MenLongitud = MenLongitud;
-        this.MenCauchos = MenCauchos;
-        this.MenEstado = MenEstado;
-        this.MenDescripcion = MenDescripcion;
-        this.MarId = MarId;
-    }
-
-    public MenuTab(int MenuId, String MenPortada, String MenSuperior, String MenLongitud, String MenCauchos, Boolean MenEstado, String MenDescripcion, int MarId) {
-        this.MenuId = MenuId;
-        this.MenPortada = MenPortada;
-        this.MenSuperior = MenSuperior;
-        this.MenLongitud = MenLongitud;
-        this.MenCauchos = MenCauchos;
-        this.MenEstado = MenEstado;
-        this.MenDescripcion = MenDescripcion;
-        this.MarId = MarId;
-    }
-
-    public MenuTab(int MenuId, String MenPortada, String MenSuperior, String MenLongitud, String MenCauchos, Boolean MenEstado, String MenDescripcion, int MarId, String Marcacion) {
-        this.MenuId = MenuId;
-        this.MenPortada = MenPortada;
-        this.MenSuperior = MenSuperior;
-        this.MenLongitud = MenLongitud;
-        this.MenCauchos = MenCauchos;
-        this.MenEstado = MenEstado;
-        this.MenDescripcion = MenDescripcion;
+    public MenuTab(int Id, String Portada, String Superior, String Longitud, String Cauchos, Boolean Estado, String Descripcion, int MarId, String Marcacion) {
+        this.Id = Id;
+        this.Portada = Portada;
+        this.Superior = Superior;
+        this.Longitud = Longitud;
+        this.Cauchos = Cauchos;
+        this.Estado = Estado;
+        this.Descripcion = Descripcion;
         this.MarId = MarId;
         this.Marcacion = Marcacion;
     }
 
+    public MenuTab(int Id, String Portada, String Superior, String Longitud, String Cauchos, Boolean Estado, String Descripcion) {
+        this.Id = Id;
+        this.Portada = Portada;
+        this.Superior = Superior;
+        this.Longitud = Longitud;
+        this.Cauchos = Cauchos;
+        this.Estado = Estado;
+        this.Descripcion = Descripcion;
+    }
+
+    public MenuTab(String Portada, String Superior, String Longitud, String Cauchos, Boolean Estado, String Descripcion) {
+        this.Portada = Portada;
+        this.Superior = Superior;
+        this.Longitud = Longitud;
+        this.Cauchos = Cauchos;
+        this.Estado = Estado;
+        this.Descripcion = Descripcion;
+    }
+    
+
     /**
-     * @return the MenuId
+     * @return the Id
      */
-    public int getMenuId() {
-        return MenuId;
+    public int getId() {
+        return Id;
     }
 
     /**
-     * @param MenuId the MenuId to set
+     * @param Id the Id to set
      */
-    public void setMenuId(int MenuId) {
-        this.MenuId = MenuId;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     /**
-     * @return the MenPortada
+     * @return the Portada
      */
-    public String getMenPortada() {
-        return MenPortada;
+    public String getPortada() {
+        return Portada;
     }
 
     /**
-     * @param MenPortada the MenPortada to set
+     * @param Portada the Portada to set
      */
-    public void setMenPortada(String MenPortada) {
-        this.MenPortada = MenPortada;
+    public void setPortada(String Portada) {
+        this.Portada = Portada;
     }
 
     /**
-     * @return the MenSuperior
+     * @return the Superior
      */
-    public String getMenSuperior() {
-        return MenSuperior;
+    public String getSuperior() {
+        return Superior;
     }
 
     /**
-     * @param MenSuperior the MenSuperior to set
+     * @param Superior the Superior to set
      */
-    public void setMenSuperior(String MenSuperior) {
-        this.MenSuperior = MenSuperior;
+    public void setSuperior(String Superior) {
+        this.Superior = Superior;
     }
 
     /**
-     * @return the MenLongitud
+     * @return the Longitud
      */
-    public String getMenLongitud() {
-        return MenLongitud;
+    public String getLongitud() {
+        return Longitud;
     }
 
     /**
-     * @param MenLongitud the MenLongitud to set
+     * @param Longitud the Longitud to set
      */
-    public void setMenLongitud(String MenLongitud) {
-        this.MenLongitud = MenLongitud;
+    public void setLongitud(String Longitud) {
+        this.Longitud = Longitud;
     }
 
     /**
-     * @return the MenCauchos
+     * @return the Cauchos
      */
-    public String getMenCauchos() {
-        return MenCauchos;
+    public String getCauchos() {
+        return Cauchos;
     }
 
     /**
-     * @param MenCauchos the MenCauchos to set
+     * @param Cauchos the Cauchos to set
      */
-    public void setMenCauchos(String MenCauchos) {
-        this.MenCauchos = MenCauchos;
+    public void setCauchos(String Cauchos) {
+        this.Cauchos = Cauchos;
+    }
+
+   
+    /**
+     * @param Estado the Estado to set
+     */
+    public void setEstado(Boolean Estado) {
+        this.Estado = Estado;
     }
 
     /**
-     * @return the MenEstado
+     * @return the ArmEstado
      */
-    public Boolean getMenEstado() {
-        return MenEstado;
+    public Boolean isEstado() {
+        return Estado;
     }
 
     /**
-     * @param MenEstado the MenEstado to set
+     * @return the Descripcion
      */
-    public void setMenEstado(Boolean MenEstado) {
-        this.MenEstado = MenEstado;
+    public String getDescripcion() {
+        return Descripcion;
     }
 
     /**
-     * @return the MenDescripcion
+     * @param Descripcion the Descripcion to set
      */
-    public String getMenDescripcion() {
-        return MenDescripcion;
-    }
-
-    /**
-     * @param MenDescripcion the MenDescripcion to set
-     */
-    public void setMenDescripcion(String MenDescripcion) {
-        this.MenDescripcion = MenDescripcion;
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
     /**
@@ -182,14 +182,11 @@ public class MenuTab {
 
     @Override
     public String toString() {
-        return "MenuTab{" + "MenuId=" + MenuId + ", MenPortada=" + MenPortada + ", MenSuperior=" + MenSuperior + ", MenLongitud=" + MenLongitud + ", MenCauchos=" + MenCauchos + ", MenEstado=" + MenEstado + ", MenDescripcion=" + MenDescripcion + ", MarId=" + MarId + ", Marcacion=" + Marcacion + '}';
+        return "MenuTab{" + "Id=" + Id + ", Portada=" + Portada + ", Superior=" + Superior + ", Longitud=" + Longitud + ", Cauchos=" + Cauchos + ", Estado=" + Estado + ", Descripcion=" + Descripcion + ", MarId=" + MarId + ", Marcacion=" + Marcacion + '}';
     }
+}
+   
 
-    public boolean isMenEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    }
 
 
    

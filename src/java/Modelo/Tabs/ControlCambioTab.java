@@ -10,30 +10,37 @@ package Modelo.Tabs;
  * @author ale-j
  */
 public class ControlCambioTab {
-    private int CCID;
+    private int CCId;
     private String CCAntes;
     private String CCDespues;
     private String CCUsuarios;
 
-    public ControlCambioTab(int CCID, String CCAntes, String CCDespues, String CCUsuarios) {
-        this.CCID = CCID;
+    public ControlCambioTab(int CCId, String CCAntes, String CCDespues, String CCUsuarios) {
+        this.CCId = CCId;
         this.CCAntes = CCAntes;
         this.CCDespues = CCDespues;
         this.CCUsuarios = CCUsuarios;
     }
 
+    public ControlCambioTab(String CCAntes, String CCDespues, String CCUsuarios) {
+        this.CCAntes = CCAntes;
+        this.CCDespues = CCDespues;
+        this.CCUsuarios = CCUsuarios;
+    }
+    
+
     /**
-     * @return the CCID
+     * @return the CCId
      */
-    public int getCCID() {
-        return CCID;
+    public int getCCId() {
+        return CCId;
     }
 
     /**
-     * @param CCID the CCID to set
+     * @param CCId the CCId to set
      */
-    public void setCCID(int CCID) {
-        this.CCID = CCID;
+    public void setCCId(int CCId) {
+        this.CCId = CCId;
     }
 
     /**
@@ -80,9 +87,6 @@ public class ControlCambioTab {
 
     @Override
     public String toString() {
-        return "ControlCambioTab{" + "CCID=" + CCID + ", CCAntes=" + CCAntes + ", CCDespues=" + CCDespues + ", CCUsuarios=" + CCUsuarios + '}';
+        return "ControlCambioTab{" + "CCId=" + CCId + ", CCAntes=" + CCAntes + ", CCDespues=" + CCDespues + ", CCUsuarios=" + CCUsuarios + '}';
     }
-    
-    
-    
 }

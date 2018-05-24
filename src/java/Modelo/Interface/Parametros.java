@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Parametros extends DAO<ResultSet, ParametrosTab, String>  {
+public interface Parametros extends DAO<ResultSet, ParametrosTab, Integer>  {
     
 }

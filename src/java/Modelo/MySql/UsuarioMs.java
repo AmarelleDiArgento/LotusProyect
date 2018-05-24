@@ -1,4 +1,3 @@
-
 package Modelo.MySql;
 
 import Modelo.Interface.Usuario;
@@ -11,23 +10,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Amarelle
  */
 public class UsuarioMs implements Usuario {
-
+    Mensajes m = new Mensajes();
     private final Connection con;
-    Mensajes mjs = null;
 
     public UsuarioMs(Connection con) {
 
         this.con = con;
     }
 
-    final String Insertar = "call LotusProyect.usuarioIn(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    final String Modificar = "call LotusProyect.usuarioMo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    final String Insertar = "call LotusProyect.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
+    final String Modificar = "call LotusProyect.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
     final String Eliminar = "call LotusProyect.usuarioEl(?);";
     final String Consultar = "call LotusProyect.usuarioCo(?);";
     final String ListarTodos = "call LotusProyect.usuarioLi();";
@@ -71,8 +68,8 @@ public class UsuarioMs implements Usuario {
     }
 
     @Override
-    public String insertar(UsuarioTab u) {
-        String msj = "";
+    public Mensajes insertar(UsuarioTab u) {
+        
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -84,36 +81,45 @@ public class UsuarioMs implements Usuario {
             stat.setString(6, u.getExtencion());
             stat.setString(7, u.getTelefono());
             stat.setString(8, u.getEmail());
+            stat.setString(9, u.getAvatar());
             if (u.getEstado()) {
-                stat.setInt(9, 1);
+                stat.setInt(10, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(10, 0);
             }
-            stat.setInt(10, u.getRolId());
+            stat.setInt(11, u.getRolId());
+
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = u.getCedula() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(u.getCedula());
+                m.setDetalles("Agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        System.out.println(m.getTipo());
+        return m;
     }
 
     @Override
-    public String modificar(UsuarioTab u) {
-        String msj = "";
+    public Mensajes modificar(UsuarioTab u) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Modificar);
@@ -130,51 +136,73 @@ public class UsuarioMs implements Usuario {
             } else {
                 stat.setInt(9, 0);
             }
-            stat.setInt(10, u.getRolId());
+            stat.setString(10, u.getAvatar());
+            stat.setInt(11, u.getRolId());
+            
             if (stat.executeUpdate() == 0) {
-                msj = "Error al modificar los datos";
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
             } else {
-                msj = u.getCedula() + " modificado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(u.getCedula());
+                m.setDetalles("Modificado exitosamente");
             }
+
         } catch (SQLException ex) {
-            msj = "Error de SQL" + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL" + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
         }
-        return msj;
+
+        return m;
     }
 
     @Override
-    public String eliminar(String Cedula) {
-
-        String msj = "";
+    public Mensajes eliminar(String Cedula) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Eliminar);
             stat.setString(1, Cedula);
             if (stat.executeUpdate() == 0) {
-                msj = "Error al eliminar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
             } else {
-                msj = Cedula + " eliminado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj(Cedula);
+                m.setDetalles("Eliminado exitosamente");
             }
+
         } catch (SQLException ex) {
-            msj = "Error de SQL" + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL" + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
         }
-        return msj;
+
+        System.out.println(m.getTipo());
+        return m;
     }
 
     @Override
@@ -187,11 +215,12 @@ public class UsuarioMs implements Usuario {
         String ext = rs.getString("UsuExtencion");
         String tel = rs.getString("UsuTelefono");
         String email = rs.getString("UsuEmail");
+        String avatar = rs.getString("UsuAvatar");
         int st = rs.getInt("UsuEstado");
         boolean status = st == 1;
         int rol_id = rs.getInt("RolId");
         String rol_n = rs.getString("RolNombre");
-        UsuarioTab uTab = new UsuarioTab(cedula, nombre, apellido, loger, pass, ext, tel, email, status, rol_id, rol_n);
+        UsuarioTab uTab = new UsuarioTab(cedula, nombre, apellido, loger, pass, ext, tel, email, avatar, status, rol_id, rol_n);
         return uTab;
     }
 
@@ -234,7 +263,7 @@ public class UsuarioMs implements Usuario {
 
     @Override
     public List<UsuarioTab> listar() {
-    PreparedStatement stat = null;
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<UsuarioTab> uModel = new ArrayList<>();
         try {
@@ -264,7 +293,7 @@ public class UsuarioMs implements Usuario {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return uModel;
     }
 
 }

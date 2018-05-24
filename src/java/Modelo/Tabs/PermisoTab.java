@@ -5,11 +5,13 @@
  */
 package Modelo.Tabs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Amarelle
  */
-public class PermisoTab {
+public class PermisoTab implements Serializable{
 
     private int PerId;
     private String PerNombre;
@@ -99,6 +101,7 @@ public class PermisoTab {
     public void setPerDescripcion(String PerDescripcion) {
         this.PerDescripcion = PerDescripcion;
     }
+
     /**
      * @return the PerIco
      */
@@ -112,13 +115,13 @@ public class PermisoTab {
     public void setPerIco(String PerIco) {
         this.PerIco = PerIco;
     }
+
     /**
      * @return the PerUrl
      */
     public String getPerUrl() {
         return PerUrl;
     }
-    
 
     /**
      * @param PerUrl the PerUrl to set
@@ -140,15 +143,6 @@ public class PermisoTab {
     public void setPerEstado(Boolean PerEstado) {
         this.PerEstado = PerEstado;
     }
-
-    @Override
-    public String toString() {
-        return "PermisoTab{" + "PerId=" + PerId + ", PerNombre=" + PerNombre + ", PerModulo=" + PerModulo + ", PerDescripcion=" + PerDescripcion + ", PerIco=" + PerIco + ", PerUrl=" + PerUrl + ", PerEstado=" + PerEstado + '}';
-    }
-
-    public boolean isPerEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
 
 }

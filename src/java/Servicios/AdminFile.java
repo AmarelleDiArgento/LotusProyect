@@ -39,6 +39,7 @@ public class AdminFile {
     }
 
     public Mensajes subirImg(Part img, String url) {
+        url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/" + url;
         Mensajes msj = new Mensajes();
         try {
             in = img.getInputStream();
@@ -59,7 +60,7 @@ public class AdminFile {
         }
 
         msj.setTipo("Ok");
-        msj.setMsj(img.getSubmittedFileName());
+        msj.setMsj(img.getName());
         msj.setDetalles("Subido exitosamente");
         return msj;
     }

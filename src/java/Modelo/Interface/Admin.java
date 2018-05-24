@@ -20,6 +20,22 @@ public interface Admin {
     AsignaPermiso getAsignaPer();
 
     Armado getArmado();
+    
+    FitoProducto getFitoProducto ();
+    
+    ControlCambios getControlCambios();
+    
+    Fitosanidad getFitosanidad();
+    
+    Grados getGrados();
+    
+    Linea getLinea ();
+    
+    Maestro getMaestro();
+    
+    Marcacion getMarcacion ();
+    
+    
     Variedad getVariedad();
     Tipo getTipo();
     Producto getProductos();

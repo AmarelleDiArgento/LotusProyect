@@ -8,6 +8,7 @@ package Modelo.MySql;
 import Modelo.Interface.Menu;
 import Modelo.Tabs.MaterialSecoTab;
 import Modelo.Tabs.MenuTab;
+import Servicios.Mensajes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,55 +23,62 @@ import java.util.List;
 public abstract class MenuMs implements Menu {
 
     private final Connection con;
+    Mensajes m = null;
 
     public MenuMs(Connection con) {
 
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = ""; 
+    final String Insertar = "call lotusproyect.menuIn(?,?,?,?,?,?);";
+    final String Modificar = "call lotusproyect.menuMo(?,?,?,?,?,?);";
+    final String Eliminar = "call lotusproyect.menuEl(?);";
+    final String Consultar = "call lotusproyect.menuCo(?);";
+    final String ListarTodos = "call lotusproyect.MenuLi();";
     
     @Override
-    public String insertar(MenuTab a) {
+    public Mensajes insertar(MenuTab me) {
         String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
-            stat.setString(1, a.getMenPortada());
-            stat.setString(2, a.getMenSuperior());
-            stat.setString(3, a.getMenLongitud());
-            stat.setString(4, a.getMenCauchos());
-            stat.setString(5, a.getMenDescripcion());
+            stat.setString(1, me.getPortada());
+            stat.setString(2, me.getSuperior());
+            stat.setString(3, me.getLongitud());
+            stat.setString(4, me.getCauchos());
+            stat.setString(5, me.getDescripcion());
 
-            if (a.isMenEstado()) {
-                stat.setInt(3, 1);
+            if (me.isEstado()) {
+                stat.setInt(6, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(6, 0);
             }
             if (stat.executeUpdate() == 0) {
-                msj = "Error al ingresar los datos";
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
             } else {
-                msj = a.getMenPortada() + " agregado exitosamente";
+                m.setTipo("Ok");
+                m.setMsj("Agregado exitosamente");
             }
 
         } catch (SQLException ex) {
-            msj = "Error de SQL " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {
                     stat.close();
                 } catch (SQLException ex) {
-                    msj = "Error de SQL " + ex;
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
                 }
             }
-
         }
-        return msj;
+        return m;
   }
     
      @Override
@@ -84,6 +92,20 @@ public abstract class MenuMs implements Menu {
         int st = rs.getInt("MenEstado");
         boolean status = st == 1;
         MenuTab mTab = new MenuTab (Id, nombre, superior,longitud,cauchos,descripcion,status);
+        return mTab;
+    }
+    
+     @Override
+    public MenuTab convertir(ResultSet rs) throws SQLException {
+        int Id = rs.getInt("MenuId");
+        String portada= rs.getString("MenPortada");
+        String superior = rs.getString("MenSuperior");
+        String longitud = rs.getString("MenLongitud");
+        String cauchos = rs.getString("MenCauchos");
+        String descripcion = rs.getString("MenDescripcion");
+        int st = rs.getInt("MenEstado");
+        boolean status = st == 1;
+        MenuTab mTab = new MenuTab (Id, portada, superior,longitud,cauchos,status,descripcion);
         return mTab;
     }
 
@@ -125,16 +147,160 @@ public abstract class MenuMs implements Menu {
     @Override
     public String modificar(MenuTab o) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+   @Override
+     public List<MenuTab> listar() {
+    PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<MenuTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;    
+     }
+     
+        
+      @Override
+    public MenuTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+
+        MenuTab mMod = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                mMod = convertir(rs);
+            } else {
+                throw new SQLException("Error, usuario no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return mMod;
     }
 
-    @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+     @Override
+    public Mensajes modificar(MenuTab me) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, me.getId());
+            stat.setString(2,me.getPortada());
+            stat.setString(3, me.getSuperior());
+            stat.setString(4, me.getLongitud());
+            stat.setString(5, me.getCauchos());
+            stat.setString(6, me.getDescripcion());
 
+
+            if (me.isEstado()) {
+                stat.setInt(7, 1);
+            } else {
+                stat.setInt(4, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(me.getPortada() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
+    
     @Override
     public MenuTab obtener(String id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
+
 
 }

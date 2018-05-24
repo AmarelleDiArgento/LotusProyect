@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Poscosecha extends DAO<ResultSet, PoscosechaTab, String>  {
+public interface Poscosecha extends DAO<ResultSet, PoscosechaTab, Integer>  {
     
 }

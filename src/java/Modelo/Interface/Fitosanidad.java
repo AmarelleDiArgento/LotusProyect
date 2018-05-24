@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Fitosanidad extends DAO<ResultSet, FitosanidadTab, String> {
+public interface Fitosanidad extends DAO<ResultSet, FitosanidadTab, Integer> {
     
 }

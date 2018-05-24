@@ -56,6 +56,38 @@
         <servlet-name>MaterialsecoServ</servlet-name>
         <servlet-class>Control.MaterialsecoServ</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControlCambiosServ</servlet-name>
+        <servlet-class>Control.ControlCambiosServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Fitosanidad</servlet-name>
+        <servlet-class>Control.Fitosanidad</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GradosServ</servlet-name>
+        <servlet-class>Control.GradosServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LineaServ</servlet-name>
+        <servlet-class>Control.LineaServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Maestro</servlet-name>
+        <servlet-class>Control.Maestro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MaestroServ</servlet-name>
+        <servlet-class>Control.MaestroServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MarcacionServ</servlet-name>
+        <servlet-class>Control.MarcacionServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FitoProductoServ</servlet-name>
+        <servlet-class>Control.FitoProductoServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioServ</servlet-name>
         <url-pattern>/usuarios.do</url-pattern>
@@ -111,6 +143,34 @@
     <servlet-mapping>
         <servlet-name>MaterialsecoServ</servlet-name>
         <url-pattern>/materialseco.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControlCambiosServ</servlet-name>
+        <url-pattern>/controlcambios.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FitosanidadServ</servlet-name>
+        <url-pattern>/fitosanidad.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradosServ</servlet-name>
+        <url-pattern>/grados.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LineaServ</servlet-name>
+        <url-pattern>/linea.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaestroServ</servlet-name>
+        <url-pattern>/maestro.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarcacionServ</servlet-name>
+        <url-pattern>/marcacion.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FitoProductoServ</servlet-name>
+        <url-pattern>/fitoproducto.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

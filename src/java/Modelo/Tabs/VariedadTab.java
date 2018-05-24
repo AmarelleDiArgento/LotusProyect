@@ -30,6 +30,7 @@ public class VariedadTab {
         this.VarNombre = VarNombre;
         this.VarEstado = VarEstado;
         this.Varimagen = Varimagen;
+
     }
 
     public VariedadTab(String VarNombre, Boolean VarEstado, String Varimagen, String VarColor) {
@@ -67,21 +68,19 @@ public class VariedadTab {
     public void setVarNombre(String VarNombre) {
         this.VarNombre = VarNombre;
     }
-
-    /**
-     * @return the VarEstado
-     */
-    public Boolean getVarEstado() {
-        return VarEstado;
-    }
-
-    /**
-     * @param VarEstado the VarEstado to set
+ /**
+     * @param VarEstado the ArmEstado to set
      */
     public void setVarEstado(Boolean VarEstado) {
         this.VarEstado = VarEstado;
     }
 
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isVarEstado() {
+        return VarEstado;
+    }
     /**
      * @return the Varimagen
      */
@@ -115,5 +114,4 @@ public class VariedadTab {
         return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", Varimagen=" + Varimagen + ", VarColor=" + VarColor + '}';
     }
 
- 
 }

@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ale-j
  */
-public interface AsignaPoscosecha extends DAO<ResultSet, AsignaPoscosechaTab, String> {
+public interface AsignaPoscosecha extends DAO<ResultSet, AsignaPoscosechaTab, Integer> {
     
 }
