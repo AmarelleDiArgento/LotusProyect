@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author ale-j
  */
 public class ControlCambioTab implements Serializable{
-    private int CCID;
+    private int CCId;
     private String CCAntes;
     private String CCDespues;
     private String CCUsuarios;

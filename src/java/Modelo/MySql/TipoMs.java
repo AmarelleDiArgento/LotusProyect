@@ -20,12 +20,12 @@ import java.util.List;
  *
  * @author ale-j
  */
-public class TipomsMs implements Tipo {
+public class TipoMs implements Tipo {
 
     private final Connection con;
     Mensajes m = null;
 
-    public TipomsMs(Connection con) {
+    public TipoMs(Connection con) {
 
         this.con = con;
     }

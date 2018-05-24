@@ -6,7 +6,7 @@
 package Control;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.GradosTab;
+import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.AsignaPermisoTab;
 import Servicios.Mensajes;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  *
  * @author ale-j
  */
-public class GradosServ extends HttpServlet {
+public class ProductoServ extends HttpServlet {
 
     @Resource(name = "Pool")
     private DataSource pool;
@@ -65,10 +65,9 @@ public class GradosServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        GradosTab g = null;
+        ProductoTab p = null;
         int Id;
-        String Nombre;
-        String Detalles;
+        String ProNombre;
         Boolean Estado;
         String E;
 
@@ -78,12 +77,12 @@ public class GradosServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        Nombre = request.getParameter("Nombre");
-                        Detalles = request.getParameter("Detalles");
+                        ProNombre = request.getParameter("ProNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        g = new GradosTab(Nombre, Detalles, Estado);
-                        m = Asql.getGrados().insertar(g);
+                        p = new ProductoTab(ProNombre,Estado);
+                        m.setMsj(Asql.getProducto().insertar(p));
+                        m.setTipo("Ok");
 
                     } else {
                         m.setTipo("Error");
@@ -95,12 +94,12 @@ public class GradosServ extends HttpServlet {
                 case "modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        Nombre = request.getParameter("Nombre");
-                        Detalles = request.getParameter("Detalles");
+                        ProNombre = request.getParameter("ProNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        g = new GradosTab(Id, Nombre, Detalles, Estado);
-                        m = Asql.getGrados().modificar(g);
+                        p = new ArmadoTab(Id, Nombre, Estado);
+                        m.setMsj(Asql.getProducto().insertar(p));
+                        m.setTipo("Ok");
 
                     } else {
                         m.setTipo("Error");
@@ -110,7 +109,8 @@ public class GradosServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getRol().eliminar(Id);
+                        m.setMsj(Asql.getRol().eliminar(Id));
+                        m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -119,9 +119,9 @@ public class GradosServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        g = Asql.getGrados().obtener(Id);
-                        Ses.setAttribute("Gra", g);
-                        m.setMsj("Se ha obtenido los grados con id: " + g.getGraId());
+                        p = Asql.getArmado().obtener(Id);
+                        Ses.setAttribute("Pro", p);
+                        m.setMsj("Se ha obtenido el productos con id: " + p.getProId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -131,15 +131,15 @@ public class GradosServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<GradosTab> gl = Asql.getGrados().listar();
-                    Ses.setAttribute("lisG", gl);
+                    List<ProductoTab> pl = Asql.getArmado().listar();
+                    Ses.setAttribute("lisP", pl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}
                     break;
 
                 default:
-                    ruta = "Grados.jsp";
+                    ruta = "armado.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
@@ -156,7 +156,7 @@ public class GradosServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getTipo() != null) {
+        if (m.getProducto() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

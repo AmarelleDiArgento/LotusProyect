@@ -57,7 +57,7 @@ public class ProductoTab implements Serializable {
         this.ProNombre = ProNombre;
     }
 
-   /**
+    /**
      * @param ProEstado the ProEstado to set
      */
     public void setArmEstado(Boolean ProEstado) {
@@ -74,6 +74,5 @@ public class ProductoTab implements Serializable {
     @Override
     public String toString() {
         return "ProductoTab{" + "ProId=" + ProId + ", ProNombre=" + ProNombre + ", ProEstado=" + ProEstado + '}';
-    }
     }
 }

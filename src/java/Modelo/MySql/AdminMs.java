@@ -63,19 +63,27 @@ public class AdminMs implements Admin {
         this.con = pool.getConnection();
     }
 
-    private Usuario Usu = null;
-    private Permiso Per = null;
-    private Rol Rol = null;
-    private AsignaPermiso AsgPer = null;
     private Armado Arm = null;
-    private Variedad Var = null;
-    private ControlCambios Con = null;
+    private AsignaPermiso AsgPer = null;
+    private ControlCambios CoC = null;
+    private FitoProducto FiP = null;
+    private FitoProducto Fitp = null;
     private Fitosanidad Fit = null;
     private Grados Gra = null;
     private Linea Lin = null;
     private Maestro Mae = null;
     private Marcacion Mar = null;
-    private FitoProducto Fitp = null;
+    private Menu Men = null;
+    private Parametros Par = null;
+    private Paso Pas = null;
+    private Permiso Per = null;
+    private Poscosecha Pos = null;
+    private Preliminar Pre = null;
+    private Producto Pro = null;
+    private Rol Rol = null;
+    private Tipo Tip = null;
+    private Usuario Usu = null;
+    private Variedad Var = null;
 
     @Override
     public Usuario getUsuario() {
@@ -121,16 +129,8 @@ public class AdminMs implements Admin {
     public Variedad getVariedad() {
         if (Var == null) {
             Var = new VariedadMs(con);
-            return Var;
         }
-    }
-
-    @Override
-    public Tipo getTipo() {
-        if (Ti == null) {
-            Ti = new TipoMs(con);
-        }
-        return Ti;
+        return Var;
     }
 
     @Override
@@ -144,7 +144,7 @@ public class AdminMs implements Admin {
     @Override
     public Preliminar getPreliminar() {
         if (Pre == null) {
-            Pre = new PreliminarsMs(con);
+            Pre = new PreliminarMs(con);
         }
         return Pre;
 
@@ -201,23 +201,30 @@ public class AdminMs implements Admin {
 
     @Override
     public Menu getMenu() {
-        if (Me == null) {
-            Me = new MenuMs(con);
+        if (Men == null) {
+            Men = new MenuMs(con);
         }
-        return Me;
+        return Men;
     }
 
     @Override
-    public Menu getMenu() {
-        if (Me == null) {
-            Me = new MenuMs(con);
+    public FitoProducto getFitoProducto() {
+        if (FiP == null) {
+            FiP = new FitoProductoMs(con);
         }
-        return Me;
+        return FiP;
     }
-}
 
-@Override
-        public Maestro getMaestro() {
+    @Override
+    public ControlCambios getControlCambios() {
+        if (CoC == null) {
+            CoC = new ControlCambiosMs(con);
+        }
+        return CoC;
+    }
+
+    @Override
+    public Maestro getMaestro() {
         if (Mae == null) {
             Mae = new MaestroMs(con);
         }
@@ -225,7 +232,7 @@ public class AdminMs implements Admin {
     }
 
     @Override
-        public Marcacion getMarcacion() {
+    public Marcacion getMarcacion() {
         if (Mar == null) {
             Mar = new MarcacionMs(con);
         }
@@ -233,12 +240,12 @@ public class AdminMs implements Admin {
     }
 
     @Override
-        public FitoProducto getFitoProducto() {
-        if (Fitp == null) {
-            Fitp = new FitoProductoMs(con);
-        }
-        return Fitp;
+    public Tipo getTipo() {
 
+        if (Tip == null) {
+            Tip = new TipoMs(con);
+        }
+        return Tip;
     }
 
 }

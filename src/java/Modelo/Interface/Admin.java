@@ -11,38 +11,44 @@ package Modelo.Interface;
  */
 public interface Admin {
 
-    Usuario getUsuario();
-
-    Rol getRol();
-
-    Permiso getPermiso();
+    Armado getArmado();
 
     AsignaPermiso getAsignaPer();
 
-    Armado getArmado();
-    
-    FitoProducto getFitoProducto ();
-    
     ControlCambios getControlCambios();
-    
+
+    FitoProducto getFitoProducto();
+
     Fitosanidad getFitosanidad();
-    
+
     Grados getGrados();
-    
-    Linea getLinea ();
-    
+
+    Linea getLinea();
+
     Maestro getMaestro();
-    
-    Marcacion getMarcacion ();
-    
-    
-    Variedad getVariedad();
-    Tipo getTipo();
-    Producto getProductos();
-    Preliminar getPreliminar();
-    Poscosecha getPoscosecha();
-    Paso getPaso();
-    Parametros getParametros();
+
+    Marcacion getMarcacion();
+
     Menu getMenu();
-    
+
+    Parametros getParametros();
+
+    Paso getPaso();
+
+    Permiso getPermiso();
+
+    Poscosecha getPoscosecha();
+
+    Preliminar getPreliminar();
+
+    Producto getProducto();
+
+    Rol getRol();
+
+    Tipo getTipo();
+
+    Usuario getUsuario();
+
+    Variedad getVariedad();
+
 }

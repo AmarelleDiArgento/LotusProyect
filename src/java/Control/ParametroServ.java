@@ -6,7 +6,7 @@
 package Control;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.ProductoTab;
+import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.AsignaPermisoTab;
 import Servicios.Mensajes;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  *
  * @author ale-j
  */
-public class ProductosServ extends HttpServlet {
+public class ParametroServ extends HttpServlet {
 
     @Resource(name = "Pool")
     private DataSource pool;
@@ -65,23 +65,22 @@ public class ProductosServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        ProductoTab p = null;
+        ParametrosTab p = null;
         int Id;
-        String ProNombre;
-        Boolean Estado;
+      String ParNombre;
+       Boolean Estado;
         String E;
 
         try {
             AdminMs Asql = new AdminMs(pool);
-
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        ProNombre = request.getParameter("ProNombre");
+                        ParNombre = request.getParameter("ParNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ProductoTab(ProNombre,Estado);
-                        m.setMsj(Asql.getProducto().insertar(p));
+                        p = new ParametrosTab(ParNombre,Estado);
+                        m.setMsj(Asql.getParametros().insertar(p));
                         m.setTipo("Ok");
 
                     } else {
@@ -93,12 +92,11 @@ public class ProductosServ extends HttpServlet {
 
                 case "modificar":
                     if (acc.isRpEditar()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        ProNombre = request.getParameter("ProNombre");
+                         ParNombre = request.getParameter("ParNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ArmadoTab(Id, Nombre, Estado);
-                        m.setMsj(Asql.getProducto().insertar(p));
+                        p = new ParametrosTab(ParNombre,Estado);
+                        m.setMsj(Asql.getParametros().insertar(p));
                         m.setTipo("Ok");
 
                     } else {
@@ -119,9 +117,9 @@ public class ProductosServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getArmado().obtener(Id);
-                        Ses.setAttribute("Pro", p);
-                        m.setMsj("Se ha obtenido el productos con id: " + p.getProId());
+                        p = Asql.getParametros().obtener(Id);
+                        Ses.setAttribute("Par", p);
+                        m.setMsj("Se ha obtenido el Parametros con id: " + p.getParId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -131,7 +129,7 @@ public class ProductosServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<ProductoTab> pl = Asql.getArmado().listar();
+                    List<ParametrosTab> pl = Asql.getParametros().listar();
                     Ses.setAttribute("lisP", pl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
@@ -139,7 +137,7 @@ public class ProductosServ extends HttpServlet {
                     break;
 
                 default:
-                    ruta = "armado.jsp";
+                    ruta = "parametros.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
@@ -156,14 +154,11 @@ public class ProductosServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getProducto() != null) {
+        if (m.getParametros() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
-
-        
-        
+     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

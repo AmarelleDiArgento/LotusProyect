@@ -117,7 +117,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="fitosanidad.do">
+            <form method="get" action="fitosanidads.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva Fitosanidad</h4>
                     <p>Registra la informacion de la nueva Fitosanidad</p>
@@ -155,7 +155,7 @@
                 FitosanidadTab fS = (FitosanidadTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="fitosanidad.do">
+            <form method="get" action="fitosanidads.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Fitosanidad</h4>
                     <p>Registra la informacion de la nueva Fitosanidad</p>
@@ -272,7 +272,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="fitosanidad.do" method="post" >
+        <form id="lista" action="fitosanidads.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

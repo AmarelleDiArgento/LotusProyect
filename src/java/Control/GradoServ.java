@@ -6,7 +6,7 @@
 package Control;
 
 import Modelo.MySql.AdminMs;
-import Modelo.Tabs.ParametrosTab;
+import Modelo.Tabs.GradosTab;
 import Modelo.Tabs.AsignaPermisoTab;
 import Servicios.Mensajes;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  *
  * @author ale-j
  */
-public class ParametrosServ extends HttpServlet {
+public class GradoServ extends HttpServlet {
 
     @Resource(name = "Pool")
     private DataSource pool;
@@ -65,23 +65,25 @@ public class ParametrosServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        ParametrosTab p = null;
+        GradosTab g = null;
         int Id;
-      String ParNombre;
-       Boolean Estado;
+        String Nombre;
+        String Detalles;
+        Boolean Estado;
         String E;
 
         try {
             AdminMs Asql = new AdminMs(pool);
+
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        ParNombre = request.getParameter("ParNombre");
+                        Nombre = request.getParameter("Nombre");
+                        Detalles = request.getParameter("Detalles");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ParametrosTab(ParNombre,Estado);
-                        m.setMsj(Asql.getParametros().insertar(p));
-                        m.setTipo("Ok");
+                        g = new GradosTab(Nombre, Detalles, Estado);
+                        m = Asql.getGrados().insertar(g);
 
                     } else {
                         m.setTipo("Error");
@@ -92,12 +94,13 @@ public class ParametrosServ extends HttpServlet {
 
                 case "modificar":
                     if (acc.isRpEditar()) {
-                         ParNombre = request.getParameter("ParNombre");
+                        Id = Integer.parseInt(request.getParameter("Id"));
+                        Nombre = request.getParameter("Nombre");
+                        Detalles = request.getParameter("Detalles");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ParametrosTab(ParNombre,Estado);
-                        m.setMsj(Asql.getParametros().insertar(p));
-                        m.setTipo("Ok");
+                        g = new GradosTab(Id, Nombre, Detalles, Estado);
+                        m = Asql.getGrados().modificar(g);
 
                     } else {
                         m.setTipo("Error");
@@ -107,8 +110,7 @@ public class ParametrosServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getRol().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -117,9 +119,9 @@ public class ParametrosServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getParametros().obtener(Id);
-                        Ses.setAttribute("Par", p);
-                        m.setMsj("Se ha obtenido el Parametros con id: " + p.getParId());
+                        g = Asql.getGrados().obtener(Id);
+                        Ses.setAttribute("Gra", g);
+                        m.setMsj("Se ha obtenido los grados con id: " + g.getGraId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -129,15 +131,15 @@ public class ParametrosServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<ParametrosTab> pl = Asql.getParametros().listar();
-                    Ses.setAttribute("lisP", pl);
+                    List<GradosTab> gl = Asql.getGrados().listar();
+                    Ses.setAttribute("lisG", gl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}
                     break;
 
                 default:
-                    ruta = "parametros.jsp";
+                    ruta = "Grados.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
@@ -154,11 +156,14 @@ public class ParametrosServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getParametros() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-     
+    
+
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

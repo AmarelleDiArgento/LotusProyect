@@ -147,7 +147,7 @@
                 FitoProductoTab fS = (FitoProductoTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="fitoproducto.do">
+            <form method="get" action="fitoproductos.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Fitoproducto</h4>
                     <p>Registra la informacion del nuevo Fitoproducto</p>
@@ -264,7 +264,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="fitoproducto.do" method="post" >
+        <form id="lista" action="fitoproductos.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>
