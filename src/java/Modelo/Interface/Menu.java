@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Menu extends DAO<ResultSet, MenuTab, String>  {
+public interface Menu extends DAO<ResultSet, MenuTab, Integer>  {
     
 }

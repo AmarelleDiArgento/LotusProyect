@@ -16,13 +16,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author ale-j
  */
-    
-    public abstract class TipomsMs implements Tipo{
+public class TipomsMs implements Tipo {
+
     private final Connection con;
     Mensajes m = null;
 
@@ -36,7 +35,7 @@ import java.util.List;
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    
+
     @Override
     public Mensajes insertar(TipoTab t) {
         String msj = "";
@@ -45,7 +44,6 @@ import java.util.List;
             stat = con.prepareStatement(Insertar);
             stat.setString(1, t.getTiMNombre());
             stat.setString(2, t.getTiMDescripcion());
-          
 
             if (stat.executeUpdate() == 0) {
 
@@ -74,18 +72,19 @@ import java.util.List;
         }
         return m;
     }
+
     @Override
     public TipoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("TiMId");
         String nombre = rs.getString("TiMNombre");
         String descripcion = rs.getString("TiMDescripcion");
-        TipoTab tTab = new TipoTab (Id, nombre, descripcion);
+        TipoTab tTab = new TipoTab(Id, nombre, descripcion);
         return tTab;
     }
-    
+
     @Override
-     public List<TipoTab> listar() {
-    PreparedStatement stat = null;
+    public List<TipoTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<TipoTab> uModel = new ArrayList<>();
         try {
@@ -115,11 +114,23 @@ import java.util.List;
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return uModel;
+    }
+
+
+
+    @Override
+    public TipoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TipoTab obtener(String id) {
+    public Mensajes modificar(TipoTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

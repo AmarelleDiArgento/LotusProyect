@@ -9,12 +9,30 @@ import Modelo.Interface.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.sql.DataSource;
+
 import Modelo.Interface.Admin;
 import Modelo.Interface.Armado;
 import Modelo.Interface.Permiso;
 import Modelo.Interface.Rol;
-import javax.sql.DataSource;
 import Modelo.Interface.AsignaPermiso;
+import Modelo.Interface.Menu;
+import Modelo.Interface.Parametros;
+import Modelo.Interface.Paso;
+import Modelo.Interface.Poscosecha;
+import Modelo.Interface.Preliminar;
+import Modelo.Interface.Producto;
+import Modelo.Interface.Tipo;
+import Modelo.Interface.Variedad;
+import Modelo.Tabs.VariedadTab;
+import javafx.geometry.Pos;
+import Modelo.Interface.ControlCambios;
+import Modelo.Interface.Fitosanidad;
+import Modelo.Interface.Grados;
+import Modelo.Interface.Linea;
+import Modelo.Interface.Maestro;
+import Modelo.Interface.Marcacion;
+import Modelo.Interface.FitoProducto;
 
 /**
  *
@@ -50,6 +68,14 @@ public class AdminMs implements Admin {
     private Rol Rol = null;
     private AsignaPermiso AsgPer = null;
     private Armado Arm = null;
+    private Variedad Var = null;
+    private ControlCambios Con = null;
+    private Fitosanidad Fit = null;
+    private Grados Gra = null;
+    private Linea Lin = null;
+    private Maestro Mae = null;
+    private Marcacion Mar = null;
+    private FitoProducto Fitp = null;
 
     @Override
     public Usuario getUsuario() {
@@ -90,4 +116,129 @@ public class AdminMs implements Admin {
         }
         return Arm;
     }
+
+    @Override
+    public Variedad getVariedad() {
+        if (Var == null) {
+            Var = new VariedadMs(con);
+            return Var;
+        }
+    }
+
+    @Override
+    public Tipo getTipo() {
+        if (Ti == null) {
+            Ti = new TipoMs(con);
+        }
+        return Ti;
+    }
+
+    @Override
+    public Producto getProducto() {
+        if (Pro == null) {
+            Pro = new ProductoMs(con);
+        }
+        return Pro;
+    }
+
+    @Override
+    public Preliminar getPreliminar() {
+        if (Pre == null) {
+            Pre = new PreliminarsMs(con);
+        }
+        return Pre;
+
+    }
+
+    @Override
+    public Poscosecha getPoscosecha() {
+        if (Pos == null) {
+            Pos = new PoscosechaMs(con);
+        }
+        return Pos;
+    }
+
+    @Override
+    public Paso getPaso() {
+        if (Pas == null) {
+            Pas = new PasoMs(con);
+        }
+        return Pas;
+    }
+
+    @Override
+    public Fitosanidad getFitosanidad() {
+        if (Fit == null) {
+            Fit = new FitosanidadMs(con);
+        }
+        return Fit;
+
+    }
+
+    @Override
+    public Grados getGrados() {
+        if (Gra == null) {
+            Gra = new GradosMs(con);
+        }
+        return Gra;
+    }
+
+    @Override
+    public Parametros getParametros() {
+        if (Par == null) {
+            Par = new ParametrosMs(con);
+        }
+        return Par;
+    }
+
+    @Override
+    public Linea getLinea() {
+        if (Lin == null) {
+            Lin = new LineaMs(con);
+        }
+        return Lin;
+    }
+
+    @Override
+    public Menu getMenu() {
+        if (Me == null) {
+            Me = new MenuMs(con);
+        }
+        return Me;
+    }
+
+    @Override
+    public Menu getMenu() {
+        if (Me == null) {
+            Me = new MenuMs(con);
+        }
+        return Me;
+    }
+}
+
+@Override
+        public Maestro getMaestro() {
+        if (Mae == null) {
+            Mae = new MaestroMs(con);
+        }
+        return Mae;
+    }
+
+    @Override
+        public Marcacion getMarcacion() {
+        if (Mar == null) {
+            Mar = new MarcacionMs(con);
+        }
+        return Mar;
+    }
+
+    @Override
+        public FitoProducto getFitoProducto() {
+        if (Fitp == null) {
+            Fitp = new FitoProductoMs(con);
+        }
+        return Fitp;
+
+    }
+
 }

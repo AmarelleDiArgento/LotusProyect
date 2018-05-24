@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class PoscosechaMs implements Poscosecha {
+public class PoscosechaMs implements Poscosecha {
 
     private final Connection con;
     Mensajes m = null;
@@ -35,7 +35,6 @@ public abstract class PoscosechaMs implements Poscosecha {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";  
     
     @Override
     public Mensajes insertar(PoscosechaTab p) {
@@ -125,20 +124,21 @@ public abstract class PoscosechaMs implements Poscosecha {
         }
         return uModel;    
     }
-     
+
     @Override
     public Mensajes modificar(PoscosechaTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public PoscosechaTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public PoscosechaTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+     
 
 }

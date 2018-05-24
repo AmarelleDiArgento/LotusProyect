@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class MarcacionMs implements Marcacion {
+public class MarcacionMs implements Marcacion {
     
      private final Connection con;
     Mensajes m = null;
@@ -29,12 +29,11 @@ public abstract class MarcacionMs implements Marcacion {
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = "";
+    final String Insertar = "call lotusproyect.marcacionIn(?,?,?);";
+    final String Modificar = "call lotusproyect.marcacionMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.marcacionEl(?);";
+    final String Consultar = "call lotusproyect.marcacionCo(?);";
+    final String ListarTodos = "call lotusproyect.marcacionLi();";
     
     @Override
     public Mensajes insertar(MarcacionTab ma) {
@@ -92,14 +91,14 @@ public abstract class MarcacionMs implements Marcacion {
      public List<MarcacionTab> listar() {
     PreparedStatement stat = null;
         ResultSet rs = null;
-        List<MarcacionTab> uModel = new ArrayList<>();
+        List<MarcacionTab> mModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(ListarTodos);
 
                 rs = stat.executeQuery();
                 while (rs.next()) {
-                    uModel.add(convertir(rs));
+                    mModel.add(convertir(rs));
                 }
             } finally {
                 if (rs != null) {
@@ -120,21 +119,119 @@ public abstract class MarcacionMs implements Marcacion {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
-    }
-    @Override
-    public Mensajes modificar(MarcacionTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+        return mModel;    
+     }
+     
+     @Override
+    public MarcacionTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+
+        MarcacionTab mMod = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                mMod = convertir(rs);
+            } else {
+                throw new SQLException("Error, usuario no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return mMod;
     }
 
-    @Override
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+     @Override
+    public Mensajes modificar(MarcacionTab mar) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, mar.getMarId());
+            stat.setString(2, mar.getMarNombre());
+            stat.setString(3, mar.getMarPortada());
+            if (mar.isMarEstado()) {
+                stat.setInt(4, 1);
+            } else {
+                stat.setInt(4, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(mar.getMarNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
+    
     @Override
-    public MarcacionTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
 
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
+    
 }

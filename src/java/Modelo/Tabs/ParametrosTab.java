@@ -51,29 +51,22 @@ public class ParametrosTab implements Serializable{
         this.ParNombre = ParNombre;
     }
 
-    /**
-     * @return the ParEstado
-     */
-    public Boolean getParEstado() {
-        return ParEstado;
-    }
-
-    /**
+   /**
      * @param ParEstado the ParEstado to set
      */
     public void setParEstado(Boolean ParEstado) {
         this.ParEstado = ParEstado;
     }
 
+    /**
+     * @return the ArmEstado
+     */
+    public Boolean isParEstado() {
+        return ParEstado;
+    }
+
     @Override
     public String toString() {
         return "ParametrosTab{" + "ParId=" + ParId + ", ParNombre=" + ParNombre + ", ParEstado=" + ParEstado + '}';
-    }
-
-    public boolean isParEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
-    
+    } 
 }

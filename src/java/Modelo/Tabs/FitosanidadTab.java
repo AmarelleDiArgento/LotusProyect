@@ -16,11 +16,11 @@ public class FitosanidadTab implements Serializable{
     private int FitId;
     private String FitNombre;
     private String FitDescripcion;
-    private Boolean FitTipo;
+    private String FitTipo;
     private String FitImagen;
     private Boolean FitEstado;
 
-    public FitosanidadTab(int FitId, String FitNombre, String FitDescripcion, Boolean FitTipo, String FitImagen, Boolean FitEstado) {
+    public FitosanidadTab(int FitId, String FitNombre, String FitDescripcion, String FitTipo, String FitImagen, Boolean FitEstado) {
         this.FitId = FitId;
         this.FitNombre = FitNombre;
         this.FitDescripcion = FitDescripcion;
@@ -29,7 +29,7 @@ public class FitosanidadTab implements Serializable{
         this.FitEstado = FitEstado;
     }
 
-    public FitosanidadTab(String FitNombre, String FitDescripcion, Boolean FitTipo, String FitImagen, Boolean FitEstado) {
+    public FitosanidadTab(String FitNombre, String FitDescripcion, String FitTipo, String FitImagen, Boolean FitEstado) {
         this.FitNombre = FitNombre;
         this.FitDescripcion = FitDescripcion;
         this.FitTipo = FitTipo;
@@ -82,14 +82,14 @@ public class FitosanidadTab implements Serializable{
     /**
      * @return the FitTipo
      */
-    public Boolean getFitTipo() {
+    public String getFitTipo() {
         return FitTipo;
     }
 
     /**
      * @param FitTipo the FitTipo to set
      */
-    public void setFitTipo(Boolean FitTipo) {
+    public void setFitTipo(String FitTipo) {
         this.FitTipo = FitTipo;
     }
 
@@ -107,18 +107,18 @@ public class FitosanidadTab implements Serializable{
         this.FitImagen = FitImagen;
     }
 
-    /**
-     * @return the FitEstado
-     */
-    public Boolean getFitEstado() {
-        return FitEstado;
-    }
-
-    /**
+  /**
      * @param FitEstado the FitEstado to set
      */
     public void setFitEstado(Boolean FitEstado) {
         this.FitEstado = FitEstado;
+    }
+
+    /**
+     * @return the FitEstado
+     */
+    public Boolean isFitEstado() {
+        return FitEstado;
     }
 
     @Override
@@ -126,11 +126,5 @@ public class FitosanidadTab implements Serializable{
         return "FitosanidadTab{" + "FitId=" + FitId + ", FitNombre=" + FitNombre + ", FitDescripcion=" + FitDescripcion + ", FitTipo=" + FitTipo + ", FitImagen=" + FitImagen + ", FitEstado=" + FitEstado + '}';
     }
 
-    public boolean isFitEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-
-    
-    
+   
 }

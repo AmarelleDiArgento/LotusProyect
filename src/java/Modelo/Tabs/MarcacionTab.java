@@ -27,12 +27,11 @@ public class MarcacionTab implements Serializable{
         this.ArmId = ArmId;
     }
 
-    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId) {
+    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado) {
         this.MarId = MarId;
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
         this.MarEstado = MarEstado;
-        this.ArmId = ArmId;
     }
 
     public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, String ArmNombre) {
@@ -44,10 +43,12 @@ public class MarcacionTab implements Serializable{
         this.ArmNombre = ArmNombre;
     }
 
-    public MarcacionTab(int Id, String nombre, String portada, boolean status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public MarcacionTab(String MarNombre, String MarPortada, Boolean MarEstado) {
+        this.MarNombre = MarNombre;
+        this.MarPortada = MarPortada;
+        this.MarEstado = MarEstado;
     }
-
+   
     /**
      * @return the MarId
      */

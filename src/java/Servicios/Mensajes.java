@@ -87,4 +87,8 @@ public class Mensajes {
         return body;
     }
 
+    public Object getVariedad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

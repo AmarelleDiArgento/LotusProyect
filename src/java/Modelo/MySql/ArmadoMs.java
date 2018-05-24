@@ -30,9 +30,9 @@ public class ArmadoMs implements Armado {
     }
 
     final String Insertar = "call LotusProyect.armadoIn(?, ?, ?);";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
+    final String Modificar = "call LotusProyect.armadoMo(?,?,?,?);";
+    final String Eliminar = "call lotusproyect.armadoEl(?);";
+    final String Consultar = "call LotusProyect.armadoCo(?);";
     final String ListarTodos = "call LotusProyect.armadoLi();";
 
     @Override
@@ -84,6 +84,7 @@ public class ArmadoMs implements Armado {
         String descripcion = rs.getString("ArmDescripcion");
         int st = rs.getInt("ArmEstado");
         boolean status = st == 1;
+
         ArmadoTab uTab = new ArmadoTab(Id, nombre, descripcion, status);
         return uTab;
     }
@@ -125,16 +126,113 @@ public class ArmadoMs implements Armado {
 
     @Override
     public ArmadoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        ArmadoTab aModel = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                aModel = convertir(rs);
+            } else {
+                throw new SQLException("Error, armado no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return aModel;
     }
-   @Override
-    public Mensajes modificar(ArmadoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+
+    @Override
+    public Mensajes modificar(ArmadoTab a) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, a.getArmId());
+            stat.setString(2, a.getArmNombre());
+            stat.setString(3, a.getArmDescripcion());
+            if (a.isArmEstado()) {
+                stat.setInt(4, 1);
+            } else {
+                stat.setInt(4, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(a.getArmNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
     public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
 }

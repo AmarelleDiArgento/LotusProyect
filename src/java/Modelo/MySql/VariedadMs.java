@@ -6,6 +6,7 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Variedad;
+import Modelo.Tabs.TipoTab;
 import Modelo.Tabs.VariedadTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class VariedadMs implements Variedad {
+public class VariedadMs implements Variedad{
 
     private final Connection con;
     Mensajes m = null;
@@ -34,7 +35,6 @@ public abstract class VariedadMs implements Variedad {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";
 
     @Override
     public Mensajes insertar(VariedadTab v) {
@@ -78,7 +78,6 @@ public abstract class VariedadMs implements Variedad {
         }
         return m;
     }
-
     @Override
     public VariedadTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("VarId");
@@ -87,14 +86,13 @@ public abstract class VariedadMs implements Variedad {
         String color = rs.getString("VarColor");
         int st = rs.getInt("VarEstado");
         boolean status = st == 1;
-        VariedadTab aTab = new VariedadTab(Id, nombre, imagen, color, status);
+        VariedadTab aTab = new VariedadTab (Id, nombre, status, imagen, color);
         return aTab;
-
     }
 
-    @Override
-    public List<VariedadTab> listar() {
-        PreparedStatement stat = null;
+  @Override
+     public List<VariedadTab> listar() {
+    PreparedStatement stat = null;
         ResultSet rs = null;
         List<VariedadTab> uModel = new ArrayList<>();
         try {
@@ -124,7 +122,25 @@ public abstract class VariedadMs implements Variedad {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;
-
+        return uModel;    
     }
+
+    @Override
+    public Mensajes modificar(VariedadTab o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public VariedadTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+
 }
+

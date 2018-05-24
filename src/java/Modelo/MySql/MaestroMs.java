@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Maestro;
-import Modelo.Tabs.LineaTab;
 import Modelo.Tabs.MaestroTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class MaestroMs implements Maestro {
+public class MaestroMs implements Maestro {
     
      private final Connection con;
     Mensajes m = null;
@@ -30,12 +29,11 @@ public abstract class MaestroMs implements Maestro {
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = "";
+    final String Insertar = "call lotusproyect.maestroIn(?,?);";
+    final String Modificar = "call lotusproyect.marcacionMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.maestroEl(?);";
+    final String Consultar = "call lotusproyect.maestroCo(?);";
+    final String ListarTodos = "call lotusproyect.maestroLi();";
 
     @Override
     public Mensajes insertar(MaestroTab ma) {
@@ -86,14 +84,14 @@ public abstract class MaestroMs implements Maestro {
      public List<MaestroTab> listar() {
     PreparedStatement stat = null;
         ResultSet rs = null;
-        List<MaestroTab> uModel = new ArrayList<>();
+        List<MaestroTab> mModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(ListarTodos);
 
                 rs = stat.executeQuery();
                 while (rs.next()) {
-                    uModel.add(convertir(rs));
+                    mModel.add(convertir(rs));
                 }
             } finally {
                 if (rs != null) {
@@ -114,25 +112,114 @@ public abstract class MaestroMs implements Maestro {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return mModel;    
     }
+     
 
+        @Override
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
 
     @Override
-    public Mensajes modificar(MaestroTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes modificar(MaestroTab ma) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, ma.getMaeId());
+            stat.setString(2, ma.getMaeNombre());
+            stat.setString(3, ma.getMaeDescripcion());
+            
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(ma.getMaeNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public MaestroTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+
+        MaestroTab mMod = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                mMod = convertir(rs);
+            } else {
+                throw new SQLException("Error, usuario no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return mMod;
     }
-
-    @Override
-    public MaestroTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
 }

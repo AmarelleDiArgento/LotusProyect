@@ -18,27 +18,34 @@ public class MaterialSecoTab implements Serializable {
     private String MsNombre;
     private String MsImagen;
     private String MsDescripcion;
-    private Boolean Estado;
+    private Boolean MsEstado;
     private  int MsAlto;
     private int MsAncho;
     private int MsProfundo;
 
-    public MaterialSecoTab(int MsId, int TipoMs_TimId, String MsNombre,String MsImagen,String MsDescripcion, Boolean Estado, int MsAlto, int MsAncho, int MsProfundo) {
+    public MaterialSecoTab(int MsId, int TipoMs_TimId, String MsNombre,String MsImagen,String MsDescripcion, Boolean MsEstado, int MsAlto, int MsAncho, int MsProfundo) {
         this.MsId = MsId;
         this.TipoMs_TimId = TipoMs_TimId;
         this.MsNombre = MsNombre;
         this.MsImagen = MsImagen;
         this.MsImagen = MsDescripcion;
-        this.Estado = Estado;
+        this.MsEstado = MsEstado;
         this.MsAlto = MsAlto;
         this.MsAncho = MsAncho;
         this.MsProfundo = MsProfundo;
     }
 
-    public MaterialSecoTab(int Id, String nombre, String descripcion, String imagen, boolean status, int alto, int ancho, String profundo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public MaterialSecoTab(int MsId, String MsNombre, String MsImagen, String MsDescripcion, Boolean MsEstado, int MsAlto, int MsAncho, int MsProfundo) {
+        this.MsId = MsId;
+        this.MsNombre = MsNombre;
+        this.MsImagen = MsImagen;
+        this.MsDescripcion = MsDescripcion;
+        this.MsEstado = MsEstado;
+        this.MsAlto = MsAlto;
+        this.MsAncho = MsAncho;
+        this.MsProfundo = MsProfundo;
     }
-
+    
     /**
      * @return the MsId
      */
@@ -109,17 +116,17 @@ public class MaterialSecoTab implements Serializable {
         this.MsDescripcion = MsDescripcion;
     }
    /**
-     * @param Estado the ArmEstado to set
+     * @param MsEstado the MsEstado to set
      */
     public void setEstado(Boolean Estado) {
-        this.Estado = Estado;
+        this.MsEstado = Estado;
     }
 
     /**
-     * @return the ArmEstado
+     * @return the MsEstado
      */
-    public Boolean isEstado() {
-        return Estado;
+    public Boolean isMsEstado() {
+        return MsEstado;
     }
 
     /**
@@ -165,7 +172,7 @@ public class MaterialSecoTab implements Serializable {
     }
     @Override
     public String toString() {
-        return "MaterialSecoTab{" + "MsId=" + getMsId() + ", TipoMs_TimId=" + getTipoMs_TimId() + ", MsNombre=" + getMsNombre() + ", Estado=" + isEstado() + ", MsAlto=" + getMsAlto() + ", MsAncho=" + getMsAncho() + ", MsProfundo=" + getMsProfundo() + '}';
+        return "MaterialSecoTab{" + "MsId=" + getMsId() + ", TipoMs_TimId=" + getTipoMs_TimId() + ", MsNombre=" + getMsNombre() + ", MsEstado=" + isMsEstado() + ", MsAlto=" + getMsAlto() + ", MsAncho=" + getMsAncho() + ", MsProfundo=" + getMsProfundo() + '}';
     }
 
 }

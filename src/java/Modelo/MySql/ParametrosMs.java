@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class ParametrosMs implements Parametros{
+public class ParametrosMs implements Parametros{
 
     private final Connection con;
     Mensajes m = null;
@@ -30,12 +30,11 @@ public abstract class ParametrosMs implements Parametros{
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = ""; 
+    final String Insertar = "call lotusproyect.parametrosIn(?,?,?,?);";
+    final String Modificar = "call lotusproyect.parametrosMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.parametrosEl(?);";
+    final String Consultar = "call lotusproyect.parametrosCo(?);";
+    final String ListarTodos = "call lotusproyect.parametrosLi();";
     
      @Override
     public Mensajes insertar(ParametrosTab p) {
@@ -122,19 +121,60 @@ public abstract class ParametrosMs implements Parametros{
         }
         return uModel;    
     }
-    @Override
-    public Mensajes modificar(ParametrosTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+
+
+     
+     
+     @Override
+    public Mensajes modificar(ParametrosTab p) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, p.getParId());
+            stat.setString(2, p.getParNombre());
+            if (p.isParEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(3, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(p.getParNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ParametrosTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public ParametrosTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+
 
 }

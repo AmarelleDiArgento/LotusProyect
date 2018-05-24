@@ -8,7 +8,7 @@
  call LotusProyect.rolIn('Ast. Comercial', 'Encargado del negocio', 1);
  call LotusProyect.rolIn('Supervisor', 'Encargado del negocio', 1);
  call LotusProyect.rolIn('Estandar', 'Encargado del negocio', 1);
--- call LotusProyect.rolMo(1, 'Admin', 'El puto amo', 1);
+-- call LotusProyect.rolMo(1,8 'Admin', 'El puto amo', 1);
 -- call LotusProyect.rolLi();
 -- call LotusProyect.rolEl(1);
 -- call LotusProyect.rolCo(1);
@@ -87,15 +87,33 @@ call LotusProyect.AsgPerIn(3, 8, 1, 1, 1, 1);
 call LotusProyect.armadoIn('rosa', 'verde', 1);
 -- call lotusproyect.armadoMo(1, 'rosa', 'amarilla', 1);
 -- call lotusproyect.armadoLi();
--- call lotusproyect.armadoCo(2);
 -- call lotusproyect.armadoEl(2);
+-- call lotusproyect.armadoCo(1);
+
 
 
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla marcacion
--- Insertar
+
 
 call LotusProyect.marcacionIn('rosa', 'sahda', 1, 3);
+
 -- call lotusproyect.maestroMo(1, 'rosa', 'amarilla');
 
+
+
+
+-- Procedimientos LotusProyect Tabla control de cambios 
+
+call lotusproyect.controldecambiosIn('rosa', 'rosita', 'aleja');
+-- call lotusproyect.controldecambiosLi();
+-- call LotusProyect.contrroldecambiosMo(4);";
+-- call lotusproyect.controldecambiosEl(1);
+-- call lotusproyect.controldecambiosCo(1);
+
+
+-- Procedimientos LotusProyect Tabla FitoProducto
+
+call lotusproyect.fitoproductoIn(2); 
+-- call lotusproyect.fitoproductoCo(1);
 

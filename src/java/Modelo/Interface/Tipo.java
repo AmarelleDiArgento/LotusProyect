@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Tipo extends DAO<ResultSet, TipoTab, String> {
+public interface Tipo extends DAO<ResultSet, TipoTab, Integer> {
     
 }

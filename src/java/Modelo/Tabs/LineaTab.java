@@ -14,35 +14,35 @@ import java.io.Serializable;
 public class LineaTab implements Serializable{
     
     private int LinId;
-    private Boolean Estado;
+    private Boolean LinEstado;
     private int poscosecha_PosId;
     private int PosId;
     private String PosNombre;
 
-    public LineaTab(Boolean Estado, int poscosecha_PosId, int PosId) {
-        this.Estado = Estado;
+    public LineaTab(Boolean LinEstado, int poscosecha_PosId, int PosId) {
+        this.LinEstado = LinEstado;
         this.poscosecha_PosId = poscosecha_PosId;
         this.PosId = PosId;
     }
 
-    public LineaTab(int LinId, Boolean Estado, int poscosecha_PosId, int PosId) {
+    public LineaTab(int LinId, Boolean LinEstado, int poscosecha_PosId, int PosId) {
         this.LinId = LinId;
-        this.Estado = Estado;
+        this.LinEstado = LinEstado;
         this.poscosecha_PosId = poscosecha_PosId;
         this.PosId = PosId;
     }
 
-    public LineaTab(int LinId, Boolean Estado, int poscosecha_PosId, int PosId, String PosNombre) {
+    public LineaTab(int LinId, Boolean LinEstado, int poscosecha_PosId, int PosId, String PosNombre) {
         this.LinId = LinId;
-        this.Estado = Estado;
+        this.LinEstado = LinEstado;
         this.poscosecha_PosId = poscosecha_PosId;
         this.PosId = PosId;
         this.PosNombre = PosNombre;
     }
 
-    public LineaTab(int LinId, Boolean Estado) {
+    public LineaTab(int LinId, Boolean LinEstado) {
         this.LinId = LinId;
-        this.Estado = Estado;
+        this.LinEstado = LinEstado;
     }
     
 
@@ -61,17 +61,17 @@ public class LineaTab implements Serializable{
     }
 
     /**
-     * @return the Estado
+     * @param LinEstado the LinEstado to set
      */
-    public Boolean getEstado() {
-        return Estado;
+    public void setArmEstado(Boolean LinEstado) {
+        this.LinEstado = LinEstado;
     }
 
     /**
-     * @param Estado the Estado to set
+     * @return the LinEstado
      */
-    public void setEstado(Boolean Estado) {
-        this.Estado = Estado;
+    public Boolean isLinEstado() {
+        return LinEstado;
     }
 
     /**
@@ -118,13 +118,10 @@ public class LineaTab implements Serializable{
 
     @Override
     public String toString() {
-        return "LineaTab{" + "LinId=" + LinId + ", Estado=" + Estado + ", poscosecha_PosId=" + poscosecha_PosId + ", PosId=" + PosId + ", PosNombre=" + PosNombre + '}';
+        return "LineaTab{" + "LinId=" + LinId + ", LinEstado=" + LinEstado + ", poscosecha_PosId=" + poscosecha_PosId + ", PosId=" + PosId + ", PosNombre=" + PosNombre + '}';
+    }
     }
 
-    public boolean isLinEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
 
    
     

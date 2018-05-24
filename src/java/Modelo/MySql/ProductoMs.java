@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class ProductoMs implements Producto {
+public class ProductoMs implements Producto {
 
     private final Connection con;
     Mensajes m = null;
@@ -35,16 +35,15 @@ public abstract class ProductoMs implements Producto {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";
-    
-       @Override
+
+    @Override
     public Mensajes insertar(ProductoTab p) {
         String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, p.getProNombre());
-          
+
             if (p.isProEstado()) {
                 stat.setInt(2, 1);
             } else {
@@ -77,20 +76,20 @@ public abstract class ProductoMs implements Producto {
         }
         return m;
     }
+
     @Override
     public ProductoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("ProId");
         String nombre = rs.getString("ProNombre");
         int st = rs.getInt("ProEstado");
         boolean status = st == 1;
-        ProductoTab pTab = new ProductoTab (Id, nombre,status);
+        ProductoTab pTab = new ProductoTab(Id, nombre, status);
         return pTab;
     }
-   
 
-   @Override
-     public List<ProductoTab> listar() {
-    PreparedStatement stat = null;
+    @Override
+    public List<ProductoTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<ProductoTab> uModel = new ArrayList<>();
         try {
@@ -120,7 +119,7 @@ public abstract class ProductoMs implements Producto {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return uModel;
     }
 
     @Override
@@ -129,13 +128,12 @@ public abstract class ProductoMs implements Producto {
     }
 
     @Override
-    public Mensajes eliminar(String id) {
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ProductoTab obtener(String id) {
+    public ProductoTab obtener(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
-    
