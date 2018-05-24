@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class VariedadMs implements Variedad{
+public class VariedadMs implements Variedad{
 
     private final Connection con;
     Mensajes m = null;
@@ -126,9 +126,21 @@ public abstract class VariedadMs implements Variedad{
     }
 
     @Override
-    public String modificar(VariedadTab o) {
+    public Mensajes modificar(VariedadTab o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public VariedadTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 
 }
 

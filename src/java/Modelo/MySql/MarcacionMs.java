@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Marcacion;
-import Modelo.Tabs.MaestroTab;
 import Modelo.Tabs.MarcacionTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class MarcacionMs implements Marcacion {
+public class MarcacionMs implements Marcacion {
     
      private final Connection con;
     Mensajes m = null;

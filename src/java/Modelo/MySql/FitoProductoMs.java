@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.FitoProducto;
-import Modelo.Tabs.ControlCambioTab;
 import Modelo.Tabs.FitoProductoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class FitoProductoMs implements FitoProducto {
+public class FitoProductoMs implements FitoProducto {
 
     private final Connection con;
     Mensajes m = null;
@@ -76,50 +75,7 @@ public abstract class FitoProductoMs implements FitoProducto {
         }
         return m;
     }
-    
- @Override
-     public List<FitoProductoTab> listar() {
-    PreparedStatement stat = null;
-        ResultSet rs = null;
-        List<FitoProductoTab> uModel = new ArrayList<>();
-        try {
-            try {
-                stat = con.prepareCall(ListarTodos);
-
-                rs = stat.executeQuery();
-                while (rs.next()) {
-                    uModel.add(convertir(rs));
-                }
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql rs: " + ex);
-                    }
-                }
-                if (stat != null) {
-                    try {
-                        stat.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql st: " + ex);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error sql: " + ex);
-        }
-        return uModel;    
-    }
-
     @Override
-    public FitoProductoTab convertir(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public String modificar(FitoProductoTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     public FitoProductoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("FitId");
         String area = rs.getString("FpArea");
@@ -138,7 +94,6 @@ public abstract class FitoProductoMs implements FitoProducto {
             try {
                 stat = con.prepareCall(ListarTodos);
 
-  
                 rs = stat.executeQuery();
                 while (rs.next()) {
                     fModel.add(convertir(rs));

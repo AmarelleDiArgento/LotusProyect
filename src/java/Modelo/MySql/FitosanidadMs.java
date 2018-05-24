@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Fitosanidad;
-import Modelo.Tabs.FitoProductoTab;
 import Modelo.Tabs.FitosanidadTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class FitosanidadMs implements Fitosanidad {
+public class FitosanidadMs implements Fitosanidad {
     
      private final Connection con;
     Mensajes m = null;
@@ -85,18 +84,6 @@ public abstract class FitosanidadMs implements Fitosanidad {
         int Id = rs.getInt("FitId");
         String nombre = rs.getString("FitNombre");
         String descripcion = rs.getString("FitDescripcion");
-        Boolean tipo = rs.getBoolean("FitTipo");
-        String imagen = rs.getString("FitImagen");
-
-
-        int st = rs.getInt("FitEstado");
-        boolean status = st == 1;
-        FitosanidadTab fTab = new FitosanidadTab (Id, nombre, descripcion,tipo,imagen,status);
-        return fTab;
-    public FitosanidadTab convertir(ResultSet rs) throws SQLException {
-        int Id = rs.getInt("FitId");
-        String nombre = rs.getString("FitNombre");
-        String descripcion = rs.getString("FitDescripcion");
         String tipo = rs.getString("FitTipo");
         String imagen = rs.getString("FitImagen");
 
@@ -107,46 +94,6 @@ public abstract class FitosanidadMs implements Fitosanidad {
         return fTab;
     }
 
-        
- @Override
-     public List<FitosanidadTab> listar() {
-    PreparedStatement stat = null;
-        ResultSet rs = null;
-        List<FitosanidadTab> uModel = new ArrayList<>();
-        try {
-            try {
-                stat = con.prepareCall(ListarTodos);
-
-                rs = stat.executeQuery();
-                while (rs.next()) {
-                    uModel.add(convertir(rs));
-                }
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql rs: " + ex);
-                    }
-                }
-                if (stat != null) {
-                    try {
-                        stat.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql st: " + ex);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error sql: " + ex);
-        }
-        return uModel;    
-    }
-
-    
-    @Override
-    public String modificar(FitosanidadTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
         
  @Override
      public List<FitosanidadTab> listar() {
@@ -227,8 +174,6 @@ public abstract class FitosanidadMs implements Fitosanidad {
     }
     
     @Override
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     public FitosanidadTab obtener(Integer id) {
         PreparedStatement stat = null;
         ResultSet rs = null;

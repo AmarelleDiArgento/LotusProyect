@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class MaterialSecoMs implements MaterialSeco {
+public class MaterialSecoMs implements MaterialSeco {
 
     private final Connection con;
     Mensajes m = null;
@@ -91,12 +91,12 @@ public abstract class MaterialSecoMs implements MaterialSeco {
         String descripcion = rs.getString("MsDescripcion");
         int alto = rs.getInt("MsAlto");
         int ancho = rs.getInt("MsAncho");
-        String profundo = rs.getString("MsProfundo");
+        int profundo = rs.getInt("MsProfundo");
 
         
         int st = rs.getInt("MsEstado");
         boolean status = st == 1;
-        MaterialSecoTab mTab = new MaterialSecoTab (Id, nombre, descripcion,imagen, status,alto,ancho,profundo);
+        MaterialSecoTab mTab = new MaterialSecoTab (Id, nombre, imagen, descripcion, status, alto, ancho, profundo);
         return mTab;
     }
     
@@ -135,10 +135,7 @@ public abstract class MaterialSecoMs implements MaterialSeco {
         return uModel;    
     }
 
-    @Override
-    public String modificar(MaterialSecoTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+
      
      
      @Override
@@ -186,16 +183,18 @@ public abstract class MaterialSecoMs implements MaterialSeco {
         }
         return m;
     }
-    
-     @Override
-    public MaterialSecoTab obtener(Integer id) {
-        PreparedStatement stat = null;
-        ResultSet rs = null;
 
     @Override
-    public MaterialSecoTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public MaterialSecoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
 
 
 }

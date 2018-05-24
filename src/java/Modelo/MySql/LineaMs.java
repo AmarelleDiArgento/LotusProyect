@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Linea;
-import Modelo.Tabs.GradosTab;
 import Modelo.Tabs.LineaTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class LineaMs implements Linea {
+public class LineaMs implements Linea {
     
      private final Connection con;
     Mensajes m = null;

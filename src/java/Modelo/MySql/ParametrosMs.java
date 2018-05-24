@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class ParametrosMs implements Parametros{
+public class ParametrosMs implements Parametros{
 
     private final Connection con;
     Mensajes m = null;
@@ -121,45 +121,8 @@ public abstract class ParametrosMs implements Parametros{
         }
         return uModel;    
     }
-    @Override
-    public String modificar(ParametrosTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
-  @Override
-     public List<ParametrosTab> listar() {
-    PreparedStatement stat = null;
-        ResultSet rs = null;
-        List<ParametrosTab> uModel = new ArrayList<>();
-        try {
-            try {
-                stat = con.prepareCall(ListarTodos);
 
-                rs = stat.executeQuery();
-                while (rs.next()) {
-                    uModel.add(convertir(rs));
-                }
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql rs: " + ex);
-                    }
-                }
-                if (stat != null) {
-                    try {
-                        stat.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql st: " + ex);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error sql: " + ex);
-        }
-        return uModel;    
-    }
      
      
      @Override
@@ -201,10 +164,17 @@ public abstract class ParametrosMs implements Parametros{
         }
         return m;
     }
-    
+
     @Override
-    public ParametrosTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ParametrosTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
 
 }

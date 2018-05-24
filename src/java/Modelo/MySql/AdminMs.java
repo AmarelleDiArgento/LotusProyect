@@ -68,12 +68,12 @@ public class AdminMs implements Admin {
     private Rol Rol = null;
     private AsignaPermiso AsgPer = null;
     private Armado Arm = null;
-    private Variedad Var =null;
+    private Variedad Var = null;
     private ControlCambios Con = null;
     private Fitosanidad Fit = null;
     private Grados Gra = null;
     private Linea Lin = null;
-    private Maestro Mae = null ;
+    private Maestro Mae = null;
     private Marcacion Mar = null;
     private FitoProducto Fitp = null;
 
@@ -116,23 +116,15 @@ public class AdminMs implements Admin {
         }
         return Arm;
     }
+
     @Override
     public Variedad getVariedad() {
         if (Var == null) {
-            Var = new VariedadMs(con) {
-                @Override
-                public String eliminar(Integer id) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-
-                @Override
-                public VariedadTab obtener(Integer id) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-            };
+            Var = new VariedadMs(con);
+            return Var;
         }
-        return Var;
     }
+
     @Override
     public Tipo getTipo() {
         if (Ti == null) {
@@ -140,6 +132,7 @@ public class AdminMs implements Admin {
         }
         return Ti;
     }
+
     @Override
     public Producto getProducto() {
         if (Pro == null) {
@@ -147,15 +140,16 @@ public class AdminMs implements Admin {
         }
         return Pro;
     }
-   
+
     @Override
     public Preliminar getPreliminar() {
         if (Pre == null) {
             Pre = new PreliminarsMs(con);
         }
         return Pre;
-   
+
     }
+
     @Override
     public Poscosecha getPoscosecha() {
         if (Pos == null) {
@@ -163,89 +157,88 @@ public class AdminMs implements Admin {
         }
         return Pos;
     }
+
     @Override
     public Paso getPaso() {
         if (Pas == null) {
             Pas = new PasoMs(con);
         }
         return Pas;
-    
-     @Override
-    public ControlCambios getControlCambios() {
-        if (Con == null) {
-            Con = new ControlCambiosMs(con);
-        }
-        return Con;
-     }
-        
+    }
+
     @Override
     public Fitosanidad getFitosanidad() {
         if (Fit == null) {
             Fit = new FitosanidadMs(con);
         }
         return Fit;
-        
-        }
-     @Override
+
+    }
+
+    @Override
     public Grados getGrados() {
         if (Gra == null) {
             Gra = new GradosMs(con);
         }
-        return Gra;    
-}
- @Override
+        return Gra;
+    }
+
+    @Override
     public Parametros getParametros() {
         if (Par == null) {
             Par = new ParametrosMs(con);
         }
         return Par;
-}
+    }
+
     @Override
     public Linea getLinea() {
         if (Lin == null) {
-            Lin = new LineaMs (con);
+            Lin = new LineaMs(con);
         }
         return Lin;
     }
 
- @Override
+    @Override
     public Menu getMenu() {
         if (Me == null) {
             Me = new MenuMs(con);
         }
         return Me;
-}
-
- @Override
-    public Menu getMenu() {
-        if (Me == null) {
-            Me = new MenuMs(con);
-        }
-        return Me;
-}
-}
+    }
 
     @Override
-    public Maestro getMaestro() {
+    public Menu getMenu() {
+        if (Me == null) {
+            Me = new MenuMs(con);
+        }
+        return Me;
+    }
+}
+
+@Override
+        public Maestro getMaestro() {
         if (Mae == null) {
             Mae = new MaestroMs(con);
         }
         return Mae;
     }
-      @Override
-    public Marcacion getMarcacion() {
+
+    @Override
+        public Marcacion getMarcacion() {
         if (Mar == null) {
             Mar = new MarcacionMs(con);
         }
         return Mar;
     }
-    
-     @Override
-    public FitoProducto getFitoProducto() {
+
+    @Override
+        public FitoProducto getFitoProducto() {
         if (Fitp == null) {
             Fitp = new FitoProductoMs(con);
         }
         return Fitp;
 
     }
-    }
+
+}

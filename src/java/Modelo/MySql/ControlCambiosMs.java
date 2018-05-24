@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.ControlCambios;
-import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.ControlCambioTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,12 +19,8 @@ import java.util.List;
  *
  * @author ale-j
  */
-<<<<<<< HEAD
-public abstract class ControlCambiosMs  implements ControlCambios{
-=======
-public abstract class ControlCambiosMs implements ControlCambios {
+public class ControlCambiosMs implements ControlCambios {
 
->>>>>>> master
     private final Connection con;
     Mensajes m = null;
 
@@ -74,61 +69,8 @@ public abstract class ControlCambiosMs implements ControlCambios {
                 }
             }
         }
-<<<<<<< HEAD
-        return msj;
-        }
-    
-    @Override
-    public ControlCambioTab convertir(ResultSet rs) throws SQLException {
-        int Id = rs.getInt("CCId");
-        String Antes = rs.getString("CCAntes");
-        String Despues = rs.getString("CCDespues");
-        String Usuarios = rs.getString("CCUsuarios");
-        ControlCambioTab cTab = new ControlCambioTab(Id, Antes, Despues, Usuarios);
-        return cTab;
-    }
-
-
-   @Override
-     public List<ControlCambioTab> listar() {
-    PreparedStatement stat = null;
-        ResultSet rs = null;
-        List<ControlCambioTab> uModel = new ArrayList<>();
-        try {
-            try {
-                stat = con.prepareCall(ListarTodos);
-
-                rs = stat.executeQuery();
-                while (rs.next()) {
-                    uModel.add(convertir(rs));
-                }
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql rs: " + ex);
-                    }
-                }
-                if (stat != null) {
-                    try {
-                        stat.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql st: " + ex);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error sql: " + ex);
-        }
-        return uModel;    
-    }
-    
- 
-=======
         return m;
     }
->>>>>>> master
 
     @Override
     public ControlCambioTab convertir(ResultSet rs) throws SQLException {
@@ -175,8 +117,6 @@ public abstract class ControlCambiosMs implements ControlCambios {
         return uModel;
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public ControlCambioTab obtener(Integer id) {
         PreparedStatement stat = null;
@@ -213,7 +153,6 @@ public abstract class ControlCambiosMs implements ControlCambios {
         }
         return cMod;
     }
->>>>>>> master
 
     @Override
     public Mensajes modificar(ControlCambioTab c) {
@@ -253,9 +192,6 @@ public abstract class ControlCambiosMs implements ControlCambios {
         return m;
     }
 
-<<<<<<< HEAD
-}
-=======
     @Override
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
@@ -290,4 +226,3 @@ public abstract class ControlCambiosMs implements ControlCambios {
     }
 
 }
->>>>>>> master

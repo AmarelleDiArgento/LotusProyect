@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Maestro;
-import Modelo.Tabs.LineaTab;
 import Modelo.Tabs.MaestroTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class MaestroMs implements Maestro {
+public class MaestroMs implements Maestro {
     
      private final Connection con;
     Mensajes m = null;

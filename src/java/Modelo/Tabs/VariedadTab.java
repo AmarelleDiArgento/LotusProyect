@@ -33,14 +33,6 @@ public class VariedadTab {
 
     }
 
-    public VariedadTab(String VarNombre, Boolean VarEstado, String Varimagen, String VarColor) {
-        this.VarNombre = VarNombre;
-        this.VarEstado = VarEstado;
-        this.Varimagen = Varimagen;
-        this.VarColor = VarColor;
-    }
-
-    
     /**
      * @return the VarId
      */

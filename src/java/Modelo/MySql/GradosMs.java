@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Grados;
-import Modelo.Tabs.FitosanidadTab;
 import Modelo.Tabs.GradosTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class GradosMs implements Grados{
+public class GradosMs implements Grados{
     
     private final Connection con;
     Mensajes m = null;
@@ -124,16 +123,6 @@ public abstract class GradosMs implements Grados{
         }
         return gModel;    
     }
-@Override
-    public GradosTab convertir(ResultSet rs) throws SQLException {
-        int Id = rs.getInt("GraID");
-        String nombre = rs.getString("GraNombre");
-        String descripcion = rs.getString("GraDetalles");
-        int st = rs.getInt("GraEstado");
-        boolean status = st == 1;
-        GradosTab gTab = new GradosTab (Id, nombre, descripcion, status);
-        return gTab;
-    }
      
      @Override
     public Mensajes modificar(GradosTab g) {
@@ -151,15 +140,6 @@ public abstract class GradosMs implements Grados{
             }
             if (stat.executeUpdate() == 0) {
 
-        
- @Override
-     public List<GradosTab> listar() {
-    PreparedStatement stat = null;
-        ResultSet rs = null;
-        List<GradosTab> uModel = new ArrayList<>();
-        try {
-            try {
-                stat = con.prepareCall(ListarTodos);
                 m.setTipo("Error");
                 m.setMsj("Error Mysql");
                 m.setDetalles("Error al modificar los datos");
@@ -168,31 +148,6 @@ public abstract class GradosMs implements Grados{
                 m.setMsj(g.getGraNombre() + " modificado exitosamente");
             }
 
-                rs = stat.executeQuery();
-                while (rs.next()) {
-                    uModel.add(convertir(rs));
-                }
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql rs: " + ex);
-                    }
-                }
-                if (stat != null) {
-                    try {
-                        stat.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql st: " + ex);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error sql: " + ex);
-        }
-        return uModel;    
-    }
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
@@ -251,8 +206,6 @@ public abstract class GradosMs implements Grados{
 
     
     @Override
-    public GradosTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
         try {

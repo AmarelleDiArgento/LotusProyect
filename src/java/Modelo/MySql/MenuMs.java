@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class MenuMs implements Menu {
+public class MenuMs implements Menu {
 
     private final Connection con;
     Mensajes m = null;
@@ -91,24 +91,9 @@ public abstract class MenuMs implements Menu {
         String descripcion = rs.getString("MenDescripcion");
         int st = rs.getInt("MenEstado");
         boolean status = st == 1;
-        MenuTab mTab = new MenuTab (Id, nombre, superior,longitud,cauchos,descripcion,status);
+        MenuTab mTab = new MenuTab (Id, longitud, superior, longitud, cauchos, status, descripcion);
         return mTab;
     }
-    
-     @Override
-    public MenuTab convertir(ResultSet rs) throws SQLException {
-        int Id = rs.getInt("MenuId");
-        String portada= rs.getString("MenPortada");
-        String superior = rs.getString("MenSuperior");
-        String longitud = rs.getString("MenLongitud");
-        String cauchos = rs.getString("MenCauchos");
-        String descripcion = rs.getString("MenDescripcion");
-        int st = rs.getInt("MenEstado");
-        boolean status = st == 1;
-        MenuTab mTab = new MenuTab (Id, portada, superior,longitud,cauchos,status,descripcion);
-        return mTab;
-    }
-
     
    @Override
      public List<MenuTab> listar() {
@@ -144,43 +129,6 @@ public abstract class MenuMs implements Menu {
         }
         return uModel;    
     }
-    @Override
-    public String modificar(MenuTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-   @Override
-     public List<MenuTab> listar() {
-    PreparedStatement stat = null;
-        ResultSet rs = null;
-        List<MenuTab> uModel = new ArrayList<>();
-        try {
-            try {
-                stat = con.prepareCall(ListarTodos);
-
-                rs = stat.executeQuery();
-                while (rs.next()) {
-                    uModel.add(convertir(rs));
-                }
-            } finally {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql rs: " + ex);
-                    }
-                }
-                if (stat != null) {
-                    try {
-                        stat.close();
-                    } catch (SQLException ex) {
-                        System.out.println("Error sql st: " + ex);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error sql: " + ex);
-        }
-        return uModel;    
-     }
      
         
       @Override
@@ -267,9 +215,6 @@ public abstract class MenuMs implements Menu {
         return m;
     }
     
-    @Override
-    public MenuTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
         try {

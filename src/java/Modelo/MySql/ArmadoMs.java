@@ -77,8 +77,6 @@ public class ArmadoMs implements Armado {
         return m;
     }
 
-
-    @Override
     @Override
     public ArmadoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("ArmId");
@@ -86,10 +84,7 @@ public class ArmadoMs implements Armado {
         String descripcion = rs.getString("ArmDescripcion");
         int st = rs.getInt("ArmEstado");
         boolean status = st == 1;
-        ArmadoTab uTab = new ArmadoTab(Id, nombre, Descripcion, status);
-        return uTab;}
 
-    @Override
         ArmadoTab uTab = new ArmadoTab(Id, nombre, descripcion, status);
         return uTab;
     }
@@ -128,17 +123,11 @@ public class ArmadoMs implements Armado {
         }
         return aTab;
     }
-   
-   
+
     @Override
     public ArmadoTab obtener(Integer id) {
         PreparedStatement stat = null;
         ResultSet rs = null;
-
-  @Override
-    public ArmadoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    } 
         ArmadoTab aModel = null;
         try {
             stat = con.prepareCall(Consultar);
@@ -170,16 +159,8 @@ public class ArmadoMs implements Armado {
         }
         return aModel;
     }
-    
-    @Override
-    public String modificar(ArmadoTab o) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public String eliminar(Integer id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
-    }
+
     @Override
     public Mensajes modificar(ArmadoTab a) {
         PreparedStatement stat = null;
@@ -192,7 +173,7 @@ public class ArmadoMs implements Armado {
                 stat.setInt(4, 1);
             } else {
                 stat.setInt(4, 0);
-                }
+            }
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -220,7 +201,7 @@ public class ArmadoMs implements Armado {
         }
         return m;
     }
-    
+
     @Override
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
@@ -254,5 +235,4 @@ public class ArmadoMs implements Armado {
         return m;
     }
 
-   
 }

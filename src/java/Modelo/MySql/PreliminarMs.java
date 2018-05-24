@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public abstract class PreliminarMs implements Preliminar {
+public class PreliminarMs implements Preliminar {
 
     private final Connection con;
     Mensajes m = null;
@@ -122,17 +122,19 @@ public abstract class PreliminarMs implements Preliminar {
     }
 
     @Override
-    public PreliminarTab convertir(ResultSet rs) throws SQLException {
+    public Mensajes modificar(PreliminarTab o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PreliminarTab obtener(String id) {
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PreliminarTab> listar() {
+    public PreliminarTab obtener(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 }
