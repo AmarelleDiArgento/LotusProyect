@@ -18,9 +18,14 @@ public class MaestroTab {
     public MaestroTab(int MaeId, String MaeNombre, String MaeDescripcion) {
         this.MaeId = MaeId;
         this.MaeNombre = MaeNombre;
-        this.MaeDescripcion = MaeDescripcion;
-  
+        this.MaeDescripcion = MaeDescripcion; 
 }
+
+    public MaestroTab(String MaeNombre, String MaeDescripcion) {
+        this.MaeNombre = MaeNombre;
+        this.MaeDescripcion = MaeDescripcion;
+    }
+    
 
     /**
      * @return the MaeId

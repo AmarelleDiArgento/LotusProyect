@@ -9,12 +9,20 @@ import Modelo.Interface.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.sql.DataSource;
+
 import Modelo.Interface.Admin;
 import Modelo.Interface.Armado;
 import Modelo.Interface.Permiso;
 import Modelo.Interface.Rol;
-import javax.sql.DataSource;
 import Modelo.Interface.AsignaPermiso;
+import Modelo.Interface.ControlCambios;
+import Modelo.Interface.Fitosanidad;
+import Modelo.Interface.Grados;
+import Modelo.Interface.Linea;
+import Modelo.Interface.Maestro;
+import Modelo.Interface.Marcacion;
+import Modelo.Interface.FitoProducto;
 
 /**
  *
@@ -50,6 +58,13 @@ public class AdminMs implements Admin {
     private Rol Rol = null;
     private AsignaPermiso AsgPer = null;
     private Armado Arm = null;
+    private ControlCambios Con = null;
+    private Fitosanidad Fit = null;
+    private Grados Gra = null;
+    private Linea Lin = null;
+    private Maestro Mae = null ;
+    private Marcacion Mar = null;
+    private FitoProducto Fitp = null;
 
     @Override
     public Usuario getUsuario() {
@@ -90,4 +105,59 @@ public class AdminMs implements Admin {
         }
         return Arm;
     }
+    
+     @Override
+    public ControlCambios getControlCambios() {
+        if (Con == null) {
+            Con = new ControlCambiosMs(con);
+        }
+        return Con;
+     }
+        
+    @Override
+    public Fitosanidad getFitosanidad() {
+        if (Fit == null) {
+            Fit = new FitosanidadMs(con);
+        }
+        return Fit;
+        
+        }
+     @Override
+    public Grados getGrados() {
+        if (Gra == null) {
+            Gra = new GradosMs(con);
+        }
+        return Gra;    
 }
+    @Override
+    public Linea getLinea() {
+        if (Lin == null) {
+            Lin = new LineaMs (con);
+        }
+        return Lin;
+    }
+
+    @Override
+    public Maestro getMaestro() {
+        if (Mae == null) {
+            Mae = new MaestroMs(con);
+        }
+        return Mae;
+    }
+      @Override
+    public Marcacion getMarcacion() {
+        if (Mar == null) {
+            Mar = new MarcacionMs(con);
+        }
+        return Mar;
+    }
+    
+     @Override
+    public FitoProducto getFitoProducto() {
+        if (Fitp == null) {
+            Fitp = new FitoProductoMs(con);
+        }
+        return Fitp;
+
+    }
+    }

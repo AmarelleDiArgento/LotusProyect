@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Grados extends DAO<ResultSet, GradosTab, String> {
+public interface Grados extends DAO<ResultSet, GradosTab, Integer> {
     
 }

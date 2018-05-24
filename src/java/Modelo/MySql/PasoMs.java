@@ -35,7 +35,6 @@ public abstract class PasoMs  implements Paso{
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";  
     
     @Override
     public Mensajes insertar(PasoTab p) {
@@ -127,12 +126,12 @@ public abstract class PasoMs  implements Paso{
     }
 
     @Override
-    public Mensajes eliminar(String id) {
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PasoTab obtener(String id) {
+    public PasoTab obtener(Integer id) {
         throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 

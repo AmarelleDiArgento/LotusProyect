@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Preliminar extends DAO<ResultSet, PreliminarTab, String> {
+public interface Preliminar extends DAO<ResultSet, PreliminarTab, Integer> {
     
 }

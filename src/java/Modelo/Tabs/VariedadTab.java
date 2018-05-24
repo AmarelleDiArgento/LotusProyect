@@ -32,9 +32,6 @@ public class VariedadTab {
         this.Varimagen = Varimagen;
 
     }
-    public VariedadTab(int Id, String nombre, String imagen, String color, boolean status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * @return the VarId

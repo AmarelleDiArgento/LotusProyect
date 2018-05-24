@@ -117,10 +117,20 @@ import java.util.List;
         }
         return uModel;    
     }
+     
+    @Override
+    public Mensajes modificar(TipoTab o) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
-    public TipoTab obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public TipoTab obtener(Integer id) {
+        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

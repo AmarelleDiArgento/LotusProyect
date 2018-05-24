@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ale-j
  */
-public interface AsignaParametro extends DAO<ResultSet, AsignaParametroTab, String> {
+public interface AsignaParametro extends DAO<ResultSet, AsignaParametroTab, Integer> {
     
 }

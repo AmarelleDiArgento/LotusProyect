@@ -14,6 +14,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Paso extends DAO<ResultSet, PasoTab, String> {
+public interface Paso extends DAO<ResultSet, PasoTab, Integer> {
     
 }

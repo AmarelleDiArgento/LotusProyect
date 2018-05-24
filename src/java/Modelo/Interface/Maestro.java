@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Maestro extends DAO<ResultSet, MaestroTab, String> {
+public interface Maestro extends DAO<ResultSet, MaestroTab, Integer> {
     
 }

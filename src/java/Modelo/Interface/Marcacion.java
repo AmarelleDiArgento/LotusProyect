@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface Marcacion extends DAO<ResultSet, MarcacionTab, String> {
+public interface Marcacion extends DAO<ResultSet, MarcacionTab, Integer> {
     
 }

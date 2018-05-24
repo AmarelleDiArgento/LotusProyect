@@ -93,7 +93,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure asignaparametroCo (in cCId INT)
+create procedure controldecambiosCo (in cCId INT)
 begin
 select CCAntes,CCDespues,CCUsuarios from controldecambios where CCId=cCId;
 end $$

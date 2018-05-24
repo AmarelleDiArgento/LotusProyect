@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface MaterialSeco extends DAO<ResultSet, MaterialSecoTab, String> {
+public interface MaterialSeco extends DAO<ResultSet, MaterialSecoTab, Integer> {
     
 }

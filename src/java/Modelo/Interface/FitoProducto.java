@@ -13,6 +13,6 @@ import java.sql.ResultSet;
  *
  * @author ALEJANDRA MEDINA
  */
-public interface FitoProducto extends DAO<ResultSet, FitoProductoTab, String> {
+public interface FitoProducto extends DAO<ResultSet, FitoProductoTab, Integer> {
     
 }

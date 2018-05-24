@@ -35,7 +35,6 @@ public abstract class ProductoMs implements Producto {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";
     
        @Override
     public Mensajes insertar(ProductoTab p) {
@@ -129,12 +128,12 @@ public abstract class ProductoMs implements Producto {
     }
 
     @Override
-    public Mensajes eliminar(String id) {
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ProductoTab obtener(String id) {
+    public ProductoTab obtener(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -35,7 +35,6 @@ public abstract class PreliminarMs implements Preliminar {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";
 
     @Override
     public Mensajes insertar(PreliminarTab p) {
@@ -127,12 +126,12 @@ public abstract class PreliminarMs implements Preliminar {
     }
 
     @Override
-    public Mensajes eliminar(String id) {
+    public Mensajes eliminar(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PreliminarTab obtener(String id) {
+    public PreliminarTab obtener(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Fitosanidad;
-import Modelo.Tabs.FitoProductoTab;
 import Modelo.Tabs.FitosanidadTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -30,12 +29,11 @@ public abstract class FitosanidadMs implements Fitosanidad {
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
-    final String Login = "";
+    final String Insertar = "call lotusproyect.fitosanidadIn(?,?,?,?,?);";
+    final String Modificar = "call lotusproyect.fitosanidadMo(?,?,?,?,?);";
+    final String Eliminar = "call lotusproyect.fitosanidadEl(?);";
+    final String Consultar = "call lotusproyect.fitosanidadCo(?);";
+    final String ListarTodos = "call lotusproyect.fitosanidadLi();";
     
     @Override
     public Mensajes insertar(FitosanidadTab f) {
@@ -45,7 +43,7 @@ public abstract class FitosanidadMs implements Fitosanidad {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, f.getFitNombre());
             stat.setString(2, f.getFitDescripcion());
-            stat.setBoolean(3, f.getFitTipo());
+            stat.setString(3, f.getFitTipo());
 
           
             if (f.isFitEstado()) {
@@ -86,7 +84,7 @@ public abstract class FitosanidadMs implements Fitosanidad {
         int Id = rs.getInt("FitId");
         String nombre = rs.getString("FitNombre");
         String descripcion = rs.getString("FitDescripcion");
-        Boolean tipo = rs.getBoolean("FitTipo");
+        String tipo = rs.getString("FitTipo");
         String imagen = rs.getString("FitImagen");
 
 
@@ -101,14 +99,14 @@ public abstract class FitosanidadMs implements Fitosanidad {
      public List<FitosanidadTab> listar() {
     PreparedStatement stat = null;
         ResultSet rs = null;
-        List<FitosanidadTab> uModel = new ArrayList<>();
+        List<FitosanidadTab> fModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(ListarTodos);
 
                 rs = stat.executeQuery();
                 while (rs.next()) {
-                    uModel.add(convertir(rs));
+                    fModel.add(convertir(rs));
                 }
             } finally {
                 if (rs != null) {
@@ -129,19 +127,120 @@ public abstract class FitosanidadMs implements Fitosanidad {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return fModel;    
     }
+     
+       @Override
+    public Mensajes modificar(FitosanidadTab f) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, f.getFitId());
+            stat.setString(2, f.getFitNombre());
+            stat.setString(3, f.getFitDescripcion());
+            stat.setString(4, f.getFitTipo());
+            stat.setString(5, f.getFitImagen());
+            if (f.isFitEstado()) {
+                stat.setInt(6, 1);
+            } else {
+                stat.setInt(6, 0);
+            }
+            if (stat.executeUpdate() == 0) {
 
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(f.getFitNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
     
     @Override
-    public Mensajes eliminar(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public FitosanidadTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+
+        FitosanidadTab fMod = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                fMod = convertir(rs);
+            } else {
+                throw new SQLException("Error, usuario no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return fMod;
     }
-
-
+    
     @Override
-    public FitosanidadTab obtener(String id) {
-        throw new UnsupportedOperationException("Método en proceso"); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
 }

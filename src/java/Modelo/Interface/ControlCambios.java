@@ -9,10 +9,11 @@ import Modelo.Dao.DAO;
 import Modelo.Tabs.ControlCambioTab;
 import java.sql.ResultSet;
 
+
 /**
  *
  * @author ale-j
  */
-public interface ControlCambios extends DAO<ResultSet, ControlCambioTab, String> {
+public interface ControlCambios extends DAO<ResultSet, ControlCambioTab, Integer> {
     
 }

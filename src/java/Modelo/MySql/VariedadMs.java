@@ -34,7 +34,6 @@ public abstract class VariedadMs implements Variedad {
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    final String Login = "";
 
     @Override
     public Mensajes insertar(VariedadTab v) {
@@ -87,7 +86,7 @@ public abstract class VariedadMs implements Variedad {
         String color = rs.getString("VarColor");
         int st = rs.getInt("VarEstado");
         boolean status = st == 1;
-        VariedadTab aTab = new VariedadTab(Id, nombre, imagen, color, status);
+        VariedadTab aTab = new VariedadTab(Id, nombre,status, imagen , color);
         return aTab;
 
     }
