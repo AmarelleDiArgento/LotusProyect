@@ -17,7 +17,7 @@
 -- Insertar LotusProyect.Usuario
 -- -----------------------------------------------------
 
-call LotusProyect.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com', 1, 1);
+call LotusProyect.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com', 'Usuario\almoreno.jpg',1, 1);
 -- call LotusProyect.usuarioMo('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '3014638753', 'almoreno@eliteflower.com', '1', 1);
 -- call LotusProyect.usuarioLi();
 -- call LotusProyect.usuarioEl('1070949');

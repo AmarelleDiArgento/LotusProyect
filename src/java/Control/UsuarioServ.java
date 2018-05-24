@@ -64,6 +64,8 @@ public class UsuarioServ extends HttpServlet {
 
         UsuarioTab u = null;
 
+        AdminFile af = new AdminFile();
+
         String Cedula;
         String Nombre;
         String Apellido;
@@ -72,6 +74,7 @@ public class UsuarioServ extends HttpServlet {
         String Extencion;
         String Celular;
         String Email;
+        String Avatar;
         Boolean Estado;
         int RolId;
         String nRol;
@@ -94,6 +97,18 @@ public class UsuarioServ extends HttpServlet {
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
+
+                    Part arc = request.getPart("imagen");
+                    String extension = "";
+
+                    int i = arc.getSubmittedFileName().lastIndexOf('.');
+                    if (i >= 0) {
+                        extension = arc.getSubmittedFileName().substring(i + 1);
+                    }
+                    
+                    String Url = "Usuario/" + Usuario + "." + extension;
+                    m = af.subirImg(arc, Url);
+
                     String E = request.getParameter("Estado");
                     Estado = E.equals("on");
                     if (request.getParameter("Rol") != null) {
@@ -101,7 +116,7 @@ public class UsuarioServ extends HttpServlet {
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Url, Estado, RolId);
                     m = Asql.getUsuario().insertar(u);
 
                     break;
@@ -120,6 +135,7 @@ public class UsuarioServ extends HttpServlet {
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
+                    Avatar = Usuario + request.getParameter("Avatar");
                     String Em = request.getParameter("Estado");
                     Estado = Em.equals("on");
                     if (request.getParameter("Rol") != null) {
@@ -127,7 +143,7 @@ public class UsuarioServ extends HttpServlet {
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Avatar, Estado, RolId);
                     m = Asql.getUsuario().modificar(u);
                     break;
 
@@ -164,10 +180,6 @@ public class UsuarioServ extends HttpServlet {
                     break;
 
                 case "Subir":
-                    Part arc = request.getPart("imagen");
-                    AdminFile af = new AdminFile();
-//                    String Url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/Test/" + arc.getSubmittedFileName();
-//                    m = af.subirImg(arc, Url);
 
                     break;
 

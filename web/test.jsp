@@ -24,6 +24,10 @@
             <input type="file" name="imagen" accept="image/*">
             <input type="submit" class="waves-effect waves-green btn-flat" name="accion" value="Subir">
 
+<div class="form">
+    
+    
+</div>
 
         </form>
 

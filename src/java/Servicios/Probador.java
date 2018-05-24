@@ -124,7 +124,7 @@ public class Probador {
              */
             List<PermisoTab> al = Asql.getPermiso().listar();
             for (PermisoTab a : al) {
-                System.out.println(a.toString());
+                System.out.println(a.getPerEstado());
 
             }
         } catch (SQLException ex) {
