@@ -13,32 +13,40 @@ import java.io.Serializable;
  */
 public class PoscosechaTab implements Serializable{
     
-  private int Idposcosecha;  
+  private int PosId;  
   private String PosNombre;
   private String PosDireccion;
   private String PosTelefono;
   private Boolean PosEstado;
 
-    public PoscosechaTab(int Idposcosecha, String PosNombre, String PosDireccion, String PosTelefono, Boolean PosEstado) {
-        this.Idposcosecha = Idposcosecha;
+    public PoscosechaTab(int PosId, String PosNombre, String PosDireccion, String PosTelefono, Boolean PosEstado) {
+        this.PosId = PosId;
         this.PosNombre = PosNombre;
         this.PosDireccion = PosDireccion;
         this.PosTelefono = PosTelefono;
         this.PosEstado = PosEstado;
     }
 
+    public PoscosechaTab(String PosNombre, String PosDireccion, String PosTelefono, Boolean PosEstado) {
+        this.PosNombre = PosNombre;
+        this.PosDireccion = PosDireccion;
+        this.PosTelefono = PosTelefono;
+        this.PosEstado = PosEstado;
+    }
+    
+
     /**
-     * @return the Idposcosecha
+     * @return the PosId
      */
-    public int getIdposcosecha() {
-        return Idposcosecha;
+    public int getPosId() {
+        return PosId;
     }
 
     /**
-     * @param Idposcosecha the Idposcosecha to set
+     * @param PosId the PosId to set
      */
-    public void setIdposcosecha(int Idposcosecha) {
-        this.Idposcosecha = Idposcosecha;
+    public void setPosId(int PosId) {
+        this.PosId = PosId;
     }
 
     /**
@@ -99,7 +107,7 @@ public class PoscosechaTab implements Serializable{
   
     @Override
     public String toString() {
-        return "PoscosechaTab{" + "Idposcosecha=" + Idposcosecha + ", PosNombre=" + PosNombre + ", PosDireccion=" + PosDireccion + ", PosTelefono=" + PosTelefono + ", PosEstado=" + PosEstado + '}';
+        return "PoscosechaTab{" + "PosId=" + PosId + ", PosNombre=" + PosNombre + ", PosDireccion=" + PosDireccion + ", PosTelefono=" + PosTelefono + ", PosEstado=" + PosEstado + '}';
     }
 }
   

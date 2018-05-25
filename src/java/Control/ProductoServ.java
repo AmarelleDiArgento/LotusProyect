@@ -65,9 +65,9 @@ public class ProductoServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        ProductoTab p = null;
+        ProductoTab pr = null;
         int Id;
-        String ProNombre;
+        String Nombre;
         Boolean Estado;
         String E;
 
@@ -77,12 +77,11 @@ public class ProductoServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        ProNombre = request.getParameter("ProNombre");
+                        Nombre = request.getParameter("ProNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ProductoTab(ProNombre,Estado);
-                        m.setMsj(Asql.getProducto().insertar(p));
-                        m.setTipo("Ok");
+                        pr = new ProductoTab(Nombre,Estado);
+                        m = Asql.getProducto().insertar(pr);
 
                     } else {
                         m.setTipo("Error");
@@ -94,12 +93,11 @@ public class ProductoServ extends HttpServlet {
                 case "modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        ProNombre = request.getParameter("ProNombre");
+                        Nombre = request.getParameter("ProNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ArmadoTab(Id, Nombre, Estado);
-                        m.setMsj(Asql.getProducto().insertar(p));
-                        m.setTipo("Ok");
+                        pr = new ProductoTab(Id,Nombre, Estado);
+                        m = Asql.getProducto().insertar(pr);
 
                     } else {
                         m.setTipo("Error");
@@ -109,8 +107,8 @@ public class ProductoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getProducto().eliminar(Id);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -119,9 +117,9 @@ public class ProductoServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getArmado().obtener(Id);
-                        Ses.setAttribute("Pro", p);
-                        m.setMsj("Se ha obtenido el productos con id: " + p.getProId());
+                        pr = Asql.getProducto().obtener(Id);
+                        Ses.setAttribute("Pro", pr);
+                        m.setMsj("Se ha obtenido el productos con id: " + pr.getProId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -131,7 +129,7 @@ public class ProductoServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<ProductoTab> pl = Asql.getArmado().listar();
+                    List<ProductoTab> pl = Asql.getProducto().listar();
                     Ses.setAttribute("lisP", pl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
@@ -139,7 +137,7 @@ public class ProductoServ extends HttpServlet {
                     break;
 
                 default:
-                    ruta = "armado.jsp";
+                    ruta = "Producto.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
@@ -156,7 +154,7 @@ public class ProductoServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getProducto() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

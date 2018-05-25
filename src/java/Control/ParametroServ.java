@@ -67,8 +67,8 @@ public class ParametroServ extends HttpServlet {
         }
         ParametrosTab p = null;
         int Id;
-      String ParNombre;
-       Boolean Estado;
+        String Nombre;
+        Boolean Estado;
         String E;
 
         try {
@@ -76,12 +76,11 @@ public class ParametroServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        ParNombre = request.getParameter("ParNombre");
+                        Nombre = request.getParameter("Nombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ParametrosTab(ParNombre,Estado);
-                        m.setMsj(Asql.getParametros().insertar(p));
-                        m.setTipo("Ok");
+                        p = new ParametrosTab(Nombre,Estado);
+                        m = Asql.getParametros().insertar(p);
 
                     } else {
                         m.setTipo("Error");
@@ -92,12 +91,12 @@ public class ParametroServ extends HttpServlet {
 
                 case "modificar":
                     if (acc.isRpEditar()) {
-                         ParNombre = request.getParameter("ParNombre");
+                        Id = Integer.parseInt(request.getParameter("Id"));
+                        Nombre = request.getParameter("Nombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new ParametrosTab(ParNombre,Estado);
-                        m.setMsj(Asql.getParametros().insertar(p));
-                        m.setTipo("Ok");
+                        p = new ParametrosTab(Id,Nombre,Estado);
+                        m = Asql.getParametros().insertar(p);
 
                     } else {
                         m.setTipo("Error");
@@ -107,8 +106,8 @@ public class ParametroServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getParametros().eliminar(Id);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -154,9 +153,10 @@ public class ParametroServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getParametros() != null) {
+         if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
+       
         request.getRequestDispatcher(ruta).forward(request, response);
      
     }

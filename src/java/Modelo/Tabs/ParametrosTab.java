@@ -23,6 +23,11 @@ public class ParametrosTab implements Serializable{
         this.ParEstado = ParEstado;
     }
 
+    public ParametrosTab(String ParNombre, Boolean ParEstado) {
+        this.ParNombre = ParNombre;
+        this.ParEstado = ParEstado;
+    }
+    
     /**
      * @return the ParId
      */

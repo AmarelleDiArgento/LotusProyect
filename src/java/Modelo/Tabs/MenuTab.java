@@ -23,18 +23,6 @@ public class MenuTab implements Serializable{
     private int MarId;
     private String Marcacion;
 
-    public MenuTab(int Id, String Portada, String Superior, String Longitud, String Cauchos, Boolean Estado, String Descripcion, int MarId, String Marcacion) {
-        this.Id = Id;
-        this.Portada = Portada;
-        this.Superior = Superior;
-        this.Longitud = Longitud;
-        this.Cauchos = Cauchos;
-        this.Estado = Estado;
-        this.Descripcion = Descripcion;
-        this.MarId = MarId;
-        this.Marcacion = Marcacion;
-    }
-
     public MenuTab(int Id, String Portada, String Superior, String Longitud, String Cauchos, Boolean Estado, String Descripcion) {
         this.Id = Id;
         this.Portada = Portada;
@@ -43,15 +31,29 @@ public class MenuTab implements Serializable{
         this.Cauchos = Cauchos;
         this.Estado = Estado;
         this.Descripcion = Descripcion;
+       
     }
 
-    public MenuTab(String Portada, String Superior, String Longitud, String Cauchos, Boolean Estado, String Descripcion) {
+    public MenuTab(int Id, String Portada, String Superior, String Longitud, String Cauchos, String Descripcion,String Marcacion, Boolean Estado) {
+        this.Id = Id;
         this.Portada = Portada;
         this.Superior = Superior;
         this.Longitud = Longitud;
         this.Cauchos = Cauchos;
-        this.Estado = Estado;
         this.Descripcion = Descripcion;
+        this.Marcacion = Marcacion;
+        this.Estado = Estado;
+
+    }
+
+    public MenuTab(String Portada, String Superior, String Longitud, String Cauchos,String Descripcion,String Marcacion, Boolean Estado) {
+        this.Portada = Portada;
+        this.Superior = Superior;
+        this.Longitud = Longitud;
+        this.Cauchos = Cauchos;
+        this.Descripcion = Descripcion;
+        this.Marcacion = Marcacion;
+        this.Estado = Estado;
     }
     
 

@@ -65,14 +65,13 @@ public class MenuServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        MenuTab p = null;
+        MenuTab me = null;
         int Id;
-         int MarId;
-     String MenPortada;
-     String MenSuperior;
-     String MenLongitud;
-     String MenCauchos;
-     String MenDescripcion;
+     String Portada;
+     String Superior;
+     String Longitud;
+     String Cauchos;
+     String Descripcion;
      String Marcacion;
      Boolean Estado;
         String E;
@@ -82,17 +81,16 @@ public class MenuServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        MenPortada = request.getParameter("MenPortada");
-                        MenSuperior = request.getParameter("MenSuperior");
-                        MenLongitud = request.getParameter("MenLongitud");
-                        MenCauchos = request.getParameter("MenCauchos");
-                        MenDescripcion = request.getParameter("MenDescripcion");
+                        Portada = request.getParameter("MenPortada");
+                        Superior = request.getParameter("MenSuperior");
+                        Longitud = request.getParameter("MenLongitud");
+                        Cauchos = request.getParameter("MenCauchos");
+                        Descripcion = request.getParameter("MenDescripcion");
                         Marcacion = request.getParameter("Marcacion");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        me = new PoscosechaTab(MenPortada,MenSuperior,MenLongitud,MenCauchos,MenDescripcion,Marcacion,Estado);
-                        m.setMsj(Asql.getPoscosecha().insertar(me));
-                        m.setTipo("Ok");
+                        me = new MenuTab(Portada,Superior,Longitud,Cauchos,Descripcion,Marcacion,Estado);
+                        m = Asql.getMenu().insertar(me);
 
                     } else {
                         m.setTipo("Error");
@@ -102,18 +100,19 @@ public class MenuServ extends HttpServlet {
                     break;
 
                 case "modificar":
-                    if (acc.isRpNuevo()) {
-                        MenPortada = request.getParameter("MenPortada");
-                        MenSuperior = request.getParameter("MenSuperior");
-                        MenLongitud = request.getParameter("MenLongitud");
-                        MenCauchos = request.getParameter("MenCauchos");
-                        MenDescripcion = request.getParameter("MenDescripcion");
+                    if (acc.isRpEditar()) {
+                        Id = Integer.parseInt(request.getParameter("Id"));
+                        Portada = request.getParameter("MenPortada");
+                        Superior = request.getParameter("MenSuperior");
+                        Longitud = request.getParameter("MenLongitud");
+                        Cauchos = request.getParameter("MenCauchos");
+                        Descripcion = request.getParameter("MenDescripcion");
                         Marcacion = request.getParameter("Marcacion");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        me = new PoscosechaTab(MenPortada,MenSuperior,MenLongitud,MenCauchos,MenDescripcion,Marcacion,Estado);
-                        m.setMsj(Asql.getPoscosecha().insertar(me));
-                        m.setTipo("Ok");
+                        me = new MenuTab(Id,Portada,Superior,Longitud,Cauchos,Descripcion,Marcacion,Estado);
+                        m =Asql.getMenu().modificar(me);
+                        
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
@@ -122,8 +121,8 @@ public class MenuServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getMenu().eliminar(Id);
+                        
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -132,9 +131,9 @@ public class MenuServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getMenu().obtener(Id);
+                        me = Asql.getMenu().obtener(Id);
                         Ses.setAttribute("men", me);
-                        m.setMsj("Se ha obtenido el menu con id: " + me.getMenuId());
+                        m.setMsj("Se ha obtenido el menu con id: " + me.getId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -144,8 +143,8 @@ public class MenuServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<MenuTab> mel = Asql.getPoscosecha().listar();
-                    Ses.setAttribute("lisMe", mel);
+                    List<MenuTab> mel = Asql.getMenu().listar();
+                    Ses.setAttribute("lisM", mel);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}
@@ -169,7 +168,7 @@ public class MenuServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getmenu() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

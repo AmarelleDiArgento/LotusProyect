@@ -116,7 +116,7 @@ public class FitosanidadServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getRol().eliminar(Id);
+                        m = Asql.getFitosanidad().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");

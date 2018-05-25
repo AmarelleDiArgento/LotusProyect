@@ -23,6 +23,12 @@ public class TipoTab implements Serializable{
         this.TiMDescripcion = TiMDescripcion;
     }
 
+    public TipoTab(String TiMNombre, String TiMDescripcion) {
+        this.TiMNombre = TiMNombre;
+        this.TiMDescripcion = TiMDescripcion;
+    }
+    
+
     /**
      * @return the TiMId
      */

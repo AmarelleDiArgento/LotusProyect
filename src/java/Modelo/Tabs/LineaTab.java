@@ -25,26 +25,22 @@ public class LineaTab implements Serializable{
         this.PosId = PosId;
     }
 
-    public LineaTab(int LinId, Boolean LinEstado, int poscosecha_PosId, int PosId) {
-        this.LinId = LinId;
-        this.LinEstado = LinEstado;
-        this.poscosecha_PosId = poscosecha_PosId;
-        this.PosId = PosId;
-    }
-
-    public LineaTab(int LinId, Boolean LinEstado, int poscosecha_PosId, int PosId, String PosNombre) {
-        this.LinId = LinId;
-        this.LinEstado = LinEstado;
-        this.poscosecha_PosId = poscosecha_PosId;
-        this.PosId = PosId;
-        this.PosNombre = PosNombre;
-    }
-
     public LineaTab(int LinId, Boolean LinEstado) {
         this.LinId = LinId;
         this.LinEstado = LinEstado;
     }
-    
+
+    public LineaTab(String PosNombre,Boolean LinEstado) {
+        this.PosNombre = PosNombre;
+        this.LinEstado = LinEstado;        
+
+    }
+
+    public LineaTab(int LinId,String PosNombre,Boolean LinEstado) {
+        this.LinId = LinId;
+        this.PosNombre = PosNombre;
+        this.LinEstado = LinEstado;
+    }
 
     /**
      * @return the LinId

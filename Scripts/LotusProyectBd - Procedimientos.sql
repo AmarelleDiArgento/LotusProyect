@@ -1182,3 +1182,58 @@ INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
 WHERE ap.VarId = apVarID;
 end $$
 delimiter $$
+
+
+ -- -----------------------------------------------------
+-- Procedimientos LotusProyect Tabla variedad
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadIn (in varNombre varchar(45), in varEstado tinyint(1),in proId int(11),in varImagen varchar(45),in varColor varchar(15))
+begin
+insert into variedad (VarNombre,VarEstado,ProId,VarImagen,VarColor) values (varNombre,varEstado,proId,varImagen,varColor);
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11),in VarImagen varchar(45),in VarColor varchar(15))
+begin
+update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarImagen=varImagen,VarColor=varColor where VarId=varId;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure variedadLi ()
+begin
+select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadCo (in tId INT)
+begin
+select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad where VarId = varId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure variedadEl (in vId INT)
+begin
+delete from variedad where  VarId = rId;
+end $$
+delimiter $$

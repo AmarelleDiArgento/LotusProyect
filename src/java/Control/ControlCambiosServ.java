@@ -107,7 +107,7 @@ public class ControlCambiosServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         CCId = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getRol().eliminar(CCId);
+                        m = Asql.getControlCambios().eliminar(CCId);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");

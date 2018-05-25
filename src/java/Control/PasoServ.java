@@ -65,30 +65,25 @@ public class PasoServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        PasoTab p = null;
+        PasoTab ps = null;
         
        int Id;
        int Pasorden;
        String PasDescripcion;
        String PasImagen;
-       
        String ArmNombre;
-       Boolean Estado;
-        String E;
+       
 
         try {
             AdminMs Asql = new AdminMs(pool);
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        Pasorden = Integer.parseInt(request.getParameter("Pasorden");
+                        Pasorden = Integer.parseInt(request.getParameter("Pasorden"));
                         PasDescripcion = request.getParameter("PasDescripcion");
                         PasImagen = request.getParameter("PasImagen");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
-                        p = new PasoTab(Pasorden,PasDescripcion,PasImagen,Estado);
-                        m.setMsj(Asql.getPaso().insertar(p));
-                        m.setTipo("Ok");
+                        ps = new PasoTab(Pasorden,PasDescripcion,PasImagen);
+                        m= Asql.getPaso().insertar(ps);
 
                     } else {
                         m.setTipo("Error");
@@ -99,15 +94,13 @@ public class PasoServ extends HttpServlet {
 
                 case "modificar":
                     if (acc.isRpEditar()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        Pasorden = Integer.parseInt(request.getParameter("Pasorden");
+                        Id = Integer.parseInt(request.getParameter("PasId"));
+                        Pasorden = Integer.parseInt(request.getParameter("Pasorden"));
                         PasDescripcion = request.getParameter("PasDescripcion");
                         PasImagen = request.getParameter("PasImagen");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
-                        p = new PasoTab(id,Pasorden,PasDescripcion,PasImagen,Estado);
-                        m.setMsj(Asql.getPaso().insertar(p));
-                        m.setTipo("Ok");
+                        ps = new PasoTab(Id,Pasorden,PasDescripcion,PasImagen);
+                        m= Asql.getPaso().modificar(ps);
+                        
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
@@ -116,8 +109,8 @@ public class PasoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getPaso().eliminar(Id);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -126,9 +119,9 @@ public class PasoServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getPaso().obtener(Id);
-                        Ses.setAttribute("Pa", p);
-                        m.setMsj("Se ha obtenido el paso con id: " + p.getPasId());
+                        ps = Asql.getPaso().obtener(Id);
+                        Ses.setAttribute("Pa", ps);
+                        m.setMsj("Se ha obtenido el paso con id: " + ps.getPasId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -163,13 +156,11 @@ public class PasoServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getPaso() != null) {
+         if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
-
-        
+   
         
     }
 

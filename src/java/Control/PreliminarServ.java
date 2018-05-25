@@ -66,12 +66,13 @@ public class PreliminarServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        PreliminarTab p = null;
+        
+        PreliminarTab pr = null;
         int Id;
-     int Poscosecha_Posnombre;
-     Date PreFecha;
-     Boolean Estado;
-      String E;
+        String Posnombre;
+         String Fecha;
+        Boolean Estado;
+         String E;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -79,12 +80,12 @@ public class PreliminarServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        PreFecha = request.getParameter("PreFecha");
+                        Fecha = request.getParameter("PreFecha");
+                        Posnombre =request.getParameter("Poscosecha_Posnombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new PreliminarTab(PreFecha, Estado);
-                        m.setMsj(Asql.getPreliminar().insertar(p));
-                        m.setTipo("Ok");
+                        pr = new PreliminarTab(Fecha,Posnombre,Estado);
+                        m = Asql.getPreliminar().insertar(pr);
 
                     } else {
                         m.setTipo("Error");
@@ -96,12 +97,12 @@ public class PreliminarServ extends HttpServlet {
                 case "modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        PreFecha = request.getParameter("PreFecha");
+                        Fecha = request.getParameter("PreFecha");
+                        Posnombre =request.getParameter("Poscosecha_Posnombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new PreliminarTab(Id, PreFecha,Estado);
-                        m.setMsj(Asql.getPreliminar().modificar(p));
-                        m.setTipo("Ok");
+                        pr = new PreliminarTab(Id,Fecha,Posnombre,Estado);
+                        m = Asql.getPreliminar().modificar(pr);
 
                     } else {
                         m.setTipo("Error");
@@ -111,8 +112,8 @@ public class PreliminarServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getPreliminar().eliminar(Id);
+                        
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -121,9 +122,9 @@ public class PreliminarServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getPreliminar().obtener(Id);
-                        Ses.setAttribute("Pro", p);
-                        m.setMsj("Se ha obtenido el preliminar con id: " + p.getPreId());
+                        pr = Asql.getPreliminar().obtener(Id);
+                        Ses.setAttribute("Pro", pr);
+                        m.setMsj("Se ha obtenido el preliminar con id: " + pr.getPreId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -133,7 +134,7 @@ public class PreliminarServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<PreliminarTab> pl = Asql.getArmado().listar();
+                    List<PreliminarTab> pl = Asql.getPreliminar().listar();
                     Ses.setAttribute("lisP", pl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
@@ -158,7 +159,7 @@ public class PreliminarServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getPreliminar() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

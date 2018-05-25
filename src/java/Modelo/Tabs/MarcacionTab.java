@@ -20,11 +20,20 @@ public class MarcacionTab implements Serializable{
     private int ArmId;
     private String ArmNombre;
 
-    public MarcacionTab(String MarNombre, String MarPortada, Boolean MarEstado, int ArmId) {
+    public MarcacionTab(int MarId, String MarNombre, String MarPortada,String ArmNombre, Boolean MarEstado) {
+        this.MarId = MarId;
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
+        this.ArmNombre = ArmNombre;
         this.MarEstado = MarEstado;
-        this.ArmId = ArmId;
+    }
+
+    public MarcacionTab(String MarNombre, String MarPortada,String ArmNombre, Boolean MarEstado) {
+        this.MarNombre = MarNombre;
+        this.MarPortada = MarPortada;
+        this.ArmNombre = ArmNombre;
+        this.MarEstado = MarEstado;
+
     }
 
     public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado) {
@@ -33,22 +42,7 @@ public class MarcacionTab implements Serializable{
         this.MarPortada = MarPortada;
         this.MarEstado = MarEstado;
     }
-
-    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, String ArmNombre) {
-        this.MarId = MarId;
-        this.MarNombre = MarNombre;
-        this.MarPortada = MarPortada;
-        this.MarEstado = MarEstado;
-        this.ArmId = ArmId;
-        this.ArmNombre = ArmNombre;
-    }
-
-    public MarcacionTab(String MarNombre, String MarPortada, Boolean MarEstado) {
-        this.MarNombre = MarNombre;
-        this.MarPortada = MarPortada;
-        this.MarEstado = MarEstado;
-    }
-   
+    
     /**
      * @return the MarId
      */

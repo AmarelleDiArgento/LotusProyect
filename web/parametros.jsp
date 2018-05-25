@@ -1,18 +1,18 @@
-<%@page import="Modelo.Tabs.VariedadTab"%>
-<%@page import="Modelo.Tabs.VariedadTab"%>
+
+<%@page import="Modelo.Tabs.ParametrosTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "variedad.jsp";
+    String jsp = "parametros.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisT") != null) {
+        if (Ses.getAttribute("lisP") != null) {
 
 
 %>
@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Variedad</title>
+        <title>Lotus QA - Armado</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -45,10 +45,9 @@
 
 
         <div class="container">
-            <h3>Variedad</h3>
 
             <%
-                List<VariedadTab> LisV = (List<VariedadTab>) Ses.getAttribute("lisV");
+                List<ParametrosTab> LisP = (List<ParametrosTab>) Ses.getAttribute("lisP");
             %>
             <table class="centered striped">
                 <thead>
@@ -63,24 +62,24 @@
                 </thead>
 
                 <tbody>
-                    <% for (VariedadTab vt : LisV) {%>
+                    <% for (ParametrosTab pt : LisP) {%>
                     <tr>
-                        <td><%=vt.getVarId()%></td>
-                        <td><%=vt.getVarNombre()%></td>
+                        <td><%=pt.getParId()%></td>
+                        <td><%=pt.getParNombre()%></td>
                         <td>
                             <label>
-                                <input type="checkbox" <% if (vt.isVarEstado()) {%> checked="checked" <% }%> /> 
+                                <input type="checkbox" <% if (pt.isParEstado()) {%> checked="checked" <% }%> /> 
                                 <span></span>
                             </label>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getParId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
+                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getParId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -94,7 +93,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Parametro"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -117,8 +116,8 @@
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="armados.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Parametro</h4>
+                    <p>Registra la informacion del nuevo Parametro</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -149,14 +148,14 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Arm") != null) {
-                VariedadTab vS = (VariedadTab) Ses.getAttribute("Rol");
+        <%if (Ses.getAttribute("Par") != null) {
+                ParametrosTab pS = (ParametrosTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="parametros.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Parametro</h4>
+                    <p>Registra la informacion del nuevo Parametro</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -264,13 +263,13 @@
 </html>
 <%
 
-    Ses.setAttribute("lisA", null);
-    Ses.setAttribute("Arm", null);
+    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("Par", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="variedads.do" method="post" >
+        <form id="lista" action="parametros.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

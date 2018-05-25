@@ -22,17 +22,30 @@ public class MaterialSecoTab implements Serializable {
     private  int MsAlto;
     private int MsAncho;
     private int MsProfundo;
+    private String TiMNombre;
 
-    public MaterialSecoTab(int MsId, int TipoMs_TimId, String MsNombre,String MsImagen,String MsDescripcion, Boolean MsEstado, int MsAlto, int MsAncho, int MsProfundo) {
-        this.MsId = MsId;
-        this.TipoMs_TimId = TipoMs_TimId;
+    public MaterialSecoTab(String MsNombre,String MsImagen,String MsDescripcion, int MsAlto, int MsAncho, int MsProfundo,String TiMNombre,Boolean MsEstado) {
         this.MsNombre = MsNombre;
         this.MsImagen = MsImagen;
         this.MsImagen = MsDescripcion;
-        this.MsEstado = MsEstado;
         this.MsAlto = MsAlto;
         this.MsAncho = MsAncho;
         this.MsProfundo = MsProfundo;
+        this.TiMNombre = TiMNombre;
+        this.MsEstado = MsEstado;
+    } 
+
+    public MaterialSecoTab(int MsId, String MsNombre, String MsImagen, String MsDescripcion,int MsAlto, int MsAncho, int MsProfundo,String TiMNombre, Boolean MsEstado) {
+        this.MsId = MsId;
+        this.MsNombre = MsNombre;
+        this.MsImagen = MsImagen;
+        this.MsDescripcion = MsDescripcion;
+        this.MsAlto = MsAlto;
+        this.MsAncho = MsAncho;
+        this.MsProfundo = MsProfundo;
+        this.TiMNombre = TiMNombre;
+        this.MsEstado = MsEstado;
+     
     }
 
     public MaterialSecoTab(int MsId, String MsNombre, String MsImagen, String MsDescripcion, Boolean MsEstado, int MsAlto, int MsAncho, int MsProfundo) {
@@ -46,6 +59,7 @@ public class MaterialSecoTab implements Serializable {
         this.MsProfundo = MsProfundo;
     }
     
+
     /**
      * @return the MsId
      */
@@ -115,11 +129,11 @@ public class MaterialSecoTab implements Serializable {
     public void setMsDescripcion(String MsDescripcion) {
         this.MsDescripcion = MsDescripcion;
     }
-   /**
+ /**
      * @param MsEstado the MsEstado to set
      */
-    public void setEstado(Boolean Estado) {
-        this.MsEstado = Estado;
+    public void setMsEstado(Boolean MsEstado) {
+        this.MsEstado = MsEstado;
     }
 
     /**
@@ -170,13 +184,26 @@ public class MaterialSecoTab implements Serializable {
     public void setMsProfundo(int MsProfundo) {
         this.MsProfundo = MsProfundo;
     }
-    @Override
-    public String toString() {
-        return "MaterialSecoTab{" + "MsId=" + getMsId() + ", TipoMs_TimId=" + getTipoMs_TimId() + ", MsNombre=" + getMsNombre() + ", MsEstado=" + isMsEstado() + ", MsAlto=" + getMsAlto() + ", MsAncho=" + getMsAncho() + ", MsProfundo=" + getMsProfundo() + '}';
+
+    /**
+     * @return the TiMNombre
+     */
+    public String getTiMNombre() {
+        return TiMNombre;
     }
 
-}
-    
-    
-    
+    /**
+     * @param TiMNombre the TiMNombre to set
+     */
+    public void setTiMNombre(String TiMNombre) {
+        this.TiMNombre = TiMNombre;
+    }
 
+    @Override
+    public String toString() {
+        return "MaterialSecoTab{" + "MsId=" + MsId + ", TipoMs_TimId=" + TipoMs_TimId + ", MsNombre=" + MsNombre + ", MsImagen=" + MsImagen + ", MsDescripcion=" + MsDescripcion + ", MsEstado=" + MsEstado + ", MsAlto=" + MsAlto + ", MsAncho=" + MsAncho + ", MsProfundo=" + MsProfundo + ", TiMNombre=" + TiMNombre + '}';
+    }
+   }
+
+    
+    

@@ -29,6 +29,13 @@ public class ProductoTab implements Serializable {
         this.ProEstado = ProEstado;
     }
 
+    public ProductoTab(String ProNombre, Boolean ProEstado) {
+        this.ProNombre = ProNombre;
+        this.ProEstado = ProEstado;
+    }
+    
+    
+
     /**
      * @return the ProId
      */

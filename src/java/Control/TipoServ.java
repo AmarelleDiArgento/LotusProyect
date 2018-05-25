@@ -66,9 +66,10 @@ public class TipoServ extends HttpServlet {
             ruta = "rol.jsp";
         }
         TipoTab t = null;
-       int TiMId;
-       String TiMNombre;
-       String TiMDescripcion;
+        
+       int Id;
+       String Nombre;
+       String Descripcion;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -76,10 +77,10 @@ public class TipoServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        TiMNombre = request.getParameter("TiMNombre");
-                        TiMDescripcion = request.getParameter("TiMDescripcion");
-                        t = new TipoTab(TiMNombre, TiMDescripcion);
-                        m.setMsj(Asql.getTipo().insertar(t);
+                        Nombre = request.getParameter("TiMNombre");
+                        Descripcion = request.getParameter("TiMDescripcion");
+                        t = new TipoTab(Nombre,Descripcion);
+                        m = Asql.getTipo().insertar(t);
                         m.setTipo("Ok");
 
                     } else {
@@ -92,10 +93,10 @@ public class TipoServ extends HttpServlet {
                 case "modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        TiMNombre = request.getParameter("TiMNombre");
-                        TiMDescripcion = request.getParameter("TiMDescripcion");
-                        t = new TipoTab(Id, TiMNombre, TiMDescripcion);
-                        m.setMsj(Asql.getTipo().modificar(t));
+                        Nombre = request.getParameter("TiMNombre");
+                        Descripcion = request.getParameter("TiMDescripcion");
+                        t = new TipoTab(Id,Nombre,Descripcion);
+                        m = Asql.getTipo().modificar(t);
                         m.setTipo("Ok");
 
                     } else {
@@ -106,7 +107,7 @@ public class TipoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
+                        m = Asql.getTipo().eliminar(Id);
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");

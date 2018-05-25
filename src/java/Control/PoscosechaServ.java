@@ -65,7 +65,7 @@ public class PoscosechaServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        PoscosechaTab p = null;
+        PoscosechaTab pos = null;
         int Id;
          String PosNombre;
          String PosDireccion;
@@ -83,9 +83,8 @@ public class PoscosechaServ extends HttpServlet {
                         PosTelefono = request.getParameter("PosTelefono");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new PoscosechaTab(PosNombre,PosDireccion,PosTelefono,Estado);
-                        m.setMsj(Asql.getPoscosecha().insertar(p));
-                        m.setTipo("Ok");
+                        pos = new PoscosechaTab(PosNombre,PosDireccion,PosTelefono,Estado);
+                        m= Asql.getPoscosecha().insertar(pos);
 
                     } else {
                         m.setTipo("Error");
@@ -102,9 +101,8 @@ public class PoscosechaServ extends HttpServlet {
                         PosTelefono = request.getParameter("PosTelefono");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        p = new PoscosechaTab(id,PosNombre,PosDireccion,PosTelefono,Estado);
-                        m.setMsj(Asql.getPoscosecha().insertar(p));
-                        m.setTipo("Ok");
+                        pos = new PoscosechaTab(Id,PosNombre,PosDireccion,PosTelefono,Estado);
+                        m = Asql.getPoscosecha().modificar(pos);
 
                     } else {
                         m.setTipo("Error");
@@ -114,8 +112,8 @@ public class PoscosechaServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getPoscosecha().eliminar(Id);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -124,9 +122,9 @@ public class PoscosechaServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        p = Asql.getPoscosecha().obtener(Id);
-                        Ses.setAttribute("Pos", p);
-                        m.setMsj("Se ha obtenido el poscosecha con id: " + p.getPosId());
+                        pos = Asql.getPoscosecha().obtener(Id);
+                        Ses.setAttribute("Pos", pos);
+                        m.setMsj("Se ha obtenido el poscosecha con id: " + pos.getPosId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -161,7 +159,7 @@ public class PoscosechaServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getPoscosecha() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

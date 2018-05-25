@@ -65,15 +65,16 @@ public class MaterialsecoServ extends HttpServlet {
         } else {
             ruta = "rol.jsp";
         }
-        MaterialSecoTab ma = null;
-        int Id;
-      String TiMNombre;
-     String MsNombre;
-     String MsImagen;
-     String MsDescripcion;
-     int MsAlto;
-     int MsAncho;
-     int MsProfundo;
+        MaterialSecoTab ms = null;
+        
+     int Id;
+     String TiMNombre;
+     String Nombre;
+     String Imagen;
+     String Descripcion;
+     int Alto;
+     int Ancho;
+     int Profundo;
      Boolean Estado;
      String E;
 
@@ -82,18 +83,17 @@ public class MaterialsecoServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
-                        MsNombre = request.getParameter("MsNombre");
-                        MsImagen = request.getParameter("MsImagen");
-                        MsDescripcion = request.getParameter("MsDescripcion");
-                        MsAlto = request.getParameter("MsAlto");
-                        MsAncho = request.getParameter("MsAncho");
-                        MsProfundo = request.getParameter("MsProfundo");
+                        Nombre = request.getParameter("MsNombre");
+                        Imagen = request.getParameter("MsImagen");
+                        Descripcion = request.getParameter("MsDescripcion");
+                        Alto = Integer.parseInt(request.getParameter("MsAlto"));
+                        Ancho = Integer.parseInt(request.getParameter("MsAncho"));
+                        Profundo = Integer.parseInt(request.getParameter("MsProfundo"));
                         TiMNombre = request.getParameter("TiMNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        me = new PoscosechaTab(MsNombre,MenSuperior,MsImagen,MsDescripcion,MsAlto,MsAncho,MsProfundo,TiMNombre,Estado);
-                        m.setMsj(Asql.getPoscosecha().insertar(me));
-                        m.setTipo("Ok");
+                        ms = new MaterialSecoTab(Nombre,Imagen,Descripcion,Alto,Ancho,Profundo,TiMNombre,Estado);
+                        m = Asql.getMaterialSeco().insertar(ms);
 
                     } else {
                         m.setTipo("Error");
@@ -105,17 +105,18 @@ public class MaterialsecoServ extends HttpServlet {
                 case "modificar":
                     if (acc.isRpNuevo()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        MenPortada = request.getParameter("MenPortada");
-                        MenSuperior = request.getParameter("MenSuperior");
-                        MenLongitud = request.getParameter("MenLongitud");
-                        MenCauchos = request.getParameter("MenCauchos");
-                        MenDescripcion = request.getParameter("MenDescripcion");
-                        Marcacion = request.getParameter("Marcacion");
+                        Nombre = request.getParameter("MsNombre");
+                        Imagen = request.getParameter("MsImagen");
+                        Descripcion = request.getParameter("MsDescripcion");
+                        Alto = Integer.parseInt(request.getParameter("MsAlto"));
+                        Ancho = Integer.parseInt(request.getParameter("MsAncho"));
+                        Profundo = Integer.parseInt(request.getParameter("MsProfundo"));
+                        TiMNombre = request.getParameter("TiMNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        me = new PoscosechaTab(MenPortada,MenSuperior,MenLongitud,MenCauchos,MenDescripcion,Marcacion,Estado);
-                        m.setMsj(Asql.getPoscosecha().insertar(me));
-                        m.setTipo("Ok");
+                        ms = new MaterialSecoTab(Id,Nombre,Imagen,Descripcion,Alto,Ancho,Profundo,TiMNombre,Estado);
+                        m = Asql.getMaterialSeco().modificar(ms);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
@@ -124,8 +125,7 @@ public class MaterialsecoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getRol().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -134,9 +134,9 @@ public class MaterialsecoServ extends HttpServlet {
                 case "obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getMenu().obtener(Id);
-                        Ses.setAttribute("men", me);
-                        m.setMsj("Se ha obtenido el menu con id: " + me.getMenuId());
+                        ms = Asql.getMaterialSeco().obtener(Id);
+                        Ses.setAttribute("men", ms);
+                        m.setMsj("Se ha obtenido el material seco con id: " + ms.getMsId());
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
@@ -146,15 +146,15 @@ public class MaterialsecoServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<MenuTab> mel = Asql.getPoscosecha().listar();
-                    Ses.setAttribute("lisMe", mel);
+                    List<MaterialSecoTab> mt = Asql.getMaterialSeco().listar();
+                    Ses.setAttribute("lisMs", mt);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}
                     break;
 
                 default:
-                    ruta = "menu.jsp";
+                    ruta = "MaterialSeco.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
@@ -171,7 +171,7 @@ public class MaterialsecoServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getmenu() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

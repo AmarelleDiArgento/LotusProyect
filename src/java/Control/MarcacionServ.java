@@ -67,6 +67,7 @@ public class MarcacionServ extends HttpServlet {
         }
         MarcacionTab ma = null;
         int Id;
+        String ArmNombre;
         String Nombre;
         String Portada;
         Boolean Estado;
@@ -80,9 +81,10 @@ public class MarcacionServ extends HttpServlet {
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
                         Portada = request.getParameter("Portada");
+                        ArmNombre = request.getParameter("ArmNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        ma = new MarcacionTab(Nombre, Portada, Estado);
+                        ma = new MarcacionTab(Nombre, Portada,ArmNombre, Estado);
                         m = Asql.getMarcacion().insertar(ma);
 
                     } else {
@@ -97,9 +99,10 @@ public class MarcacionServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
                         Portada = request.getParameter("Portada");
+                        ArmNombre = request.getParameter("ArmNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        ma = new MarcacionTab(Id, Nombre, Portada, Estado);
+                        ma = new MarcacionTab(Id, Nombre, Portada,ArmNombre,Estado);
                         m = Asql.getMarcacion().modificar(ma);
 
                     } else {

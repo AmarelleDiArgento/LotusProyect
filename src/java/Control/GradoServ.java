@@ -110,7 +110,7 @@ public class GradoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getRol().eliminar(Id);
+                        m = Asql.getGrados().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");

@@ -1,18 +1,18 @@
-<%@page import="Modelo.Tabs.VariedadTab"%>
-<%@page import="Modelo.Tabs.VariedadTab"%>
+
+<%@page import="Modelo.Tabs.MaterialSecoTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "variedad.jsp";
+    String jsp = "materialseco.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisT") != null) {
+        if (Ses.getAttribute("lisM") != null) {
 
 
 %>
@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Variedad</title>
+        <title>Lotus QA - Materialseco</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -45,10 +45,9 @@
 
 
         <div class="container">
-            <h3>Variedad</h3>
 
             <%
-                List<VariedadTab> LisV = (List<VariedadTab>) Ses.getAttribute("lisV");
+                List<MaterialSecoTab> LisM = (List<MaterialSecoTab>) Ses.getAttribute("lisM");
             %>
             <table class="centered striped">
                 <thead>
@@ -63,24 +62,30 @@
                 </thead>
 
                 <tbody>
-                    <% for (VariedadTab vt : LisV) {%>
+                    <% for (MaterialSecoTab mt : LisM) {%>
                     <tr>
-                        <td><%=vt.getVarId()%></td>
-                        <td><%=vt.getVarNombre()%></td>
+                        <td><%=mt.getMsId()%></td>
+                        <td><%=mt.getTipoMs_TimId()%></td>
+                        <td><%=mt.getMsNombre()%></td>
+                        <td><%=mt.getMsImagen()%></td>
+                        <td><%=mt.getMsDescripcion()%></td>
+                        <td><%=mt.getMsAlto()%></td>
+                          <td><%=mt.getMsAncho()%></td>
+                            <td><%=mt.getMsProfundo()%></td>
                         <td>
                             <label>
-                                <input type="checkbox" <% if (vt.isVarEstado()) {%> checked="checked" <% }%> /> 
+                                <input type="checkbox" <% if (mt.isMsEstado()) {%> checked="checked" <% }%> /> 
                                 <span></span>
                             </label>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=mt.getMsId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
+                                <i class="material-icons purple-text" onclick="msjConf(<%=mt.getMsId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -94,7 +99,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Materialseco"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -115,7 +120,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="materialseco.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
                     <p>Registra la informacion del nuevo Armado</p>
@@ -149,11 +154,11 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Arm") != null) {
-                VariedadTab vS = (VariedadTab) Ses.getAttribute("Rol");
+        <%if (Ses.getAttribute("Mat") != null) {
+                MaterialSecoTab mS = (MaterialSecoTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="materialseco.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
                     <p>Registra la informacion del nuevo Armado</p>
@@ -264,13 +269,13 @@
 </html>
 <%
 
-    Ses.setAttribute("lisA", null);
-    Ses.setAttribute("Arm", null);
+    Ses.setAttribute("lisM", null);
+    Ses.setAttribute("Mat", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="variedads.do" method="post" >
+        <form id="lista" action="materialseco.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

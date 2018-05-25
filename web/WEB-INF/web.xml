@@ -81,6 +81,10 @@
         <servlet-class>Control.VariedadServ</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>MarcacionServ</servlet-name>
+        <servlet-class>Control.MarcacionServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ArmadoServ</servlet-name>
         <url-pattern>/armados.do</url-pattern>
@@ -160,6 +164,12 @@
     <servlet-mapping>
         <servlet-name>VariedadServ</servlet-name>
         <url-pattern>/variedads.do</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>MarcacionServ</servlet-name>
+        <url-pattern>/marcacions.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

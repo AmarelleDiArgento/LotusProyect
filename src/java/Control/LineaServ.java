@@ -66,7 +66,9 @@ public class LineaServ extends HttpServlet {
             ruta = "rol.jsp";
         }
         LineaTab l = null;
+        
         int Id;
+        String PosNombre;
         Boolean Estado;
         String E;
 
@@ -76,8 +78,10 @@ public class LineaServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
+                        PosNombre = request.getParameter("PosNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
+                        l = new LineaTab(PosNombre,Estado);
                         m = Asql.getLinea().insertar(l);
 
                     } else {
@@ -90,9 +94,10 @@ public class LineaServ extends HttpServlet {
                 case "modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
+                        PosNombre = request.getParameter("PosNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        l = new LineaTab(Id,Estado);
+                        l = new LineaTab(Id,PosNombre,Estado);
                         m = Asql.getLinea().modificar(l);
 
                     } else {

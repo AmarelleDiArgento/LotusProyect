@@ -1,17 +1,17 @@
-<%@page import="Modelo.Tabs.MarcacionTab"%>
+<%@page import="Modelo.Tabs.PasoTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "Marcacion.jsp";
+    String jsp = "armado.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisM") != null) {
+        if (Ses.getAttribute("lisP") != null) {
 
 
 %>
@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Marcacion</title>
+        <title>Lotus QA - Paso</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -46,7 +46,7 @@
         <div class="container">
 
             <%
-                List<MarcacionTab> LisM = (List<MarcacionTab>) Ses.getAttribute("lisM");
+                List<PasoTab> LisP = (List<PasoTab>) Ses.getAttribute("lisLP");
             %>
             <table class="centered striped">
                 <thead>
@@ -61,25 +61,22 @@
                 </thead>
 
                 <tbody>
-                    <% for (MarcacionTab mt : LisM) {%>
+                    <% for (PasoTab pt : LisP) {%>
                     <tr>
-                        <td><%=mt.getMarId()%></td>
-                        <td><%=mt.getMarNombre()%></td>
-                        <td><%=mt.getMarPortada()%></td>
+                        <td><%=pt.getPasId()%></td>
+                        <td><%=pt.getPasorden()%></td>
+                        <td><%=pt.getPasDescripcion()%></td>
+                        <td><%=pt.getPasImagen()%></td>
                         <td>
                             <label>
-                                <input type="checkbox" <% if (mt.isMarEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>
+                     
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=mt.getMarId()%>)" > edit </i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getPasId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=mt.getMarId()%>)"> delete </i>
+                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getPasId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -93,7 +90,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Paso"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -114,17 +111,17 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="marcacion.do">
+            <form method="get" action="Paso.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Marcacion</h4>
-                    <p>Registra la informacion de la nueva Marcacion</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
+                    <p>Registra la informacion del nuevo Armado</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class= "validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
                         <div class="switch">
@@ -148,14 +145,14 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Mar") != null) {
-                MarcacionTab mS = (MarcacionTab) Ses.getAttribute("Rol");
+        <%if (Ses.getAttribute("Pas") != null) {
+                PasoTab pS = (PasoTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="marcacion.do">
+            <form method="get" action="paso.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Marcacion</h4>
-                    <p>Registra la informacion de la nueva Marcacion</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
+                    <p>Registra la informacion del nuevo Paso</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -263,13 +260,13 @@
 </html>
 <%
 
-    Ses.setAttribute("lisM", null);
-    Ses.setAttribute("Mar", null);
+    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("Pas", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="armados.do" method="post" >
+        <form id="lista" action="paso.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>
@@ -283,3 +280,4 @@
         response.sendRedirect("index.jsp");
     }
 %>
+

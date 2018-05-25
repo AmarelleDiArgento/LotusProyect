@@ -25,6 +25,13 @@ public class PasoTab implements Serializable{
         this.PasImagen = PasImagen;
     }
 
+    public PasoTab(int Pasorden, String PasDescripcion, String PasImagen) {
+        this.Pasorden = Pasorden;
+        this.PasDescripcion = PasDescripcion;
+        this.PasImagen = PasImagen;
+    }
+    
+   
     /**
      * @return the PasId
      */

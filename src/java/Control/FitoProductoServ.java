@@ -69,7 +69,9 @@ public class FitoProductoServ extends HttpServlet {
         int Id;
         String Area;
         String Imagen;
-   
+        String Maenombre;
+        String pronombre;
+        String varnombre;
         try {
             AdminMs Asql = new AdminMs(pool);
 
@@ -78,7 +80,10 @@ public class FitoProductoServ extends HttpServlet {
                     if (acc.isRpNuevo()) {
                         Area = request.getParameter("Area");
                         Imagen = request.getParameter("Imagen");
-                        fi = new FitoProductoTab(Area, Imagen);
+                        Maenombre = request.getParameter("Maenombre");
+                        pronombre = request.getParameter("pronombre");
+                        varnombre = request.getParameter("varnombre");
+                        fi = new FitoProductoTab(Area, Imagen,Maenombre,pronombre,varnombre);
                         m = Asql.getFitoProducto().insertar(fi);
 
                     } else {
@@ -93,7 +98,10 @@ public class FitoProductoServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Area = request.getParameter("Area");
                         Imagen = request.getParameter("Imagen");
-                        fi = new FitoProductoTab(Id, Area, Imagen);
+                        Maenombre = request.getParameter("Maenombre");
+                        pronombre = request.getParameter("pronombre");
+                        varnombre = request.getParameter("varnombre");
+                        fi = new FitoProductoTab(Id, Area, Imagen,Maenombre,pronombre,varnombre);
                         m = Asql.getFitoProducto().modificar(fi);
 
                     } else {
@@ -104,7 +112,7 @@ public class FitoProductoServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getRol().eliminar(Id);
+                        m = Asql.getFitoProducto().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
