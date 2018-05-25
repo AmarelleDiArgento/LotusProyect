@@ -17,8 +17,8 @@ USE LotusProyect ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS LotusProyect.armado (
   ArmId INT(11) NOT NULL AUTO_INCREMENT,
-  ArmNombre VARCHAR(45) NULL DEFAULT NULL,
-  ArmDescripcion VARCHAR(45) NULL DEFAULT NULL,
+  ArmNombre VARCHAR(45) NOT NULL UNIQUE,
+  ArmDescripcion VARCHAR(255) NULL DEFAULT NULL,
   ArmEstado TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (ArmId))
 ENGINE = InnoDB

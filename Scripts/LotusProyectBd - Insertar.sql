@@ -17,7 +17,7 @@
 -- Insertar LotusProyect.Usuario
 -- -----------------------------------------------------
 
-call LotusProyect.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com', 'Usuario\almoreno.jpg',1, 1);
+call LotusProyect.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com', 'Usuario\\almoreno.jpg',1, 1);
 -- call LotusProyect.usuarioMo('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '3014638753', 'almoreno@eliteflower.com', '1', 1);
 -- call LotusProyect.usuarioLi();
 -- call LotusProyect.usuarioEl('1070949');
@@ -78,42 +78,10 @@ call LotusProyect.AsgPerIn(3, 8, 1, 1, 1, 1);
 -- call LotusProyect.AsgPerSession(1070949);
 -- call LotusProyect.AsgPerEl(3, 6);
 
-
-
--- erika
 -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla armado
-
-call LotusProyect.armadoIn('rosa', 'verde', 1);
--- call lotusproyect.armadoMo(1, 'rosa', 'amarilla', 1);
--- call lotusproyect.armadoLi();
--- call lotusproyect.armadoEl(2);
--- call lotusproyect.armadoCo(1);
-
-
-
+-- Insertar LotusProyect Armado
 -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla marcacion
 
-
-call LotusProyect.marcacionIn('rosa', 'sahda', 1, 3);
-
--- call lotusproyect.maestroMo(1, 'rosa', 'amarilla');
-
-
-
-
--- Procedimientos LotusProyect Tabla control de cambios 
-
-call lotusproyect.controldecambiosIn('rosa', 'rosita', 'aleja');
--- call lotusproyect.controldecambiosLi();
--- call LotusProyect.contrroldecambiosMo(4);";
--- call lotusproyect.controldecambiosEl(1);
--- call lotusproyect.controldecambiosCo(1);
-
-
--- Procedimientos LotusProyect Tabla FitoProducto
-
-call lotusproyect.fitoproductoIn(2); 
--- call lotusproyect.fitoproductoCo(1);
-
+call LotusProyect.armadoIn('Caracol en un piso sin fillers', 'Armado de doce rosas', 1);
+call LotusProyect.armadoIn('Caracol en un piso con gipsophilia', 'Armado de doce rosas 3 gipsophilia', 1);
+call LotusProyect.armadoIn('Caracol en un piso con gipso y ruscus', 'Armado de doce rosas, tres gipsophilias y cuatro ruscus', 1);

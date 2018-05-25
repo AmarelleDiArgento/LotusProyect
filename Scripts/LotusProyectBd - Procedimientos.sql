@@ -4,7 +4,7 @@
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolIn (in rNombre VARCHAR(45), in rDescripcion mediumtext, in rEstado tinyint(1))
+create procedure rolIn (in rNombre varchar(60), in rDescripcion mediumtext, in rEstado tinyint(1))
 begin
 insert into rol (RolNombre,RolDescripcion,RolEstado) values (rNombre,rDescripcion,rEstado);
 end $$
@@ -15,7 +15,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure rolMo (in rId INT, in rNombre VARCHAR(45), in rDescripcion mediumtext, in rEstado tinyint(1))
+create procedure rolMo (in rId INT, in rNombre varchar(60), in rDescripcion mediumtext, in rEstado tinyint(1))
 begin
 update rol SET RolNombre=rNombre, RolDescripcion=rDescripcion, RolEstado=rEstado where RolId = rId;
 end $$
@@ -59,7 +59,7 @@ delimiter $$
 -- Insertar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioIn (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(45),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(100), in uEstado VARCHAR(10), in RolId INT)
+create procedure usuarioIn (in uCedula VARCHAR(10), in uNombre varchar(60), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(45),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(100), in uEstado VARCHAR(10), in RolId INT)
 begin
 insert into usuario (UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuAvatar,UsuEstado,RolId) values (uCedula,uNombre,uApellido,uLoger,SHA(uPass),uExt,uTel,uEmail,uAvatar,uEstado,RolId);
 end $$
@@ -69,7 +69,7 @@ delimiter $$
 -- Modificar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(100),in uEstado VARCHAR(10), in RolId INT)
+create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre varchar(60), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(100),in uEstado VARCHAR(10), in RolId INT)
 begin
 update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuPassword=uPass,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuAvatar=uAvatar,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
 end $$
@@ -134,7 +134,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure permisoIn (in pNombre VARCHAR(45), in pModulo varchar(45), in pDescripcion mediumtext, in pUrl varchar(45), in pIco varchar(20), in pEstado tinyint(1))
+create procedure permisoIn (in pNombre varchar(60), in pModulo varchar(45), in pDescripcion mediumtext, in pUrl varchar(45), in pIco varchar(20), in pEstado tinyint(1))
 begin
 insert into permiso (PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado) values (pNombre,pModulo,pDescripcion,pIco,pUrl,pEstado);
 end $$
@@ -145,7 +145,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure permisoMo (in pId int(11), in pNombre VARCHAR(45), in pModulo varchar(45), in pDescripcion mediumtext, in pUrl varchar(45), in pIco varchar(20), in pEstado tinyint(1))
+create procedure permisoMo (in pId int(11), in pNombre varchar(60), in pModulo varchar(45), in pDescripcion mediumtext, in pUrl varchar(45), in pIco varchar(20), in pEstado tinyint(1))
 begin
 update permiso SET PerNombre=pNombre, PerModulo=pModulo, PerDescripcion=pDescripcion, PerIco=pIco, PerUrl=pUrl, PerEstado=pEstado where PerId = pId;
 end $$
@@ -246,7 +246,7 @@ inner join AsignaPermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
 where r.RolId = apRol;
 end $$
-delimiter $$usuarioLogin
+delimiter $$
 
 -- -----------------------------------------------------
 -- Permisos de sesión
@@ -281,7 +281,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure armadoIn (in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
+create procedure armadoIn (in aNombre varchar(60), in aDescripcion MEDIUMTEXT,in aEstado tinyint(1))
 begin
 insert into armado (ArmNombre,ArmDescripcion,ArmEstado) values (aNombre,aDescripcion,aEstado);
 end $$ArmId
@@ -292,7 +292,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure armadoMo (in aId int(11),in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
+create procedure armadoMo (in aId int(11),in aNombre varchar(60), in aDescripcion MEDIUMTEXT,in aEstado tinyint(1))
 begin
 update armado SET ArmNombre=aNombre, ArmDescripcion=aDescripcion, ArmEstado=aEstado where ArmId=aId;
 end $$
@@ -319,6 +319,7 @@ begin
 select ArmId,ArmNombre,ArmDescripcion,ArmEstado from armado where ArmId = aId;
 end $$
 delimiter $$
+
 -- -----------------------------------------------------
 -- Eliminar
 -- -----------------------------------------------------
@@ -329,8 +330,6 @@ begin
 delete from armado where  ArmId = aId;
 end $$
 delimiter $$
-
-
 
 
 
@@ -461,7 +460,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure fitosanidadIn (in FitNombre varchar(45), in FitDescripcion varchar(45),in FitTipo enum ('Plaga','Enfermedad'), in FitImagen varchar (45),in FitEstado tinyint(1))
+create procedure fitosanidadIn (in FitNombre varchar(60), in FitDescripcion MEDIUMTEXT,in FitTipo enum ('Plaga','Enfermedad'), in FitImagen varchar (45),in FitEstado tinyint(1))
 begin
 insert into fitosanidad(FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado) values (fNombre,fDescripcion,fTipo,fImagen,fEstado);
 end $$FitId
@@ -472,7 +471,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitosanidadMo(in fId int(11),in fNombre varchar(45), in fDescripcion varchar(45),in fTipo enum ('Plaga','Enfermedad'),in fImagen varchar(45), in FitEstado tinyint(1))
+create procedure fitosanidadMo(in fId int(11),in fNombre varchar(60), in fDescripcion MEDIUMTEXT,in fTipo enum ('Plaga','Enfermedad'),in fImagen varchar(45), in FitEstado tinyint(1))
 begin
 update fitosanidad SET FitNombre=fNombre, FitDescripcion=fDescripcion, FitTipo=fTipo, FitImagen=fImagen where FitId=fId;
 end $$
@@ -521,10 +520,10 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure gradosIn (in GraNombre varchar(45), in GraDetalles mediumtext,in GraEstado tinyint(1))
+create procedure gradosIn (in GraNombre varchar(60), in GraDetalles mediumtext,in GraEstado tinyint(1))
 begin
 insert into grados (GraNombre,GraDetalles,GraEstado) values (gNombre,gDetalles,gEstado);
-end $$GraID
+end $$
 delimiter $$
 
 -- -----------------------------------------------------
@@ -532,7 +531,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure gradosMo(in gId int(11),in gNombre varchar(45), in gDetalles mediumtext,in GraEstado tinyint(1))
+create procedure gradosMo(in gId int(11),in gNombre varchar(60), in gDetalles mediumtext,in GraEstado tinyint(1))
 begin
 update grados SET GraNombre=gNombre, GraDetalles=gDetalles, GraEstado=gEstado where GraID=gID;
 end $$
@@ -642,7 +641,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure maestroIn(in MaeNombre varchar(45), in MaeDescripcion varchar(255))
+create procedure maestroIn(in MaeNombre varchar(60), in MaeDescripcion varchar(255))
 begin
 insert into maestro(MaeNombre,MaeDescripcion) values (mNombre,mDescripcion);
 end $$
@@ -653,7 +652,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure maestroMo(in maId int(11),in maNombre varchar(60), in maDescripcion MEDIUMTEXT)
 begin
 update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
 end $$
@@ -700,7 +699,7 @@ delimiter $$
 
 --------------------------------------------
 delimiter $$
- create procedure marcacionIn(in MarNombre varchar(45), in MarPortada mediumtext,in MarEstado tinyint(1))
+ create procedure marcacionIn(in MarNombre varchar(60), in MarPortada mediumtext,in MarEstado tinyint(1))
  begin
  insert into marcacion (MarNombre,MarPortada,MarEstado) values (maNombre,maPortada,maEstado);
  end $$
@@ -711,7 +710,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure marcacionMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure marcacionMo(in maId int(11),in maNombre varchar(60), in maDescripcion MEDIUMTEXT)
 begin
 update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
 end $$
@@ -814,7 +813,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
- create procedure parametrosIn(in pNombre varchar(45), in pEstado tinyint(1), in MaeId int(11), in ProId int(11),in VarId int(11))
+ create procedure parametrosIn(in pNombre varchar(60), in pEstado tinyint(1), in MaeId int(11), in ProId int(11),in VarId int(11))
  begin
  insert into parametros (ParNombre,ParEstado) values (pNombre,pEstado);
  end $$ 
@@ -824,7 +823,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure parametrosMo(in pId int(11),in pNombre varchar(45), in pEstado tinyint(1))
+create procedure parametrosMo(in pId int(11),in pNombre varchar(60), in pEstado tinyint(1))
 begin
 update parametros SET ParNombre=pNombre, ParEstado=pEstado where ParId=pId;
 end $$
@@ -881,7 +880,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure pasoMo(in peId int(11),in peNombre varchar(45), in peModulo varchar(45), in peDescripcion mediumtext, in PerIco varchar(20), in PerUrl varchar(100), in PerEstado tinyint(1) )
+create procedure pasoMo(in peId int(11),in peNombre varchar(60), in peModulo varchar(45), in peDescripcion mediumtext, in PerIco varchar(20), in PerUrl varchar(100), in PerEstado tinyint(1) )
 begin
 update paso SET PasOrden=pNombre, PasDescripcion=pDescripcion, PasImagen=pImagen where PerId=psId;
 end $$
@@ -925,7 +924,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure poscosechaIn (in psNombre varchar(45), in psDireccion varchar(90), in psTelefono varchar(10), in PosEstado tinyint(1))
+create procedure poscosechaIn (in psNombre varchar(60), in psDireccion varchar(90), in psTelefono varchar(10), in PosEstado tinyint(1))
 begin
 insert into poscosecha (PosNombre,PosDireccion,PosTelefono,PosEstado) values (psNombre,psDireccion,psTelefono,psEstado);
 end $$
@@ -936,7 +935,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure poscosechaMo (in psId int(11),in psNombre varchar(45), in psDireccion varchar(90),in psTelefono varchar(10),in psEstado tinyint(1))
+create procedure poscosechaMo (in psId int(11),in psNombre varchar(60), in psDireccion varchar(90),in psTelefono varchar(10),in psEstado tinyint(1))
 begin
 update poscosecha SET PosNombre=psNombre, PosDireccion=psDireccion,PosTelefono=psTelefono,PosEstado=psEstado where PosId=psId;
 end $$
@@ -1034,14 +1033,14 @@ delimiter $$
 
 
  -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla productos
+-- Procedimientos LotusProyect Tabla producto
 -- Insertar
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosIn (in prNombre varchar(45), in prEstado tinyint(1))
+create procedure productoIn (in prNombre varchar(60), in prEstado tinyint(1))
 begin
-insert into productos (ProNombre,ProEstado) values (prNombre,prEstado);
+insert into producto (ProNombre,ProEstado) values (prNombre,prEstado);
 end $$
 delimiter $$
 
@@ -1050,9 +1049,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosMo (in prId int(11),in prNombre varchar(45), in prEstado tinyint(1))
+create procedure productoMo (in prId int(11),in prNombre varchar(60), in prEstado tinyint(1))
 begin
-update productos SET ProNombre=prNombre, ProEstado=prEstado where ProId=prId;
+update producto SET ProNombre=prNombre, ProEstado=prEstado where ProId=prId;
 end $$
 delimiter $$
  -- -----------------------------------------------------
@@ -1060,9 +1059,9 @@ delimiter $$
 -- ----------------------------------------- ------------
 
 delimiter $$
-create procedure productosLi ()
+create procedure productoLi ()
 begin
-select ProNombre,ProEstado from productos;
+select ProNombre,ProEstado from producto;
 end $$
 delimiter $$
 
@@ -1071,7 +1070,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosCo (in prId INT)
+create procedure productoCo (in prId INT)
 begin
 select ProNombre,ProEstado,MaeId from producto where ProId=prId;
 end $$
@@ -1083,9 +1082,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosEl (in prId INT)
+create procedure productoEl (in prId INT)
 begin
-delete from productos where  ProId = prId;
+delete from producto where  ProId = prId;
 end $$
 delimiter $$
 
@@ -1097,7 +1096,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure tipomsIn (in tNombre varchar(45), in tDescripcion mediumtext)
+create procedure tipomsIn (in tNombre varchar(60), in tDescripcion mediumtext)
 begin
 insert into tipoms (TiMNombre,TiMDescripcion) values (tNombre,tDescripcion);
 end $$
@@ -1108,7 +1107,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure tipomsMo (in tId int(11),in tNombre varchar(45), in tDescripcion mediumtext)
+create procedure tipomsMo (in tId int(11),in tNombre varchar(60), in tDescripcion mediumtext)
 begin
 update tipoms SET TiMNombre=tId, TiMDescripcion=tNombre where TiMId=tId;
 end $$
@@ -1160,7 +1159,7 @@ SELECT ap.GraID, g.GraNombre, ap.ParId, pa.ParNombre, ap.ProId, pr.ProNombre, ap
 FROM AsignaParametro AS ap
 INNER JOIN grados AS g ON ap.GraID = g.GraID
 INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
-INNER JOIN productos AS pr ON ap.ProId = pr.ProId
+INNER JOIN producto AS pr ON ap.ProId = pr.ProId
 INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
 WHERE ap.ProId = apProID;
 end $$
@@ -1177,7 +1176,7 @@ SELECT ap.GraID, g.GraNombre, ap.ParId, pa.ParNombre, ap.ProId, pr.ProNombre, ap
 FROM AsignaParametro AS ap
 INNER JOIN grados AS g ON ap.GraID = g.GraID
 INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
-INNER JOIN productos AS pr ON ap.ProId = pr.ProId
+INNER JOIN producto AS pr ON ap.ProId = pr.ProId
 INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
 WHERE ap.VarId = apVarID;
 end $$
@@ -1190,7 +1189,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure variedadIn (in varNombre varchar(45), in varEstado tinyint(1),in proId int(11),in varImagen varchar(45),in varColor varchar(15))
+create procedure variedadIn (in varNombre varchar(60), in varEstado tinyint(1),in proId int(11),in varImagen varchar(45),in varColor varchar(15))
 begin
 insert into variedad (VarNombre,VarEstado,ProId,VarImagen,VarColor) values (varNombre,varEstado,proId,varImagen,varColor);
 end $$
@@ -1201,7 +1200,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11),in VarImagen varchar(45),in VarColor varchar(15))
+create procedure variedadMo (in varId int(11),in varNombre varchar(60), in varEstado tinyint(1),in ProId int(11),in VarImagen varchar(45),in VarColor varchar(15))
 begin
 update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarImagen=varImagen,VarColor=varColor where VarId=varId;
 end $$
