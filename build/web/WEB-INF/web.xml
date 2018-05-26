@@ -48,6 +48,7 @@
         <servlet-name>PasoServ</servlet-name>
         <servlet-class>Control.PasoServ</servlet-class>
     </servlet>   
+<<<<<<< Updated upstream
     <servlet>
         <servlet-name>PermisoServ</servlet-name>
         <servlet-class>Control.PermisoServ</servlet-class>
@@ -79,12 +80,38 @@
     <servlet>
         <servlet-name>VariedadServ</servlet-name>
         <servlet-class>Control.VariedadServ</servlet-class>
+=======
+    <servlet>
+        <servlet-name>PermisoServ</servlet-name>
+        <servlet-class>Control.PermisoServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PoscosechaServ</servlet-name>
+        <servlet-class>Control.PoscosechaServ</servlet-class>
+    </servlet>   
+    <servlet>
+        <servlet-name>PreliminarServ</servlet-name>
+        <servlet-class>Control.PreliminarServ</servlet-class>
+    </servlet>   
+    <servlet>
+        <servlet-name>ProductoServ</servlet-name>
+        <servlet-class>Control.ProductoServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RolServ</servlet-name>
+        <servlet-class>Control.RolServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TipoServ</servlet-name>
+        <servlet-class>Control.TipoServ</servlet-class>
+>>>>>>> Stashed changes
     </servlet>
     
     <servlet>
-        <servlet-name>MarcacionServ</servlet-name>
-        <servlet-class>Control.MarcacionServ</servlet-class>
+        <servlet-name>UsuarioServ</servlet-name>
+        <servlet-class>Control.UsuarioServ</servlet-class>
     </servlet>
+<<<<<<< Updated upstream
     <servlet-mapping>
         <servlet-name>ArmadoServ</servlet-name>
         <url-pattern>/armados.do</url-pattern>
@@ -94,6 +121,88 @@
         <url-pattern>/asignapers.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ControlCambiosServ</servlet-name>
+        <url-pattern>/controlcambios.do</url-pattern>
+=======
+    <servlet>
+        <servlet-name>VariedadServ</servlet-name>
+        <servlet-class>Control.VariedadServ</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ArmadoServ</servlet-name>
+        <url-pattern>/armados.do</url-pattern>
+>>>>>>> Stashed changes
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FitoProductoServ</servlet-name>
+        <url-pattern>/fitoproductos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+<<<<<<< Updated upstream
+        <servlet-name>FitosanidadServ</servlet-name>
+        <url-pattern>/fitosanidads.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradoServ</servlet-name>
+        <url-pattern>/grados.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LineaServ</servlet-name>
+        <url-pattern>/lineas.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaestroServ</servlet-name>
+        <url-pattern>/maestros.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaterialsecoServ</servlet-name>
+        <url-pattern>/materialsecos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenuServ</servlet-name>
+        <url-pattern>/menus.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParametroServ</servlet-name>
+        <url-pattern>/parametros.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasoServ</servlet-name>
+        <url-pattern>/pasos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PermisoServ</servlet-name>
+        <url-pattern>/permisos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PoscosechaServ</servlet-name>
+        <url-pattern>/poscosechas.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PreliminarServ</servlet-name>
+        <url-pattern>/preliminars.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductoServ</servlet-name>
+        <url-pattern>/productos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RolServ</servlet-name>
+        <url-pattern>/rols.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipoServ</servlet-name>
+        <url-pattern>/tipos.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioServ</servlet-name>
+        <url-pattern>/usuarios.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VariedadServ</servlet-name>
+        <url-pattern>/variedads.do</url-pattern>
+=======
         <servlet-name>ControlCambiosServ</servlet-name>
         <url-pattern>/controlcambios.do</url-pattern>
     </servlet-mapping>
@@ -160,16 +269,18 @@
     <servlet-mapping>
         <servlet-name>UsuarioServ</servlet-name>
         <url-pattern>/usuarios.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VariedadServ</servlet-name>
-        <url-pattern>/variedads.do</url-pattern>
+>>>>>>> Stashed changes
     </servlet-mapping>
     
     
     <servlet-mapping>
+<<<<<<< Updated upstream
         <servlet-name>MarcacionServ</servlet-name>
         <url-pattern>/marcacions.do</url-pattern>
+=======
+        <servlet-name>VariedadServ</servlet-name>
+        <url-pattern>/variedads.do</url-pattern>
+>>>>>>> Stashed changes
     </servlet-mapping>
     <session-config>
         <session-timeout>

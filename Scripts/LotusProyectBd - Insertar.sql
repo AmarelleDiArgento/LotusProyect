@@ -78,9 +78,6 @@ call LotusProject.AsgPerIn(3, 8, 1, 1, 1, 1);
 -- call LotusProject.AsgPerSession(1070949);
 -- call LotusProject.AsgPerEl(3, 6);
 
-
-
--- erika
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla armado
 
@@ -93,7 +90,6 @@ call LotusProject.armadoIn('rosa', 'verde', 1);
 
 
 -- -----------------------------------------------------
--- Procedimientos LotusProyect Tabla marcacion
 
 
 call LotusProject.marcacionIn('rosa', 'sahda', 1, 3);
