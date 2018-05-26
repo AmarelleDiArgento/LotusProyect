@@ -23,12 +23,12 @@ public class UsuarioMs implements Usuario {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProyect.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
-    final String Modificar = "call LotusProyect.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
-    final String Eliminar = "call LotusProyect.usuarioEl(?);";
-    final String Consultar = "call LotusProyect.usuarioCo(?);";
-    final String ListarTodos = "call LotusProyect.usuarioLi();";
-    final String Login = "call LotusProyect.usuarioLogin(?,?);";
+    final String Insertar = "call LotusProject.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
+    final String Modificar = "call LotusProject.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
+    final String Eliminar = "call LotusProject.usuarioEl(?);";
+    final String Consultar = "call LotusProject.usuarioCo(?);";
+    final String ListarTodos = "call LotusProject.usuarioLi();";
+    final String Login = "call LotusProject.usuarioLogin(?,?);";
 
     @Override
     public UsuarioTab login(String cedula, String pass) {

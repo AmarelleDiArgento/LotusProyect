@@ -29,11 +29,11 @@ public class PoscosechaMs implements Poscosecha {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.poscosechaIn(?,?,?,?);";
-    final String Modificar = "call lotusproyect.poscosechaMo(?,?,?,?);";
-    final String Eliminar = "call lotusproyect.poscosechaEl(?);";
-    final String Consultar = "call lotusproyect.poscosechaCo(?);";
-    final String ListarTodos = "call lotusproyect.poscosechaLi();";
+    final String Insertar = "call LotusProject.poscosechaIn(?,?,?,?);";
+    final String Modificar = "call LotusProject.poscosechaMo(?,?,?,?);";
+    final String Eliminar = "call LotusProject.poscosechaEl(?);";
+    final String Consultar = "call LotusProject.poscosechaCo(?);";
+    final String ListarTodos = "call LotusProject.poscosechaLi();";
     
     @Override
     public Mensajes insertar(PoscosechaTab p) {

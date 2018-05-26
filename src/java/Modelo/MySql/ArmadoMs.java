@@ -29,11 +29,11 @@ public class ArmadoMs implements Armado {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProyect.armadoIn(?, ?, ?);";
-    final String Modificar = "call LotusProyect.armadoMo(?,?,?,?);";
+    final String Insertar = "call LotusProject.armadoIn(?, ?, ?);";
+    final String Modificar = "call LotusProject.armadoMo(?,?,?,?);";
     final String Eliminar = "call lotusproyect.armadoEl(?);";
-    final String Consultar = "call LotusProyect.armadoCo(?);";
-    final String ListarTodos = "call LotusProyect.armadoLi();";
+    final String Consultar = "call LotusProject.armadoCo(?);";
+    final String ListarTodos = "call LotusProject.armadoLi();";
 
     @Override
     public Mensajes insertar(ArmadoTab a) {

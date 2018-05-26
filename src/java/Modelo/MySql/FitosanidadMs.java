@@ -29,11 +29,11 @@ public class FitosanidadMs implements Fitosanidad {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.fitosanidadIn(?,?,?,?,?);";
-    final String Modificar = "call lotusproyect.fitosanidadMo(?,?,?,?,?);";
-    final String Eliminar = "call lotusproyect.fitosanidadEl(?);";
-    final String Consultar = "call lotusproyect.fitosanidadCo(?);";
-    final String ListarTodos = "call lotusproyect.fitosanidadLi();";
+    final String Insertar = "call LotusProject.fitosanidadIn(?,?,?,?,?);";
+    final String Modificar = "call LotusProject.fitosanidadMo(?,?,?,?,?);";
+    final String Eliminar = "call LotusProject.fitosanidadEl(?);";
+    final String Consultar = "call LotusProject.fitosanidadCo(?);";
+    final String ListarTodos = "call LotusProject.fitosanidadLi();";
     
     @Override
     public Mensajes insertar(FitosanidadTab f) {
