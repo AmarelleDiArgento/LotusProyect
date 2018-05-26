@@ -30,12 +30,12 @@ public class AsignaPermisoMs implements AsignaPermiso {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.AsgPerIn(?, ?, ?, ?, ?, ?);";
-    final String Modificar = "call LotusProject.AsgPerMo(?, ?, ?, ?, ?, ?);";
-    final String Eliminar = "call LotusProject.AsgPerEl(?, ?)";
-    final String Consultar = "call LotusProject.AsgPerCo(?, ?)";
-    final String ListarTodos = "call LotusProject.AsgPerLi(?);";
-    final String PerSession = "call LotusProject.AsgPerSession(?);";
+    final String Insertar = "call LotusProyect.AsgPerIn(?, ?, ?, ?, ?, ?);";
+    final String Modificar = "call LotusProyect.AsgPerMo(?, ?, ?, ?, ?, ?);";
+    final String Eliminar = "call LotusProyect.AsgPerEl(?, ?)";
+    final String Consultar = "call LotusProyect.AsgPerCo(?, ?)";
+    final String ListarTodos = "call LotusProyect.AsgPerLi(?);";
+    final String PerSession = "call LotusProyect.AsgPerSession(?);";
 
     @Override
     public List<AsignaPermisoTab> listar(Integer rol) {

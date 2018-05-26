@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Menu;
-import Modelo.Tabs.MaterialSecoTab;
 import Modelo.Tabs.MenuTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -30,11 +29,11 @@ public class MenuMs implements Menu {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.menuIn(?,?,?,?,?,?);";
-    final String Modificar = "call LotusProject.menuMo(?,?,?,?,?,?);";
-    final String Eliminar = "call LotusProject.menuEl(?);";
-    final String Consultar = "call LotusProject.menuCo(?);";
-    final String ListarTodos = "call LotusProject.MenuLi();";
+    final String Insertar = "call lotusproyect.menuIn(?,?,?,?,?,?);";
+    final String Modificar = "call lotusproyect.menuMo(?,?,?,?,?,?);";
+    final String Eliminar = "call lotusproyect.menuEl(?);";
+    final String Consultar = "call lotusproyect.menuCo(?);";
+    final String ListarTodos = "call lotusproyect.MenuLi();";
     
     @Override
     public Mensajes insertar(MenuTab me) {
@@ -84,14 +83,14 @@ public class MenuMs implements Menu {
      @Override
     public MenuTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("MenuId");
-        String nombre = rs.getString("MenPortada");
+        String portada = rs.getString("MenPortada");
         String superior = rs.getString("MenSuperior");
         String longitud = rs.getString("MenLongitud");
         String cauchos = rs.getString("MenCauchos");
         String descripcion = rs.getString("MenDescripcion");
         int st = rs.getInt("MenEstado");
         boolean status = st == 1;
-        MenuTab mTab = new MenuTab (Id, longitud, superior, longitud, cauchos, status, descripcion);
+        MenuTab mTab = new MenuTab (Id,portada, superior, longitud, cauchos, status, descripcion);
         return mTab;
     }
     
@@ -99,14 +98,14 @@ public class MenuMs implements Menu {
      public List<MenuTab> listar() {
     PreparedStatement stat = null;
         ResultSet rs = null;
-        List<MenuTab> uModel = new ArrayList<>();
+        List<MenuTab> meModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(ListarTodos);
 
                 rs = stat.executeQuery();
                 while (rs.next()) {
-                    uModel.add(convertir(rs));
+                    meModel.add(convertir(rs));
                 }
             } finally {
                 if (rs != null) {
@@ -127,7 +126,7 @@ public class MenuMs implements Menu {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return meModel;    
     }
      
         
@@ -246,6 +245,4 @@ public class MenuMs implements Menu {
         }
         return m;
     }
-
-
 }

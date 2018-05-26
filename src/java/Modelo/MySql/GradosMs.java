@@ -29,11 +29,11 @@ public class GradosMs implements Grados{
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.gradosIn(?,?,?);";
-    final String Modificar = "call LotusProject.gradosMo(?,?,?);";
-    final String Eliminar = "call LotusProject.gradosEl(?);";
-    final String Consultar = "call LotusProject.gradosCo(?);";
-    final String ListarTodos = "call LotusProject.gradosLi();";
+    final String Insertar = "call lotusproyect.gradosIn(?,?,?);";
+    final String Modificar = "call lotusproyect.gradosMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.gradosEl(?);";
+    final String Consultar = "call lotusproyect.gradosCo(?);";
+    final String ListarTodos = "call lotusproyect.gradosLi();";
 
     
      @Override

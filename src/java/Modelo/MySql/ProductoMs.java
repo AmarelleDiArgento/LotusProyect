@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Producto;
-import Modelo.Tabs.PreliminarTab;
 import Modelo.Tabs.ProductoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -30,11 +29,11 @@ public class ProductoMs implements Producto {
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
+    final String Insertar = "call lotusproyect.productosIn(?,?);";
+    final String Modificar = "call lotusproyect.preliminarMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.productosEl(?);";
+    final String Consultar = "call lotusproyect.productosCo(?);";
+    final String ListarTodos = "call lotusproyect.productosLi();";
 
     @Override
     public Mensajes insertar(ProductoTab p) {
@@ -122,18 +121,115 @@ public class ProductoMs implements Producto {
         return uModel;
     }
 
+@Override
+    public ProductoTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        ProductoTab pModel = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                pModel = convertir(rs);
+            } else {
+                throw new SQLException("Error, armado no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return pModel;
+    }
+
+
     @Override
-    public Mensajes modificar(ProductoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes modificar(ProductoTab p) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, p.getProId());
+            stat.setString(2, p.getProNombre());
+            if (p.isProEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(3, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(p.getProNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
     public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
-    @Override
-    public ProductoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
+

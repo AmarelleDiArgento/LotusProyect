@@ -29,11 +29,11 @@ public class PreliminarMs implements Preliminar {
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
+    final String Insertar = "call lotusproyect.preliminarIn(?,?);";
+    final String Modificar = "call lotusproyect.preliminarMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.preliminarEl(?);";
+    final String Consultar = "call lotusproyect.preliminarCo(?);";
+    final String ListarTodos = "call lotusproyect.preliminarLi();";
 
     @Override
     public Mensajes insertar(PreliminarTab p) {
@@ -43,7 +43,7 @@ public class PreliminarMs implements Preliminar {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, p.getPreFecha());
 
-            if (p.isEstado()) {
+            if (p.isPreEstado()) {
                 stat.setInt(2, 1);
             } else {
                 stat.setInt(2, 0);
@@ -82,21 +82,21 @@ public class PreliminarMs implements Preliminar {
         String fecha = rs.getString("PreFecha");
         int st = rs.getInt("PreEstado");
         boolean status = st == 1;
-        PreliminarTab aTab = new PreliminarTab (Id, fecha,status);
-        return aTab;
+        PreliminarTab pTab = new PreliminarTab (Id, fecha,status);
+        return pTab;
     }
    @Override
      public List<PreliminarTab> listar() {
     PreparedStatement stat = null;
         ResultSet rs = null;
-        List<PreliminarTab> uModel = new ArrayList<>();
+        List<PreliminarTab> pModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(ListarTodos);
 
                 rs = stat.executeQuery();
                 while (rs.next()) {
-                    uModel.add(convertir(rs));
+                    pModel.add(convertir(rs));
                 }
             } finally {
                 if (rs != null) {
@@ -117,23 +117,116 @@ public class PreliminarMs implements Preliminar {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return pModel;    
     }
 
-    @Override
-    public Mensajes modificar(PreliminarTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
+   @Override
     public PreliminarTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        PreliminarTab pModel = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                pModel = convertir(rs);
+            } else {
+                throw new SQLException("Error, armado no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return pModel;
     }
 
+        @Override
+        public Mensajes modificar(PreliminarTab p) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, p.getPreId());
+            stat.setString(2, p.getPreFecha());
+            if (p.isPreEstado()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(3, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(p.getPreFecha() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
+
+        @Override
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
 
 }

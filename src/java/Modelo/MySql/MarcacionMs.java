@@ -29,11 +29,11 @@ public class MarcacionMs implements Marcacion {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.marcacionIn(?,?,?);";
-    final String Modificar = "call LotusProject.marcacionMo(?,?,?);";
-    final String Eliminar = "call LotusProject.marcacionEl(?);";
-    final String Consultar = "call LotusProject.marcacionCo(?);";
-    final String ListarTodos = "call LotusProject.marcacionLi();";
+    final String Insertar = "call lotusproyect.marcacionIn(?,?,?);";
+    final String Modificar = "call lotusproyect.marcacionMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.marcacionEl(?);";
+    final String Consultar = "call lotusproyect.marcacionCo(?);";
+    final String ListarTodos = "call lotusproyect.marcacionLi();";
     
     @Override
     public Mensajes insertar(MarcacionTab ma) {
