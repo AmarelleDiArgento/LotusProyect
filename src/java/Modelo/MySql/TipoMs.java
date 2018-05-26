@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Tipo;
-import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.TipoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;

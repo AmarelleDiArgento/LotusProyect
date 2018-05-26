@@ -15,28 +15,28 @@ public class PreliminarTab implements Serializable{
    
     private int PreId;
     private String PreFecha;
-    private Boolean Estado;
+    private Boolean PreEstado;
     private int Poscosecha_Posnombre;
     private String Posnombre;
 
-    public PreliminarTab(String PreFecha,String Posnombre, Boolean Estado) {
+    public PreliminarTab(String PreFecha,String Posnombre, Boolean PreEstado) {
         this.PreFecha = PreFecha;
         this.Posnombre = Posnombre;
-        this.Estado = Estado;
+        this.PreEstado = PreEstado;
 
     }
 
-    public PreliminarTab(int PreId, String PreFecha,String Posnombre, Boolean Estado) {
+    public PreliminarTab(int PreId, String PreFecha,String Posnombre, Boolean PreEstado) {
         this.PreId = PreId;
         this.PreFecha = PreFecha;
         this.Posnombre = Posnombre;
-        this.Estado = Estado;
+        this.PreEstado = PreEstado;
     }
 
-    public PreliminarTab(int PreId, String PreFecha, Boolean Estado) {
+    public PreliminarTab(int PreId, String PreFecha, Boolean PreEstado) {
         this.PreId = PreId;
         this.PreFecha = PreFecha;
-        this.Estado = Estado;
+        this.PreEstado = PreEstado;
     }
     
    
@@ -70,17 +70,17 @@ public class PreliminarTab implements Serializable{
 
     
     /**
-     * @param Estado the Estado to set
+     * @param PreEstado the Estado to set
      */
-    public void setArmEstado(Boolean Estado) {
-        this.Estado = Estado;
+    public void setPreEstado(Boolean PreEstado) {
+        this.PreEstado = PreEstado;
     }
 
     /**
-     * @return the ArmEstado
+     * @return the PreEstado
      */
-    public Boolean isEstado() {
-        return Estado;
+    public Boolean isPreEstado() {
+        return PreEstado;
     }
 
     /**
@@ -113,7 +113,7 @@ public class PreliminarTab implements Serializable{
 
     @Override
     public String toString() {
-        return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + ", Posnombre=" + Posnombre + '}';
+        return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", PreEstado=" + PreEstado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + ", Posnombre=" + Posnombre + '}';
     }
 }
     

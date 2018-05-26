@@ -30,11 +30,11 @@ public class MaterialSecoMs implements MaterialSeco {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.materialsecoIn(?,?,?,?,?,?,?,?);";
-    final String Modificar = "call LotusProject.materialsecoMo(?,?,?,?);";
-    final String Eliminar = "call LotusProject.materialsecoEl(?);";
-    final String Consultar = "call LotusProject.materialsecoCo(?);";
-    final String ListarTodos = "call LotusProject.materialsecoLi();";
+    final String Insertar = "call lotusproyect.materialsecoIn(?,?,?,?,?,?,?,?);";
+    final String Modificar = "call lotusproyect.materialsecoMo(?,?,?,?);";
+    final String Eliminar = "call lotusproyect.materialsecoEl(?);";
+    final String Consultar = "call lotusproyect.materialsecoCo(?);";
+    final String ListarTodos = "call lotusproyect.materialsecoLi();";
 
     @Override
     public Mensajes insertar(MaterialSecoTab ms) {
@@ -104,14 +104,14 @@ public class MaterialSecoMs implements MaterialSeco {
      public List<MaterialSecoTab> listar() {
     PreparedStatement stat = null;
         ResultSet rs = null;
-        List<MaterialSecoTab> uModel = new ArrayList<>();
+        List<MaterialSecoTab> msModel = new ArrayList<>();
         try {
             try {
                 stat = con.prepareCall(ListarTodos);
 
                 rs = stat.executeQuery();
                 while (rs.next()) {
-                    uModel.add(convertir(rs));
+                    msModel.add(convertir(rs));
                 }
             } finally {
                 if (rs != null) {
@@ -132,7 +132,7 @@ public class MaterialSecoMs implements MaterialSeco {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return msModel;    
     }
 
 
@@ -185,15 +185,72 @@ public class MaterialSecoMs implements MaterialSeco {
     }
 
     @Override
-    public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public MaterialSecoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        MaterialSecoTab msModel = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                msModel = convertir(rs);
+            } else {
+                throw new SQLException("Error, armado no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return msModel;
     }
-    
+    @Override
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
 
 
 

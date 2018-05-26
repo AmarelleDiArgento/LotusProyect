@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Parametros;
-import Modelo.Tabs.MenuTab;
 import Modelo.Tabs.ParametrosTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -30,11 +29,11 @@ public class ParametrosMs implements Parametros{
         this.con = con;
     }
 
-    final String Insertar = "call lotusproject.parametrosIn(?,?,?,?);";
-    final String Modificar = "call lotusproject.parametrosMo(?,?,?);";
-    final String Eliminar = "call lotusproject.parametrosEl(?);";
-    final String Consultar = "call lotusproject.parametrosCo(?);";
-    final String ListarTodos = "call lotusproject.parametrosLi();";
+    final String Insertar = "call lotusproyect.parametrosIn(?,?,?,?);";
+    final String Modificar = "call lotusproyect.parametrosMo(?,?,?);";
+    final String Eliminar = "call lotusproyect.parametrosEl(?);";
+    final String Consultar = "call lotusproyect.parametrosCo(?);";
+    final String ListarTodos = "call lotusproyect.parametrosLi();";
     
      @Override
     public Mensajes insertar(ParametrosTab p) {
@@ -164,17 +163,74 @@ public class ParametrosMs implements Parametros{
         }
         return m;
     }
-
-    @Override
-    public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ParametrosTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
+        @Override
+       public ParametrosTab obtener(Integer id) {
+           PreparedStatement stat = null;
+           ResultSet rs = null;
+           ParametrosTab pModel = null;
+           try {
+               stat = con.prepareCall(Consultar);
+               stat.setInt(1, id);
+               rs = stat.executeQuery();
+               if (rs.next()) {
+                   pModel = convertir(rs);
+               } else {
+                   throw new SQLException("Error, armado no encontrado");
+               }
+           } catch (SQLException ex) {
+               System.out.println("Error de SQL " + ex);
+           } finally {
+               if (rs != null) {
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       System.out.println("Error de SQL rs: " + ex);
+                   }
+               }
+               if (stat != null) {
+                   try {
+                       stat.close();
+                   } catch (SQLException ex) {
+                       System.out.println("Error de SQL: " + ex);
+                   }
+
+               }
+           }
+           return pModel;
+       }
 
 
-}
+       @Override
+       public Mensajes eliminar(Integer id) {
+           PreparedStatement stat = null;
+           try {
+               stat = con.prepareStatement(Eliminar);
+               stat.setInt(1, id);
+               if (stat.executeUpdate() == 0) {
+                   m.setTipo("Error");
+                   m.setMsj("Error Mysql");
+                   m.setDetalles("Error al eliminar los datos");
+               } else {
+                   m.setTipo("Ok");
+                   m.setMsj(id + " eliminado exitosamente");
+               }
+
+           } catch (SQLException ex) {
+               m.setTipo("Error");
+               m.setMsj("Error Mysql");
+               m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+           } finally {
+               if (stat != null) {
+                   try {
+                       stat.close();
+                   } catch (SQLException ex) {
+                       m.setTipo("Error");
+                       m.setMsj("Error Mysql Statement");
+                       m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                   }
+               }
+           }
+           return m;
+       }
+   }

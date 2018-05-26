@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Poscosecha;
-import Modelo.Tabs.PasoTab;
 import Modelo.Tabs.PoscosechaTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -30,11 +29,11 @@ public class PoscosechaMs implements Poscosecha {
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
+    final String Insertar = "call lotusproyect.poscosechaIn(?,?,?,?);";
+    final String Modificar = "call lotusproyect.poscosechaMo(?,?,?,?);";
+    final String Eliminar = "call lotusproyect.poscosechaEl(?);";
+    final String Consultar = "call lotusproyect.poscosechaCo(?);";
+    final String ListarTodos = "call lotusproyect.poscosechaLi();";
     
     @Override
     public Mensajes insertar(PoscosechaTab p) {
@@ -124,21 +123,119 @@ public class PoscosechaMs implements Poscosecha {
         }
         return uModel;    
     }
+     
+      @Override
+    public Mensajes modificar(PoscosechaTab p) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, p.getPosId());
+            stat.setString(2, p.getPosNombre());
+            stat.setString(3, p.getPosDireccion());
+            stat.setString(4, p.getPosTelefono());
 
-    @Override
-    public Mensajes modificar(PoscosechaTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            if (p.isPosEstado()) {
+                stat.setInt(5, 1);
+            } else {
+                stat.setInt(5, 0);
+            }
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(p.getPosNombre() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
-
-    @Override
-    public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public PoscosechaTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        PoscosechaTab pModel = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                pModel = convertir(rs);
+            } else {
+                throw new SQLException("Error, armado no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
+
+            }
+        }
+        return pModel;
     }
-     
+
+
+      @Override
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
 
 }
+    

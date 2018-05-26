@@ -6,7 +6,6 @@
 package Modelo.MySql;
 
 import Modelo.Interface.Paso;
-import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.PasoTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
@@ -120,21 +119,112 @@ public class PasoMs  implements Paso{
     }
 
     @Override
-    public Mensajes modificar(PasoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       public PasoTab obtener(Integer id) {
+           PreparedStatement stat = null;
+           ResultSet rs = null;
+           PasoTab pModel = null;
+           try {
+               stat = con.prepareCall(Consultar);
+               stat.setInt(1, id);
+               rs = stat.executeQuery();
+               if (rs.next()) {
+                   pModel = convertir(rs);
+               } else {
+                   throw new SQLException("Error, armado no encontrado");
+               }
+           } catch (SQLException ex) {
+               System.out.println("Error de SQL " + ex);
+           } finally {
+               if (rs != null) {
+                   try {
+                       rs.close();
+                   } catch (SQLException ex) {
+                       System.out.println("Error de SQL rs: " + ex);
+                   }
+               }
+               if (stat != null) {
+                   try {
+                       stat.close();
+                   } catch (SQLException ex) {
+                       System.out.println("Error de SQL: " + ex);
+                   }
+
+               }
+           }
+           return pModel;
+       }
+
+        @Override
+    public Mensajes modificar(PasoTab p) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, p.getPasId());
+            stat.setInt(2, p.getPasorden());
+            stat.setString(3, p.getPasDescripcion());
+            stat.setString(4, p.getPasImagen());
+
+            if (stat.executeUpdate() == 0) {
+
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(p.getPasorden() + " modificado exitosamente");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
-    public Mensajes eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+       public Mensajes eliminar(Integer id) {
+           PreparedStatement stat = null;
+           try {
+               stat = con.prepareStatement(Eliminar);
+               stat.setInt(1, id);
+               if (stat.executeUpdate() == 0) {
+                   m.setTipo("Error");
+                   m.setMsj("Error Mysql");
+                   m.setDetalles("Error al eliminar los datos");
+               } else {
+                   m.setTipo("Ok");
+                   m.setMsj(id + " eliminado exitosamente");
+               }
 
-    @Override
-    public PasoTab obtener(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-    
+           } catch (SQLException ex) {
+               m.setTipo("Error");
+               m.setMsj("Error Mysql");
+               m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+           } finally {
+               if (stat != null) {
+                   try {
+                       stat.close();
+                   } catch (SQLException ex) {
+                       m.setTipo("Error");
+                       m.setMsj("Error Mysql Statement");
+                       m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                   }
+               }
+           }
+           return m;
+       }
 
 }
+
+  

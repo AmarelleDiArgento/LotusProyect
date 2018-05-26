@@ -28,11 +28,11 @@ public class ControlCambiosMs implements ControlCambios {
 
         this.con = con;
     }
-    final String Insertar = "call LotusProject.controldecambiosIn(?,?,?)";
-    final String Modificar = "call LotusProject.contrroldecambiosMo(?,?,?,?);";
-    final String Eliminar = "call LotusProject.controldecambiosEl(?);";
-    final String Consultar = "call LotusProject.controldecambiosCo(?);";
-    final String ListarTodos = "call LotusProject.controldecambiosLi();";
+    final String Insertar = "call LotusProyect.controldecambiosIn(?,?,?)";
+    final String Modificar = "call LotusProyect.contrroldecambiosMo(?,?,?,?);";
+    final String Eliminar = "call lotusproyect.controldecambiosEl(?);";
+    final String Consultar = "call lotusproyect.controldecambiosCo(?);";
+    final String ListarTodos = "call LotusProyect.controldecambiosLi();";
 
     @Override
     public Mensajes insertar(ControlCambioTab c) {

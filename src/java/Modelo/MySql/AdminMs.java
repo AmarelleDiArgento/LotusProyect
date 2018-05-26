@@ -33,6 +33,7 @@ import Modelo.Interface.Marcacion;
 import Modelo.Interface.FitoProducto;
 import Modelo.Interface.MaterialSeco;
 
+
 /**
  *
  * @author Amarelle
@@ -51,7 +52,7 @@ public class AdminMs implements Admin {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lotusproject", "lotusproject", "1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LotusProyect", "lotusproyect", "1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF");
         } catch (ClassNotFoundException ex) {
             System.out.print("Class for name " + ex);
         }
@@ -61,18 +62,18 @@ public class AdminMs implements Admin {
         this.pool = ds;
         this.con = pool.getConnection();
     }
-
+    
     private Armado Arm = null;
     private AsignaPermiso AsgPer = null;
-    private ControlCambios CoC = null;
-    private FitoProducto FiP = null;
+    private ControlCambios Cont = null;
+    private FitoProducto Fitp = null;
     private Fitosanidad Fit = null;
     private Grados Gra = null;
     private Linea Lin = null;
     private Maestro Mae = null;
     private Marcacion Mar = null;
-    private MaterialSeco Mat = null;
-    private Menu Men = null;
+    private MaterialSeco  Mat = null;
+    private Menu Me = null;
     private Parametros Par = null;
     private Paso Pas = null;
     private Permiso Per = null;
@@ -80,34 +81,18 @@ public class AdminMs implements Admin {
     private Preliminar Pre = null;
     private Producto Pro = null;
     private Rol Rol = null;
-    private Tipo Tip = null;
+    private Tipo Ti = null;
     private Usuario Usu = null;
     private Variedad Var = null;
 
-    @Override
-    public Usuario getUsuario() {
-        if (Usu == null) {
-            Usu = new UsuarioMs(con);
+      @Override
+    public Armado getArmado() {
+        if (Arm == null) {
+            Arm = new ArmadoMs(con);
         }
-        return Usu;
+        return Arm;
     }
-
-    @Override
-    public Rol getRol() {
-        if (Rol == null) {
-            Rol = new RolMs(con);
-        }
-        return Rol;
-    }
-
-    @Override
-    public Permiso getPermiso() {
-        if (Per == null) {
-            Per = new PermisoMs(con);
-        }
-        return Per;
-    }
-
+    
     @Override
     public AsignaPermiso getAsignaPer() {
         if (AsgPer == null) {
@@ -115,57 +100,25 @@ public class AdminMs implements Admin {
         }
         return AsgPer;
     }
-
-    @Override
-    public Armado getArmado() {
-        if (Arm == null) {
-            Arm = new ArmadoMs(con);
+    
+     @Override
+        public ControlCambios getControlCambios() {
+        if (Cont == null) {
+            Cont = new ControlCambiosMs(con);
         }
-        return Arm;
-    }
-
+        return Cont;      
+        
+     }
+        
     @Override
-    public Variedad getVariedad() {
-        if (Var == null) {
-            Var = new VariedadMs(con);
+        public FitoProducto getFitoProducto() {
+        if (Fitp == null) {
+            Fitp = new FitoProductoMs(con);
         }
-        return Var;
-    }
-
-    @Override
-    public Producto getProducto() {
-        if (Pro == null) {
-            Pro = new ProductoMs(con);
-        }
-        return Pro;
-    }
-
-    @Override
-    public Preliminar getPreliminar() {
-        if (Pre == null) {
-            Pre = new PreliminarMs(con);
-        }
-        return Pre;
-
-    }
-
-    @Override
-    public Poscosecha getPoscosecha() {
-        if (Pos == null) {
-            Pos = new PoscosechaMs(con);
-        }
-        return Pos;
-    }
-
-    @Override
-    public Paso getPaso() {
-        if (Pas == null) {
-            Pas = new PasoMs(con);
-        }
-        return Pas;
-    }
-
-    @Override
+        return Fitp;  
+    }  
+        
+  @Override
     public Fitosanidad getFitosanidad() {
         if (Fit == null) {
             Fit = new FitosanidadMs(con);
@@ -173,57 +126,25 @@ public class AdminMs implements Admin {
         return Fit;
 
     }
-
-    @Override
+    
+     @Override
     public Grados getGrados() {
         if (Gra == null) {
             Gra = new GradosMs(con);
         }
         return Gra;
     }
-
-    @Override
-    public Parametros getParametros() {
-        if (Par == null) {
-            Par = new ParametrosMs(con);
-        }
-        return Par;
-    }
-
-    @Override
+        
+     @Override
     public Linea getLinea() {
         if (Lin == null) {
             Lin = new LineaMs(con);
         }
         return Lin;
     }
-
+    
     @Override
-    public Menu getMenu() {
-        if (Men == null) {
-            Men = new MenuMs(con);
-        }
-        return Men;
-    }
-
-    @Override
-    public FitoProducto getFitoProducto() {
-        if (FiP == null) {
-            FiP = new FitoProductoMs(con);
-        }
-        return FiP;
-    }
-
-    @Override
-    public ControlCambios getControlCambios() {
-        if (CoC == null) {
-            CoC = new ControlCambiosMs(con);
-        }
-        return CoC;
-    }
-
-    @Override
-    public Maestro getMaestro() {
+        public Maestro getMaestro() {
         if (Mae == null) {
             Mae = new MaestroMs(con);
         }
@@ -231,27 +152,111 @@ public class AdminMs implements Admin {
     }
 
     @Override
-    public Marcacion getMarcacion() {
+        public Marcacion getMarcacion() {
         if (Mar == null) {
             Mar = new MarcacionMs(con);
         }
         return Mar;
     }
-
-    @Override
-    public Tipo getTipo() {
-
-        if (Tip == null) {
-            Tip = new TipoMs(con);
-        }
-        return Tip;
-    }
-    @Override
-    public MaterialSeco getMaterialSeco() {
-
+        
+        
+     @Override
+        public MaterialSeco getMaterialSeco() {
         if (Mat == null) {
             Mat = new MaterialSecoMs(con);
         }
-        return Mat;
-}
-}
+        return Mat;   
+        
+      }
+        
+   @Override
+        public Menu getMenu() {
+        if (Me == null) {
+            Me = new MenuMs(con);
+        }
+        return Me;
+    } 
+        
+         @Override
+    public Parametros getParametros() {
+        if (Par == null) {
+            Par = new ParametrosMs(con);
+        }
+        return Par;
+    }
+    
+     @Override
+    public Paso getPaso() {
+        if (Pas == null) {
+            Pas = new PasoMs(con);
+        }
+        return Pas;
+    }
+    
+     @Override
+    public Permiso getPermiso() {
+        if (Per == null) {
+            Per = new PermisoMs(con);
+        }
+        return Per;
+    }
+    
+    
+    @Override
+    public Poscosecha getPoscosecha() {
+        if (Pos == null) {
+            Pos = new PoscosechaMs(con);
+        }
+        return Pos;
+    }
+    
+     @Override
+    public Preliminar getPreliminar() {
+        if (Pre == null) {
+            Pre = new PreliminarMs(con);
+        }
+        return Pre;
+
+    }
+    
+     @Override
+    public Producto getProducto() {
+        if (Pro == null) {
+            Pro = new ProductoMs(con);
+        }
+        return Pro;
+    }
+    
+    @Override
+    public Rol getRol() {
+        if (Rol == null) {
+            Rol = new RolMs(con);
+        }
+        return Rol;
+    }
+    
+     @Override
+    public Tipo getTipo() {
+        if (Ti == null) {
+            Ti = new TipomsMs(con);
+        }
+        return Ti;
+    }
+    
+    @Override
+    public Usuario getUsuario() {
+        if (Usu == null) {
+            Usu = new UsuarioMs(con);
+        }
+        return Usu;
+    }
+       
+    @Override
+    public Variedad getVariedad() {
+        if (Var == null) {
+            Var = new VariedadMs(con);
+            }
+            return Var;
+        }
+        
+     }
