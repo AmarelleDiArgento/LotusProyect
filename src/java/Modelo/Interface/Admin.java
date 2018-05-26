@@ -28,6 +28,8 @@ public interface Admin {
     Maestro getMaestro();
 
     Marcacion getMarcacion();
+    
+    MaterialSeco getMaterialSeco();
 
     Menu getMenu();
 

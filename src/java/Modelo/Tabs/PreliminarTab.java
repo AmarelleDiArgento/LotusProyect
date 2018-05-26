@@ -6,7 +6,6 @@
 package Modelo.Tabs;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  *
@@ -15,15 +14,32 @@ import java.sql.Date;
 public class PreliminarTab implements Serializable{
    
     private int PreId;
-    private Date PreFecha;
+    private String PreFecha;
     private Boolean Estado;
     private int Poscosecha_Posnombre;
+    private String Posnombre;
 
-    public PreliminarTab(int PreId, Date PreFecha, Boolean Estado) {
+    public PreliminarTab(String PreFecha,String Posnombre, Boolean Estado) {
+        this.PreFecha = PreFecha;
+        this.Posnombre = Posnombre;
+        this.Estado = Estado;
+
+    }
+
+    public PreliminarTab(int PreId, String PreFecha,String Posnombre, Boolean Estado) {
+        this.PreId = PreId;
+        this.PreFecha = PreFecha;
+        this.Posnombre = Posnombre;
+        this.Estado = Estado;
+    }
+
+    public PreliminarTab(int PreId, String PreFecha, Boolean Estado) {
         this.PreId = PreId;
         this.PreFecha = PreFecha;
         this.Estado = Estado;
     }
+    
+   
     /**
      * @return the PreId
      */
@@ -41,21 +57,22 @@ public class PreliminarTab implements Serializable{
     /**
      * @return the PreFecha
      */
-    public Date getPreFecha() {
+    public String getPreFecha() {
         return PreFecha;
     }
 
     /**
      * @param PreFecha the PreFecha to set
      */
-    public void setPreFecha(Date PreFecha) {
+    public void setPreFecha(String PreFecha) {
         this.PreFecha = PreFecha;
     }
 
-      /**
+    
+    /**
      * @param Estado the Estado to set
      */
-    public void setEstado(Boolean Estado) {
+    public void setArmEstado(Boolean Estado) {
         this.Estado = Estado;
     }
 
@@ -80,10 +97,28 @@ public class PreliminarTab implements Serializable{
         this.Poscosecha_Posnombre = Poscosecha_Posnombre;
     }
 
+    /**
+     * @return the Posnombre
+     */
+    public String getPosnombre() {
+        return Posnombre;
+    }
+
+    /**
+     * @param Posnombre the Posnombre to set
+     */
+    public void setPosnombre(String Posnombre) {
+        this.Posnombre = Posnombre;
+    }
+
     @Override
     public String toString() {
-        return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + '}';
+        return "PreliminarTab{" + "PreId=" + PreId + ", PreFecha=" + PreFecha + ", Estado=" + Estado + ", Poscosecha_Posnombre=" + Poscosecha_Posnombre + ", Posnombre=" + Posnombre + '}';
     }
 }
+    
 
-   
+    
+
+    
+    

@@ -30,11 +30,11 @@ public class ParametrosMs implements Parametros{
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.parametrosIn(?,?,?,?);";
-    final String Modificar = "call lotusproyect.parametrosMo(?,?,?);";
-    final String Eliminar = "call lotusproyect.parametrosEl(?);";
-    final String Consultar = "call lotusproyect.parametrosCo(?);";
-    final String ListarTodos = "call lotusproyect.parametrosLi();";
+    final String Insertar = "call lotusproject.parametrosIn(?,?,?,?);";
+    final String Modificar = "call lotusproject.parametrosMo(?,?,?);";
+    final String Eliminar = "call lotusproject.parametrosEl(?);";
+    final String Consultar = "call lotusproject.parametrosCo(?);";
+    final String ListarTodos = "call lotusproject.parametrosLi();";
     
      @Override
     public Mensajes insertar(ParametrosTab p) {

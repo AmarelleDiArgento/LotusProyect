@@ -45,6 +45,8 @@
 
 
         <div class="container">
+            <h3>Material Seco</h3>
+
 
             <%
                 List<MaterialSecoTab> LisM = (List<MaterialSecoTab>) Ses.getAttribute("lisM");
@@ -120,10 +122,10 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="materialseco.do">
+            <form method="get" action="materialsecos.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo MaterialSeco</h4>
+                    <p>Registra la informacion del nuevo MaterialSeco</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -158,7 +160,7 @@
                 MaterialSecoTab mS = (MaterialSecoTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="materialseco.do">
+            <form method="get" action="materialsecos.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
                     <p>Registra la informacion del nuevo Armado</p>
@@ -275,7 +277,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="materialseco.do" method="post" >
+        <form id="lista" action="materialsecos.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

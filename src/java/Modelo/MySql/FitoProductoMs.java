@@ -29,11 +29,11 @@ public class FitoProductoMs implements FitoProducto {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.fitoproductoIn(?,?);";
-    final String Modificar = "call lotusproyect.fitoproductoMo(?,?,?);";
-    final String Eliminar = "call lotusproyect.fitosanidadEl(?);";
-    final String Consultar = "call lotusproyect.fitoproductoCo(?)";
-    final String ListarTodos = "call lotusproyect.fitosanidadLi();";
+    final String Insertar = "call LotusProject.fitoproductoIn(?,?);";
+    final String Modificar = "call LotusProject.fitoproductoMo(?,?,?);";
+    final String Eliminar = "call LotusProject.fitosanidadEl(?);";
+    final String Consultar = "call LotusProject.fitoproductoCo(?)";
+    final String ListarTodos = "call LotusProject.fitoproductoLi();";
 
     {
 

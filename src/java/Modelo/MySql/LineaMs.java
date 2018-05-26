@@ -29,11 +29,11 @@ public class LineaMs implements Linea {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.lineaIn(?);";
-    final String Modificar = "call lotusproyect.lineaMo(?,?);";
-    final String Eliminar = "call lotusproyect.lineaEl(?);";
-    final String Consultar = "call lotusproyect.lineaCo(?);";
-    final String ListarTodos = "call lotusproyect.lineaLi();";
+    final String Insertar = "call LotusProject.lineaIn(?);";
+    final String Modificar = "call LotusProject.lineaMo(?,?);";
+    final String Eliminar = "call LotusProject.lineaEl(?);";
+    final String Consultar = "call LotusProject.lineaCo(?);";
+    final String ListarTodos = "call LotusProject.lineaLi();";
     
      @Override
     public Mensajes insertar(LineaTab l) {

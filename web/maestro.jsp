@@ -44,6 +44,8 @@
 
 
         <div class="container">
+            <h3>Maestro</h3>
+
 
             <%
                 List<MaestroTab> LisM = (List<MaestroTab>) Ses.getAttribute("lisM");
@@ -109,7 +111,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="maestro.do">
+            <form method="get" action="maestros.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Maestro</h4>
                     <p>Registra la informacion del nuevo Maestro</p>
@@ -264,7 +266,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="maestro.do" method="post" >
+        <form id="lista" action="maestros.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

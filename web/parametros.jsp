@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Armado</title>
+        <title>Lotus QA - Parametros</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -45,6 +45,8 @@
 
 
         <div class="container">
+           <h3>Parametros</h3>
+
 
             <%
                 List<ParametrosTab> LisP = (List<ParametrosTab>) Ses.getAttribute("lisP");
@@ -114,10 +116,10 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="parametros.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Parametro</h4>
-                    <p>Registra la informacion del nuevo Parametro</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Parametros</h4>
+                    <p>Registra la informacion del nuevo Parametros</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">

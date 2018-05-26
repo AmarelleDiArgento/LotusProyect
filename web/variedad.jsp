@@ -1,5 +1,4 @@
 <%@page import="Modelo.Tabs.VariedadTab"%>
-<%@page import="Modelo.Tabs.VariedadTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -115,10 +114,10 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="variedads.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Variedad</h4>
+                    <p>Registra la informacion de la nueva Variedad</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -149,14 +148,14 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Arm") != null) {
+        <%if (Ses.getAttribute("Var") != null) {
                 VariedadTab vS = (VariedadTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="variedads.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Variedad</h4>
+                    <p>Registra la informacion de la nueva Variedad</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -264,8 +263,8 @@
 </html>
 <%
 
-    Ses.setAttribute("lisA", null);
-    Ses.setAttribute("Arm", null);
+    Ses.setAttribute("lisV", null);
+    Ses.setAttribute("Var", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>

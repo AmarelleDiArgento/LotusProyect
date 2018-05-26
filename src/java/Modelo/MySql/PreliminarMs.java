@@ -9,7 +9,6 @@ import Modelo.Interface.Preliminar;
 import Modelo.Tabs.PreliminarTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class PreliminarMs implements Preliminar {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
-            stat.setDate(1, p.getPreFecha());
+            stat.setString(1, p.getPreFecha());
 
             if (p.isEstado()) {
                 stat.setInt(2, 1);
@@ -80,7 +79,7 @@ public class PreliminarMs implements Preliminar {
     @Override
     public PreliminarTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("PreId");
-        Date fecha = rs.getDate("PreFecha");
+        String fecha = rs.getString("PreFecha");
         int st = rs.getInt("PreEstado");
         boolean status = st == 1;
         PreliminarTab aTab = new PreliminarTab (Id, fecha,status);

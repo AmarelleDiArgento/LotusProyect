@@ -16,24 +16,31 @@ public class VariedadTab implements Serializable{
     private int VarId;
     private String VarNombre;
     private Boolean VarEstado;
-    private String Varimagen;
+    private String VarImagen;
     private String VarColor;
 
-    public VariedadTab(int VarId, String VarNombre, Boolean VarEstado, String Varimagen, String VarColor) {
+    public VariedadTab(int VarId, String VarNombre, String VarImagen, String VarColor,Boolean VarEstado) {
+        this.VarId = VarId;
+        this.VarNombre = VarNombre;
+        this.VarImagen = VarImagen;
+        this.VarColor = VarColor;
+        this.VarEstado = VarEstado;
+    }
+    public VariedadTab(String VarNombre,String VarImagen, String VarColor,Boolean VarEstado) {
+        this.VarNombre = VarNombre;
+        this.VarImagen = VarImagen;
+        this.VarColor = VarColor;
+        this.VarEstado = VarEstado;
+    }
+
+    public VariedadTab(int VarId, String VarNombre, Boolean VarEstado, String VarImagen, String VarColor) {
         this.VarId = VarId;
         this.VarNombre = VarNombre;
         this.VarEstado = VarEstado;
-        this.Varimagen = Varimagen;
+        this.VarImagen = VarImagen;
         this.VarColor = VarColor;
     }
-
-    public VariedadTab(int VarId, String VarNombre, Boolean VarEstado, String Varimagen) {
-        this.VarId = VarId;
-        this.VarNombre = VarNombre;
-        this.VarEstado = VarEstado;
-        this.Varimagen = Varimagen;
-
-    }
+    
 
     /**
      * @return the VarId
@@ -78,15 +85,15 @@ public class VariedadTab implements Serializable{
     /**
      * @return the Varimagen
      */
-    public String getVarimagen() {
-        return Varimagen;
+    public String getVarImagen() {
+        return VarImagen;
     }
 
     /**
-     * @param Varimagen the Varimagen to set
+     * @param VarImagen the VarImagen to set
      */
-    public void setVarimagen(String Varimagen) {
-        this.Varimagen = Varimagen;
+    public void setVarImagen(String VarImagen) {
+        this.VarImagen = VarImagen;
     }
 
     /**
@@ -105,7 +112,7 @@ public class VariedadTab implements Serializable{
 
     @Override
     public String toString() {
-        return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", Varimagen=" + Varimagen + ", VarColor=" + VarColor + '}';
+        return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", VarImagen=" + VarImagen + ", VarColor=" + VarColor + '}';
     }
 
 }

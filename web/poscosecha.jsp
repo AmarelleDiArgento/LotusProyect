@@ -44,6 +44,8 @@
 
 
         <div class="container">
+            <h3>Poscosecha</h3>
+
 
             <%
                 List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
@@ -63,7 +65,7 @@
                 <tbody>
                     <% for (PoscosechaTab pt : LisP) {%>
                     <tr>
-                        <td><%=pt.getIdposcosecha()%></td>
+                        <td><%=pt.getPosId()%></td>
                         <td><%=pt.getPosNombre()%></td>
                         <td><%=pt.getPosDireccion()%></td>
                         <td><%=pt.getPosTelefono()%></td>
@@ -76,12 +78,12 @@
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getIdposcosecha()%>)" > edit </i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getPosId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getIdposcosecha()%>)"> delete </i>
+                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getPosId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -95,7 +97,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Poscosecha"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -116,7 +118,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="poscosechas.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Poscosecha</h4>
                     <p>Registra la informacion del nuevo Poscosecha</p>
@@ -154,7 +156,7 @@
                 PoscosechaTab pS = (PoscosechaTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="poscosechas.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Poscosecha</h4>
                     <p>Registra la informacion del nuevo Poscosecha</p>
@@ -271,7 +273,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="poscosecha.do" method="post" >
+        <form id="lista" action="poscosechas.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

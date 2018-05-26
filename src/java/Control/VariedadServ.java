@@ -68,7 +68,7 @@ public class VariedadServ extends HttpServlet {
         VariedadTab v = null;
     int Id;
     String VarNombre;
-    String Varimagen;
+    String VarImagen;
     String VarColor;
     Boolean VarEstado;
     String E;
@@ -79,13 +79,12 @@ public class VariedadServ extends HttpServlet {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
                         VarNombre = request.getParameter("VarNombre");
-                        Varimagen = request.getParameter("Varimagen");
+                        VarImagen = request.getParameter("Varimagen");
                         VarColor = request.getParameter("VarColor");
                         E = request.getParameter("VarEstado");
                         VarEstado = E.equals("on");
-                        v = new VariedadTab(VarNombre, Varimagen,VarColor,VarEstado);
-                        m.setMsj(Asql.getVariedad().insertar(v);
-                        m.setTipo("Ok");
+                        v = new VariedadTab(VarNombre, VarImagen,VarColor,VarEstado);
+                        m = Asql.getVariedad().insertar(v);
 
                     } else {
                         m.setTipo("Error");
@@ -98,13 +97,12 @@ public class VariedadServ extends HttpServlet {
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         VarNombre = request.getParameter("VarNombre");
-                        Varimagen = request.getParameter("Varimagen");
+                        VarImagen = request.getParameter("Varimagen");
                         VarColor = request.getParameter("VarColor");
                         E = request.getParameter("VarEstado");
                         VarEstado = E.equals("on");
-                        v = new VariedadTab(id,VarNombre, Varimagen,VarColor,VarEstado);
-                        m.setMsj(Asql.getVariedad().modificar(v));
-                        m.setVariedad("Ok");
+                        v = new VariedadTab(Id,VarNombre, VarImagen,VarColor,VarEstado);
+                        m = Asql.getVariedad().modificar(v);
 
                     } else {
                         m.setTipo("Error");
@@ -114,8 +112,7 @@ public class VariedadServ extends HttpServlet {
                 case "eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m.setMsj(Asql.getRol().eliminar(Id));
-                        m.setTipo("Ok");
+                        m = Asql.getVariedad().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -161,7 +158,7 @@ public class VariedadServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-        if (m.getVariedad() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);

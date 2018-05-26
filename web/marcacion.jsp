@@ -44,6 +44,8 @@
 
 
         <div class="container">
+            <h3>Marcacion</h3>
+
 
             <%
                 List<MarcacionTab> LisM = (List<MarcacionTab>) Ses.getAttribute("lisM");
@@ -93,7 +95,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Marcacion"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -114,7 +116,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="marcacion.do">
+            <form method="get" action="marcacions.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
@@ -152,7 +154,7 @@
                 MarcacionTab mS = (MarcacionTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="marcacion.do">
+            <form method="get" action="marcacions.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>

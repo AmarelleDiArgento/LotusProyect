@@ -44,6 +44,8 @@
 
 
         <div class="container">
+             <h3>Preliminar</h3>
+
 
             <%
                 List<PreliminarTab> LisP = (List<PreliminarTab>) Ses.getAttribute("lisP");
@@ -114,7 +116,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="preliminar.do">
+            <form method="get" action="preliminars.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Preliminar</h4>
                     <p>Registra la informacion del nuevo Preliminar</p>
@@ -152,7 +154,7 @@
                 PreliminarTab pS = (PreliminarTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="preliminar.do">
+            <form method="get" action="preliminars.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo preliminar</h4>
                     <p>Registra la informacion del nuevo preliminar</p>
@@ -269,7 +271,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="preliminar.do" method="post" >
+        <form id="lista" action="preliminars.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

@@ -44,6 +44,8 @@
 
 
         <div class="container">
+               <h3>Permiso</h3>
+
 
             <%
                 List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisP");

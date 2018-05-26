@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "Fitosanidad.jsp";
+    String jsp = "fitosanidad.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisA") != null) {
+        if (Ses.getAttribute("lisF") != null) {
 
 
 %>
@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Armado</title>
+        <title>Lotus QA - Fitosanidad</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -44,6 +44,8 @@
 
 
         <div class="container">
+           <h3>Fitosanidad</h3>
+
 
             <%
                 List<FitosanidadTab> LisF = (List<FitosanidadTab>) Ses.getAttribute("lisF");

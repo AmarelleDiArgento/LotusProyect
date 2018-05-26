@@ -31,12 +31,12 @@ public class PermisoMs implements Permiso {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProyect.permisoIn(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    final String Modificar = "call LotusProyect.permisoMo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    final String Eliminar = "call LotusProyect.permisoEl(?);";
-    final String Consultar = "call LotusProyect.permisoCo(?);";
-    final String ListarTodos = "call LotusProyect.permisoLi();";
-    final String Menu = "call LotusProyect.perMenu(?);";
+    final String Insertar = "call LotusProject.permisoIn(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    final String Modificar = "call LotusProject.permisoMo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    final String Eliminar = "call LotusProject.permisoEl(?);";
+    final String Consultar = "call LotusProject.permisoCo(?);";
+    final String ListarTodos = "call LotusProject.permisoLi();";
+    final String Menu = "call LotusProject.perMenu(?);";
 
     @Override
     public Mensajes insertar(PermisoTab p) {

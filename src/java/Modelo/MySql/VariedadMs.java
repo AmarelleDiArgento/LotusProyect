@@ -43,7 +43,7 @@ public class VariedadMs implements Variedad{
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, v.getVarNombre());
-            stat.setString(2, v.getVarimagen());
+            stat.setString(2, v.getVarImagen());
             stat.setString(2, v.getVarColor());
 
             if (v.isVarEstado()) {

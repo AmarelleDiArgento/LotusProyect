@@ -281,7 +281,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure armadoIn (in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
+create procedure armadoIn (in aNombre varchar(45), in aDescripcion MEDIUMTEXT,in aEstado tinyint(1))
 begin
 insert into armado (ArmNombre,ArmDescripcion,ArmEstado) values (aNombre,aDescripcion,aEstado);
 end $$ArmId
@@ -292,7 +292,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure armadoMo (in aId int(11),in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
+create procedure armadoMo (in aId int(11),in aNombre varchar(45), in aDescripcion MEDIUMTEXT,in aEstado tinyint(1))
 begin
 update armado SET ArmNombre=aNombre, ArmDescripcion=aDescripcion, ArmEstado=aEstado where ArmId=aId;
 end $$
@@ -461,7 +461,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure fitosanidadIn (in FitNombre varchar(45), in FitDescripcion varchar(45),in FitTipo enum ('Plaga','Enfermedad'), in FitImagen varchar (45),in FitEstado tinyint(1))
+create procedure fitosanidadIn (in FitNombre varchar(45), in FitDescripcion MEDIUMTEXT,in FitTipo enum ('Plaga','Enfermedad'), in FitImagen varchar (45),in FitEstado tinyint(1))
 begin
 insert into fitosanidad(FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado) values (fNombre,fDescripcion,fTipo,fImagen,fEstado);
 end $$FitId
@@ -472,7 +472,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitosanidadMo(in fId int(11),in fNombre varchar(45), in fDescripcion varchar(45),in fTipo enum ('Plaga','Enfermedad'),in fImagen varchar(45), in FitEstado tinyint(1))
+create procedure fitosanidadMo(in fId int(11),in fNombre varchar(45), in fDescripcion MEDIUMTEXT,in fTipo enum ('Plaga','Enfermedad'),in fImagen varchar(45), in FitEstado tinyint(1))
 begin
 update fitosanidad SET FitNombre=fNombre, FitDescripcion=fDescripcion, FitTipo=fTipo, FitImagen=fImagen where FitId=fId;
 end $$
@@ -642,7 +642,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure maestroIn(in MaeNombre varchar(45), in MaeDescripcion varchar(255))
+create procedure maestroIn(in MaeNombre varchar(45), in MaeDescripcion MEDIUMTEXT)
 begin
 insert into maestro(MaeNombre,MaeDescripcion) values (mNombre,mDescripcion);
 end $$
@@ -653,7 +653,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure maestroMo(in maId int(11),in maNombre varchar(45), in maDescripcion MEDIUMTEXT)
 begin
 update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
 end $$
@@ -711,7 +711,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure marcacionMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure marcacionMo(in maId int(11),in maNombre varchar(45), in maDescripcion MEDIUMTEXT)
 begin
 update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
 end $$

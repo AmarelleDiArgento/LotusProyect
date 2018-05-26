@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "Grados.jsp";
+    String jsp = "grados.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
@@ -44,6 +44,8 @@
 
 
         <div class="container">
+           <h3>Grados</h3>
+
 
             <%
                 List<GradosTab> LisG = (List<GradosTab>) Ses.getAttribute("LisG");
@@ -63,7 +65,7 @@
                 <tbody>
                     <% for (GradosTab gt : LisG) {%>
                     <tr>
-                        <td><%=gt.getGraID()%></td>
+                        <td><%=gt.getGraId()%></td>
                         <td><%=gt.getGraNombre()%></td>
                         <td><%=gt.getGraDetalles()%></td>
                         <td>
@@ -74,12 +76,12 @@
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=gt.getGraID()%>)" > edit </i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=gt.getGraId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=gt.getGraID()%>)"> delete </i>
+                                <i class="material-icons purple-text" onclick="msjConf(<%=gt.getGraId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -114,7 +116,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="grados.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevos Grados</h4>
                     <p>Registra la informacion de los nuevos Grados</p>

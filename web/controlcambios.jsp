@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "ControlCambios.jsp";
+    String jsp = "controlcambios.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
@@ -44,6 +44,8 @@
 
 
         <div class="container">
+          <h3>Control De Cambios</h3>
+
 
             <%
                 List<ControlCambioTab> LisC = (List<ControlCambioTab>) Ses.getAttribute("lisC");
@@ -137,7 +139,7 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Cont") != null) {
+        <%if (Ses.getAttribute("CoC") != null) {
                 ControlCambioTab cS = (ControlCambioTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">

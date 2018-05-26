@@ -24,8 +24,6 @@ import Modelo.Interface.Preliminar;
 import Modelo.Interface.Producto;
 import Modelo.Interface.Tipo;
 import Modelo.Interface.Variedad;
-import Modelo.Tabs.VariedadTab;
-import javafx.geometry.Pos;
 import Modelo.Interface.ControlCambios;
 import Modelo.Interface.Fitosanidad;
 import Modelo.Interface.Grados;
@@ -33,6 +31,7 @@ import Modelo.Interface.Linea;
 import Modelo.Interface.Maestro;
 import Modelo.Interface.Marcacion;
 import Modelo.Interface.FitoProducto;
+import Modelo.Interface.MaterialSeco;
 
 /**
  *
@@ -52,7 +51,7 @@ public class AdminMs implements Admin {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LotusProyect", "lotusproyect", "1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lotusproject", "lotusproject", "1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF");
         } catch (ClassNotFoundException ex) {
             System.out.print("Class for name " + ex);
         }
@@ -67,12 +66,12 @@ public class AdminMs implements Admin {
     private AsignaPermiso AsgPer = null;
     private ControlCambios CoC = null;
     private FitoProducto FiP = null;
-    private FitoProducto Fitp = null;
     private Fitosanidad Fit = null;
     private Grados Gra = null;
     private Linea Lin = null;
     private Maestro Mae = null;
     private Marcacion Mar = null;
+    private MaterialSeco Mat = null;
     private Menu Men = null;
     private Parametros Par = null;
     private Paso Pas = null;
@@ -247,5 +246,12 @@ public class AdminMs implements Admin {
         }
         return Tip;
     }
+    @Override
+    public MaterialSeco getMaterialSeco() {
 
+        if (Mat == null) {
+            Mat = new MaterialSecoMs(con);
+        }
+        return Mat;
+}
 }

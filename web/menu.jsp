@@ -45,6 +45,7 @@
 
 
         <div class="container">
+           <h3>Menu</h3>
 
             <%
                 List<MenuTab> LisM = (List<MenuTab>) Ses.getAttribute("lisM");
@@ -120,7 +121,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="menus.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Menu</h4>
                     <p>Registra la informacion del nuevo Menu</p>
@@ -158,7 +159,7 @@
                 MenuTab mS = (MenuTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="menu.do">
+            <form method="get" action="menus.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Menu</h4>
                     <p>Registra la informacion del nuevo Menu</p>
@@ -275,7 +276,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="menu.do" method="post" >
+        <form id="lista" action="menus.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

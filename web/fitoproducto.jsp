@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "FitoProducto.jsp";
+    String jsp = "fitoProducto.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
@@ -44,6 +44,8 @@
 
 
         <div class="container">
+            <h3>Fitoproducto</h3>
+
 
             <%
                 List<FitoProductoTab> LisF = (List<FitoProductoTab>) Ses.getAttribute("lisF");
@@ -109,7 +111,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="fitoproductos.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo FitoProducto</h4>
                     <p>Registra la informacion del nuevo FitoProducto</p>

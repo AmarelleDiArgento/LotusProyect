@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "armado.jsp";
+    String jsp = "paso.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
@@ -44,6 +44,8 @@
 
 
         <div class="container">
+             <h3>Paso</h3>
+
 
             <%
                 List<PasoTab> LisP = (List<PasoTab>) Ses.getAttribute("lisLP");
@@ -111,10 +113,10 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="Paso.do">
+            <form method="get" action="Pasos.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
+                    <p>Registra la informacion del nuevo Paso</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -149,7 +151,7 @@
                 PasoTab pS = (PasoTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="paso.do">
+            <form method="get" action="pasos.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
                     <p>Registra la informacion del nuevo Paso</p>
@@ -266,7 +268,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="paso.do" method="post" >
+        <form id="lista" action="pasos.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

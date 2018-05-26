@@ -44,6 +44,8 @@
 
 
         <div class="container">
+            <h3>Rol</h3>
+
 
             <%
                 List<RolTab> LisR = (List<RolTab>) Ses.getAttribute("lisR");

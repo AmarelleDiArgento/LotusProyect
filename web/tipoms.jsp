@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Armado</title>
+        <title>Lotus QA - Tipo MaterialSeco</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -44,6 +44,8 @@
 
 
         <div class="container">
+              <h3>Tipo Material Seco</h3>
+
 
             <%
                 List<TipoTab> LisT = (List<TipoTab>) Ses.getAttribute("lisT");
@@ -59,25 +61,21 @@
                 </thead>
 
                 <tbody>
-                    <% for (ArmadoTab at : LisA) {%>
+                    <% for (TipoTab tmt : LisT) {%>
                     <tr>
-                        <td><%=at.getTiMId()%></td>
-                        <td><%=at.getTiMNombre()%></td>
-                        <td><%=at.getTiMDescripcion()%></td>
+                        <td><%=tmt.getTiMId()%></td>
+                        <td><%=tmt.getTiMNombre()%></td>
+                        <td><%=tmt.getTiMDescripcion()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (at.isArmEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
-                        </td>
+                          
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=at.getArmId()%>)" > edit </i>
+                                <i class="material-icons purple-text" onclick="consultar(<%=tmt.getTiMId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=at.getArmId()%>)"> delete </i>
+                                <i class="material-icons purple-text" onclick="msjConf(<%=tmt.getTiMId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -112,10 +110,10 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="tipoms.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Tipo Material Seco</h4>
+                    <p>Registra la informacion del nuevo Tipo Material Seco</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -146,14 +144,14 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Arm") != null) {
-                ArmadoTab aS = (ArmadoTab) Ses.getAttribute("Rol");
+        <%if (Ses.getAttribute("Tip") != null) {
+                TipoTab tS = (TipoTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="armados.do">
+            <form method="get" action="tipoms.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Tipo Material Seco </h4>
+                    <p>Registra la informacion del nuevo Tipo Material Seco</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -261,13 +259,13 @@
 </html>
 <%
 
-    Ses.setAttribute("lisA", null);
-    Ses.setAttribute("Arm", null);
+    Ses.setAttribute("lisT", null);
+    Ses.setAttribute("Tip", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="armados.do" method="post" >
+        <form id="lista" action="tipoms.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

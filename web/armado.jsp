@@ -44,6 +44,8 @@
 
 
         <div class="container">
+          <h3>Armado</h3>
+
 
             <%
                 List<ArmadoTab> LisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
