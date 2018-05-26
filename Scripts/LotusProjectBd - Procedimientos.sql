@@ -59,9 +59,9 @@ delimiter $$
 -- Insertar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioIn (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(45),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uEstado VARCHAR(10), in RolId INT)
+create procedure usuarioIn (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(45),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uAvatar VARCHAR(60), in uEstado VARCHAR(10), in RolId INT)
 begin
-insert into usuario (UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,RolId) values (uCedula,uNombre,uApellido,uLoger,SHA(uPass),uExt,uTel,uEmail,uEstado,RolId);
+insert into usuario (UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuAvatar,UsuEstado,RolId) values (uCedula,uNombre,uApellido,uLoger,SHA(uPass),uExt,uTel,uEmail,uAvatar,uEstado,RolId);
 end $$
 delimiter $$
 
@@ -69,9 +69,9 @@ delimiter $$
 -- Modificar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uEstado VARCHAR(10), in RolId INT)
+create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60),in uAvatar VARCHAR(60), in uEstado VARCHAR(10), in RolId INT)
 begin
-update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuPassword=uPass,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
+update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuPassword=uPass,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuAvatar=uAvatar,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
 end $$
 delimiter $$
 
@@ -93,7 +93,7 @@ delimiter $$
 delimiter $$
 create procedure usuarioLi ()
 begin
-Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,u.RolId,RolNombre
+Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuAvatar,UsuEstado,u.RolId,RolNombre
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 order by u.UsuNombre;
@@ -107,7 +107,7 @@ delimiter $$
 delimiter $$
 create procedure usuarioCo (in uCedula VARCHAR(10))
 begin
-Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,u.RolId,RolNombre
+Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuAvatar,UsuEstado,u.RolId,RolNombre
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 where u.UsuCedula=uCedula;
@@ -121,7 +121,7 @@ delimiter $$
 delimiter $$
 create procedure usuarioLogin (in uLoger VARCHAR(15), in uPass VARCHAR(45))
 begin
-Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,u.RolId, RolNombre
+Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTelefono,UsuEmail,UsuEstado,UsuAvatar,u.RolId, RolNombre
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 where u.UsuLoger=uLoger and UsuPassword=SHA(uPass);
@@ -207,7 +207,7 @@ delimiter $$d
 delimiter $$
 create procedure AsgPerIn (in apRol int(11), in apPer int(11), in apLeer boolean, in apNuevo boolean, in apEditar boolean, in apEliminar boolean)
 begin
-insert into AsignaPermiso (RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar) values (apRol,apPer,apLeer,apNuevo,apEditar,apEliminar);
+insert into asignapermiso (RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar) values (apRol,apPer,apLeer,apNuevo,apEditar,apEliminar);
 end $$
 delimiter $$
 
@@ -218,7 +218,7 @@ delimiter $$
 delimiter $$
 create procedure AsgPerMo (in apRol int(11), in apPer int(11), in apLeer boolean, in apNuevo boolean, in apEditar boolean, in apEliminar boolean)
 begin
-update AsignaPermiso SET  RolId=apRol,PerId=apPer,rolperLeer=apLeer,rolperNuevo=apNuevo,rolperEditar=apEditar,rolperEliminar=apEliminar where RolId=apRol and PerId=apPer;
+update asignapermiso SET  RolId=apRol,PerId=apPer,rolperLeer=apLeer,rolperNuevo=apNuevo,rolperEditar=apEditar,rolperEliminar=apEliminar where RolId=apRol and PerId=apPer;
 end $$
 delimiter $$
 
@@ -229,7 +229,7 @@ delimiter $$
 delimiter $$
 create procedure AsgPerEl (in apRol int(11), in apPer int(11))
 begin
-delete from AsignaPermiso where RolId=apRol and PerId=apPer;
+delete from asignapermiso where RolId=apRol and PerId=apPer;
 end $$
 delimiter $$
 
@@ -242,7 +242,7 @@ create procedure AsgPerLi (in apRol int(11))
 begin
 Select ap.RolId, r.RolNombre, ap.PerId, p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
 from rol as r
-inner join AsignaPermiso as ap on r.RolId = ap.RolId
+inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
 where r.RolId = apRol;
 end $$
@@ -258,7 +258,7 @@ begin
 Select p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
-inner join AsignaPermiso as ap on r.RolId = ap.RolId
+inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
 where u.UsuCedula = uCedula;
 end $$
@@ -271,7 +271,7 @@ delimiter $$
 delimiter $$
 create procedure AsgPerCo (in apRol int(11), in apPer int(11))
 begin
-select RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar from AsignaPermiso where RolId=apRol and PerId=apPer;
+select RolId,PerId,rolperLeer,rolperNuevo,rolperEditar,rolperEliminar from asignapermiso where RolId=apRol and PerId=apPer;
 end $$
 delimiter $$
 
@@ -311,9 +311,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure armadoIn (in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
+create procedure armadoIn (in aNombre varchar(45), in adescripcion mediumtext,in aEstado tinyint(1))
 begin
-insert into armado (ArmNombre,ArmDescricion,ArmEstado) values (aNombre,aDescripcion,aEstado);
+insert into armado (ArmNombre,ArmDescripcion,ArmEstado) values (aNombre,aDescripcion,aEstado);
 end $$ArmId
 delimiter $$
 
@@ -322,7 +322,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure armadoMo (in aId int(11),in aNombre varchar(45), in aDescripcion varchar(45),in aEstado tinyint(1))
+create procedure armadoMo (in aId int(11),in aNombre varchar(45), in adescripcion mediumtext,in aEstado tinyint(1))
 begin
 update armado SET ArmNombre=aNombre, ArmDescripcion=aDescripcion, ArmEstado=aEstado where ArmId=aId;
 end $$
@@ -484,7 +484,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure fitosanidadIn (in fNombre varchar(45), in fDescripcion varchar(45),in fTipo enum ('Plaga','Enfermedad'), in fImagen varchar (45),in fEstado tinyint(1))
+create procedure fitosanidadIn (in fNombre varchar(45), in fdescripcion mediumtext,in fTipo enum ('Plaga','Enfermedad'), in fImagen varchar (45),in fEstado tinyint(1))
 begin
 insert into fitosanidad(FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado) values (fNombre,fDescripcion,fTipo,fImagen,fEstado);
 end $$FitId
@@ -495,7 +495,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure fitosanidadMo(in fId int(11),in fNombre varchar(45), in fDescripcion varchar(45),in fTipo enum ('Plaga','Enfermedad'),in fImagen varchar(45), in FitEstado tinyint(1))
+create procedure fitosanidadMo(in fId int(11),in fNombre varchar(45), in fdescripcion mediumtext,in fTipo enum ('Plaga','Enfermedad'),in fImagen varchar(45), in FitEstado tinyint(1))
 begin
 update fitosanidad SET FitNombre=fNombre, FitDescripcion=fDescripcion, FitTipo=fTipo, FitImagen=fImagen where FitId=fId;
 end $$
@@ -674,7 +674,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
-create procedure maestroIn(in mNombre varchar(45), in mDescripcion varchar(255))
+create procedure maestroIn(in mNombre varchar(45), in mdescripcion mediumtext)
 begin
 insert into maestro(MaeNombre,MaeDescripcion) values (mNombre,mDescripcion);
 end $$
@@ -685,7 +685,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure maestroMo(in maId int(11),in maNombre varchar(45), in maDescripcion varchar(45))
+create procedure maestroMo(in maId int(11),in maNombre varchar(45), in madescripcion mediumtext)
 begin
 update maestro SET MaeNombre=maNombre, MaeDescripcion=maDescripcion where MaeId=maId;
 end $$
@@ -976,7 +976,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure permisoMo(in peId int(11),in peNombre varchar(45), in peModulo varchar(45), in peDescripcion mediumtext, in PerIco varchar(20), in PerUrl varchar(100), in PerEstado tinyint(1) )
+create procedure pasoMo(in peId int(11),in peNombre varchar(45), in peModulo varchar(45), in peDescripcion mediumtext, in PerIco varchar(20), in PerUrl varchar(100), in PerEstado tinyint(1) )
 begin
 update paso SET PasOrden=pNombre, PasDescripcion=pDescripcion, PasImagen=pImagen where PerId=psId;
 end $$

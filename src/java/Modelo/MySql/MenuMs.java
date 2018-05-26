@@ -29,11 +29,11 @@ public class MenuMs implements Menu {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.menuIn(?,?,?,?,?,?);";
-    final String Modificar = "call lotusproyect.menuMo(?,?,?,?,?,?);";
-    final String Eliminar = "call lotusproyect.menuEl(?);";
-    final String Consultar = "call lotusproyect.menuCo(?);";
-    final String ListarTodos = "call lotusproyect.MenuLi();";
+    final String Insertar = "call LotusProject.menuIn(?,?,?,?,?,?);";
+    final String Modificar = "call LotusProject.menuMo(?,?,?,?,?,?);";
+    final String Eliminar = "call LotusProject.menuEl(?);";
+    final String Consultar = "call LotusProject.menuCo(?);";
+    final String ListarTodos = "call LotusProject.MenuLi();";
     
     @Override
     public Mensajes insertar(MenuTab me) {

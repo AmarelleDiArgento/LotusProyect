@@ -29,11 +29,11 @@ public class RolMs implements Rol {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProyect.rolIn(?,?,?);";
-    final String Modificar = "call LotusProyect.rolMo(?,?,?,?);";
-    final String Eliminar = "call LotusProyect.rolEl(?);";
-    final String Consultar = "call LotusProyect.rolCo(?)";
-    final String ListarTodos = "call LotusProyect.rolLi()";
+    final String Insertar = "call LotusProject.rolIn(?,?,?);";
+    final String Modificar = "call LotusProject.rolMo(?,?,?,?);";
+    final String Eliminar = "call LotusProject.rolEl(?);";
+    final String Consultar = "call LotusProject.rolCo(?)";
+    final String ListarTodos = "call LotusProject.rolLi()";
 
     @Override
     public Mensajes insertar(RolTab r) {

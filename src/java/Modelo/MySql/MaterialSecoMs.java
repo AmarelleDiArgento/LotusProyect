@@ -30,11 +30,11 @@ public class MaterialSecoMs implements MaterialSeco {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.materialsecoIn(?,?,?,?,?,?,?,?);";
-    final String Modificar = "call lotusproyect.materialsecoMo(?,?,?,?);";
-    final String Eliminar = "call lotusproyect.materialsecoEl(?);";
-    final String Consultar = "call lotusproyect.materialsecoCo(?);";
-    final String ListarTodos = "call lotusproyect.materialsecoLi();";
+    final String Insertar = "call LotusProject.materialsecoIn(?,?,?,?,?,?,?,?);";
+    final String Modificar = "call LotusProject.materialsecoMo(?,?,?,?);";
+    final String Eliminar = "call LotusProject.materialsecoEl(?);";
+    final String Consultar = "call LotusProject.materialsecoCo(?);";
+    final String ListarTodos = "call LotusProject.materialsecoLi();";
 
     @Override
     public Mensajes insertar(MaterialSecoTab ms) {

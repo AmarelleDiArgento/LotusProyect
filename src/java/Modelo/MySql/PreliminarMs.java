@@ -29,11 +29,11 @@ public class PreliminarMs implements Preliminar {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.preliminarIn(?,?);";
-    final String Modificar = "call lotusproyect.preliminarMo(?,?,?);";
-    final String Eliminar = "call lotusproyect.preliminarEl(?);";
-    final String Consultar = "call lotusproyect.preliminarCo(?);";
-    final String ListarTodos = "call lotusproyect.preliminarLi();";
+    final String Insertar = "call LotusProject.preliminarIn(?,?);";
+    final String Modificar = "call LotusProject.preliminarMo(?,?,?);";
+    final String Eliminar = "call LotusProject.preliminarEl(?);";
+    final String Consultar = "call LotusProject.preliminarCo(?);";
+    final String ListarTodos = "call LotusProject.preliminarLi();";
 
     @Override
     public Mensajes insertar(PreliminarTab p) {

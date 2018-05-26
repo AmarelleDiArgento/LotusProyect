@@ -29,11 +29,11 @@ public class VariedadMs implements Variedad{
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.variedadIn(?,?,?,?,?);";
-    final String Modificar = "call lotusproyect.variedadMo(?,?,?,?,?,?);";
-    final String Eliminar = "call lotusproyect.variedadEl(?);";
-    final String Consultar = "call lotusproyect.variedadCo(?);";
-    final String ListarTodos = "call lotusproyect.variedadLi();";
+    final String Insertar = "call LotusProject.variedadIn(?,?,?,?,?);";
+    final String Modificar = "call LotusProject.variedadMo(?,?,?,?,?,?);";
+    final String Eliminar = "call LotusProject.variedadEl(?);";
+    final String Consultar = "call LotusProject.variedadCo(?);";
+    final String ListarTodos = "call LotusProject.variedadLi();";
 
     @Override
     public Mensajes insertar(VariedadTab v) {

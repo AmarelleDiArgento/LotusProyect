@@ -2,31 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/ControlCambiosMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/AsignaPermisoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/ProductoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/UsuarioMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/GradosMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/LineaMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/ArmadoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/PoscosechaMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/PreliminarMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/VariedadMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Servicios/AdminFile.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/AdminMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/MenuMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/ParametrosMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/FitosanidadMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/MaterialSecoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/PermisoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/TipoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/RolMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/MaestroMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/FitoProductoMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/MarcacionMs.java</file>
-            <file>file:/C:/Users/ale-j/Documents/GitHub/LotusProyect/src/java/Modelo/MySql/PasoMs.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

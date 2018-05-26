@@ -29,11 +29,11 @@ public class TipomsMs implements Tipo {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.tipomsIn(?,?);";
-    final String Modificar = "call lotusproyect.tipomsMo(?,?,?);";
-    final String Eliminar = "call lotusproyect.tipomsEl(?);";
-    final String Consultar = "call lotusproyect.tipomsCo(?  );";
-    final String ListarTodos = "call lotusproyect.tipomsLi();";
+    final String Insertar = "call LotusProject.tipomsIn(?,?);";
+    final String Modificar = "call LotusProject.tipomsMo(?,?,?);";
+    final String Eliminar = "call LotusProject.tipomsEl(?);";
+    final String Consultar = "call LotusProject.tipomsCo(?  );";
+    final String ListarTodos = "call LotusProject.tipomsLi();";
 
     @Override
     public Mensajes insertar(TipoTab t) {

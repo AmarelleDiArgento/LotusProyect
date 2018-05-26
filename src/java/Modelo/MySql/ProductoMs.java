@@ -29,11 +29,11 @@ public class ProductoMs implements Producto {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.productosIn(?,?);";
-    final String Modificar = "call lotusproyect.preliminarMo(?,?,?);";
-    final String Eliminar = "call lotusproyect.productosEl(?);";
-    final String Consultar = "call lotusproyect.productosCo(?);";
-    final String ListarTodos = "call lotusproyect.productosLi();";
+    final String Insertar = "call LotusProject.productosIn(?,?);";
+    final String Modificar = "call LotusProject.preliminarMo(?,?,?);";
+    final String Eliminar = "call LotusProject.productosEl(?);";
+    final String Consultar = "call LotusProject.productosCo(?);";
+    final String ListarTodos = "call LotusProject.productosLi();";
 
     @Override
     public Mensajes insertar(ProductoTab p) {

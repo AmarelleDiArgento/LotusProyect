@@ -1,4 +1,6 @@
 
+<%@page import="Modelo.Tabs.RolTab"%>
+<%@page import="Modelo.Tabs.PoscosechaTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="Modelo.Tabs.UsuarioTab"%>
 <%@page import="java.util.List"%>
@@ -13,6 +15,10 @@
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
         if (Ses.getAttribute("lisU") != null) {
+            if (Ses.getAttribute("lisP") != null) {
+                List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
+                if (Ses.getAttribute("lisR") != null) {
+                    List<RolTab> LisR = (List<RolTab>) Ses.getAttribute("lisR");
 
 
 %>
@@ -43,7 +49,7 @@
 
 
         <div class="container">
-           <h3>Usuario</h3>
+            <h3>Usuario</h3>
 
 
             <%
@@ -126,10 +132,10 @@
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="post" action="usuarios.do" enctype="multipart/form-data">
-                
 
-            
-                
+
+
+
                 <div class="modal-content">
                     <h4><i class="material-icons medium">face</i> Nuevo Usuario</h4>
                     <p>Registra la informacion del nuevo usuario</p>
@@ -159,17 +165,47 @@
                             <label for="Extencion">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
+
                         <div class="input-field col s6">
                             <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
                             <label for="Celular">Celular</label>
-                            <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
+                            <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
                         </div>
+
                         <div class="input-field col s6">
                             <input id="Email" type="Email" name="Email" class="validate">
                             <label for="Email">Email</label>
+                            <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
                         </div>
-                        <div class="file-field input-field">
-                            <div class="btn">
+
+
+
+
+                        <div class="input-field col s6">
+                            <select>
+                                <option value="" disabled selected>Rol</option>
+                                <%                        for (RolTab rl : LisR) {%>
+                                <option value="<%=rl.getRolId()%>"><%=rl.getRolNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Rol</label>
+                        </div>
+
+
+                        <%
+                        %>
+                        <div class="input-field col s6">
+                            <select multiple>
+                                <option value="" disabled selected>Poscosecha</option>
+                                <%                        for (PoscosechaTab pl : LisP) {%>
+                                <option value="<%=pl.getPosId()%>"><%=pl.getPosNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Poscosecha</label>
+                        </div>
+
+                        <div class="input-field  file-field col s6">
+                            <div class="btwaves-button-inputn">
                                 <span>Avatar</span>
                                 <input type="file" name="imagen" accept="image/*">
                             </div>
@@ -177,19 +213,20 @@
                                 <input class="file-path validate" type="text">
                             </div>
                         </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
+
+                        <div class="input-field col s6 center">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
 
-                    </div>    
+                    </div>  
                 </div>
-
-
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
@@ -336,11 +373,16 @@
     </body>
 </html>
 <%
-
+        } else {
+            response.sendRedirect("rols.do?accion=Listar");
+        }
+    } else {
+        response.sendRedirect("poscosechas.do?accion=Listar");
+    }
     Ses.setAttribute("lisU", null);
     Ses.setAttribute("Usu", null);
     Ses.setAttribute("msj", null);
-} else {%>
+} else { %>
 <html>
     <body onload="document.getElementById('lista').submit()">
         <form id="lista" action="usuarios.do" method="post" >

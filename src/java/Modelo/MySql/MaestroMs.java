@@ -29,11 +29,11 @@ public class MaestroMs implements Maestro {
         this.con = con;
     }
 
-    final String Insertar = "call lotusproyect.maestroIn(?,?);";
-    final String Modificar = "call lotusproyect.marcacionMo(?,?,?);";
-    final String Eliminar = "call lotusproyect.maestroEl(?);";
-    final String Consultar = "call lotusproyect.maestroCo(?);";
-    final String ListarTodos = "call lotusproyect.maestroLi();";
+    final String Insertar = "call LotusProject.maestroIn(?,?);";
+    final String Modificar = "call LotusProject.marcacionMo(?,?,?);";
+    final String Eliminar = "call LotusProject.maestroEl(?);";
+    final String Consultar = "call LotusProject.maestroCo(?);";
+    final String ListarTodos = "call LotusProject.maestroLi();";
 
     @Override
     public Mensajes insertar(MaestroTab ma) {
