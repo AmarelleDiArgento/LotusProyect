@@ -169,7 +169,7 @@ delimiter $$
 delimiter $$
 create procedure permisoLi ()
 begin
-select PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado from permiso;
+select PerId,PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado from permiso;
 end $$
 delimiter $$
 
@@ -180,10 +180,10 @@ delimiter $$
 delimiter $$
 create procedure perMenu (in uCedula int(11))
 begin
-Select p.PerNombre, p.PerUrl, p.PerIco
+Select p.PerId,p.PerNombre, p.PerUrl, p.PerIco
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
-inner join AsignaPermiso as ap on r.RolId = ap.RolId
+inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
 where u.UsuCedula= uCedula and p.PerEstado=1 and ap.rolperLeer = 1;
 end $$
@@ -1138,9 +1138,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosIn (in prNombre varchar(45), in prEstado tinyint(1),in maeId int(11))
+create procedure productosIn (in prNombre varchar(45), in prImagen varchar(255), in prEstado tinyint(1),in maeId int(11))
 begin
-insert into productos (ProNombre,ProEstado,MaeId) values (prNombre,prEstado,maeId);
+insert into productos (ProNombre,ProImagen,ProEstado,MaeId) values (prNombre,prImagen,prEstado,maeId);
 end $$
 delimiter $$
 
@@ -1149,9 +1149,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosMo (in prId int(11),in prNombre varchar(45), in prEstado tinyint(1),in maeId int(11))
+create procedure productosMo (in prId int(11),in prNombre varchar(45), in prImagen varchar(255), in prEstado tinyint(1),in maeId int(11))
 begin
-update productos SET ProNombre=prNombre, ProEstado=prEstado,MaeId=maeId where ProId=prId;
+update productos SET ProNombre=prNombre, ProImagen=prImagen, ProEstado=prEstado,MaeId=maeId where ProId=prId;
 end $$
 delimiter $$
  -- -----------------------------------------------------
@@ -1161,8 +1161,12 @@ delimiter $$
 delimiter $$
 create procedure productosLi ()
 begin
-select *
-from productos as pro inner join maestro as mae on pro.MaeId = mae.MaeId;
+SELECT m.MaeId, m.MaeNombre, p.ProId, p.ProNombre, p.ProImagen, p.ProEstado, p.MaeId
+FROM
+productos AS p
+INNER JOIN maestro AS m ON p.MaeId = m.MaeId
+ORDER BY
+p.ProNombre ASC;
 end $$
 delimiter $$
 
@@ -1173,8 +1177,9 @@ delimiter $$
 delimiter $$
 create procedure productosCo (in prId INT)
 begin
-select *
-from productos as pro inner join maestro as mae on pro.MaeId = mae.MaeId;
+select p.ProId,p.ProNombre,p.ProImagen,p.ProEstado,m.MaeId,m.MaeNombre
+from productos as p 
+inner join maestro as m on p.MaeId = m.MaeId;
 end $$
 delimiter $$ 
 

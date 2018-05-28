@@ -174,7 +174,7 @@ footer.page-footer {
     text-indent: -9999px;
     width: 3.5rem;
     height: 2rem;
-    background: #c70a0a;
+    background: #9c8383;
     display: block;
     border-radius: 100px;
     position: relative;
@@ -193,7 +193,7 @@ label:after {
 }
 
 input:checked + label {
-    background: #bada55;
+    background: #9c27b0;
 }
 
 input:checked + label:after {

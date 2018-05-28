@@ -31,7 +31,8 @@ call LotusProject.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234'
 call LotusProject.permisoIn('Usuario', 'Usuario', 'Permisos de usuario', 'usuario.jsp', 'face', 1);
 call LotusProject.permisoIn('Rol', 'Usuario', 'Permisos de usuario', 'rol.jsp', 'assignment_ind', 1);
 call LotusProject.permisoIn('Permiso', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
-call LotusProject.permisoIn('Postcosecha', 'Postcosecha', 'Permisos de postcosecha', 'postcosecha.jsp', 'business', 1);
+call LotusProject.permisoIn('AsignaPer', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
+call LotusProject.permisoIn('Postcosecha', 'Postcosecha', 'Permisos de poscosecha', 'postcosecha.jsp', 'business', 1);
 call LotusProject.permisoIn('Cliente', 'Cliente', 'Permisos de cliente', 'cliente.jsp', 'local_mall', 1);
 call LotusProject.permisoIn('Producto', 'Producto', 'Permisos de producto', 'producto.jsp', 'local_florist', 1);
 call LotusProject.permisoIn('Marcación', 'Marcación', 'Permisos de marcación', 'marcacion.jsp', 'local_offer', 1);
@@ -53,6 +54,7 @@ call LotusProject.AsgPerIn(1, 5, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 6, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 7, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 9, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(2, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 2, 1, 1, 1, 1);
@@ -62,6 +64,7 @@ call LotusProject.AsgPerIn(2, 5, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 6, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 7, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 9, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(3, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 2, 1, 1, 1, 1);
@@ -71,6 +74,7 @@ call LotusProject.AsgPerIn(3, 5, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 6, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 7, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 9, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);
@@ -81,7 +85,7 @@ call LotusProject.AsgPerIn(3, 8, 1, 1, 1, 1);
 -- -----------------------------------------------------
 -- Procedimientos LotusProyect Tabla armado
 
-call LotusProject.armadoIn('rosa', 'verde', 1);
+-- call LotusProject.armadoIn('rosa', 'verde', 1);
 -- call LotusProject.armadoMo(1, 'rosa', 'amarilla', 1);
 -- call LotusProject.armadoLi();
 -- call LotusProject.armadoEl(2);
@@ -92,7 +96,7 @@ call LotusProject.armadoIn('rosa', 'verde', 1);
 -- -----------------------------------------------------
 
 
-call LotusProject.marcacionIn('rosa', 'sahda', 1, 3);
+-- call LotusProject.marcacionIn('rosa', 'sahda', 1, 3);
 
 -- call LotusProject.maestroMo(1, 'rosa', 'amarilla');
 
@@ -101,7 +105,7 @@ call LotusProject.marcacionIn('rosa', 'sahda', 1, 3);
 
 -- Procedimientos LotusProyect Tabla control de cambios 
 
-call LotusProject.controldecambiosIn('rosa', 'rosita', 'aleja');
+-- call LotusProject.controldecambiosIn('rosa', 'rosita', 'aleja');
 -- call LotusProject.controldecambiosLi();
 -- call LotusProject.contrroldecambiosMo(4);";
 -- call LotusProject.controldecambiosEl(1);
@@ -110,6 +114,19 @@ call LotusProject.controldecambiosIn('rosa', 'rosita', 'aleja');
 
 -- Procedimientos LotusProyect Tabla FitoProducto
 
-call LotusProject.fitoproductoIn(2); 
+-- call LotusProject.fitoproductoIn(2); 
 -- call LotusProject.fitoproductoCo(1);
 
+call LotusProject.maestroIn('Roses', 'Agrupa rosas de jardin spray y estandar');
+call LotusProject.maestroIn('Pompon', 'Agrupa pompones no desbotonados');
+
+call LotusProject.poscosechaIn('El Morado', 'Km x ', '1234', 1);
+call LotusProject.poscosechaIn('Santa Maria', 'Km x ', '1234', 1);
+call LotusProject.poscosechaIn('La Valentina', 'Km x ', '1234', 1);
+call LotusProject.poscosechaIn('San Carlos', 'Km x ', '1234', 1);
+call LotusProject.poscosechaIn('San Pedro', 'Km x ', '1234', 1);
+call LotusProject.poscosechaIn('Marly', 'Km x ', '1234', 1);
+
+call LotusProject.productoIn('Rosas', 'img/Maestro/Producto/Rosa.png', 1, 1);
+call LotusProject.productoIn('Rosas spray', 'img/Maestro/Producto/Rosa Spray.png', 1, 1);
+call LotusProject.productoIn('Rosas de jardin', 'img/Maestro/Producto/Rosita de jardin.png', 1, 1);

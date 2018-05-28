@@ -34,12 +34,42 @@ public class AsignaPermisoMs implements AsignaPermiso {
     final String Modificar = "call LotusProject.AsgPerMo(?, ?, ?, ?, ?, ?);";
     final String Eliminar = "call LotusProject.AsgPerEl(?, ?)";
     final String Consultar = "call LotusProject.AsgPerCo(?, ?)";
-    final String ListarTodos = "call LotusProject.AsgPerLi(?);";
+    final String ListarRol = "call LotusProject.AsgPerLi(?);";
     final String PerSession = "call LotusProject.AsgPerSession(?);";
 
     @Override
     public List<AsignaPermisoTab> listar(Integer rol) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<AsignaPermisoTab> apModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarRol);
+                stat.setInt(1, rol);
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    apModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AsignaPermisoMs.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AsignaPermisoMs.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AsignaPermisoMs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return apModel;
     }
 
     @Override
@@ -59,7 +89,20 @@ public class AsignaPermisoMs implements AsignaPermiso {
 
     @Override
     public AsignaPermisoTab convertir(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int RolId = Integer.parseInt(rs.getString("RolId"));
+        String Rol = rs.getString("RolNombre");
+        int PerId = Integer.parseInt(rs.getString("PerId"));
+        String Permiso = rs.getString("PerNombre");
+        int l = rs.getInt("rolperLeer");
+        boolean leer = l == 1;
+        int n = rs.getInt("rolperNuevo");
+        boolean nuevo = n == 1;
+        int m = rs.getInt("rolperEditar");
+        boolean modificar = m == 1;
+        int e = rs.getInt("rolperEliminar");
+        boolean eliminar = e == 1;
+        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, leer, nuevo, eliminar, eliminar);
+        return apModel;
     }
 
     public AsignaPermisoTab coSession(ResultSet rs) throws SQLException {

@@ -44,10 +44,20 @@
 
 
         <div class="container">
-            <h3>Productos</h3>
+            
             <%
                 List<ProductoTab> LisP = (List<ProductoTab>) Ses.getAttribute("lisP");
             %>
+
+            <div class="carousel">
+               <%     for (ProductoTab pc : LisP) {  %>
+                
+               <a class="carousel-item" href="#one!"><img src="<%=pc.getProImagen()%>"></a>
+
+                <%}%>
+            </div>
+
+
             <table class="centered striped">
                 <thead>
                     <tr>
@@ -65,7 +75,7 @@
                     <tr>
                         <td><%=pt.getProId()%></td>
                         <td><%=pt.getProNombre()%></td>
-                        
+
                         <td>
                             <label>
                                 <input type="checkbox" <% if (pt.isProEstado()) {%> checked="checked" <% }%> /> 
@@ -96,7 +106,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Producto"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
