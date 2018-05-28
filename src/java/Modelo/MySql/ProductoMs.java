@@ -80,9 +80,12 @@ public class ProductoMs implements Producto {
     public ProductoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("ProId");
         String nombre = rs.getString("ProNombre");
+        String imagen = rs.getString("ProImagen");
         int st = rs.getInt("ProEstado");
         boolean status = st == 1;
-        ProductoTab pTab = new ProductoTab(Id, nombre, status);
+        int MaeId =  rs.getInt("MaeId");
+        String Maen = rs.getString("MaeNombre");
+        ProductoTab pTab = new ProductoTab(Id, nombre, imagen, status, MaeId, nombre);
         return pTab;
     }
 
@@ -165,10 +168,11 @@ public class ProductoMs implements Producto {
             stat = con.prepareStatement(Modificar);
             stat.setInt(1, p.getProId());
             stat.setString(2, p.getProNombre());
+            stat.setString(3, p.getProImagen());
             if (p.isProEstado()) {
-                stat.setInt(3, 1);
+                stat.setInt(4, 1);
             } else {
-                stat.setInt(3, 0);
+                stat.setInt(4, 0);
             }
             if (stat.executeUpdate() == 0) {
 

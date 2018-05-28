@@ -50,6 +50,7 @@
             <%
                 List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
             %>
+
             <table class="centered striped">
                 <thead>
                     <tr>
@@ -69,7 +70,7 @@
                         <td><%=pt.getPosNombre()%></td>
                         <td><%=pt.getPosDireccion()%></td>
                         <td><%=pt.getPosTelefono()%></td>
-                     
+
                         <td>
                             <label>
                                 <input type="checkbox" <% if (pt.isPosEstado()) {%> checked="checked" <% }%> /> 
@@ -100,7 +101,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>

@@ -10,6 +10,7 @@
     $('.materialboxed').materialbox();
     $('.tabs').tabs();
     $('select').formSelect();
+    $('.carousel').carousel();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space

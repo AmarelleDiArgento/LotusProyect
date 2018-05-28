@@ -75,6 +75,11 @@
                             </label>
                         </td>
                         <td>
+                            <a href="asignaper.jsp?Id=<%=rt.getRolId()%>">
+                                <i class="material-icons purple-text"> settings_applications</i>
+                            </a>
+                        </td>
+                        <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=rt.getRolId()%>)" > edit </i>
                             </a>
@@ -234,7 +239,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisR", null);
+    Ses.setAttribute("lisAp", null);
     Ses.setAttribute("Rol", null);
     Ses.setAttribute("msj", null);
 } else {%>

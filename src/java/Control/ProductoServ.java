@@ -68,6 +68,7 @@ public class ProductoServ extends HttpServlet {
         ProductoTab pr = null;
         int Id;
         String Nombre;
+        String Imagen;
         Boolean Estado;
         String E;
 
@@ -78,9 +79,10 @@ public class ProductoServ extends HttpServlet {
                 case "Insertar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("ProNombre");
+                        Imagen = request.getParameter("ProImagen");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        pr = new ProductoTab(Nombre,Estado);
+                        pr = new ProductoTab(Nombre, Imagen, Estado);
                         m = Asql.getProducto().insertar(pr);
 
                     } else {
@@ -94,9 +96,10 @@ public class ProductoServ extends HttpServlet {
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("ProNombre");
+                        Imagen = request.getParameter("ProImagen");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        pr = new ProductoTab(Id,Nombre, Estado);
+                        pr = new ProductoTab(Id, Nombre, Imagen, Estado);
                         m = Asql.getProducto().insertar(pr);
 
                     } else {
@@ -158,10 +161,7 @@ public class ProductoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

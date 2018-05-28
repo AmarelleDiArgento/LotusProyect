@@ -102,11 +102,14 @@ public class AsignaPerServ extends HttpServlet {
 
                     break;
 
+                case "Listar":
+
+                    break;
                 case "Obtener":
-                    int rol = Integer.parseInt(request.getParameter("rol"));
+                    int rol = Integer.parseInt(request.getParameter("Id"));
                     List<AsignaPermisoTab> apli = Asql.getAsignaPer().listar(rol);
-                    Ses.setAttribute("Aprr", apli);
-                    ruta = "rol.jsp";
+                    Ses.setAttribute("lisAp", apli);
+                    ruta = "asignaper.jsp";
                     break;
                 case "session":
                     UsuarioTab u = (UsuarioTab) Ses.getAttribute("log");

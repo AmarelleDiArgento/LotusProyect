@@ -9,6 +9,7 @@ import Modelo.MySql.AdminMs;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.PermisoTab;
+import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
 import java.sql.SQLException;
@@ -122,9 +123,9 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            List<PermisoTab> al = Asql.getPermiso().listar();
-            for (PermisoTab a : al) {
-                System.out.println(a.getPerEstado());
+            List<AsignaPermisoTab> apl = Asql.getAsignaPer().listar(1);
+            for (AsignaPermisoTab ap : apl) {
+                System.out.println(ap.toString());
 
             }
         } catch (SQLException ex) {
