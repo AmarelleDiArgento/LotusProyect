@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPr") != null) {
 
 
 %>
@@ -46,11 +46,11 @@
         <div class="container">
             
             <%
-                List<ProductoTab> LisP = (List<ProductoTab>) Ses.getAttribute("lisP");
+                List<ProductoTab> LisPr = (List<ProductoTab>) Ses.getAttribute("lisPr");
             %>
 
             <div class="carousel">
-               <%     for (ProductoTab pc : LisP) {  %>
+               <%     for (ProductoTab pc : LisPr) {  %>
                 
                <a class="carousel-item" href="#one!"><img src="<%=pc.getProImagen()%>"></a>
 
@@ -71,7 +71,7 @@
                 </thead>
 
                 <tbody>
-                    <% for (ProductoTab pt : LisP) {%>
+                    <% for (ProductoTab pt : LisPr) {%>
                     <tr>
                         <td><%=pt.getProId()%></td>
                         <td><%=pt.getProNombre()%></td>
@@ -273,7 +273,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("lisPr", null);
     Ses.setAttribute("Pro", null);
     Ses.setAttribute("msj", null);
 } else {%>

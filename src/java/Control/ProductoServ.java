@@ -133,7 +133,7 @@ public class ProductoServ extends HttpServlet {
                 case "Listar":
                     //if (acc.isRpLeer()) {
                     List<ProductoTab> pl = Asql.getProducto().listar();
-                    Ses.setAttribute("lisP", pl);
+                    Ses.setAttribute("lisPr", pl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}

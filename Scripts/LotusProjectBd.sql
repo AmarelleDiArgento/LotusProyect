@@ -1,8 +1,9 @@
 -- -----------------------------------------------------
--- Schema LotusProject
--- CREATE USER 'LotusProject'@'localhost' IDENTIFIED BY '1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF';
--- GRANT ALL PRIVILEGES ON * . * TO 'LotusProject'@'localhost';
--- FLUSH PRIVILEGES;
+-- Usuario LotusProject
+ CREATE USER IF NOT EXISTS 'LotusProject'@'localhost' IDENTIFIED BY '1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF';
+ GRANT ALL PRIVILEGES ON * . * TO 'LotusProject'@'localhost';
+ FLUSH PRIVILEGES;
+ DROP USER IF EXISTS lotusproyect@localhost;
 -- -----------------------------------------------------
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -215,17 +216,17 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table LotusProject productos
+-- Table LotusProject producto
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS LotusProject.productos (
+CREATE TABLE IF NOT EXISTS LotusProject.producto (
   ProId INT(11) NOT NULL AUTO_INCREMENT,
   ProNombre VARCHAR(45) NOT NULL UNIQUE,
   ProImagen VARCHAR(45) NOT NULL DEFAULT '0',
   ProEstado TINYINT(1) NOT NULL DEFAULT '0',
   MaeId INT(11) NOT NULL,
   PRIMARY KEY (ProId, MaeId),
-  INDEX fk_productos_maestro1_idx (MaeId ASC),
-  CONSTRAINT fk_productos_maestro1
+  INDEX fk_producto_maestro1_idx (MaeId ASC),
+  CONSTRAINT fk_producto_maestro1
     FOREIGN KEY (MaeId)
     REFERENCES LotusProject.maestro (MaeId)
     ON DELETE NO ACTION
@@ -245,10 +246,10 @@ CREATE TABLE IF NOT EXISTS LotusProject.variedad (
   VarImagen VARCHAR(45) NULL DEFAULT NULL,
   VarColor VARCHAR(15) NULL DEFAULT NULL,
   PRIMARY KEY (VarId, ProId),
-  INDEX fk_Variedad_productos1 (ProId ASC),
-  CONSTRAINT fk_Variedad_productos1
+  INDEX fk_Variedad_producto1 (ProId ASC),
+  CONSTRAINT fk_Variedad_producto1
     FOREIGN KEY (ProId)
-    REFERENCES LotusProject.productos (ProId)
+    REFERENCES LotusProject.producto (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -269,7 +270,7 @@ CREATE TABLE IF NOT EXISTS LotusProject.asignaparametro (
   PRIMARY KEY (GraID, ParId, MaeId),
   INDEX fk_grados_has_parametros_parametros1 (ParId ASC),
   INDEX fk_parproducto_variedad1_idx (VarId ASC),
-  INDEX fk_parproducto_productos1_idx (ProId ASC),
+  INDEX fk_parproducto_producto1_idx (ProId ASC),
   INDEX fk_asignaparametro_maestro1_idx (MaeId ASC),
   CONSTRAINT fk_grados_has_parametros_grados1
     FOREIGN KEY (GraID)
@@ -281,9 +282,9 @@ CREATE TABLE IF NOT EXISTS LotusProject.asignaparametro (
     REFERENCES LotusProject.parametros (ParId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_parproducto_productos1
+  CONSTRAINT fk_parproducto_producto1
     FOREIGN KEY (ProId)
-    REFERENCES LotusProject.productos (ProId)
+    REFERENCES LotusProject.producto (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_parproducto_variedad1
@@ -412,15 +413,15 @@ CREATE TABLE IF NOT EXISTS LotusProject.asignaproducto (
   Tallos INT(11) NULL DEFAULT NULL,
   Color VARCHAR(45) NULL,
   PRIMARY KEY (ProId, MenuId),
-  INDEX fk_productos_has_menu_menu1 (MenuId ASC),
-  CONSTRAINT fk_productos_has_menu_menu1
+  INDEX fk_producto_has_menu_menu1 (MenuId ASC),
+  CONSTRAINT fk_producto_has_menu_menu1
     FOREIGN KEY (MenuId)
     REFERENCES LotusProject.menu (MenuId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_productos_has_menu_productos1
+  CONSTRAINT fk_producto_has_menu_producto1
     FOREIGN KEY (ProId)
-    REFERENCES LotusProject.productos (ProId)
+    REFERENCES LotusProject.producto (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -512,16 +513,16 @@ CREATE TABLE IF NOT EXISTS LotusProject.asignaparte (
   PrtId INT NOT NULL,
   ProId INT(11) NOT NULL,
   PRIMARY KEY (AsPrtID, PrtId, ProId),
-  INDEX fk_Partes_has_productos_productos1_idx (ProId ASC),
-  INDEX fk_Partes_has_productos_Partes1_idx (PrtId ASC),
-  CONSTRAINT fk_Partes_has_productos_Partes1
+  INDEX fk_Partes_has_producto_producto1_idx (ProId ASC),
+  INDEX fk_Partes_has_producto_Partes1_idx (PrtId ASC),
+  CONSTRAINT fk_Partes_has_producto_Partes1
     FOREIGN KEY (PrtId)
     REFERENCES LotusProject.Partes (prtId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_Partes_has_productos_productos1
+  CONSTRAINT fk_Partes_has_producto_producto1
     FOREIGN KEY (ProId)
-    REFERENCES LotusProject.productos (ProId)
+    REFERENCES LotusProject.producto (ProId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

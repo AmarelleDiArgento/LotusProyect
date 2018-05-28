@@ -282,7 +282,7 @@ SELECT ap.GraID, g.GraNombre, ap.ParId, pa.ParNombre, ap.ProId, pr.ProNombre, ap
 FROM AsignaParametro AS ap
 INNER JOIN grados AS g ON ap.GraID = g.GraID
 INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
-INNER JOIN productos AS pr ON ap.ProId = pr.ProId
+INNER JOIN producto AS pr ON ap.ProId = pr.ProId
 INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
 WHERE ap.ProId = apProID;
 end $$
@@ -299,7 +299,7 @@ SELECT ap.GraID, g.GraNombre, ap.ParId, pa.ParNombre, ap.ProId, pr.ProNombre, ap
 FROM AsignaParametro AS ap
 INNER JOIN grados AS g ON ap.GraID = g.GraID
 INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
-INNER JOIN productos AS pr ON ap.ProId = pr.ProId
+INNER JOIN producto AS pr ON ap.ProId = pr.ProId
 INNER JOIN variedad AS v ON v.ProId = pr.ProId AND ap.VarId = v.VarId
 WHERE ap.VarId = apVarID;
 end $$
@@ -1133,14 +1133,14 @@ delimiter $$
 
 
  -- -----------------------------------------------------
--- Procedimientos LotusProject Tabla productos
+-- Procedimientos LotusProject Tabla producto
 -- Insertar
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosIn (in prNombre varchar(45), in prImagen varchar(255), in prEstado tinyint(1),in maeId int(11))
+create procedure productoIn (in prNombre varchar(45), in prImagen varchar(255), in prEstado tinyint(1),in maeId int(11))
 begin
-insert into productos (ProNombre,ProImagen,ProEstado,MaeId) values (prNombre,prImagen,prEstado,maeId);
+insert into producto (ProNombre,ProImagen,ProEstado,MaeId) values (prNombre,prImagen,prEstado,maeId);
 end $$
 delimiter $$
 
@@ -1149,9 +1149,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosMo (in prId int(11),in prNombre varchar(45), in prImagen varchar(255), in prEstado tinyint(1),in maeId int(11))
+create procedure productoMo (in prId int(11),in prNombre varchar(45), in prImagen varchar(255), in prEstado tinyint(1),in maeId int(11))
 begin
-update productos SET ProNombre=prNombre, ProImagen=prImagen, ProEstado=prEstado,MaeId=maeId where ProId=prId;
+update producto SET ProNombre=prNombre, ProImagen=prImagen, ProEstado=prEstado,MaeId=maeId where ProId=prId;
 end $$
 delimiter $$
  -- -----------------------------------------------------
@@ -1159,11 +1159,11 @@ delimiter $$
 -- ----------------------------------------- ------------
 
 delimiter $$
-create procedure productosLi ()
+create procedure productoLi ()
 begin
 SELECT m.MaeId, m.MaeNombre, p.ProId, p.ProNombre, p.ProImagen, p.ProEstado, p.MaeId
 FROM
-productos AS p
+producto AS p
 INNER JOIN maestro AS m ON p.MaeId = m.MaeId
 ORDER BY
 p.ProNombre ASC;
@@ -1175,10 +1175,10 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosCo (in prId INT)
+create procedure productoCo (in prId INT)
 begin
 select p.ProId,p.ProNombre,p.ProImagen,p.ProEstado,m.MaeId,m.MaeNombre
-from productos as p 
+from producto as p 
 inner join maestro as m on p.MaeId = m.MaeId;
 end $$
 delimiter $$ 
@@ -1189,9 +1189,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure productosEl (in prId INT)
+create procedure productoEl (in prId INT)
 begin
-delete from productos where  ProId = prId;
+delete from producto where  ProId = prId;
 end $$
 delimiter $$
 
