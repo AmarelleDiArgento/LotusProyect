@@ -43,22 +43,29 @@
         </header>
 
 
-        <div class="container">
+        <div class="">
             
             <%
                 List<ProductoTab> LisPr = (List<ProductoTab>) Ses.getAttribute("lisPr");
             %>
 
-            <div class="carousel">
+            <!-- <div class="carousel">
                <%     for (ProductoTab pc : LisPr) {  %>
                 
                <a class="carousel-item" href="#one!"><img src="<%=pc.getProImagen()%>"></a>
 
                 <%}%>
+            </div> -->
+
+            <div class="carousel carousel-slider center">
+                <%     for (ProductoTab pc : LisPr) {%>
+                <div class="carousel-item white black-text" href="#two!">
+                <h2><%=pc.getProNombre()%></h2>
+                  <img style="width: auto;height: 100%;" src="<%=pc.getProImagen()%>">
+                </div>
+                <%}%>
             </div>
-
-
-            <table class="centered striped">
+         <!--    <table class="centered striped">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -96,7 +103,7 @@
 
                     <%}%>
                 </tbody>
-            </table>
+            </table> -->
 
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
