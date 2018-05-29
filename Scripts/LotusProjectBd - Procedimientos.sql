@@ -199,6 +199,7 @@ select PerNombre,PerModulo,PerDescripcion,PerIco,PerUrl,PerEstado from permiso w
 end $$
 delimiter $$d
 
+
 -- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla AsignaPermiso
 -- Insertar
@@ -308,7 +309,8 @@ delimiter $$
 -- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla armado
 -- Insertar
--- -----------------------------------------------------
+-- ---------------------------
+--------------------------
 
 delimiter $$
 create procedure armadoIn (in aNombre varchar(45), in adescripcion mediumtext,in aEstado tinyint(1))
@@ -474,9 +476,6 @@ delimiter $$
 
 
 
-
-
-
 -- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla fitosanidad
 -- Insertar
@@ -509,6 +508,14 @@ delimiter $$
 create procedure fitosanidadLi ()
 begin
 select FitId,FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado from fitosanidad;
+end $$
+delimiter $$
+
+delimiter $$
+create procedure preliminarLi ()
+begin
+select *
+from preliminar as pr inner join poscosecha as ps on pr.PosId = ps.PosId;
 end $$
 delimiter $$
 
@@ -596,7 +603,7 @@ delimiter $$
 create procedure gradosEl (in gId INT)
 begin
 delete from grados where GraID = gId;
-end $$
+end $$q3n
 delimiter $$
 
 
@@ -633,7 +640,7 @@ delimiter $$
 delimiter $$
 create procedure lineaLi ()
 begin
-select *
+select li.LinId,li.LinEstado,li.PosId,po.PosNombre
 from linea as li inner join poscosecha as po on li.PosId = po.PosId;
 end $$
 delimiter $$
@@ -644,10 +651,10 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure lineaCo (in liId INT)
+create procedure lineaCo ()
 begin
-select *
-from linea as li inner join poscosecha as po on li.PosId=po.PosId;
+select l.LinId,l.LinEstado,l.PosId,po.PosNombre
+from linea as l inner join poscosecha as po on l.PosId=po.PosId;
 end $$
 delimiter $$
 
@@ -756,7 +763,7 @@ delimiter $$
 delimiter $$
 create procedure marcacionLi ()
 begin
-select *
+select ma.MarId,ma.MarNombre,ma.MarPortada,ma.MarEstado,a.ArmId,a.ArmNombre
 from marcacion as ma inner join armado as ar on ma.ArmId = ar.ArmId;
 end $$
 delimiter $$
@@ -766,10 +773,10 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure marcacionCo (in marId INT)
+create procedure marcacionCo ()
 begin
-select *
-from marcacion as ma inner join armado as a on ma.ArmId = a.ArmId;
+select mar.MarId,mar.MarNombre,mar.MarPortada,mar.MarEstado,a.ArmId,a.ArmNombre
+from marcacion as mar inner join armado as a on mar.ArmId = a.ArmId;
 end $$
 delimiter $$
 -- ----------
@@ -816,8 +823,8 @@ delimiter $$
 delimiter $$
 create procedure materialsecoLi ()
 begin
-select *
-from materialseco as ma inner join armado as a on ma.ArmId = a.ArmId;
+select ma.MsId,ma.MsNombre,ma.MsImagen,ma.MsDescripcion,ma.MsEstado,ma.MsAlto,ma.MsAncho,ma.MsProfundo,t.TiMId,t.TiMNombre
+from materialseco as ma inner join tipoms as t on ma.TiMId = t.TiMId;
 end $$
 delimiter $$
 
@@ -828,8 +835,9 @@ delimiter $$
 delimiter $$
 create procedure materialsecoCo (in msId INT)
 begin
-select *
-from materialseco as m inner join armado as a on ma.ArmId = a.ArmId;end $$
+select m.MsId,m.MsNombre,m.MsImagen,m.MsDescripcion,m.MsEstado,m.MsAlto,m.MsAncho,m.MsProfundo,t.TiMId,t.TiMNombre
+from materialseco as m inner join tipoms as t on m.TiMId = t.TiMId;
+end $$
 delimiter $$
 -- ----------
 -------------------------------------------
@@ -874,8 +882,8 @@ delimiter $$
 delimiter $$
 create procedure menuLi ()
 begin
-select *
-from menu as me inner join marcacion as mar on me.MarId = mar.MarId;
+select me.MenuId,me.MenuOrden,me.MenPortada,me.MenSuperior,me.MenLongitud,me.MenCauchos,me.MenEstado,me.MenDescripcion,mar.MarId,mar.MarNombre
+from menu as me inner join marcacion as mar on me.Marcacion_MarId = mar.MarId;
 end $$
 delimiter $$
 
@@ -885,8 +893,9 @@ delimiter $$
 delimiter $$
 create procedure menuCo (in menuId INT)
 begin
-select *
-from menu as me inner join marcacion as mar on me.MarId = mar.MarId;
+select men.MenuId,men.MenuOrden,men.MenPortada,men.MenSuperior,men.MenLongitud,men.MenCauchos,men.MenEstado,men.MenDescripcion,mar.MarId,mar.MarNombre
+from menu as men inner join marcacion as mar on men.Marcacion_MarId = mar.MarId;
+end $$
 delimiter $$
 
 -------------------------------------------
@@ -989,8 +998,8 @@ delimiter $$
 delimiter $$
 create procedure pasoLi ()
 begin
-select *
-from paso as ps inner join armado as ar on ps.ArmId = ar.ArmId;
+select pso.PasId,pso.PasOrden,pso.PasDescripcion,pso.PasImagen,ar.ArmId,ar.ArmNombre
+from paso as pso inner join armado as ar on pso.ArmId = ar.ArmId;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -999,7 +1008,7 @@ delimiter $$
 delimiter $$
 create procedure pasoCo (in psId INT)
 begin
-select *
+select ps.PasId,ps.PasOrden,ps.PasDescripcion,ps.PasImagen,ar.ArmId,ar.ArmNombre
 from paso as ps inner join armado as ar on ps.ArmId = ar.ArmId;
 end $$
 delimiter $$
@@ -1103,8 +1112,8 @@ delimiter $$
 delimiter $$
 create procedure preliminarLi ()
 begin
-select *
-from preliminar as pr inner join poscosecha as ps on pr.PosId = ps.PosId;
+select pre.PreId,pre.PreFecha,pre.PreEstado,ps.PosId,ps.PosNombre
+from preliminar as pre inner join poscosecha as ps on pre.PosId = ps.PosId;
 end $$
 delimiter $$
 
@@ -1115,11 +1124,11 @@ delimiter $$
 delimiter $$
 create procedure preliminarCo (in prId INT)
 begin
-select *
+select pr.PreId,pr.PreFecha,pr.PreEstado,ps.PosId,ps.PosNombre
 from preliminar as pr inner join poscosecha as ps on pr.PosId = ps.PosId;
 end $$
 delimiter $$ 
--- -----------------------------------------------------
+-- ------------------------<>-----------------------------
 -- Eliminar
 -- -----------------------------------------------------
 
@@ -1310,4 +1319,219 @@ delete from variedad where  VarId = rId;
 end $$
 delimiter $$
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla asignafito
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignafitoIn (asgPate_AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
+begin
+insert into asignafito (asignaParte_AsPrtID,AsfImagen,AsfDescripcion) values (asgPate_AsPrtID,asfImagen,asfDescripcion);
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignafitoMo (in fito_FitId int(11),asignaParte_AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
+begin
+update asignafito SET AsfImagen=asfImagen, AsfDescripcion=asfDescripcion,asignaParte_AsPrtID=asgPate_AsPrtID where fitosanidad_FitId=fito_FitId;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure asignafitoLi ()
+begin
+select fitosanidad_FitId,asignaParte_AsPrtID,AsfImagen,AsfDescripcion 
+from asignafito;
+end $$
+delimiter $$
+
+create procedure asignafitoLi ()
+begin
+select asfi.fitosanidad_FitId,asfi.asignaParte_AsPrtID,asfi.AsfImagen,asfi.AsfDescripcion,aspar.AsPrtID
+from asignafito as asfi inner join asignaparte as aspar on asfi.asignaParte_AsPrtID = aspar.AsPrtID;
+end $$
+delimiter $$ 
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignafitoCo ()
+begin
+select asfit.fitosanidad_FitId,asfit.asignaParte_AsPrtID,asfit.AsfImagen,asfit.AsfDescripcion,aspar.AsPrtID
+from asignafito as asfit inner join asignaparte as aspar on asfit.asignaParte_AsPrtID = aspar.AsPrtID;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignafitoEl (in fito_FitId INT)
+begin
+delete from asignafito where  fitosanidad_FitId = fito_FitId;
+end $$
+delimiter $$
+
+
+
+
+
+ -- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla asignamarcacion
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamarcacionIn (in aPreId int(11), in aMarId int(11),in aNoRamos int(11))
+begin
+insert into asignamarcacion (PreId,MarId,NoRamos) values (aPreId,aMarId,aNoRamos);
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamarcacionMo (in aPreId int(11), in aMarId int(11),in aNoRamos int(11))
+begin
+update asignamarcacion SET  PreId=aPreId,NoRamos=aNoRamos where MarId=aMarId;
+end $$
+delimiter $$
+
+
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure asignamarcacionLi ()
+begin
+Select p.PreId, m.MarId, m.MarNombre
+from preliminar as p 
+inner join asignamarcacion as am on p.PreId = am.PreId
+inner join marcacion as m on am.MarId = m.MarId;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamarcacionCo ()
+begin
+Select pre.PreId, m.MarId, m.MarNombre
+from preliminar as pre
+inner join asignamarcacion as am on pre.PreId = am.PreId
+inner join marcacion as m on am.MarId = m.MarId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamarcacionEl (in marId INT)
+begin
+delete from asignamarcacion where  MarId = marId;
+end $$
+delimiter $$
+
+
+
+ -- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla asignamatseco
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamatsecoIn (in aMenuId int(11), in aMsMenUbicacion varchar(100),in aMsMenImagen mediumtext,in aMsMenCantidad int(2))
+begin
+insert into asignamatseco(MenuId,MsMenUbicacion,MsMenImagen,MsMenCantidad) values (aMenuId,asMenUbicacion,aMsMenImagen,aMsMenCantidad);
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamatsecoMo (in aMenuId int(11), in aMsMenUbicacion varchar(100),in aMsMenImagen mediumtext,in aMsMenCantidad int(2))
+begin
+update asignamarcacion SET  MenuId=aMenuId,MsMenUbicacion=aMsMenUbicacion,MsMenImagen=aMsMenImagen,MsMenCantidad=aMsMenCantidad  where MarId=aMarId;
+end $$
+delimiter $$
+
+
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure asignamatsecoLi ()
+begin
+Select p.PreId,m.MarId,m.MarNombre
+from asignamatseco as p 
+inner join asignamatseco as am on p.PreId = am.PreId
+inner join marcacion as m on am.MarId = m.MarId;
+end $$
+delimiter $$
+
+delimiter $$
+create procedure asignamatsecoLi ()
+begin
+select ama.MsMenUbicacion,ama.MsMenImagen,ama.MsMenCantidad,
+from asignamatseco as ama inner join menu as me on ama.asignaParte_AsPrtID = aspar.AsPrtID;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamarcacionCo ()
+begin
+Select pre.PreId, m.MarId, m.MarNombre
+from preliminar as pre
+inner join asignamarcacion as am on pre.PreId = am.PreId
+inner join marcacion as m on am.MarId = m.MarId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure asignamarcacionEl (in marId INT)
+begin
+delete from asignamarcacion where  MarId = marId;
+end $$
+delimiter $$
 
