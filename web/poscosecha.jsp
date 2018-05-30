@@ -57,6 +57,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Detalles</th>
+                        <th></th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>

@@ -244,41 +244,41 @@
                     <h4><i class="material-icons medium">face</i> Modificar Usuario</h4>
                     <p>Modifica la informacion del usuario</p>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="CedulaM" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
                             <label for="CedulaM">Cedula</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="NombreM" type="text" name="Nombre" class="validate" value="<%=uS.getNombre()%>">
                             <label for="NombreM">Nombre</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="ApellidoM" type="text" name="Apellido" class="validate" value="<%=uS.getApellido()%>">
                             <label for="ApellidoM">Apellido</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="UsuarioM" type="text" name="Usuario" class="validate" value="<%=uS.getLoger()%>">
                             <label for="UsuarioM">Usuario</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="PasswordM" type="Password" name="Password" class="validate"value="<%=uS.getPassword()%>">
                             <label for="PasswordM">Password</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
                             <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="CelularM" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate" value="<%=uS.getTelefono()%>">
                             <label for="CelularM">Celular</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" data-success="right"></span>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="EmailM" type="Email" name="Email" class="validate" value="<%=uS.getEmail()%>">
                             <label for="EmailM">Email</label>
                         </div>
-                        <div class="switch">
+                        <div class="switch col s4" >
                             <label>
                                 Inactivo
                                 <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">

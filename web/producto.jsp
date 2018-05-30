@@ -60,7 +60,7 @@
             <div class="carousel carousel-slider center">
                 <%     for (ProductoTab pc : LisPr) {%>
                 <div class="carousel-item white black-text" href="#two!">
-                <h2><%=pc.getProNombre()%></h2>
+                <h1 class="carousel-fixed-item left"><%=pc.getProNombre()%></h1>
                   <img style="width: auto;height: 100%;" src="<%=pc.getProImagen()%>">
                 </div>
                 <%}%>
@@ -178,7 +178,7 @@
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s6">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>

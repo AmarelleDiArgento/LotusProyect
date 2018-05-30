@@ -14,7 +14,10 @@
 %>
 <nav class="z-depth-0">
     <div class="nav-wrapper white">
-        <a href="#!" class="brand-logo">Lotus Project</a>
+        <a href="#!" class="brand-logo">
+            <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
+            
+        </a>
 
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">more_vert</i></a>
 

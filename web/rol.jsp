@@ -57,6 +57,7 @@
                         <th>Nombre</th>
                         <th>Detalles</th>
                         <th>Estado</th>
+                        <th>Configurar</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>

@@ -5749,8 +5749,8 @@ button.btn-floating {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
-  width: 55%;
+  max-height: 85%;
+  width: 90%;
   margin: auto;
   overflow-y: auto;
   border-radius: 2px;
@@ -5804,7 +5804,7 @@ button.btn-floating {
 
 .modal.modal-fixed-footer {
   padding: 0;
-  height: 70%;
+  height: 85%;
 }
 
 .modal.modal-fixed-footer .modal-content {
@@ -8357,11 +8357,20 @@ input[type=range].focused:focus:not(.active)::-ms-thumb {
 .carousel.carousel-slider .carousel-fixed-item {
   position: absolute;
   left: 0;
-  right: 0;
-  bottom: 20px;
+  right: auto;
+  bottom: 120px;
   z-index: 1;
 }
-
+@media only screen and (max-width: 660px){
+    .carousel.carousel-slider .carousel-fixed-item {
+      position: relative;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 12px;
+      z-index: 1;
+    }
+}
 .carousel.carousel-slider .carousel-fixed-item.with-indicators {
   bottom: 68px;
 }
