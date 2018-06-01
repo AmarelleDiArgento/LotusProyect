@@ -74,6 +74,7 @@ public class UsuarioServ extends HttpServlet {
         String Extencion;
         String Celular;
         String Email;
+        String Genero;
         String Avatar;
         Boolean Estado;
         int RolId;
@@ -97,6 +98,7 @@ public class UsuarioServ extends HttpServlet {
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
+                    Genero = request.getParameter("Genero");
 
                     Part arc = request.getPart("imagen");
                     String extension = "";
@@ -105,18 +107,18 @@ public class UsuarioServ extends HttpServlet {
                     if (i >= 0) {
                         extension = arc.getSubmittedFileName().substring(i + 1);
                     }
-                    
+
                     String Url = "Usuario/" + Usuario + "." + extension;
                     m = af.subirImg(arc, Url);
 
-                    String E = request.getParameter("Estado");
-                    Estado = E.equals("on");
+                    Estado = (request.getParameter("Estado") != null);
+
                     if (request.getParameter("Rol") != null) {
                         RolId = Integer.parseInt(request.getParameter("Rol"));
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Url, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Url, Estado, RolId);
                     m = Asql.getUsuario().insertar(u);
 
                     break;
@@ -135,15 +137,16 @@ public class UsuarioServ extends HttpServlet {
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
+                    Genero = request.getParameter("Genero");
                     Avatar = Usuario + request.getParameter("Avatar");
-                    String Em = request.getParameter("Estado");
-                    Estado = Em.equals("on");
+                    Estado = (request.getParameter("Estado") != null);
+
                     if (request.getParameter("Rol") != null) {
                         RolId = Integer.parseInt(request.getParameter("Rol"));
                     } else {
                         RolId = 3;
                     }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Avatar, Estado, RolId);
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Avatar, Estado, RolId);
                     m = Asql.getUsuario().modificar(u);
                     break;
 

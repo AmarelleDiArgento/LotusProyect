@@ -8,12 +8,13 @@ package Modelo.Interface;
 import Modelo.Dao.DAO;
 import Modelo.Tabs.PasoTab;
 import java.sql.ResultSet;
-
+import java.util.List;
 
 /**
  *
  * @author ALEJANDRA MEDINA
  */
 public interface Paso extends DAO<ResultSet, PasoTab, Integer> {
-    
+
+    public List<PasoTab> listar(int Id);
 }

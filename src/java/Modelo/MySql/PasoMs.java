@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public class PasoMs  implements Paso{
+public class PasoMs implements Paso {
 
     private final Connection con;
     Mensajes m = null;
@@ -33,8 +33,8 @@ public class PasoMs  implements Paso{
     final String Modificar = "";
     final String Eliminar = "";
     final String Consultar = "";
-    final String ListarTodos = "";
-    
+    final String ListarTodos = "call LotusProject.pasoLi(?);";
+
     @Override
     public Mensajes insertar(PasoTab p) {
         String msj = "";
@@ -44,8 +44,8 @@ public class PasoMs  implements Paso{
             stat.setInt(1, p.getPasorden());
             stat.setString(2, p.getPasDescripcion());
             stat.setString(3, p.getPasImagen());
+            stat.setInt(4, p.getArmId());
 
-         
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -73,19 +73,22 @@ public class PasoMs  implements Paso{
         }
         return m;
     }
-     @Override
+
+    @Override
     public PasoTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("PasId");
         int orden = rs.getInt("PasOrden");
         String descripcion = rs.getString("PasDescripcion");
         String imagen = rs.getString("PasImagen");
-        PasoTab pTab = new PasoTab (Id, orden, descripcion, imagen);
+        int ArmId = rs.getInt("ArmId");
+        String ArmN = rs.getString("ArmNombre");
+        PasoTab pTab = new PasoTab(Id, orden, descripcion, imagen, ArmId, ArmN);
         return pTab;
     }
 
-  @Override
-     public List<PasoTab> listar() {
-    PreparedStatement stat = null;
+    @Override
+    public List<PasoTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<PasoTab> uModel = new ArrayList<>();
         try {
@@ -115,46 +118,46 @@ public class PasoMs  implements Paso{
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return uModel;
     }
 
     @Override
-       public PasoTab obtener(Integer id) {
-           PreparedStatement stat = null;
-           ResultSet rs = null;
-           PasoTab pModel = null;
-           try {
-               stat = con.prepareCall(Consultar);
-               stat.setInt(1, id);
-               rs = stat.executeQuery();
-               if (rs.next()) {
-                   pModel = convertir(rs);
-               } else {
-                   throw new SQLException("Error, armado no encontrado");
-               }
-           } catch (SQLException ex) {
-               System.out.println("Error de SQL " + ex);
-           } finally {
-               if (rs != null) {
-                   try {
-                       rs.close();
-                   } catch (SQLException ex) {
-                       System.out.println("Error de SQL rs: " + ex);
-                   }
-               }
-               if (stat != null) {
-                   try {
-                       stat.close();
-                   } catch (SQLException ex) {
-                       System.out.println("Error de SQL: " + ex);
-                   }
+    public PasoTab obtener(Integer id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        PasoTab pModel = null;
+        try {
+            stat = con.prepareCall(Consultar);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                pModel = convertir(rs);
+            } else {
+                throw new SQLException("Error, armado no encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL " + ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL: " + ex);
+                }
 
-               }
-           }
-           return pModel;
-       }
+            }
+        }
+        return pModel;
+    }
 
-        @Override
+    @Override
     public Mensajes modificar(PasoTab p) {
         PreparedStatement stat = null;
         try {
@@ -193,38 +196,72 @@ public class PasoMs  implements Paso{
     }
 
     @Override
-       public Mensajes eliminar(Integer id) {
-           PreparedStatement stat = null;
-           try {
-               stat = con.prepareStatement(Eliminar);
-               stat.setInt(1, id);
-               if (stat.executeUpdate() == 0) {
-                   m.setTipo("Error");
-                   m.setMsj("Error Mysql");
-                   m.setDetalles("Error al eliminar los datos");
-               } else {
-                   m.setTipo("Ok");
-                   m.setMsj(id + " eliminado exitosamente");
-               }
+    public Mensajes eliminar(Integer id) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Eliminar);
+            stat.setInt(1, id);
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al eliminar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj(id + " eliminado exitosamente");
+            }
 
-           } catch (SQLException ex) {
-               m.setTipo("Error");
-               m.setMsj("Error Mysql");
-               m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
-           } finally {
-               if (stat != null) {
-                   try {
-                       stat.close();
-                   } catch (SQLException ex) {
-                       m.setTipo("Error");
-                       m.setMsj("Error Mysql Statement");
-                       m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
-                   }
-               }
-           }
-           return m;
-       }
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
+    }
+
+    @Override
+    public List<PasoTab> listar(int Id) {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<PasoTab> uModel = new ArrayList<>();
+        try {
+            try {
+                stat = con.prepareCall(ListarTodos);
+                stat.setInt(1, Id);
+
+                rs = stat.executeQuery();
+                while (rs.next()) {
+                    uModel.add(convertir(rs));
+                }
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql rs: " + ex);
+                    }
+                }
+                if (stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException ex) {
+                        System.out.println("Error sql st: " + ex);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
+        }
+        return uModel;
+    }
 
 }
-
-  

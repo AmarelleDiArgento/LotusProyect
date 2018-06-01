@@ -1,4 +1,4 @@
-
+|   
 <%@page import="Modelo.Tabs.RolTab"%>
 <%@page import="Modelo.Tabs.PoscosechaTab"%>
 <%@page import="Servicios.Mensajes"%>
@@ -49,8 +49,7 @@
 
 
         <div class="container">
-            <h3>Usuario</h3>
-
+            <h5>Usuarios</h5>
 
             <%
                 List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
@@ -77,7 +76,7 @@
                     <tr>
                         <td><div class="user-view">
                                 <a href="#">
-                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="img\<%=ut.getAvatar()%>">
+                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="<%=ut.getAvatar()%>">
                                 </a>
                             </div>
                         </td>
@@ -140,39 +139,39 @@
                     <h4><i class="material-icons medium">face</i> Nuevo Usuario</h4>
                     <p>Registra la informacion del nuevo usuario</p>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Cedula" type="text" name="Cedula" class="validate">
                             <label for="Cedula">Cedula</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Nombre" class="validate">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Apellido" type="text" name="Apellido" class="validate">
                             <label for="Apellido">Apellido</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Usuario" type="text" name="Usuario" class="validate">
                             <label for="Usuario">Usuario</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Password" type="Password" name="Password" class="validate">
                             <label for="Password">Password</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
                             <label for="Extencion">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
 
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
                             <label for="Celular">Celular</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
                         </div>
 
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Email" type="Email" name="Email" class="validate">
                             <label for="Email">Email</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
@@ -181,8 +180,8 @@
 
 
 
-                        <div class="input-field col s6">
-                            <select>
+                        <div class="input-field col s4">
+                            <select name="Rol">>
                                 <option value="" disabled selected>Rol</option>
                                 <%                        for (RolTab rl : LisR) {%>
                                 <option value="<%=rl.getRolId()%>"><%=rl.getRolNombre()%></option>
@@ -194,7 +193,7 @@
 
                         <%
                         %>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <select multiple>
                                 <option value="" disabled selected>Poscosecha</option>
                                 <%                        for (PoscosechaTab pl : LisP) {%>
@@ -204,7 +203,7 @@
                             <label>Poscosecha</label>
                         </div>
 
-                        <div class="input-field  file-field col s6">
+                        <div class="input-field  file-field col s4">
                             <div class="btwaves-button-inputn">
                                 <span>Avatar</span>
                                 <input type="file" name="imagen" accept="image/*">
@@ -214,7 +213,7 @@
                             </div>
                         </div>
 
-                        <div class="input-field col s6 center">
+                        <div class="input-field col s4 center">
                             <div class="switch">
                                 <label>
                                     Inactivo
@@ -278,13 +277,40 @@
                             <input id="EmailM" type="Email" name="Email" class="validate" value="<%=uS.getEmail()%>">
                             <label for="EmailM">Email</label>
                         </div>
-                        <div class="switch col s4" >
-                            <label>
-                                Inactivo
-                                <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
+
+
+
+                        <div class="input-field col s4">
+                            <select name="Rol">
+                                <option value="" disabled >Rol</option>
+                                <%                        for (RolTab rlm : LisR) {%>
+                                <option value="<%=rlm.getRolId()%>" <%if (rlm.getRolId() == uS.getRolId()) {%>selected<%}%>><%=rlm.getRolNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Rol</label>
+                        </div>
+
+
+                        <%
+                        %>
+                        <div class="input-field col s4">
+                            <select multiple>
+                                <option value="" disabled >Poscosecha</option>
+                                <%                        for (PoscosechaTab plm : LisP) {%>
+                                <option value="<%=plm.getPosId()%>"><%=plm.getPosNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Poscosecha</label>
+                        </div>
+                        <div class="input-field col s4 center">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
 
                     </div>    

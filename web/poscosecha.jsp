@@ -44,7 +44,7 @@
 
 
         <div class="container">
-            <h3>Poscosecha</h3>
+            <h5>Poscosecha</h5>
 
 
             <%

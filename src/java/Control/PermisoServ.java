@@ -141,20 +141,24 @@ public class PermisoServ extends HttpServlet {
                 case "Listar":
 //                    if (acc.isRpLeer()) {
                     List<PermisoTab> pl = Asql.getPermiso().listar();
-                    Ses.setAttribute("lisP", pl);
+                    Ses.setAttribute("lisPe", pl);
                     /*                    
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar estos registros");
                     }
-                     */ 
+                     */
                     break;
                 case "menu":
                     if (uSes.getCedula() != null) {
                         List<PermisoTab> menu = Asql.getPermiso().menu(uSes.getCedula());
                         Ses.setAttribute("Menu", menu);
                         m.setTipo("Msj");
-                        m.setMsj("Bienvenido " + uSes.toFullName());
+                        if (uSes.getGenero().equalsIgnoreCase("M")) {
+                            m.setMsj("Bienvenido " + uSes.toFullName());
+                        } else {
+                            m.setMsj("Bienvenida " + uSes.toFullName());
+                        }
                         ruta = "main.jsp";
                     } else {
                         m.setTipo("Error");
