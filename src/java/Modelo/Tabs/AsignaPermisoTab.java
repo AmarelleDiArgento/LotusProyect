@@ -48,6 +48,7 @@ public class AsignaPermisoTab implements Serializable{
         this.rpEditar = rpEditar;
         this.rpEliminar = rpEliminar;
     }
+    
 
     /**
      * @return the RolId
@@ -161,10 +162,12 @@ public class AsignaPermisoTab implements Serializable{
         this.rpEliminar = rpEliminar;
     }
 
+
     @Override
     public String toString() {
-        return "RolPermisoTab{" + "RolId=" + RolId + ", Roln=" + Roln + ", PerId=" + PerId + ", nPermiso=" + nPermiso + ", rpLeer=" + rpLeer + ", rpNuevo=" + rpNuevo + ", rpEditar=" + rpEditar + ", rpEliminar=" + rpEliminar + '}';
+        return "AsignaPermisoTab{" + "RolId=" + RolId + ", PerId=" + PerId + ", rpLeer=" + rpLeer + ", rpNuevo=" + rpNuevo + ", rpEditar=" + rpEditar + ", rpEliminar=" + rpEliminar + '}';
     }
+ 
     
     
     

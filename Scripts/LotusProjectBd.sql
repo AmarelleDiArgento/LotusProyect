@@ -1,9 +1,9 @@
 -- -----------------------------------------------------
--- Usuario LotusProject
+-- Schema LotusProject
  CREATE USER IF NOT EXISTS 'LotusProject'@'localhost' IDENTIFIED BY '1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF';
  GRANT ALL PRIVILEGES ON * . * TO 'LotusProject'@'localhost';
  FLUSH PRIVILEGES;
- DROP USER IF EXISTS lotusproyect@localhost;
+ DROP USER LotusProject@localhost;
 -- -----------------------------------------------------
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -366,6 +366,7 @@ CREATE TABLE IF NOT EXISTS LotusProject.usuario (
   UsuExtencion VARCHAR(4) NOT NULL,
   UsuTelefono VARCHAR(10) NULL DEFAULT NULL,
   UsuEmail VARCHAR(60) NOT NULL,
+  UsuGenero VARCHAR(1) NOT NULL,
   UsuAvatar VARCHAR(60) NOT NULL,
   UsuEstado TINYINT(1) NOT NULL DEFAULT '0',
   RolId INT(11) NOT NULL,
@@ -481,7 +482,7 @@ CREATE TABLE IF NOT EXISTS LotusProject.paso (
   PasId INT(11) NOT NULL AUTO_INCREMENT,
   PasOrden INT(11) NOT NULL,
   PasDescripcion MEDIUMTEXT NOT NULL,
-  PasImagen VARCHAR(45) NOT NULL,
+  PasImagen VARCHAR(255) NOT NULL,
   ArmId INT(11) NOT NULL,
   PRIMARY KEY (PasId, ArmId),
   INDEX fk_paso_armado1_idx (ArmId ASC),

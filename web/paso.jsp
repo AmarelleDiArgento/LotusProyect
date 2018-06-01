@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPa") != null) {
 
 
 %>
@@ -44,49 +44,37 @@
 
 
         <div class="container">
-             <h3>Paso</h3>
+            <h5>Paso</h5>
 
 
             <%
-                List<PasoTab> LisP = (List<PasoTab>) Ses.getAttribute("lisLP");
+                List<PasoTab> LisP = (List<PasoTab>) Ses.getAttribute("lisPa");
             %>
-            <table class="centered striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Detalles</th>
-                        <th>Estado</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <% for (PasoTab pt : LisP) {%>
-                    <tr>
-                        <td><%=pt.getPasId()%></td>
-                        <td><%=pt.getPasorden()%></td>
-                        <td><%=pt.getPasDescripcion()%></td>
-                        <td><%=pt.getPasImagen()%></td>
-                        <td>
-                            <label>
-                     
-                            <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getPasId()%>)" > edit </i>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getPasId()%>)"> delete </i>
-                            </a>
-                        </td>
-                    </tr>
 
-                    <%}%>
-                </tbody>
-            </table>
 
+
+            <div class="row">
+                <% for (PasoTab pt : LisP) {%>
+
+                <div class="col s3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="<%=pt.getPasImagen()%>" class="materialboxed" >
+                            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons" onclick="consultar(<%=pt.getPasId()%>)">edit</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">Paso <%=pt.getPasorden()%><i class="material-icons right">more_vert</i></span>
+
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">paso <%=pt.getPasorden()%><i class="material-icons right">close</i></span>
+                            <p><%=pt.getPasDescripcion()%></p>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+            </div>
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
                     <i class="large material-icons">settings</i>
@@ -95,7 +83,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Paso"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -191,69 +179,69 @@
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
         <script type="text/javascript">
-                                    function modalMod() {
+                                function modalMod() {
 
-                                        var elem = document.querySelector('#modalModificar');
-                                        var instance = M.Modal.init(elem);
-                                        instance.open();
-                                    }
-                                    ;
-                                    function msjConf(id) {
-                                        swal({
-                                            title: "¿Estas seguro?",
-                                            text: "Se eliminara el registro con el ID: " + id,
-                                            icon: "warning",
-                                            buttons: true,
-                                            dangerMode: true
-                                        })
-                                                .then((willDelete) => {
-                                                    if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
-                                                    }
-                                                });
-                                    }
-                                    ;
-                                    function consultar(id) {
-                                        var url = 'rols.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
-                                                '<input type="text" name="accion" value="Obtener" hidden/>' +
-                                                '</form>');
-                                        $('body').append(form);
-                                        (form).submit();
-                                    }
+                                    var elem = document.querySelector('#modalModificar');
+                                    var instance = M.Modal.init(elem);
+                                    instance.open();
+                                }
+                                ;
+                                function msjConf(id) {
+                                    swal({
+                                        title: "¿Estas seguro?",
+                                        text: "Se eliminara el registro con el ID: " + id,
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true
+                                    })
+                                            .then((willDelete) => {
+                                                if (willDelete) {
+                                                    window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                }
+                                            });
+                                }
+                                ;
+                                function consultar(id) {
+                                    var url = 'rols.do';
+                                    var form = $('<form action="' + url + '" method="get">' +
+                                            '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                            '<input type="text" name="accion" value="Obtener" hidden/>' +
+                                            '</form>');
+                                    $('body').append(form);
+                                    (form).submit();
+                                }
             <% if (msj != null) {%>
 
             <%if (msj.getTipo().equals("Error")) {%>
-                                    function msjError() {
-                                        swal({
-                                            title: "<%=msj.getMsj()%>",
-                                            text: "<%=msj.getDetalles()%>",
-                                            icon: "error"
-                                        });
-                                    }
-                                    ;
+                                function msjError() {
+                                    swal({
+                                        title: "<%=msj.getMsj()%>",
+                                        text: "<%=msj.getDetalles()%>",
+                                        icon: "error"
+                                    });
+                                }
+                                ;
 
 
             <%} else if (msj.getTipo().equals("Msj")) {%>
-                                    function msjMsj() {
+                                function msjMsj() {
 
-                                        swal("<%=msj.getMsj()%>", {
-                                            button: false
-                                        });
-                                    }
-                                    ;
+                                    swal("<%=msj.getMsj()%>", {
+                                        button: false
+                                    });
+                                }
+                                ;
 
             <%} else if (msj.getTipo().equals("Ok")) {%>
-                                    function msjOk()
-                                    {
-                                        swal({
-                                            title: "<%=msj.getMsj()%>",
-                                            text: "<%=msj.getDetalles()%>",
-                                            icon: "success"
-                                        });
-                                    }
-                                    ;
+                                function msjOk()
+                                {
+                                    swal({
+                                        title: "<%=msj.getMsj()%>",
+                                        text: "<%=msj.getDetalles()%>",
+                                        icon: "success"
+                                    });
+                                }
+                                ;
             <%}
                 }%>
 

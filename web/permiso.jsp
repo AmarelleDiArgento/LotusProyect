@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPe") != null) {
 
 
 %>
@@ -44,11 +44,11 @@
 
 
         <div class="container">
-               <h3>Permiso</h3>
+               <h5>Permiso</h5>
 
 
             <%
-                List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisP");
+                List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisPe");
             %>
             <table class="centered striped">
                 <thead>
@@ -101,7 +101,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
-                    <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
+                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">developer_board</i></a></li>
 
                 </ul>
             </div>
@@ -237,7 +237,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("lisPe", null);
     Ses.setAttribute("Per", null);
     Ses.setAttribute("msj", null);
 } else {%>

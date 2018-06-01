@@ -40,7 +40,7 @@
         </header>
         <div id="sesion" class="modal modal-session">
             <div class="modal-content center-align">
-                <form class="col s12" method="get" action="usuarios.do">
+                <form class="col s12" method="Post" action="usuarios.do">
                     <div class="row">
                         <h2>Iniciar sesion</h2>
                         <div class="input-field col s12">

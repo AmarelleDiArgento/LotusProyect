@@ -7,6 +7,7 @@ package Control;
 
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.AsignaPermisoTab;
+import Modelo.Tabs.PermisoTab;
 import Modelo.Tabs.UsuarioTab;
 import Servicios.Mensajes;
 import java.io.IOException;
@@ -50,7 +51,6 @@ public class AsignaPerServ extends HttpServlet {
         }
 
         String ruta = "";
-        String Dato = "";
         String Accion = request.getParameter("accion");
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -64,39 +64,41 @@ public class AsignaPerServ extends HttpServlet {
                      N,
                      M,
                      E;
-                    List<String> msjs = null;
-                    List<AsignaPermisoTab> li = (List<AsignaPermisoTab>) Ses.getAttribute("Aprr");
-                    int Rol = li.get(1).getRolId();
 
-                    for (AsignaPermisoTab ap : li) {
-                        int P = ap.getPerId();
-                        String[] cap = request.getParameterValues(ap.getnPermiso());
+                    int Rol = Integer.parseInt(request.getParameter("Rol"));
+                    List<PermisoTab> Lp = Asql.getPermiso().listar();
+                    for (PermisoTab p : Lp) {
+                        String[] cap = request.getParameterValues(String.valueOf(p.getPerId()));
                         L = false;
                         N = false;
                         M = false;
                         E = false;
                         for (String a : cap) {
                             switch (a) {
-                                case "1":
+                                case "L":
                                     L = true;
                                     break;
-                                case "2":
+                                case "N":
                                     N = true;
                                     break;
-                                case "3":
+                                case "M":
                                     M = true;
                                     break;
-                                case "4":
+                                case "E":
                                     E = true;
                                     break;
 
                             }
                         }
-                        AsignaPermisoTab aps = new AsignaPermisoTab(Rol, P, L, N, M, E);
-                        //msj = msj + Asql.getAsignaPer().modificar(aps);
-                        P++;
+
+                        AsignaPermisoTab aps = new AsignaPermisoTab(Rol, p.getPerId(), L, N, M, E);
+                        Asql.getAsignaPer().modificar(aps);
+
                     }
-                    ruta = "rol.jsp";
+                    m.setTipo("Ok");
+                    m.setMsj("Modificacion Exitosa");
+                    m.setDetalles(":D");
+                    ruta = "asignaper.jsp?Id="+Rol;
                     break;
                 case "eliminar":
 
@@ -115,21 +117,19 @@ public class AsignaPerServ extends HttpServlet {
                     UsuarioTab u = (UsuarioTab) Ses.getAttribute("log");
                     List<AsignaPermisoTab> apl = Asql.getAsignaPer().PerSession(u.getCedula());
                     Ses.setAttribute("ApSes", apl);
-                    m.setMsj("Bienvenido " + u.toFullName());
-                    m.setTipo("Msj");
-                    ruta = "main.jsp";
+                    ruta = "permisos.do?accion=menu";
 
                     break;
                 default:
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
-            m.setMsj("MySql Error");
+            m.setMsj("Serv MySql Error" + ex.getSQLState());
             m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
-            m.setMsj("Error");
+            m.setMsj("Serv Error " +ex.getMessage());
             m.setDetalles("Detalles: " + ex);
         }
 

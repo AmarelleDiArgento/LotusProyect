@@ -44,7 +44,7 @@
 
 
         <div class="container">
-          <h3>Armado</h3>
+          <h5>Armado</h5>
 
 
             <%
@@ -66,7 +66,7 @@
                     <% for (ArmadoTab at : LisA) {%>
                     <tr>
                         <td><%=at.getArmId()%></td>
-                        <td><%=at.getArmNombre()%></td>
+                        <td><a href="pasos.do?accion=Listar&Id=<%=at.getArmId()%>"><%=at.getArmNombre()%></a></td>
                         <td><%=at.getArmDescripcion()%></td>
                         <td>
                             <label>

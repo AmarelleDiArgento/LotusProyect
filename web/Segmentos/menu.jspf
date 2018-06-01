@@ -16,7 +16,7 @@
     <div class="nav-wrapper white">
         <a href="#!" class="brand-logo">
             <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
-            
+
         </a>
 
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">more_vert</i></a>
@@ -36,7 +36,7 @@
             <%        for (PermisoTab m : menu) {
 
             %>
-            <li><a href="<%=m.getPerUrl()%>" class="tooltipped" data-position="bottom" data-tooltip="<%=m.getPerNombre()%>"><i class="material-icons"><%=m.getPerIco()%></i></a></li>
+            <li><a href="<%=m.getPerUrl()%>" class="tooltipped" data-position="bottom" data-tooltip="<%=m.getPerModulo()%>"><i class="material-icons"><%=m.getPerIco()%></i></a></li>
                     <%}%>
             <li><a href="sessionFinally.jsp" class="tooltipped" data-position="bottom" data-tooltip="Cerrar sesión"><i class    ="material-icons">exit_to_app</i></a></li>
 
@@ -51,7 +51,7 @@
             <div class="background">
                 <img src="img\LotoLila.jpg">
             </div>
-            <a href="#"><img class="circle" src="img\<%=u.getAvatar()%>"></a>
+            <a href="#"><img class="circle" src="<%=u.getAvatar()%>"></a>
             <a href="#!name"><span class="white-text name"><%=u.toFullName()%></span></a>
             <a href="#!email"><span class="white-text email"><%=u.getnRol()%></span></a>
         </div>
@@ -61,16 +61,15 @@
         <div class="divider"></div>
     </li>
     <%        for (PermisoTab m : menu) {%>
-    <li ><a href="<%=m.getPerUrl()%>"><i class="material-icons"><%=m.getPerIco()%></i><%=m.getPerNombre()%></a></li>
+    <li ><a href="<%=m.getPerUrl()%>"><i class="material-icons"><%=m.getPerIco()%></i><%=m.getPerModulo()%></a></li>
             <%}%>
     <li><div class="divider"></div></li>
     <li ><a href="sessionFinally.jsp"><i class="material-icons">exit_to_app</i>Cerrar session</a></li>
 </ul>
 
 
-<%    } else {
-        response.sendRedirect("permisos.do?accion=menu");
-
-    }
+<%    } else {//
+response.sendRedirect("permisos.do?accion=menu");
+}
 
 %>

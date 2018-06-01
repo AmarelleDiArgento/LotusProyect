@@ -25,7 +25,7 @@ public class Probador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String msj = "";
+       Mensajes m = new Mensajes();
         try {
             AdminMs Asql = new AdminMs();
             //Insertar usuario
@@ -123,15 +123,19 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            List<AsignaPermisoTab> apl = Asql.getAsignaPer().listar(1);
-            for (AsignaPermisoTab ap : apl) {
-                System.out.println(ap.toString());
 
-            }
+            AsignaPermisoTab ap = new AsignaPermisoTab(1, 1, false, true, true, true);
+            m = Asql.getAsignaPer().modificar(ap);
+
         } catch (SQLException ex) {
-            msj = "Error sql: " + ex;
+            m.setTipo("Error");
+            m.setMsj("Error " + ex.getLocalizedMessage());
+            m.setDetalles("Error sql: " + ex.getMessage());
         }
-        System.out.println(msj);
+        
+        System.out.println(m.getTipo());
+        System.out.println(m.getMsj());
+        System.out.println(m.getDetalles());
 
     }
 }

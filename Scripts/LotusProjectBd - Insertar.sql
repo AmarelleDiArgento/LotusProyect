@@ -17,10 +17,10 @@
 -- Insertar LotusProject.Usuario
 -- -----------------------------------------------------
 
-call LotusProject.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com', 'Usuario/almoreno.jpg',1, 1);
-call LotusProject.usuarioIn('1075', 'Neissy', 'Medina', 'nmedina', '1234', '2315', '301463', 'nmedina@eliteflower.com', 'Usuario/nmedina.jpg',1, 1);
-call LotusProject.usuarioIn('1073', 'Erika', 'Guerrero', 'eguerrero', '1234', '2315', '301463', 'eguerrero@eliteflower.com', 'Usuario/eguerrero.jpg',1, 1);
-call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315', '301463', 'clara@eliteflower.com', 'Usuario/clara.jpg',1, 1);
+call LotusProject.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com','M' ,'img/Usuario/almoreno.jpg',1, 1);
+call LotusProject.usuarioIn('1075', 'Neissy', 'Medina', 'nmedina', '1234', '2315', '301463', 'nmedina@eliteflower.com','F', 'img/Usuario/Usuaria.png',1, 1);
+call LotusProject.usuarioIn('1073', 'Erika', 'Guerrero', 'eguerrero', '1234', '2315', '301463', 'eguerrero@eliteflower.com','F', 'img/Usuario/Usuaria.png',1, 1);
+call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315', '301463', 'clara@eliteflower.com','M', 'img/Usuario/Usuariousuario.png.jpg',1, 1);
 -- call LotusProject.usuarioMo('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '3014638753', 'almoreno@eliteflower.com', '1', 1);
 -- call LotusProject.usuarioLi();
 -- call LotusProject.usuarioEl('1070949');
@@ -78,6 +78,36 @@ call LotusProject.AsgPerIn(3, 6, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 7, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 9, 1, 1, 1, 1);
+
+call LotusProject.AsgPerIn(4, 1, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 2, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 3, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 4, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 5, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 6, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 7, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 9, 1, 1, 1, 1);
+
+call LotusProject.AsgPerIn(5, 1, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 2, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 3, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 4, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 5, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 6, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 7, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 9, 1, 1, 1, 1);
+
+call LotusProject.AsgPerIn(6, 1, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 2, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 3, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 4, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 5, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 6, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 7, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 9, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);
@@ -207,3 +237,29 @@ call LotusProject.productoIn('Spider','img/Maestro/Producto/spider.png',1,3);
 call LotusProject.productoIn('Sunflower','img/Maestro/Producto/sunflower.png',1,7);
 call LotusProject.productoIn('Trachelium','img/Maestro/Producto/trachelium.png',1,7);
 call LotusProject.productoIn('Viburnum','img/Maestro/Producto/viburnum.png',1,1);
+
+call LotusProject.armadoIn('Bloomstar Rainbow', 'Armado de 24 tallos', 1);
+
+call LotusProject.pasoIn(1, 'Hacer y hacer 1', 'img/Armado/Bloomstar Rainbow con lamina/1ro.png', 1);
+call LotusProject.pasoIn(2, 'Hacer y hacer 2', 'img/Armado/Bloomstar Rainbow con lamina/2do.png', 1);
+call LotusProject.pasoIn(3,'Hacer y hacer! 3','img/Armado/Bloomstar Rainbow con lamina/3ro.png',1);
+call LotusProject.pasoIn(4,'Hacer y hacer! 4','img/Armado/Bloomstar Rainbow con lamina/4to.png',1);
+call LotusProject.pasoIn(5,'Hacer y hacer! 5','img/Armado/Bloomstar Rainbow con lamina/5to.png',1);
+call LotusProject.pasoIn(6,'Hacer y hacer! 6','img/Armado/Bloomstar Rainbow con lamina/6to.png',1);
+call LotusProject.pasoIn(7,'Hacer y hacer! 7','img/Armado/Bloomstar Rainbow con lamina/7mo.png',1);
+call LotusProject.pasoIn(8,'Hacer y hacer! 8','img/Armado/Bloomstar Rainbow con lamina/8vo.png',1);
+call LotusProject.pasoIn(9,'Hacer y hacer! 9','img/Armado/Bloomstar Rainbow con lamina/9no.png',1);
+call LotusProject.pasoIn(10,'Hacer y hacer! 10','img/Armado/Bloomstar Rainbow con lamina/10mo.png',1);
+call LotusProject.pasoIn(11,'Hacer y hacer! 11','img/Armado/Bloomstar Rainbow con lamina/11vo.png',1);
+call LotusProject.pasoIn(12,'Hacer y hacer! 12','img/Armado/Bloomstar Rainbow con lamina/12vo.png',1);
+call LotusProject.pasoIn(13,'Hacer y hacer! 13','img/Armado/Bloomstar Rainbow con lamina/13vo.png',1);
+call LotusProject.pasoIn(14,'Hacer y hacer! 14','img/Armado/Bloomstar Rainbow con lamina/14vo.png',1);
+call LotusProject.pasoIn(15,'Hacer y hacer! 15','img/Armado/Bloomstar Rainbow con lamina/15vo.png',1);
+call LotusProject.pasoIn(16,'Hacer y hacer! 16','img/Armado/Bloomstar Rainbow con lamina/16vo.png',1);
+call LotusProject.pasoIn(17,'Hacer y hacer! 17','img/Armado/Bloomstar Rainbow con lamina/17vo.png',1);
+call LotusProject.pasoIn(18,'Hacer y hacer! 18','img/Armado/Bloomstar Rainbow con lamina/18vo.png',1);
+call LotusProject.pasoIn(19,'Hacer y hacer! 19','img/Armado/Bloomstar Rainbow con lamina/19vo.png',1);
+call LotusProject.pasoIn(20,'Hacer y hacer! 20','img/Armado/Bloomstar Rainbow con lamina/20vo.png',1);
+call LotusProject.pasoIn(21,'Hacer y hacer! 21','img/Armado/Bloomstar Rainbow con lamina/21vo.png',1);
+call LotusProject.pasoIn(22,'Hacer y hacer! 22','img/Armado/Bloomstar Rainbow con lamina/22vo.png',1);
+call LotusProject.pasoIn(23,'Hacer y hacer! 23','img/Armado/Bloomstar Rainbow con lamina/23vo.png',1);

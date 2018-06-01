@@ -17,21 +17,33 @@ public class PasoTab implements Serializable{
     private int Pasorden;
     private String PasDescripcion;
     private String PasImagen;
+    private int ArmId;
+    private String ArmNombre;
 
-    public PasoTab(int PasId, int Pasorden, String PasDescripcion, String PasImagen) {
+    public PasoTab(int Pasorden, String PasDescripcion, String PasImagen, int ArmId) {
+        this.Pasorden = Pasorden;
+        this.PasDescripcion = PasDescripcion;
+        this.PasImagen = PasImagen;
+        this.ArmId = ArmId;
+    }
+
+    public PasoTab(int PasId, int Pasorden, String PasDescripcion, String PasImagen, int ArmId) {
         this.PasId = PasId;
         this.Pasorden = Pasorden;
         this.PasDescripcion = PasDescripcion;
         this.PasImagen = PasImagen;
+        this.ArmId = ArmId;
     }
 
-    public PasoTab(int Pasorden, String PasDescripcion, String PasImagen) {
+    public PasoTab(int PasId, int Pasorden, String PasDescripcion, String PasImagen, int ArmId, String ArmNombre) {
+        this.PasId = PasId;
         this.Pasorden = Pasorden;
         this.PasDescripcion = PasDescripcion;
         this.PasImagen = PasImagen;
+        this.ArmId = ArmId;
+        this.ArmNombre = ArmNombre;
     }
-    
-   
+
     /**
      * @return the PasId
      */
@@ -75,24 +87,52 @@ public class PasoTab implements Serializable{
     }
 
     /**
-     * @return the Imagen
+     * @return the PasImagen
      */
     public String getPasImagen() {
         return PasImagen;
     }
 
     /**
-     * @param PasImagen the Imagen to set
+     * @param PasImagen the PasImagen to set
      */
     public void setPasImagen(String PasImagen) {
         this.PasImagen = PasImagen;
     }
 
-    @Override
-    public String toString() {
-        return "PasoTab{" + "PasId=" + PasId + ", Pasorden=" + Pasorden + ", PasDescripcion=" + PasDescripcion + ", PasImagen=" + PasImagen + '}';
+    /**
+     * @return the ArmId
+     */
+    public int getArmId() {
+        return ArmId;
     }
 
-   
-    
+    /**
+     * @param ArmId the ArmId to set
+     */
+    public void setArmId(int ArmId) {
+        this.ArmId = ArmId;
+    }
+
+    /**
+     * @return the ArmNombre
+     */
+    public String getArmNombre() {
+        return ArmNombre;
+    }
+
+    /**
+     * @param ArmNombre the ArmNombre to set
+     */
+    public void setArmNombre(String ArmNombre) {
+        this.ArmNombre = ArmNombre;
+    }
+
+    @Override
+    public String toString() {
+        return "PasoTab{" + "PasId=" + PasId + ", Pasorden=" + Pasorden + ", PasDescripcion=" + PasDescripcion + ", PasImagen=" + PasImagen + ", ArmId=" + ArmId + ", ArmNombre=" + ArmNombre + '}';
+    }
+
+
+
 }

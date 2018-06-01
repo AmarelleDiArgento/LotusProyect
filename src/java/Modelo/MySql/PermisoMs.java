@@ -147,10 +147,10 @@ public class PermisoMs implements Permiso {
     }
 
     private PermisoTab conMenu(ResultSet rs) throws SQLException {
-        String Permiso = rs.getString("PerNombre");
+        String Modulo = rs.getString("PerModulo");
         String Ico = rs.getString("PerIco");
         String Url = rs.getString("PerUrl");
-        PermisoTab pModel = new PermisoTab(Permiso, Ico, Url);
+        PermisoTab pModel = new PermisoTab(Modulo, Ico, Url);
         return pModel;
 
     }

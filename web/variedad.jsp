@@ -44,7 +44,7 @@
 
 
         <div class="container">
-            <h3>Variedad</h3>
+            <h5>Variedad</h5>
 
             <%
                 List<VariedadTab> LisV = (List<VariedadTab>) Ses.getAttribute("lisV");
