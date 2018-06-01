@@ -4,6 +4,7 @@
     Author     : Amarelle
 --%>
 
+<%@page import="Modelo.Tabs.UsuarioTab"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,15 +20,24 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
+
+        <%
+
+            UsuarioTab u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Url, Estado, RolId);
+
+            out.println("<h1>" + u.toString() + "</h1>");
+        %>
+
+
         <form method="post" action="usuarios.do" enctype="multipart/form-data" >
 
             <input type="file" name="imagen" accept="image/*">
             <input type="submit" class="waves-effect waves-green btn-flat" name="accion" value="Subir">
 
-<div class="form">
-    
-    
-</div>
+            <div class="form">
+
+
+            </div>
 
         </form>
 

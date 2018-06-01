@@ -75,6 +75,7 @@ public class UsuarioServ extends HttpServlet {
         String Celular;
         String Email;
         String Genero;
+        String Url;
         String Avatar;
         Boolean Estado;
         int RolId;
@@ -89,34 +90,17 @@ public class UsuarioServ extends HttpServlet {
                     Nombre = request.getParameter("Nombre");
                     Apellido = request.getParameter("Apellido");
                     Usuario = request.getParameter("Usuario");
-
-                    if (request.getParameter("Password") != null) {
-                        Password = request.getParameter("Password");
-                    } else {
-                        Password = "1234";
-                    }
+                    Password = request.getParameter("Password");
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
                     Genero = request.getParameter("Genero");
-
-                    Part arc = request.getPart("imagen");
-                    String extension = "";
-
-                    int i = arc.getSubmittedFileName().lastIndexOf('.');
-                    if (i >= 0) {
-                        extension = arc.getSubmittedFileName().substring(i + 1);
-                    }
-
-                    String Url = "Usuario/" + Usuario + "." + extension;
-                    m = af.subirImg(arc, Url);
-
-                    Estado = (request.getParameter("Estado") != null);
-
-                    if (request.getParameter("Rol") != null) {
-                        RolId = Integer.parseInt(request.getParameter("Rol"));
+                    Estado = request.getParameter("Estado") != null;
+                    RolId = Integer.parseInt(request.getParameter("Rol"));
+                    if (Genero.equalsIgnoreCase("M")) {
+                        Url = "img/Usuario/Usuario.png";
                     } else {
-                        RolId = 3;
+                        Url = "img/Usuario/Usuaria.png";
                     }
                     u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Url, Estado, RolId);
                     m = Asql.getUsuario().insertar(u);
@@ -128,26 +112,15 @@ public class UsuarioServ extends HttpServlet {
                     Nombre = request.getParameter("Nombre");
                     Apellido = request.getParameter("Apellido");
                     Usuario = request.getParameter("Usuario");
-
-                    if (request.getParameter("Password") != null) {
-                        Password = request.getParameter("Password");
-                    } else {
-                        Password = "1234";
-                    }
                     Extencion = request.getParameter("Extencion");
                     Celular = request.getParameter("Celular");
                     Email = request.getParameter("Email");
                     Genero = request.getParameter("Genero");
-                    Avatar = Usuario + request.getParameter("Avatar");
-                    Estado = (request.getParameter("Estado") != null);
-
-                    if (request.getParameter("Rol") != null) {
-                        RolId = Integer.parseInt(request.getParameter("Rol"));
-                    } else {
-                        RolId = 3;
-                    }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Avatar, Estado, RolId);
+                    Estado = request.getParameter("Estado") != null;
+                    RolId = Integer.parseInt(request.getParameter("Rol"));
+                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Extencion, Celular, Email, Genero, Estado, RolId);
                     m = Asql.getUsuario().modificar(u);
+                    
                     break;
 
                 case "Eliminar":

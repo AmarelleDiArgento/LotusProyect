@@ -130,7 +130,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="post" action="usuarios.do" enctype="multipart/form-data">
+            <form method="get" action="usuarios.do" enctype="multipart/form-data">
 
 
 
@@ -174,12 +174,18 @@
                         <div class="input-field col s4">
                             <input id="Email" type="Email" name="Email" class="validate">
                             <label for="Email">Email</label>
-                            <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
+                            <span class="helper-text" data-error="Digita un correo valido" ></span>
                         </div>
 
 
-
-
+                        <div class="input-field col s4">
+                            <select name="Genero">
+                                <option selected disabled >Genero</option>
+                                <option value="M" >Masculino</option>
+                                <option value="F" >Femenino</option>
+                            </select>
+                            <label>Genero</label>
+                        </div>
                         <div class="input-field col s4">
                             <select name="Rol">>
                                 <option value="" disabled selected>Rol</option>
@@ -203,15 +209,6 @@
                             <label>Poscosecha</label>
                         </div>
 
-                        <div class="input-field  file-field col s4">
-                            <div class="btwaves-button-inputn">
-                                <span>Avatar</span>
-                                <input type="file" name="imagen" accept="image/*">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
 
                         <div class="input-field col s4 center">
                             <div class="switch">
@@ -260,10 +257,6 @@
                             <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="PasswordM" type="Password" name="Password" class="validate"value="<%=uS.getPassword()%>">
-                            <label for="PasswordM">Password</label>
-                        </div>
-                        <div class="input-field col s4">
                             <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
                             <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
@@ -278,7 +271,14 @@
                             <label for="EmailM">Email</label>
                         </div>
 
-
+                        <div class="input-field col s4">
+                            <select name="Genero">
+                                <option value="" disabled >Rol</option>
+                                <option value="M"" <%if (uS.getGenero().equalsIgnoreCase("M")) {%> selected <%}%> >Masculino</option>
+                                <option value="F"" <%if (uS.getGenero().equalsIgnoreCase("F")) {%>selected<%}%>>Femenino</option>
+                            </select>
+                            <label>Genero</label>
+                        </div>
 
                         <div class="input-field col s4">
                             <select name="Rol">

@@ -57,6 +57,19 @@ public class UsuarioTab implements Serializable {
         this.RolId = RolId;
         this.nRol = nRol;
     }
+
+    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Extencion, String Telefono, String Email, String Genero, Boolean Estado, int RolId) {
+        this.Cedula = Cedula;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.Loger = Loger;
+        this.Extencion = Extencion;
+        this.Telefono = Telefono;
+        this.Email = Email;
+        this.Genero = Genero;
+        this.Estado = Estado;
+        this.RolId = RolId;
+    }
     
     public String toFullName() {
         return getNombre() + " " + getApellido();

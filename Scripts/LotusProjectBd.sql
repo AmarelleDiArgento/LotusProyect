@@ -1,8 +1,9 @@
 -- -----------------------------------------------------
 -- Schema LotusProject
--- CREATE USER 'LotusProject'@'localhost' IDENTIFIED BY '1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF';
--- GRANT ALL PRIVILEGES ON * . * TO 'LotusProject'@'localhost';
--- FLUSH PRIVILEGES;
+ CREATE USER IF NOT EXISTS 'LotusProject'@'localhost' IDENTIFIED BY '1311138C72A04BB7D228AFB9D574ED2D00DFD264C67161A958AD62E32672DEFF';
+ GRANT ALL PRIVILEGES ON * . * TO 'LotusProject'@'localhost';
+ FLUSH PRIVILEGES;
+ DROP USER LotusProject;
 -- -----------------------------------------------------
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;

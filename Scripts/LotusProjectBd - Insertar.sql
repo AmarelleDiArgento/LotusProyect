@@ -20,7 +20,7 @@
 call LotusProject.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com','M' ,'img/Usuario/almoreno.jpg',1, 1);
 call LotusProject.usuarioIn('1075', 'Neissy', 'Medina', 'nmedina', '1234', '2315', '301463', 'nmedina@eliteflower.com','F', 'img/Usuario/Usuaria.png',1, 1);
 call LotusProject.usuarioIn('1073', 'Erika', 'Guerrero', 'eguerrero', '1234', '2315', '301463', 'eguerrero@eliteflower.com','F', 'img/Usuario/Usuaria.png',1, 1);
-call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315', '301463', 'clara@eliteflower.com','M', 'img/Usuario/Usuario.png.jpg',1, 1);
+call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315', '301463', 'clara@eliteflower.com','M', 'img/Usuario/Usuariousuario.png.jpg',1, 1);
 -- call LotusProject.usuarioMo('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '3014638753', 'almoreno@eliteflower.com', '1', 1);
 -- call LotusProject.usuarioLi();
 -- call LotusProject.usuarioEl('1070949');
@@ -78,6 +78,36 @@ call LotusProject.AsgPerIn(3, 6, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 7, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 9, 1, 1, 1, 1);
+
+call LotusProject.AsgPerIn(4, 1, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 2, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 3, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 4, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 5, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 6, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 7, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 9, 1, 1, 1, 1);
+
+call LotusProject.AsgPerIn(5, 1, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 2, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 3, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 4, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 5, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 6, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 7, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 9, 1, 1, 1, 1);
+
+call LotusProject.AsgPerIn(6, 1, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 2, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 3, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 4, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 5, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 6, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 7, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 8, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 9, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);

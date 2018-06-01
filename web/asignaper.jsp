@@ -60,33 +60,35 @@
                         <th>Eli</th>
                     </tr>
                 </thead>
+                <font>
 
                 <tbody>
                     <% for (AsignaPermisoTab apt : LisAp) {
 
 
-                    %>
+                    %>   
                     <tr>
                         <td hidden ><%=apt.getRolId()%></td>
                         <td ><%=apt.getRoln()%></td>
                         <td hidden ><%=apt.getPerId()%></td>
                         <td><%=apt.getnPermiso()%></td>
                         <td>
-                            <input class="switchstad" type="checkbox" id="switch<%=apt.getPerId()%>" <%if (apt.isRpLeer()) {%>checked <%}%>/><label class="labelstad" for="switch<%=apt.getPerId()%>">Toggle</label>
+                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>L" value="L" <%if (apt.isRpLeer()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>L">Toggle</label>
                         </td>
                         <td>
-                            <input class="switchstad" type="checkbox" id="switch<%=apt.getPerId()%>" <%if (apt.isRpNuevo()) {%>checked <%}%>/><label class="labelstad" for="switch<%=apt.getPerId()%>">Toggle</label>
+                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>N"value="N" <%if (apt.isRpNuevo()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>N">Toggle</label>
                         </td>
                         <td>
-                            <input class="switchstad" type="checkbox" id="switch<%=apt.getPerId()%>" <%if (apt.isRpEditar()) {%>checked <%}%>/><label class="labelstad" for="switch<%=apt.getPerId()%>">Toggle</label>
+                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>M" value="M"<%if (apt.isRpEditar()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>M">Toggle</label>
                         </td>
                         <td>
-                            <input class="switchstad" type="checkbox" id="switch<%=apt.getPerId()%>" <%if (apt.isRpEliminar()) {%>checked <%}%>/><label class="labelstad" for="switch<%=apt.getPerId()%>">Toggle</label>
+                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>E" value="E" <%if (apt.isRpEliminar()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>E">Toggle</label>
                         </td>
                     </tr>
 
                     <%}%>
                 </tbody>
+                </form>
             </table>
 
             <div class="fixed-action-btn">

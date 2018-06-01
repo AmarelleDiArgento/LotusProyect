@@ -15,6 +15,7 @@ import java.util.List;
  * @author Amarelle
  */
 public class UsuarioMs implements Usuario {
+
     Mensajes m = new Mensajes();
     private final Connection con;
 
@@ -23,8 +24,8 @@ public class UsuarioMs implements Usuario {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?,?);";
-    final String Modificar = "call LotusProject.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?,?, ?);";
+    final String Insertar = "call LotusProject.usuarioIn(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    final String Modificar = "call LotusProject.usuarioMo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     final String Eliminar = "call LotusProject.usuarioEl(?);";
     final String Consultar = "call LotusProject.usuarioCo(?);";
     final String ListarTodos = "call LotusProject.usuarioLi();";
@@ -69,7 +70,7 @@ public class UsuarioMs implements Usuario {
 
     @Override
     public Mensajes insertar(UsuarioTab u) {
-        
+
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -128,17 +129,16 @@ public class UsuarioMs implements Usuario {
             stat.setString(2, u.getNombre());
             stat.setString(3, u.getApellido());
             stat.setString(4, u.getLoger());
-            stat.setString(5, u.getPassword());
-            stat.setString(6, u.getExtencion());
-            stat.setString(7, u.getTelefono());
-            stat.setString(8, u.getEmail());
+            stat.setString(5, u.getExtencion());
+            stat.setString(6, u.getTelefono());
+            stat.setString(7, u.getEmail());
+            stat.setString(8, u.getGenero());
             if (u.getEstado()) {
                 stat.setInt(9, 1);
             } else {
                 stat.setInt(9, 0);
             }
-            stat.setString(10, u.getAvatar());
-            stat.setInt(11, u.getRolId());
+            stat.setInt(10, u.getRolId());
             
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");

@@ -69,9 +69,9 @@ delimiter $$
 -- Modificar
 -- -----------------------------------------------------
 delimiter $$
-create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uPass VARCHAR(255),in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60), in uEstado TINYINT(1), in RolId INT)
+create procedure usuarioMo (in uCedula VARCHAR(10), in uNombre VARCHAR(45), in uApellido VARCHAR(45), in uLoger VARCHAR(15), in uExt VARCHAR(4),in uTel VARCHAR(10), in uEmail VARCHAR(60),in uGenero Varchar(1), in uEstado VARCHAR(10), in RolId INT)
 begin
-update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuPassword=uPass,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuGenero=uGenero,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
+update usuario SET UsuCedula=uCedula,UsuNombre=uNombre,UsuApellido=uApellido,UsuLoger=uLoger,UsuExtencion=uExt,UsuTelefono=uTel,UsuEmail=uEmail,UsuGenero=uGenero,UsuEstado=uEstado,RolId=RolId where UsuCedula=uCedula;
 end $$
 delimiter $$
 
