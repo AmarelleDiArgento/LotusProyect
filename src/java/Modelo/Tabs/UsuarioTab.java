@@ -21,12 +21,13 @@ public class UsuarioTab implements Serializable {
     private String Extencion;
     private String Telefono;
     private String Email;
+    private String Genero;
     private String Avatar;
     private Boolean Estado;
     private int RolId;
     private String nRol;
 
-    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, String Avatar, Boolean Estado, int RolId, String nRol) {
+    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, String Genero, String Avatar, Boolean Estado, int RolId) {
         this.Cedula = Cedula;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -35,24 +36,35 @@ public class UsuarioTab implements Serializable {
         this.Extencion = Extencion;
         this.Telefono = Telefono;
         this.Email = Email;
+        this.Genero = Genero;
+        this.Avatar = Avatar;
+        this.Estado = Estado;
+        this.RolId = RolId;
+    }
+
+    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, String Genero, String Avatar, Boolean Estado, int RolId, String nRol) {
+        this.Cedula = Cedula;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.Loger = Loger;
+        this.Password = Password;
+        this.Extencion = Extencion;
+        this.Telefono = Telefono;
+        this.Email = Email;
+        this.Genero = Genero;
         this.Avatar = Avatar;
         this.Estado = Estado;
         this.RolId = RolId;
         this.nRol = nRol;
     }
+    
+    public String toFullName() {
+        return getNombre() + " " + getApellido();
+    }
 
-    public UsuarioTab(String Cedula, String Nombre, String Apellido, String Loger, String Password, String Extencion, String Telefono, String Email, String Avatar, Boolean Estado, int RolId) {
-        this.Cedula = Cedula;
-        this.Nombre = Nombre;
-        this.Apellido = Apellido;
-        this.Loger = Loger;
-        this.Password = Password;
-        this.Extencion = Extencion;
-        this.Telefono = Telefono;
-        this.Email = Email;
-        this.Avatar = Avatar;
-        this.Estado = Estado;
-        this.RolId = RolId;
+    @Override
+    public String toString() {
+        return "UsuarioTab{" + "Nombre=" + Nombre + ", Apellido=" + Apellido + ", Loger=" + Loger + ", Password=" + Password + ", Extencion=" + Extencion + ", Telefono=" + Telefono + ", Email=" + Email + ", Genero=" + Genero + ", Avatar=" + Avatar + ", Estado=" + Estado + ", nRol=" + nRol + '}';
     }
 
     /**
@@ -168,6 +180,20 @@ public class UsuarioTab implements Serializable {
     }
 
     /**
+     * @return the Genero
+     */
+    public String getGenero() {
+        return Genero;
+    }
+
+    /**
+     * @param Genero the Genero to set
+     */
+    public void setGenero(String Genero) {
+        this.Genero = Genero;
+    }
+
+    /**
      * @return the Avatar
      */
     public String getAvatar() {
@@ -221,14 +247,5 @@ public class UsuarioTab implements Serializable {
      */
     public void setnRol(String nRol) {
         this.nRol = nRol;
-    }
-
-    @Override
-    public String toString() {
-        return "UsuarioTab{" + "Cedula=" + Cedula + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Loger=" + Loger + ", Password=" + Password + ", Extencion=" + Extencion + ", Telefono=" + Telefono + ", Email=" + Email + ", Estado=" + Estado + ", RolId=" + RolId + ", nRol=" + nRol + '}';
-    }
-
-    public String toFullName() {
-        return Nombre + " " + Apellido;
     }
 }

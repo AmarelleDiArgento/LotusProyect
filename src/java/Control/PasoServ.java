@@ -55,7 +55,7 @@ public class PasoServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Paso")) {
                 acc = a;
             }
         }
@@ -63,17 +63,16 @@ public class PasoServ extends HttpServlet {
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
-            ruta = "rol.jsp";
+            ruta = "paso.jsp";
         }
         PasoTab ps = null;
-        
-       int Id;
-       int Pasorden;
-       String PasDescripcion;
-       String PasImagen;
-       String ArmNombre;
-       
 
+        int Id;
+        int Pasorden;
+        String PasDescripcion;
+        String PasImagen;
+        String ArmNombre;
+        int ArmId;
         try {
             AdminMs Asql = new AdminMs(pool);
             switch (Accion) {
@@ -82,8 +81,9 @@ public class PasoServ extends HttpServlet {
                         Pasorden = Integer.parseInt(request.getParameter("Pasorden"));
                         PasDescripcion = request.getParameter("PasDescripcion");
                         PasImagen = request.getParameter("PasImagen");
-                        ps = new PasoTab(Pasorden,PasDescripcion,PasImagen);
-                        m= Asql.getPaso().insertar(ps);
+                        ArmId = Integer.parseInt(request.getParameter("ArmId"));
+                        ps = new PasoTab(Pasorden, PasDescripcion, PasImagen, ArmId);
+                        m = Asql.getPaso().insertar(ps);
 
                     } else {
                         m.setTipo("Error");
@@ -98,9 +98,10 @@ public class PasoServ extends HttpServlet {
                         Pasorden = Integer.parseInt(request.getParameter("Pasorden"));
                         PasDescripcion = request.getParameter("PasDescripcion");
                         PasImagen = request.getParameter("PasImagen");
-                        ps = new PasoTab(Id,Pasorden,PasDescripcion,PasImagen);
-                        m= Asql.getPaso().modificar(ps);
-                        
+                        ArmId = Integer.parseInt(request.getParameter("ArmId"));
+                        ps = new PasoTab(Id, Pasorden, PasDescripcion, PasImagen, ArmId);
+                        m = Asql.getPaso().modificar(ps);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
@@ -131,8 +132,10 @@ public class PasoServ extends HttpServlet {
                     break;
                 case "Listar":
                     //if (acc.isRpLeer()) {
-                    List<PasoTab> pl = Asql.getPaso().listar();
-                    Ses.setAttribute("lisP", pl);
+                    Id = Integer.parseInt(request.getParameter("Id"));
+                    List<PasoTab> pl = Asql.getPaso().listar(Id);
+                    Ses.setAttribute("lisPa", pl);
+                    ruta = "paso.jsp";
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}
@@ -156,12 +159,11 @@ public class PasoServ extends HttpServlet {
         //    ruta = "index.jsp";
         //    msj = "No has iniciado sesión";
         //}
-         if (m.getTipo() != null) {
+        if (m.getTipo() != null) {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-   
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

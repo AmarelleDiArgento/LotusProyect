@@ -40,8 +40,8 @@ public class PermisoTab implements Serializable{
         this.PerEstado = PerEstado;
     }
 
-    public PermisoTab(String PerNombre, String PerIco, String PerUrl) {
-        this.PerNombre = PerNombre;
+    public PermisoTab(String PerModulo, String PerIco, String PerUrl) {
+        this.PerModulo = PerModulo;
         this.PerIco = PerIco;
         this.PerUrl = PerUrl;
     }

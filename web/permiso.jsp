@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPe") != null) {
 
 
 %>
@@ -44,11 +44,11 @@
 
 
         <div class="container">
-               <h3>Permiso</h3>
+               <h5>Permiso</h5>
 
 
             <%
-                List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisP");
+                List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisPe");
             %>
             <table class="centered striped">
                 <thead>
@@ -237,7 +237,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("lisPe", null);
     Ses.setAttribute("Per", null);
     Ses.setAttribute("msj", null);
 } else {%>

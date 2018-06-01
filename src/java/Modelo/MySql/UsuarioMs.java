@@ -23,8 +23,8 @@ public class UsuarioMs implements Usuario {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
-    final String Modificar = "call LotusProject.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?);";
+    final String Insertar = "call LotusProject.usuarioIn(?, ?, ?, ?, ?, ?, ?,?, ?,?, ?,?);";
+    final String Modificar = "call LotusProject.usuarioMo(?, ?, ?, ?, ?, ?, ?,?, ?,?,?, ?);";
     final String Eliminar = "call LotusProject.usuarioEl(?);";
     final String Consultar = "call LotusProject.usuarioCo(?);";
     final String ListarTodos = "call LotusProject.usuarioLi();";
@@ -81,13 +81,14 @@ public class UsuarioMs implements Usuario {
             stat.setString(6, u.getExtencion());
             stat.setString(7, u.getTelefono());
             stat.setString(8, u.getEmail());
-            stat.setString(9, u.getAvatar());
+            stat.setString(9, u.getGenero());
+            stat.setString(10, u.getAvatar());
             if (u.getEstado()) {
-                stat.setInt(10, 1);
+                stat.setInt(11, 1);
             } else {
-                stat.setInt(10, 0);
+                stat.setInt(11, 0);
             }
-            stat.setInt(11, u.getRolId());
+            stat.setInt(12, u.getRolId());
 
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");
@@ -215,12 +216,13 @@ public class UsuarioMs implements Usuario {
         String ext = rs.getString("UsuExtencion");
         String tel = rs.getString("UsuTelefono");
         String email = rs.getString("UsuEmail");
+        String genero = rs.getString("UsuGenero");
         String avatar = rs.getString("UsuAvatar");
         int st = rs.getInt("UsuEstado");
         boolean status = st == 1;
         int rol_id = rs.getInt("RolId");
         String rol_n = rs.getString("RolNombre");
-        UsuarioTab uTab = new UsuarioTab(cedula, nombre, apellido, loger, pass, ext, tel, email, avatar, status, rol_id, rol_n);
+        UsuarioTab uTab = new UsuarioTab(cedula, nombre, apellido, loger, pass, ext, tel, email, genero, avatar, status, rol_id, rol_n);
         return uTab;
     }
 
