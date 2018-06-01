@@ -4,6 +4,11 @@
     Author     : Amarelle
 --%>
 
+<%@page import="Modelo.MySql.AdminMs"%>
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
+<%@page import="Modelo.Tabs.PermisoTab"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page import="Modelo.Tabs.UsuarioTab"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,9 +28,7 @@
 
         <%
 
-            UsuarioTab u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Url, Estado, RolId);
 
-            out.println("<h1>" + u.toString() + "</h1>");
         %>
 
 
@@ -40,6 +43,48 @@
             </div>
 
         </form>
+
+        <%            
+            try{
+                AdminMs Asql = new AdminMs();
+            
+            boolean L, N, M, E;
+
+            int Rol = Integer.parseInt(request.getParameter("Rol"));
+            List<PermisoTab> Lp = Asql.getPermiso().listar();
+            for (PermisoTab p : Lp) {
+                String[] cap = request.getParameterValues(String.valueOf(p.getPerId()));
+                L = false;
+                N = false;
+                M = false;
+                E = false;
+                for (String a : cap) {
+                    out.println(a);
+                    switch (a) {
+                        case "L":
+                            L = true;
+                            break;
+                        case "N":
+                            N = true;
+                            break;
+                        case "M":
+                            M = true;
+                            break;
+                        case "E":
+                            E = true;
+                            break;
+
+                    }
+                }
+                
+                AsignaPermisoTab aps = new AsignaPermisoTab(Rol, p.getPerId(), L, N, M, E);
+                out.print(aps.toString());
+            }
+            }catch (Exception ex) {            
+                out.println(ex.getCause());
+            }
+
+        %>
 
 
     </body>

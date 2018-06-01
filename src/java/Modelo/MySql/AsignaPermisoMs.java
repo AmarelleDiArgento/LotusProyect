@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Modelo.Interface.AsignaPermiso;
 import Servicios.Mensajes;
+import java.util.HashSet;
 
 /**
  *
@@ -24,6 +25,7 @@ import Servicios.Mensajes;
 public class AsignaPermisoMs implements AsignaPermiso {
 
     private final Connection con;
+    Mensajes m = new Mensajes();
 
     public AsignaPermisoMs(Connection con) {
 
@@ -34,7 +36,7 @@ public class AsignaPermisoMs implements AsignaPermiso {
     final String Modificar = "call LotusProject.AsgPerMo(?, ?, ?, ?, ?, ?);";
     final String Eliminar = "call LotusProject.AsgPerEl(?, ?)";
     final String Consultar = "call LotusProject.AsgPerCo(?, ?)";
-    final String ListarRol = "call LotusProject.AsgPerLi(?);";
+    final String Listar = "call LotusProject.AsgPerLi(?);";
     final String PerSession = "call LotusProject.AsgPerSession(?);";
 
     @Override
@@ -44,7 +46,7 @@ public class AsignaPermisoMs implements AsignaPermiso {
         List<AsignaPermisoTab> apModel = new ArrayList<>();
         try {
             try {
-                stat = con.prepareCall(ListarRol);
+                stat = con.prepareCall(Listar);
                 stat.setInt(1, rol);
                 rs = stat.executeQuery();
                 while (rs.next()) {
@@ -73,13 +75,116 @@ public class AsignaPermisoMs implements AsignaPermiso {
     }
 
     @Override
-    public Mensajes insertar(AsignaPermisoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes insertar(AsignaPermisoTab ap) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Insertar);
+            stat.setInt(1, ap.getRolId());
+            stat.setInt(2, ap.getPerId());
+            if (ap.isRpLeer()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(3, 0);
+            }
+            if (ap.isRpNuevo()) {
+                stat.setInt(4, 1);
+            } else {
+                stat.setInt(4, 0);
+            }
+            if (ap.isRpEditar()) {
+                stat.setInt(5, 1);
+            } else {
+                stat.setInt(5, 0);
+            }
+            if (ap.isRpEliminar()) {
+                stat.setInt(6, 1);
+            } else {
+                stat.setInt(6, 0);
+            }
+
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj("Permiso agregado a " + ap.getRolId() + " agregado exitosamente");
+                m.setDetalles("Perfecto!");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
-    public Mensajes modificar(AsignaPermisoTab o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Mensajes modificar(AsignaPermisoTab ap) {
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Modificar);
+            stat.setInt(1, ap.getRolId());
+            stat.setInt(2, ap.getPerId());
+            if (ap.isRpLeer()) {
+                stat.setInt(3, 1);
+            } else {
+                stat.setInt(3, 0);
+            }
+            if (ap.isRpNuevo()) {
+                stat.setInt(4, 1);
+            } else {
+                stat.setInt(4, 0);
+            }
+            if (ap.isRpEditar()) {
+                stat.setInt(5, 1);
+            } else {
+                stat.setInt(5, 0);
+            }
+            if (ap.isRpEliminar()) {
+                stat.setInt(6, 1);
+            } else {
+                stat.setInt(6, 0);
+            }
+
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al ingresar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj("Permiso modificado a " + ap.getRolId() + " - " + ap.getPerId() + " agregado exitosamente");
+                m.setDetalles("Perfecto!");
+
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                }
+            }
+        }
+        return m;
     }
 
     @Override
@@ -101,7 +206,7 @@ public class AsignaPermisoMs implements AsignaPermiso {
         boolean modificar = m == 1;
         int e = rs.getInt("rolperEliminar");
         boolean eliminar = e == 1;
-        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, leer, nuevo, eliminar, eliminar);
+        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, leer, nuevo, modificar, eliminar);
         return apModel;
     }
 

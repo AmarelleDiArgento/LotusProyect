@@ -44,65 +44,68 @@
 
 
         <div class="container">
-            <%
-                List<AsignaPermisoTab> LisAp = (List<AsignaPermisoTab>) Ses.getAttribute("lisAp");
-            %>
-            <table class="centered striped">
-                <thead>
-                    <tr>
-                        <th hidden >Rol ID</th> 
-                        <th>Rol</th>
-                        <th hidden >Per ID</th> 
-                        <th>Permiso</th>
-                        <th>Lee</th>
-                        <th>Nue</th>
-                        <th>Mod</th>
-                        <th>Eli</th>
-                    </tr>
-                </thead>
-                <font>
-
-                <tbody>
-                    <% for (AsignaPermisoTab apt : LisAp) {
+            <form action="asignapers.do" method="get" />
+                
+                <%
+                    List<AsignaPermisoTab> LisAp = (List<AsignaPermisoTab>) Ses.getAttribute("lisAp");
+                    
+                %>
+                <input name="Rol" value="<%=LisAp.get(1).getRolId()%>" hidden />
+                <table class="centered striped">
+                    <thead>
+                        <tr>
+                            <th>Rol</th>
+                            <th>Permiso</th>
+                            <th>Leer</th>
+                            <th>Nuevo</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
 
 
-                    %>   
-                    <tr>
-                        <td hidden ><%=apt.getRolId()%></td>
-                        <td ><%=apt.getRoln()%></td>
-                        <td hidden ><%=apt.getPerId()%></td>
-                        <td><%=apt.getnPermiso()%></td>
-                        <td>
-                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>L" value="L" <%if (apt.isRpLeer()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>L">Toggle</label>
-                        </td>
-                        <td>
-                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>N"value="N" <%if (apt.isRpNuevo()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>N">Toggle</label>
-                        </td>
-                        <td>
-                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>M" value="M"<%if (apt.isRpEditar()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>M">Toggle</label>
-                        </td>
-                        <td>
-                            <input class="switchstad" type="checkbox" id="<%=apt.getPerId()%>E" value="E" <%if (apt.isRpEliminar()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>E">Toggle</label>
-                        </td>
-                    </tr>
+                    <tbody>
 
-                    <%}%>
-                </tbody>
-                </form>
-            </table>
+                        <% for (AsignaPermisoTab apt : LisAp) {
 
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large pink">
-                    <i class="large material-icons">settings</i>
-                </a>
-                <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
-                    <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
 
-                </ul>
-            </div>
+                        %>   
+                        <tr>
+                            <td><%=apt.getRoln()%></td>
+                            <td><%=apt.getnPermiso()%></td>
+                            <td>
+                                <input name="<%=apt.getPerId()%>" class="switchstad" type="checkbox" id="<%=apt.getPerId()%>L" value="L" <%if (apt.isRpLeer()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>L">Toggle</label>
+                            </td>
+                            <td>
+                                <input name="<%=apt.getPerId()%>" class="switchstad" type="checkbox" id="<%=apt.getPerId()%>N"value="N" <%if (apt.isRpNuevo()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>N">Toggle</label>
+                            </td>
+                            <td>
+                                <input name="<%=apt.getPerId()%>" class="switchstad" type="checkbox" id="<%=apt.getPerId()%>M" value="M"<%if (apt.isRpEditar()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>M">Toggle</label>
+                            </td>
+                            <td>
+                                <input name="<%=apt.getPerId()%>" class="switchstad" type="checkbox" id="<%=apt.getPerId()%>E" value="E" <%if (apt.isRpEliminar()) {%>checked <%}%>/><label class="labelstad" for="<%=apt.getPerId()%>E">Toggle</label>
+                            </td>
+                        </tr>
+
+                        <%}%>
+                    <input type="submit" name="accion" value="modificar">
+
+                    </tbody>
+                </table>
+
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large pink">
+                        <i class="large material-icons">settings</i>
+                    </a>
+                    <ul>
+                        <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
+                        <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+                        <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
+                        <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
+
+                    </ul>
+                </div>
+            </form>
         </div>
 
         <footer class="footer">

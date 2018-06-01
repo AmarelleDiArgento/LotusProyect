@@ -142,7 +142,7 @@ public class RolServ extends HttpServlet {
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
-            m.setMsj("MySql Error");
+            m.setMsj("MySql Error: ");
             m.setDetalles("Detalles" + ex);
 
         } catch (Exception ex) {
