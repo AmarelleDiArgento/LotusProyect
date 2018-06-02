@@ -1,4 +1,3 @@
-|   
 <%@page import="Modelo.Tabs.RolTab"%>
 <%@page import="Modelo.Tabs.PoscosechaTab"%>
 <%@page import="Servicios.Mensajes"%>
