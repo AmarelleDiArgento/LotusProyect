@@ -263,3 +263,70 @@ call LotusProject.pasoIn(20,'Hacer y hacer! 20','img/Armado/Bloomstar Rainbow co
 call LotusProject.pasoIn(21,'Hacer y hacer! 21','img/Armado/Bloomstar Rainbow con lamina/21vo.png',1);
 call LotusProject.pasoIn(22,'Hacer y hacer! 22','img/Armado/Bloomstar Rainbow con lamina/22vo.png',1);
 call LotusProject.pasoIn(23,'Hacer y hacer! 23','img/Armado/Bloomstar Rainbow con lamina/23vo.png',1);
+
+
+-- Procedimientos LotusProject Tabla grados 
+call lotusproject.gradosIn('rosa', 'roja', 1); 
+-- call lotusproject.gradosMo(12345, 'rosa', 'amarillo', 1); 
+-- call lotusproject.gradosLi(); 
+-- call lotusproject.gradosCo(1); 
+ 
+-- Procedimientos LotusProject Tabla linea 
+call lotusproject.lineaIn(1, 1); 
+-- call lotusproject.lineaMo(1, 1, 1); 
+-- call lotusproject.lineaLi(); 
+-- call lotusproject.lineaCo(); 
+ 
+ 
+ 
+-- Procedimientos LotusProject Tabla maestro 
+call lotusproject.maestroIn('roja', 'verde'); 
+-- call lotusproject.maestroMo(123, 'rosa', 'amarilla'); 
+-- call lotusproject.maestroLi(); 
+-- call lotusproject.maestroCo(12); 
+ 
+ 
+-- Procedimientos LotusProject Tabla marcacion 
+call lotusproject.marcacionIn('rosa', 'aasf', 1, 1); 
+ 
+call lotusproject.marcacionLi(); 
+call lotusproject.marcacionCo(); 
+ 
+ 
+-- Procedimientos LotusProject Tabla materialseco 
+call lotusproject.materialsecoIn('rosa', 'asdf', 'roja', 1, 1, 1, 1, 1); 
+ 
+call lotusproject.materialsecoLi(); 
+call lotusproject.materialsecoCo(2); 
+ 
+ 
+-- Procedimientos LotusProject Tabla Paso 
+call lotusproject.pasoIn(12345, 'rosa amarilla', 'abcd', 1); 
+-- call lotusproject.pasoMo(1, 12345, 'rosa amarilla', 'abcd', 12345); 
+-- call lotusproject.pasoLi(); 
+-- call lotusproject.pasoCo(1); 
+ 
+ 
+-- Procedimientos LotusProject Tabla Parametros 
+call lotusproject.parametrosIn('rosita', 1); 
+-- call lotusproject.parametrosMo(123, 'rosita', 1); 
+-- call lotusproject.parametrosLi(); 
+-- call lotusproject.parametrosCo(1); 
+ 
+-- Procedimientos LotusProject Tabla Poscosecha 
+call lotusproject.poscosechaIn('rosa amarilla', 'cra 21a numero 13a 64', '1234567', 1); 
+-- call lotusproject.poscosechaMo(123, 'rosa amarilla', 'cra 21a numero 13a 64', '567890', 1); 
+-- call lotusproject.poscosechaLi(); 
+-- call lotusproject.poscosechaCo(16); 
+ 
+-- Procedimientos LotusProject Tabla tipoms 
+call lotusproject.tipomsIn('girasol', 'amarilla'); 
+-- call lotusproject.tipomsMo(123, 'girasol ', 'verde'); 
+-- call lotusproject.tipomsLi(); 
+-- call lotusproject.tipomsCo(1); 
+ 
+-- Procedimientos LotusProject Tabla Preliminar 
+ call lotusproject.preliminarIn('2018-12-12', 'pendiente', 1); 
+-- call lotusproject.preliminarMo(12345, '2018-12-12', '1', 1); 
+-- call lotusproject.preliminarLi(); 
+-- call lotusproject.preliminarCo(1); 
