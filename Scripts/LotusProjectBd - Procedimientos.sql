@@ -1290,9 +1290,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11),in VarImagen varchar(45),in VarColor varchar(15))
+create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11), in VarColor varchar(15))
 begin
-update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarImagen=varImagen,VarColor=varColor where VarId=varId;
+update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarColor=varColor where VarId=varId;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -1312,9 +1312,12 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure variedadCo (in tId INT)
+create procedure variedadCo (in vId INT)
 begin
-select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad where VarId = varId;
+select v.VarId,v.VarNombre,v.ProId,p.ProNombre,v.VarColor, v.VarImagen,v.VarEstado
+from variedad as v
+inner join producto as p on v.ProId = p.ProId
+where VarId = vId;
 end $$
 delimiter $$
 

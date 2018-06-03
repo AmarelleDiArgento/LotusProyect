@@ -55,7 +55,7 @@ public class VariedadServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Variedad")) {
                 acc = a;
             }
         }
@@ -76,42 +76,43 @@ public class VariedadServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
-                        VarNombre = request.getParameter("VarNombre");
-                        VarImagen = request.getParameter("Varimagen");
-                        VarColor = request.getParameter("VarColor");
+                        VarNombre = request.getParameter("Nombre");
+                        VarImagen = request.getParameter("Imagen");
+                        VarColor = request.getParameter("Color");
                         ProId = Integer.parseInt(request.getParameter("ProId"));
-                        VarEstado = request.getParameter("VarEstado") != null;
+                        VarEstado = request.getParameter("Estado") != null;
 
                         v = new VariedadTab(VarNombre, VarImagen, VarColor, ProId, VarEstado);
                         m = Asql.getVariedad().insertar(v);
 
                     } else {
+                        ruta="main.jsp";
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer registros");
                     }
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         VarNombre = request.getParameter("VarNombre");
-                        VarImagen = request.getParameter("Varimagen");
                         VarColor = request.getParameter("VarColor");
                         ProId = Integer.parseInt(request.getParameter("ProId"));
                         VarEstado = request.getParameter("VarEstado") != null;
 
-                        v = new VariedadTab(Id, VarNombre, VarImagen, VarColor, ProId, VarEstado);
+                        v = new VariedadTab(Id, VarNombre, VarColor, ProId, VarEstado);
                         m = Asql.getVariedad().modificar(v);
 
                     } else {
+                        ruta="main.jsp";
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getVariedad().eliminar(Id);
@@ -120,13 +121,13 @@ public class VariedadServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
-                    if (acc.isRpLeer()) {
+                case "Obtener":
+                    if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         v = Asql.getVariedad().obtener(Id);
                         Ses.setAttribute("Var", v);
                         m.setMsj("Se ha obtenido el tipo con id: " + v.getVarId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
@@ -148,12 +149,12 @@ public class VariedadServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles " + ex.getMessage());
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles " + ex.getMessage());
 
         }
         //}else{

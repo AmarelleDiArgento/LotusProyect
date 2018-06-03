@@ -29,10 +29,9 @@ public class VariedadTab implements Serializable{
         this.VarEstado = VarEstado;
     }
 
-    public VariedadTab(int VarId, String VarNombre, String VarImagen, String VarColor, int ProId, Boolean VarEstado) {
+    public VariedadTab(int VarId, String VarNombre, String VarColor, int ProId, Boolean VarEstado) {
         this.VarId = VarId;
         this.VarNombre = VarNombre;
-        this.VarImagen = VarImagen;
         this.VarColor = VarColor;
         this.ProId = ProId;
         this.VarEstado = VarEstado;
