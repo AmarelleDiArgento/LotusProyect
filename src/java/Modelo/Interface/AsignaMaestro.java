@@ -6,13 +6,13 @@
 package Modelo.Interface;
 
 import Modelo.Dao.DAO;
-import Modelo.Tabs.AsignaFitoTab;
+import Modelo.Tabs.AsignaMaestroTab;
 import java.sql.ResultSet;
 
 /**
  *
  * @author ale-j
  */
-public interface AsignaFito extends DAO<ResultSet, AsignaFitoTab, Integer> {
+public interface AsignaMaestro extends DAO<ResultSet, AsignaMaestroTab, Integer> {
     
 }
