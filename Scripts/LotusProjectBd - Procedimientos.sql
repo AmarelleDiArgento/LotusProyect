@@ -9,6 +9,16 @@ begin
 insert into rol (RolNombre,RolDescripcion,RolEstado) values (rNombre,rDescripcion,rEstado);
 end $$
 delimiter $$
+-- -----------------------------------------------------
+-- Id insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure rolID ()
+begin
+select max(RolId) from rol;
+end $$
+delimiter $$
 
 -- -----------------------------------------------------
 -- Modificar
@@ -28,6 +38,7 @@ delimiter $$
 delimiter $$
 create procedure rolEl (in rId INT)
 begin
+delete from asignapermiso where RolId = rId;
 delete from rol where RolId = rId;
 end $$
 delimiter $$
@@ -246,9 +257,10 @@ Select ap.RolId, r.RolNombre, ap.PerId, p.PerNombre, ap.rolperLeer ,ap.rolperNue
 from rol as r
 inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
-where r.RolId = apRol;
+where r.RolId = apRol
+order by p.PerModulo asc;
 end $$
-delimiter $$usuarioLogin
+delimiter $$
 
 -- -----------------------------------------------------
 -- Permisos de sesión
@@ -508,14 +520,6 @@ delimiter $$
 create procedure fitosanidadLi ()
 begin
 select FitId,FitNombre,FitDescripcion,FitTipo,FitImagen,FitEstado from fitosanidad;
-end $$
-delimiter $$
-
-delimiter $$
-create procedure preliminarLi ()
-begin
-select *
-from preliminar as pr inner join poscosecha as ps on pr.PosId = ps.PosId;
 end $$
 delimiter $$
 
@@ -950,7 +954,7 @@ delimiter $$
 delimiter $$
 create procedure parametrosCo (in pId INT)
 begin
-select ParNombre,ParEstado from parametros where ParId = pId;
+select ParId,ParNombre,ParEstado from parametros where ParId = pId;
 end $$
 delimiter $$
 -- ----------
@@ -1298,7 +1302,9 @@ delimiter $$
 delimiter $$
 create procedure variedadLi ()
 begin
-select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad;
+select v.VarId,v.VarNombre,v.ProId,p.ProNombre,v.VarColor, v.VarImagen,v.VarEstado
+from variedad as v
+inner join producto as p on v.ProId = p.ProId;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -1352,13 +1358,6 @@ delimiter $$
 -- ----------------------------------------- ------------
 
 delimiter $$
-create procedure asignafitoLi ()
-begin
-select fitosanidad_FitId,asignaParte_AsPrtID,AsfImagen,AsfDescripcion 
-from asignafito;
-end $$
-delimiter $$
-
 create procedure asignafitoLi ()
 begin
 select asfi.fitosanidad_FitId,asfi.asignaParte_AsPrtID,asfi.AsfImagen,asfi.AsfDescripcion,aspar.AsPrtID
@@ -1498,7 +1497,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure asignamarcacionCo ()
+create procedure asignamatsecoCo ()
 begin
 Select pre.PreId, m.MarId, m.MarNombre
 from preliminar as pre
@@ -1556,7 +1555,7 @@ delimiter $$
 -- Consultar x id 
 -- ----------------------------------------------------- 
 delimiter $$ 
-create procedure asignamatsecoLi () 
+create procedure asignaparteCo () 
 begin 
 select ams.MsMenUbicacion,ams.MsMenImagen,ams.MsMenCantidad,me.MenuId,me.MenuOrden 
 from asignamatseco as ams inner join menu as me on ams.MenuId = me.MenuId; 

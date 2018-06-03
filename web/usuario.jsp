@@ -64,6 +64,7 @@
                         <th>Cel.</th>
                         <th>Email</th>
                         <th>Rol</th>
+                        <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -87,13 +88,19 @@
                         <td><%=ut.getEmail()%></td>
                         <td><%=ut.getnRol()%></td>
                         <td>
+                            <a href="#"> 
+                                <i class="material-icons medium<% if (ut.getEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            </a>
+                        </td>
+                        
+                        <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=ut.getCedula()%>)">edit</i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=ut.getCedula()%>)">edit</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=ut.getCedula()%>)">delete</i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=ut.getCedula()%>)">delete</i>
                             </a>
                         </td>
 

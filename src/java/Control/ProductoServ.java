@@ -63,7 +63,7 @@ public class ProductoServ extends HttpServlet {
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
-            ruta = "rol.jsp";
+            ruta = "producto.jsp";
         }
         ProductoTab pr = null;
         int Id;
@@ -133,7 +133,7 @@ public class ProductoServ extends HttpServlet {
                 case "Listar":
                     //if (acc.isRpLeer()) {
                     List<ProductoTab> pl = Asql.getProducto().listar();
-                    Ses.setAttribute("lisPr", pl);
+                    Ses.setAttribute("lisPro", pl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}

@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisPr") != null) {
+        if (Ses.getAttribute("lisPro") != null) {
 
 
 %>
@@ -44,66 +44,68 @@
 
 
         <div class="">
-            
+
             <%
-                List<ProductoTab> LisPr = (List<ProductoTab>) Ses.getAttribute("lisPr");
+                List<ProductoTab> LisPr = (List<ProductoTab>) Ses.getAttribute("lisPro");
             %>
 
             <!-- <div class="carousel">
-               <%     for (ProductoTab pc : LisPr) {  %>
-                
-               <a class="carousel-item" href="#one!"><img src="<%=pc.getProImagen()%>"></a>
+            <%     for (ProductoTab pc : LisPr) {%>
+             
+            <a class="carousel-item" href="#one!"><img src="<%=pc.getProImagen()%>"></a>
 
-                <%}%>
-            </div> -->
+            <%}%>
+        </div> -->
 
             <div class="carousel carousel-slider center">
                 <%     for (ProductoTab pc : LisPr) {%>
                 <div class="carousel-item white black-text" href="#two!">
-                <h1 class="carousel-fixed-item left"><%=pc.getProNombre()%></h1>
-                  <img style="width: auto;height: 100%;" src="<%=pc.getProImagen()%>">
+                    <h1 class="carousel-fixed-item left"><%=pc.getProNombre()%></h1>
+                    <img style="width: auto;height: 100%;" src="<%=pc.getProImagen()%>">
+                    <a class="btn-floating btn-session waves-effect waves-light grey text-lighten-4 z-depth-0" style="bottom: 2rem"><i class="material-icons" onclick="consultar(<%=pc.getProId()%>)">image</i></a>
+
                 </div>
                 <%}%>
             </div>
-         <!--    <table class="centered striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Detalles</th>
-                        <th>Estado</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
+            <!--    <table class="centered striped">
+                   <thead>
+                       <tr>
+                           <th>ID</th>
+                           <th>Nombre</th>
+                           <th>Detalles</th>
+                           <th>Estado</th>
+                           <th>Editar</th>
+                           <th>Eliminar</th>
+                       </tr>
+                   </thead>
+   
+                   <tbody>
+            <% for (ProductoTab pt : LisPr) {%>
+            <tr>
+                <td><%=pt.getProId()%></td>
+                <td><%=pt.getProNombre()%></td>
 
-                <tbody>
-                    <% for (ProductoTab pt : LisPr) {%>
-                    <tr>
-                        <td><%=pt.getProId()%></td>
-                        <td><%=pt.getProNombre()%></td>
+                <td>
+                    <label>
+                        <input type="checkbox" <% if (pt.isProEstado()) {%> checked="checked" <% }%> /> 
+                        <span></span>
+                    </label>
+                </td>
+                <td>
+                    <a href="#">
+                        <i class="material-icons purple-text" onclick="consultar(<%=pt.getProId()%>)" > edit </i>
+                    </a>
+                </td>
+                <td>
+                    <a href="#">
+                        <i class="material-icons purple-text" onclick="msjConf(<%=pt.getProId()%>)"> delete </i>
+                    </a>
+                </td>
+            </tr>
 
-                        <td>
-                            <label>
-                                <input type="checkbox" <% if (pt.isProEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>
-                            <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getProId()%>)" > edit </i>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getProId()%>)"> delete </i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <%}%>
-                </tbody>
-            </table> -->
+            <%}%>
+        </tbody>
+    </table> -->
 
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
@@ -111,9 +113,12 @@
                 </a>
                 <ul>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Producto"><i class="material-icons">extension</i></a></li>
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-
+                    <li><a href="parametros.jsp" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Parametros"><i class="material-icons">tune</i></a></li>
+                    <li><a href="grados.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Grados"><i class="material-icons">blur_linear</i></a></li>
+                    <li><a href="fitosanidad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Fitosanidad"><i class="material-icons">bug_report</i></a></li>
+                    <li><a href="partes.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Partes"><i class="material-icons">flip</i></a></li>
+                    <li><a href="variedad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Variedades"><i class="material-icons">filter_vintage</i></a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -209,69 +214,69 @@
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
         <script type="text/javascript">
-                                    function modalMod() {
+                        function modalMod() {
 
-                                        var elem = document.querySelector('#modalModificar');
-                                        var instance = M.Modal.init(elem);
-                                        instance.open();
-                                    }
-                                    ;
-                                    function msjConf(id) {
-                                        swal({
-                                            title: "¿Estas seguro?",
-                                            text: "Se eliminara el registro con el ID: " + id,
-                                            icon: "warning",
-                                            buttons: true,
-                                            dangerMode: true
-                                        })
-                                                .then((willDelete) => {
-                                                    if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
-                                                    }
-                                                });
-                                    }
-                                    ;
-                                    function consultar(id) {
-                                        var url = 'rols.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
-                                                '<input type="text" name="accion" value="Obtener" hidden/>' +
-                                                '</form>');
-                                        $('body').append(form);
-                                        (form).submit();
-                                    }
+                            var elem = document.querySelector('#modalModificar');
+                            var instance = M.Modal.init(elem);
+                            instance.open();
+                        }
+                        ;
+                        function msjConf(id) {
+                            swal({
+                                title: "¿Estas seguro?",
+                                text: "Se eliminara el registro con el ID: " + id,
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+                                            window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                        }
+                                    });
+                        }
+                        ;
+                        function consultar(id) {
+                            var url = 'rols.do';
+                            var form = $('<form action="' + url + '" method="get">' +
+                                    '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                    '<input type="text" name="accion" value="Obtener" hidden/>' +
+                                    '</form>');
+                            $('body').append(form);
+                            (form).submit();
+                        }
             <% if (msj != null) {%>
 
             <%if (msj.getTipo().equals("Error")) {%>
-                                    function msjError() {
-                                        swal({
-                                            title: "<%=msj.getMsj()%>",
-                                            text: "<%=msj.getDetalles()%>",
-                                            icon: "error"
-                                        });
-                                    }
-                                    ;
+                        function msjError() {
+                            swal({
+                                title: "<%=msj.getMsj()%>",
+                                text: "<%=msj.getDetalles()%>",
+                                icon: "error"
+                            });
+                        }
+                        ;
 
 
             <%} else if (msj.getTipo().equals("Msj")) {%>
-                                    function msjMsj() {
+                        function msjMsj() {
 
-                                        swal("<%=msj.getMsj()%>", {
-                                            button: false
-                                        });
-                                    }
-                                    ;
+                            swal("<%=msj.getMsj()%>", {
+                                button: false
+                            });
+                        }
+                        ;
 
             <%} else if (msj.getTipo().equals("Ok")) {%>
-                                    function msjOk()
-                                    {
-                                        swal({
-                                            title: "<%=msj.getMsj()%>",
-                                            text: "<%=msj.getDetalles()%>",
-                                            icon: "success"
-                                        });
-                                    }
-                                    ;
+                        function msjOk()
+                        {
+                            swal({
+                                title: "<%=msj.getMsj()%>",
+                                text: "<%=msj.getDetalles()%>",
+                                icon: "success"
+                            });
+                        }
+                        ;
             <%}
                 }%>
 
@@ -280,7 +285,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisPr", null);
+    Ses.setAttribute("lisPro", null);
     Ses.setAttribute("Pro", null);
     Ses.setAttribute("msj", null);
 } else {%>

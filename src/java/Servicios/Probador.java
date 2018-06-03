@@ -5,9 +5,11 @@
  */
 package Servicios;
 
+import Modelo.Interface.Parametros;
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
+import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.PermisoTab;
 import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.RolTab;
@@ -25,7 +27,7 @@ public class Probador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Mensajes m = new Mensajes();
+        Mensajes m = new Mensajes();
         try {
             AdminMs Asql = new AdminMs();
             //Insertar usuario
@@ -123,16 +125,15 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-
-            AsignaPermisoTab ap = new AsignaPermisoTab(1, 1, false, true, true, true);
-            m = Asql.getAsignaPer().modificar(ap);
-
+            ParametrosTab par = Asql.getParametros().obtener(3);
+            System.out.println(par.getParNombre());
+ 
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error " + ex.getLocalizedMessage());
             m.setDetalles("Error sql: " + ex.getMessage());
         }
-        
+
         System.out.println(m.getTipo());
         System.out.println(m.getMsj());
         System.out.println(m.getDetalles());

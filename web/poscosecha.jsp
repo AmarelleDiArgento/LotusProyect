@@ -57,7 +57,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Detalles</th>
-                        <th></th>
+                        <th>Ext.</th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -73,19 +73,18 @@
                         <td><%=pt.getPosTelefono()%></td>
 
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (pt.isPosEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getPosId()%>)" > edit </i>
+                                <i class="material-icons medium<% if (pt.isPosEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getPosId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=pt.getPosId()%>)" > edit </i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=pt.getPosId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -99,7 +98,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">business</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
 
@@ -122,8 +121,8 @@
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="poscosechas.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Poscosecha</h4>
-                    <p>Registra la informacion del nuevo Poscosecha</p>
+                    <h4><i class="material-icons medium">business</i> Nueva Poscosecha</h4>
+                    <p>Registra la informacion del nueva Poscosecha</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -160,8 +159,8 @@
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="poscosechas.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Poscosecha</h4>
-                    <p>Registra la informacion del nuevo Poscosecha</p>
+                    <h4><i class="material-icons medium">business</i> Nuevo Poscosecha</h4>
+                    <p>Modifica la informacion del la Poscosecha</p>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">

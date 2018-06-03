@@ -12,8 +12,6 @@
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
         if (Ses.getAttribute("lisR") != null) {
-
-
 %>
 <html lang="es">
     <head>
@@ -70,24 +68,23 @@
                         <td><%=rt.getRolNombre()%></td>
                         <td><%=rt.getRolDescripcion()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (rt.isRolEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
+                            <a href="#">
+                                <i class="material-icons medium<% if (rt.isRolEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            </a>
                         </td>
                         <td>
-                            <a href="asignaper.jsp?Id=<%=rt.getRolId()%>">
-                                <i class="material-icons purple-text"> settings_applications</i>
+                            <a href="asignaper.jsp?Rol=<%=rt.getRolId()%>">
+                                <i class="material-icons small purple-text"> settings_applications</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=rt.getRolId()%>)" > edit </i>
-                            </a>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=rt.getRolId()%>)" > edit </i>
+
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=rt.getRolId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=rt.getRolId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -136,13 +133,15 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
+                        <div class="input-field col s4 center">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
 
                     </div>    
@@ -158,17 +157,57 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Rol") != null) {
-                RolTab uS = (RolTab) Ses.getAttribute("Rol");
+                RolTab rS = (RolTab) Ses.getAttribute("Rol");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <%}%>
-            <!--Scripts-->
-            <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-            <script type="text/javascript" src="js/materialize.min.js"></script>
-            <script type="text/javascript" src="js/init.js"></script>
-            <script type="text/javascript" src="js/sweetalert.min.js"></script>
+            <form method="get" action="rols.do">
+                <div class="modal-content">
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Rol</h4>
+                    <p>Registra la informacion del nuevo rol</p>
+                    <div class="row">
+                        <div class="input-field col s6" hidden>
+                            <input id="Id" type="text" name="Id" class="validate" value="<%=rS.getRolId()%>"required="">
+                            <label for="Id">Id</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=rS.getRolNombre()%>"required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required><%=rS.getRolDescripcion()%></textarea>
+                            <label for="Descripcion">Descripción</label>
+                        </div>
+                        <div class="input-field col s4 center">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" <%if (rS.isRolEstado()) {%>checked<%}%> name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
+                        </div>
 
-            <script type="text/javascript">
+                    </div>    
+                </div>
+
+
+                <div class="modal-footer">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                </div>
+            </form>
+        </div>
+
+
+
+        <%}%>
+        <!--Scripts-->
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+        <script type="text/javascript" src="js/sweetalert.min.js"></script>
+
+        <script type="text/javascript">
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');
@@ -194,15 +233,15 @@
                                     function consultar(id) {
                                         var url = 'rols.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
                                         (form).submit();
                                     }
-                <% if (msj != null) {%>
+            <% if (msj != null) {%>
 
-                <%if (msj.getTipo().equals("Error")) {%>
+            <%if (msj.getTipo().equals("Error")) {%>
                                     function msjError() {
                                         swal({
                                             title: "<%=msj.getMsj()%>",
@@ -213,7 +252,7 @@
                                     ;
 
 
-                <%} else if (msj.getTipo().equals("Msj")) {%>
+            <%} else if (msj.getTipo().equals("Msj")) {%>
                                     function msjMsj() {
 
                                         swal("<%=msj.getMsj()%>", {
@@ -222,7 +261,7 @@
                                     }
                                     ;
 
-                <%} else if (msj.getTipo().equals("Ok")) {%>
+            <%} else if (msj.getTipo().equals("Ok")) {%>
                                     function msjOk()
                                     {
                                         swal({
@@ -232,15 +271,15 @@
                                         });
                                     }
                                     ;
-                <%}
-                    }%>
+            <%}
+                }%>
 
-            </script>
+        </script>
     </body>
 </html>
 <%
 
-    Ses.setAttribute("lisAp", null);
+    Ses.setAttribute("lisR", null);
     Ses.setAttribute("Rol", null);
     Ses.setAttribute("msj", null);
 } else {%>

@@ -83,7 +83,7 @@ public class RolTab implements Serializable{
     /**
      * @param RolEstado the RolEstado to set
      */
-    public void setRolEstado(boolean RolEstado) {
+    public void getEstado(boolean RolEstado) {
         this.RolEstado = RolEstado;
     }
 

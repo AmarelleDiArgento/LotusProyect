@@ -69,21 +69,21 @@ public class RolServ extends HttpServlet {
         String Nombre;
         String Descripcion;
         Boolean Estado;
-        String E;
 
         try {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        Estado = request.getParameter("Estado") != null;
                         r = new RolTab(Nombre, Descripcion, Estado);
                         m = Asql.getRol().insertar(r);
-
+                        if (!m.getTipo().equals("Error")) {
+                            ruta = "asignapers.do?accion=Insertar&Id=" + r.getRolId();
+                        }
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer registros");
@@ -91,13 +91,12 @@ public class RolServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        Estado = request.getParameter("Estado") != null;
                         r = new RolTab(Id, Nombre, Descripcion, Estado);
                         m = Asql.getRol().modificar(r);
 
@@ -106,7 +105,7 @@ public class RolServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getRol().eliminar(Id);
@@ -115,13 +114,14 @@ public class RolServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         r = Asql.getRol().obtener(Id);
                         Ses.setAttribute("Rol", r);
+
                         m.setMsj("Se ha obtenido el rol con id: " + r.getRolId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

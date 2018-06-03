@@ -66,12 +66,12 @@ public class VariedadServ extends HttpServlet {
             ruta = "rol.jsp";
         }
         VariedadTab v = null;
-    int Id;
-    String VarNombre;
-    String VarImagen;
-    String VarColor;
-    Boolean VarEstado;
-    String E;
+        int Id;
+        String VarNombre;
+        String VarImagen;
+        String VarColor;
+        Boolean VarEstado;
+        int ProId;
         try {
             AdminMs Asql = new AdminMs(pool);
 
@@ -81,9 +81,10 @@ public class VariedadServ extends HttpServlet {
                         VarNombre = request.getParameter("VarNombre");
                         VarImagen = request.getParameter("Varimagen");
                         VarColor = request.getParameter("VarColor");
-                        E = request.getParameter("VarEstado");
-                        VarEstado = E.equals("on");
-                        v = new VariedadTab(VarNombre, VarImagen,VarColor,VarEstado);
+                        ProId = Integer.parseInt(request.getParameter("ProId"));
+                        VarEstado = request.getParameter("VarEstado") != null;
+
+                        v = new VariedadTab(VarNombre, VarImagen, VarColor, ProId, VarEstado);
                         m = Asql.getVariedad().insertar(v);
 
                     } else {
@@ -99,9 +100,10 @@ public class VariedadServ extends HttpServlet {
                         VarNombre = request.getParameter("VarNombre");
                         VarImagen = request.getParameter("Varimagen");
                         VarColor = request.getParameter("VarColor");
-                        E = request.getParameter("VarEstado");
-                        VarEstado = E.equals("on");
-                        v = new VariedadTab(Id,VarNombre, VarImagen,VarColor,VarEstado);
+                        ProId = Integer.parseInt(request.getParameter("ProId"));
+                        VarEstado = request.getParameter("VarEstado") != null;
+
+                        v = new VariedadTab(Id, VarNombre, VarImagen, VarColor, ProId, VarEstado);
                         m = Asql.getVariedad().modificar(v);
 
                     } else {
@@ -162,10 +164,7 @@ public class VariedadServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -22,14 +22,14 @@ import java.util.List;
 public class ParametrosMs implements Parametros{
 
     private final Connection con;
-    Mensajes m = null;
+    Mensajes m = new Mensajes();
 
     public ParametrosMs(Connection con) {
 
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.parametrosIn(?,?,?,?);";
+    final String Insertar = "call LotusProject.parametrosIn(?,?);";
     final String Modificar = "call LotusProject.parametrosMo(?,?,?);";
     final String Eliminar = "call LotusProject.parametrosEl(?);";
     final String Consultar = "call LotusProject.parametrosCo(?);";
@@ -42,7 +42,6 @@ public class ParametrosMs implements Parametros{
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, p.getParNombre());
-          
             if (p.isParEstado()) {
                 stat.setInt(2, 1);
             } else {
@@ -169,7 +168,7 @@ public class ParametrosMs implements Parametros{
            PreparedStatement stat = null;
            ResultSet rs = null;
            ParametrosTab pModel = null;
-           try {
+           try {     
                stat = con.prepareCall(Consultar);
                stat.setInt(1, id);
                rs = stat.executeQuery();

@@ -12,7 +12,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPar") != null) {
 
 
 %>
@@ -45,18 +45,17 @@
 
 
         <div class="container">
-           <h5>Parametros</h5>
+            <h5>Parametros</h5>
 
 
             <%
-                List<ParametrosTab> LisP = (List<ParametrosTab>) Ses.getAttribute("lisP");
+                List<ParametrosTab> lisPar = (List<ParametrosTab>) Ses.getAttribute("lisPar");
             %>
             <table class="centered striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Detalles</th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -64,24 +63,23 @@
                 </thead>
 
                 <tbody>
-                    <% for (ParametrosTab pt : LisP) {%>
+                    <% for (ParametrosTab pt : lisPar) {%>
                     <tr>
                         <td><%=pt.getParId()%></td>
                         <td><%=pt.getParNombre()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (pt.isParEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getParId()%>)" > edit </i>
+                                <i class="material-icons medium<% if (pt.isParEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getParId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=pt.getParId()%>)" > edit </i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=pt.getParId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -95,10 +93,10 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Parametro"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Parametro"><i class="material-icons">tune</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+                    <li><a href="producto.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Productos"><i class="material-icons">local_florist</i></a></li>
+
                 </ul>
             </div>
         </div>
@@ -125,10 +123,6 @@
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
                         <div class="switch">
                             <label>
                                 Inactivo
@@ -151,26 +145,25 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Par") != null) {
-                ParametrosTab pS = (ParametrosTab) Ses.getAttribute("Rol");
+                ParametrosTab pS = (ParametrosTab) Ses.getAttribute("Par");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="parametros.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Parametro</h4>
-                    <p>Registra la informacion del nuevo Parametro</p>
+                    <h4><i class="material-icons medium">tune</i> Nuevo Parametro</h4>
+                    <p>Modifica la informacion del Parametro</p>
                     <div class="row">
+                        <input id="Id" type="text" name="Id" value="<%=pS.getParId()%>"class="validate" hidden required="">
+
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <input id="Nombre" type="text" name="Nombre" value="<%=pS.getParNombre()%>"class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
+
                         <div class="switch">
                             <label>
                                 Inactivo
-                                <input type="checkbox" name="Estado">
+                                <input type="checkbox" name="Estado" <%if (pS.isParEstado()) {%>checked <%}%>>
                                 <span class="lever"></span>
                                 Activo
                             </label>
@@ -181,7 +174,7 @@
 
 
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
@@ -211,15 +204,15 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'parametros.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                        var url = 'parametros.do';
+                                        var form = $('<form action="' + url + '" method="post">' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
@@ -265,7 +258,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("lisPar", null);
     Ses.setAttribute("Par", null);
     Ses.setAttribute("msj", null);
 } else {%>

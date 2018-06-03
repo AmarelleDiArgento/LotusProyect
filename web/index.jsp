@@ -33,8 +33,8 @@
                 <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
             </div>
             <div>
-                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons medium grey-text darken-4">search</i></a>
-                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons medium grey-text darken-4 ">person</i></a>
+                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#buscar"><i class="material-icons large grey-text darken-4">search</i></a>
+                <a class=" btn-session floating waves-effect waves-light modal-trigger" href="#sesion"><i class="material-icons large grey-text darken-4 ">person</i></a>
 
             </div>
         </header>

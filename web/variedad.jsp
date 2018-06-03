@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.ProductoTab"%>
 <%@page import="Modelo.Tabs.VariedadTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,9 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisT") != null) {
+        if (Ses.getAttribute("lisV") != null) {
+            if (Ses.getAttribute("lisPro") != null) {
+                List<ProductoTab> LisPro = (List<ProductoTab>) Ses.getAttribute("lisPro");
 
 
 %>
@@ -53,8 +56,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Producto</th>
+                        <th>Variedad</th>
+                        <th>Color</th>
+                        <th>Imagen</th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -65,21 +70,29 @@
                     <% for (VariedadTab vt : LisV) {%>
                     <tr>
                         <td><%=vt.getVarId()%></td>
+                        <td><%=vt.getProNombre()%></td>
                         <td><%=vt.getVarNombre()%></td>
+                        <td><%=vt.getVarColor()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (vt.isVarEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
+                            <div class="user-view">
+                                <a href="#">
+                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="<%=vt.getVarImagen()%>">
+                                </a>
+                            </div>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
+                                <i class="material-icons medium<% if (vt.isVarEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
+                                <i class="material-icons medium purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="material-icons medium purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -93,10 +106,10 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Variedad"><i class="material-icons">filter_vintage</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+                    <li><a href="producto.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto"><i class="material-icons">local_florist</i></a></li>
+
                 </ul>
             </div>
         </div>
@@ -116,18 +129,35 @@
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="variedads.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Variedad</h4>
+                    <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
                     <p>Registra la informacion de la nueva Variedad</p>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
+                            <select name="Producto">>
+                                <option value="" disabled selected>Producto</option>
+                                <%                        for (ProductoTab pl : LisPro) {%>
+                                <option value="<%=pl.getProId()%>"><%=pl.getProNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Producto</label>
+                        </div>
+                        <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">color_lens</i>
+                            <input type="text" id="Color" name="Color" class="autocomplete">
+                            <label for="Color">Color</label>
                         </div>
-                        <div class="switch">
+                        <div class="file-field input-field col s4">
+
+                            <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
+                        <div class="switch center col s4">
                             <label>
                                 Inactivo
                                 <input type="checkbox" name="Estado">
@@ -154,18 +184,35 @@
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="variedads.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Variedad</h4>
+                    <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
                     <p>Registra la informacion de la nueva Variedad</p>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
+                            <select name="Producto">>
+                                <option value="" disabled selected>Producto</option>
+                                <%                        for (ProductoTab pl : LisPro) {%>
+                                <option value="<%=pl.getProId()%>"><%=pl.getProNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Producto</label>
+                        </div>
+                        <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">color_lens</i>
+                            <input type="text" id="Color" name="Color" class="autocomplete">
+                            <label for="Color">Color</label>
                         </div>
-                        <div class="switch">
+                        <div class="file-field input-field col s4">
+
+                            <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
+                        <div class="switch center col s4">
                             <label>
                                 Inactivo
                                 <input type="checkbox" name="Estado">
@@ -173,11 +220,8 @@
                                 Activo
                             </label>
                         </div>
-
                     </div>    
                 </div>
-
-
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
@@ -258,11 +302,83 @@
             <%}
                 }%>
 
+
+
+                                    $(document).ready(function () {
+                                        $('input.autocomplete').autocomplete({
+                                            data: {
+                                                "Bicolors": null,
+                                                "Bicolor Burgundy Yellow": null,
+                                                "Bicolor Cream Pink": null,
+                                                "Bicolor Cream Purple": null,
+                                                "Bicolor Cream Red": null,
+                                                "Bicolor Lavender - Purple": null,
+                                                "Bicolor Lavender - White": null,
+                                                "Bicolor Lavender Green": null,
+                                                "Bicolor Orange": null,
+                                                "Bicolor Orange - Red": null,
+                                                "Bicolor Orange - Yellow": null,
+                                                "Bicolor Orange Hot Pink": null,
+                                                "Bicolor Peach - Orange": null,
+                                                "Bicolor Peach Pink": null,
+                                                "Bicolor Pink": null,
+                                                "Bicolor Pink - Hot Pink": null,
+                                                "Bicolor Pink - White": null,
+                                                "Bicolor Pink Purple": null,
+                                                "Bicolor Pink White": null,
+                                                "Bicolor Purple": null,
+                                                "Bicolor Purple - Pink": null,
+                                                "Bicolor Purple - White": null,
+                                                "Bicolor Purple Pink": null,
+                                                "Bicolor Red - Orange": null,
+                                                "Bicolor Red - White": null,
+                                                "Bicolor Red Cream": null,
+                                                "Bicolor White - Green": null,
+                                                "Bicolor White - Lavender": null,
+                                                "Bicolor White - Pink": null,
+                                                "Bicolor White - Purple": null,
+                                                "Bicolor White Hot Pink": null,
+                                                "Bicolor White Pink": null,
+                                                "Bicolor White Purple": null,
+                                                "Bicolor White Red": null,
+                                                "Bicolor Yellow": null,
+                                                "Bicolor Yellow - Orange": null,
+                                                "Bicolor Yellow - Red": null,
+                                                "Bicolor Yellow Pink": null,
+                                                "Bicolor Yellow-Red": null,
+                                                "Blue": null,
+                                                "Bronze": null,
+                                                "Burgundy": null,
+                                                "Cream": null,
+                                                "Dark Pink": null,
+                                                "Green": null,
+                                                "Hot Pink": null,
+                                                "Lavender": null,
+                                                "Light Blue": null,
+                                                "Light Pink": null,
+                                                "Medium Pink": null,
+                                                "Old": null,
+                                                "Orange": null,
+                                                "Peach": null,
+                                                "Pepermint": null,
+                                                "Pink": null,
+                                                "Purple": null,
+                                                "Red": null,
+                                                "White": null,
+                                                "Yellow": null
+
+                                            },
+                                        });
+                                    });
+
         </script>
     </body>
 </html>
 <%
 
+    } else {
+        response.sendRedirect("productos.do?accion=Listar");
+    }
     Ses.setAttribute("lisV", null);
     Ses.setAttribute("Var", null);
     Ses.setAttribute("msj", null);

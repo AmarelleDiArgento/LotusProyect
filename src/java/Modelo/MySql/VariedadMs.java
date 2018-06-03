@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public class VariedadMs implements Variedad{
+public class VariedadMs implements Variedad {
 
     private final Connection con;
     Mensajes m = null;
@@ -77,21 +77,24 @@ public class VariedadMs implements Variedad{
         }
         return m;
     }
+
     @Override
     public VariedadTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("VarId");
         String nombre = rs.getString("VarNombre");
         String imagen = rs.getString("VarImagen");
         String color = rs.getString("VarColor");
+        int ProId = rs.getInt("ProId");
+        String Pnombre = rs.getString("ProNombre");
         int st = rs.getInt("VarEstado");
         boolean status = st == 1;
-        VariedadTab aTab = new VariedadTab (Id, nombre, status, imagen, color);
-        return aTab;
+        VariedadTab vTab = new VariedadTab(Id, Pnombre, imagen, color, ProId, Pnombre, status);
+        return vTab;
     }
 
-  @Override
-     public List<VariedadTab> listar() {
-    PreparedStatement stat = null;
+    @Override
+    public List<VariedadTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<VariedadTab> uModel = new ArrayList<>();
         try {
@@ -121,7 +124,7 @@ public class VariedadMs implements Variedad{
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return uModel;    
+        return uModel;
     }
 
     @Override
@@ -159,7 +162,6 @@ public class VariedadMs implements Variedad{
         }
         return vModel;
     }
-
 
     @Override
     public Mensajes modificar(VariedadTab v) {
@@ -237,4 +239,3 @@ public class VariedadMs implements Variedad{
     }
 
 }
-

@@ -44,7 +44,7 @@
 
 
         <div class="container">
-               <h5>Permiso</h5>
+            <h5>Permiso</h5>
 
 
             <%
@@ -72,21 +72,22 @@
                         <td><%=pt.getPerNombre()%></td>
                         <td><%=pt.getPerModulo()%></td>
                         <td><%=pt.getPerDescripcion()%></td>
-                        <td><i class="material-icons gray-text"><%=pt.getPerIco()%></i></td>
+                        <td><i class="material-icons medium gray-text text-darken-4"><%=pt.getPerIco()%></i></td>
                         <td><%=pt.getPerUrl()%></td>
-                        <td>
-                            <input class="switchstad" type="checkbox" id="switch<%=pt.getPerId()%>" <%if (pt.getPerEstado()) {%>checked <%}%>/><label class="labelstad" for="switch<%=pt.getPerId()%>">Toggle</label>    
-
-
-                        </td>
+                       
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getPerId()%>)" > edit </i>
+                                <i class="material-icons medium<% if (pt.getPerEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getPerId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=pt.getPerId()%>)" > edit </i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=pt.getPerId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -103,7 +104,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
-                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">developer_board</i></a></li>
+                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
 
                 </ul>
             </div>
@@ -121,7 +122,7 @@
                 </ul>
             </div>
         </div>
-    
+
 
         <footer class="footer">
             <div>

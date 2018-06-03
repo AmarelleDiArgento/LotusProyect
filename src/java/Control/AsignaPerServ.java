@@ -50,7 +50,16 @@ public class AsignaPerServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
 
-        String ruta = "";
+        String ruta;
+        if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "usuario.jsp";
+        }
+
+        boolean L, N, M, E;
+        int Rol;
+
         String Accion = request.getParameter("accion");
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -58,49 +67,67 @@ public class AsignaPerServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
 
-                    break;
-                case "modificar":
-                    boolean L,
-                     N,
-                     M,
-                     E;
-
-                    int Rol = Integer.parseInt(request.getParameter("Rol"));
+                    Rol = Integer.parseInt(request.getParameter("Rol"));
                     List<PermisoTab> Lp = Asql.getPermiso().listar();
+
+                    L = false;
+                    N = false;
+                    M = false;
+                    E = false;
+
                     for (PermisoTab p : Lp) {
-                        String[] cap = request.getParameterValues(String.valueOf(p.getPerId()));
-                        L = false;
-                        N = false;
-                        M = false;
-                        E = false;
-                        for (String a : cap) {
-                            switch (a) {
-                                case "L":
-                                    L = true;
-                                    break;
-                                case "N":
-                                    N = true;
-                                    break;
-                                case "M":
-                                    M = true;
-                                    break;
-                                case "E":
-                                    E = true;
-                                    break;
-
-                            }
-                        }
-
                         AsignaPermisoTab aps = new AsignaPermisoTab(Rol, p.getPerId(), L, N, M, E);
-                        Asql.getAsignaPer().modificar(aps);
-
+                        Asql.getAsignaPer().insertar(aps);
                     }
                     m.setTipo("Ok");
                     m.setMsj("Modificacion Exitosa");
                     m.setDetalles(":D");
-                    ruta = "asignaper.jsp?Id="+Rol;
+                    ruta = "rol.jsp";
                     break;
-                case "eliminar":
+
+                case "modificar":
+
+                    Rol = Integer.parseInt(request.getParameter("Rol"));
+                    List<PermisoTab> Lpm = Asql.getPermiso().listar();
+                    for (PermisoTab p : Lpm) {
+
+                            L = false;
+                            N = false;
+                            M = false;
+                            E = false;
+
+                        if (request.getParameterValues(String.valueOf(p.getPerId())) != null) {
+
+                            String[] cap = request.getParameterValues(String.valueOf(p.getPerId()));
+                            for (String a : cap) {
+                                switch (a) {
+                                    case "L":
+                                        L = true;
+                                        break;
+                                    case "N":
+                                        N = true;
+                                        break;
+                                    case "M":
+                                        M = true;
+                                        break;
+                                    case "E":
+                                        E = true;
+                                        break;
+
+                                }
+                            }
+                        }
+                            AsignaPermisoTab aps = new AsignaPermisoTab(Rol, p.getPerId(), L, N, M, E);
+                            Asql.getAsignaPer().modificar(aps);
+
+                        }
+                        m.setTipo("Ok");
+                        m.setMsj("Modificacion Exitosa");
+                        m.setDetalles(":D");
+                        ruta = "asignaper.jsp?Id=" + Rol;
+                        break;
+                    
+            case "eliminar":
 
                     break;
 
@@ -108,7 +135,7 @@ public class AsignaPerServ extends HttpServlet {
 
                     break;
                 case "Obtener":
-                    int rol = Integer.parseInt(request.getParameter("Id"));
+                    int rol = Integer.parseInt(request.getParameter("Rol"));
                     List<AsignaPermisoTab> apli = Asql.getAsignaPer().listar(rol);
                     Ses.setAttribute("lisAp", apli);
                     ruta = "asignaper.jsp";
@@ -127,55 +154,59 @@ public class AsignaPerServ extends HttpServlet {
             m.setMsj("Serv MySql Error" + ex.getSQLState());
             m.setDetalles("Detalles: " + ex);
 
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             m.setTipo("Error");
-            m.setMsj("Serv Error " +ex.getMessage());
+            m.setMsj("Serv Error " + ex.getMessage());
             m.setDetalles("Detalles: " + ex);
         }
 
-        if (m.getTipo() != null) {
-            Ses.setAttribute("msj", m);
+            if (m.getTipo() != null) {
+                Ses.setAttribute("msj", m);
+            }
+            request.getRequestDispatcher(ruta).forward(request, response);
         }
-        request.getRequestDispatcher(ruta).forward(request, response);
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

@@ -22,7 +22,7 @@ import java.util.List;
 public class RolMs implements Rol {
 
     private final Connection con;
-    Mensajes m = null;
+    Mensajes m = new Mensajes();
 
     public RolMs(Connection con) {
 
@@ -32,17 +32,18 @@ public class RolMs implements Rol {
     final String Insertar = "call LotusProject.rolIn(?,?,?);";
     final String Modificar = "call LotusProject.rolMo(?,?,?,?);";
     final String Eliminar = "call LotusProject.rolEl(?);";
-    final String Consultar = "call LotusProject.rolCo(?)";
-    final String ListarTodos = "call LotusProject.rolLi()";
+    final String Consultar = "call LotusProject.rolCo(?);";
+    final String ListarTodos = "call LotusProject.rolLi();";
+    final String ID = "call LotusProject.rolID();";
 
     @Override
     public Mensajes insertar(RolTab r) {
         PreparedStatement stat = null;
+        ResultSet rs = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, r.getRolNombre());
             stat.setString(2, r.getRolDescripcion());
-
             if (r.isRolEstado()) {
                 stat.setInt(3, 1);
             } else {
@@ -53,8 +54,15 @@ public class RolMs implements Rol {
                 m.setMsj("Error Mysql");
                 m.setDetalles("Error al ingresar los datos");
             } else {
+                stat = con.prepareCall(ID);
+                rs = stat.executeQuery();
+                if (rs.next()) {
+                    r.setRolId(rs.getInt(1));
+                }
+
                 m.setTipo("Ok");
-                m.setMsj(r.getRolNombre() + " agregado exitosamente");
+                m.setMsj("Se a agregado exitosamente el ID: " + r.getRolId());
+                
             }
 
         } catch (SQLException ex) {
@@ -62,6 +70,13 @@ public class RolMs implements Rol {
             m.setMsj("Error Mysql");
             m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
         } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error de SQL rs: " + ex);
+                }
+            }
             if (stat != null) {
                 try {
                     stat.close();

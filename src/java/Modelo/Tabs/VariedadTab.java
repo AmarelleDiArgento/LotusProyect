@@ -15,32 +15,38 @@ public class VariedadTab implements Serializable{
     
     private int VarId;
     private String VarNombre;
-    private Boolean VarEstado;
     private String VarImagen;
     private String VarColor;
+    private int ProId;
+    private String ProNombre;
+    private Boolean VarEstado;
 
-    public VariedadTab(int VarId, String VarNombre, String VarImagen, String VarColor,Boolean VarEstado) {
+    public VariedadTab(String VarNombre, String VarImagen, String VarColor, int ProId, Boolean VarEstado) {
+        this.VarNombre = VarNombre;
+        this.VarImagen = VarImagen;
+        this.VarColor = VarColor;
+        this.ProId = ProId;
+        this.VarEstado = VarEstado;
+    }
+
+    public VariedadTab(int VarId, String VarNombre, String VarImagen, String VarColor, int ProId, Boolean VarEstado) {
         this.VarId = VarId;
         this.VarNombre = VarNombre;
         this.VarImagen = VarImagen;
         this.VarColor = VarColor;
-        this.VarEstado = VarEstado;
-    }
-    public VariedadTab(String VarNombre,String VarImagen, String VarColor,Boolean VarEstado) {
-        this.VarNombre = VarNombre;
-        this.VarImagen = VarImagen;
-        this.VarColor = VarColor;
+        this.ProId = ProId;
         this.VarEstado = VarEstado;
     }
 
-    public VariedadTab(int VarId, String VarNombre, Boolean VarEstado, String VarImagen, String VarColor) {
+    public VariedadTab(int VarId, String VarNombre, String VarImagen, String VarColor, int ProId, String ProNombre, Boolean VarEstado) {
         this.VarId = VarId;
         this.VarNombre = VarNombre;
-        this.VarEstado = VarEstado;
         this.VarImagen = VarImagen;
         this.VarColor = VarColor;
+        this.ProId = ProId;
+        this.ProNombre = ProNombre;
+        this.VarEstado = VarEstado;
     }
-    
 
     /**
      * @return the VarId
@@ -69,21 +75,9 @@ public class VariedadTab implements Serializable{
     public void setVarNombre(String VarNombre) {
         this.VarNombre = VarNombre;
     }
- /**
-     * @param VarEstado the ArmEstado to set
-     */
-    public void setVarEstado(Boolean VarEstado) {
-        this.VarEstado = VarEstado;
-    }
 
     /**
-     * @return the ArmEstado
-     */
-    public Boolean isVarEstado() {
-        return VarEstado;
-    }
-    /**
-     * @return the Varimagen
+     * @return the VarImagen
      */
     public String getVarImagen() {
         return VarImagen;
@@ -110,9 +104,49 @@ public class VariedadTab implements Serializable{
         this.VarColor = VarColor;
     }
 
-    @Override
-    public String toString() {
-        return "VariedadTab{" + "VarId=" + VarId + ", VarNombre=" + VarNombre + ", VarEstado=" + VarEstado + ", VarImagen=" + VarImagen + ", VarColor=" + VarColor + '}';
+    /**
+     * @return the ProId
+     */
+    public int getProId() {
+        return ProId;
     }
 
+    /**
+     * @param ProId the ProId to set
+     */
+    public void setProId(int ProId) {
+        this.ProId = ProId;
+    }
+
+    /**
+     * @return the ProNombre
+     */
+    public String getProNombre() {
+        return ProNombre;
+    }
+
+    /**
+     * @param ProNombre the ProNombre to set
+     */
+    public void setProNombre(String ProNombre) {
+        this.ProNombre = ProNombre;
+    }
+
+    /**
+     * @return the VarEstado
+     */
+    public Boolean isVarEstado() {
+        return VarEstado;
+    }
+
+    /**
+     * @param VarEstado the VarEstado to set
+     */
+    public void setVarEstado(Boolean VarEstado) {
+        this.VarEstado = VarEstado;
+    }
+    
+    
+
+    
 }
