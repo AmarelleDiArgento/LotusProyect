@@ -49,22 +49,31 @@ public class GradoServ extends HttpServlet {
         }
         String ruta;
 
+        if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "grados.jsp";
+        }
+        
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
 
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Grado")) {
                 acc = a;
             }
+
         }
 
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "rol.jsp";
+        if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+
         GradosTab g = null;
         int Id;
         String Nombre;
@@ -76,12 +85,11 @@ public class GradoServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
-                        Detalles = request.getParameter("Detalles");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        Detalles = request.getParameter("Descripcion");
+                        Estado = request.getParameter("Estado") != null;
                         g = new GradosTab(Nombre, Detalles, Estado);
                         m = Asql.getGrados().insertar(g);
 
@@ -92,13 +100,12 @@ public class GradoServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
-                        Detalles = request.getParameter("Detalles");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        Detalles = request.getParameter("Descripcion");
+                        Estado = request.getParameter("Estado") != null;
                         g = new GradosTab(Id, Nombre, Detalles, Estado);
                         m = Asql.getGrados().modificar(g);
 
@@ -107,7 +114,7 @@ public class GradoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getGrados().eliminar(Id);
@@ -116,13 +123,13 @@ public class GradoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         g = Asql.getGrados().obtener(Id);
                         Ses.setAttribute("Gra", g);
                         m.setMsj("Se ha obtenido los grados con id: " + g.getGraId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
@@ -139,17 +146,17 @@ public class GradoServ extends HttpServlet {
                     break;
 
                 default:
-                    ruta = "Grados.jsp";
+                    ruta = "grados.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles: " + ex);
 
         }
         //}else{
@@ -160,10 +167,7 @@ public class GradoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

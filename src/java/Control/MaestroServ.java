@@ -55,7 +55,7 @@ public class MaestroServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Maestro")) {
                 acc = a;
             }
         }
@@ -63,7 +63,7 @@ public class MaestroServ extends HttpServlet {
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
-            ruta = "rol.jsp";
+            ruta = "maestro.jsp";
         }
         MaestroTab ma = null;
         int Id;

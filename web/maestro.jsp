@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "Maestro.jsp";
+    String jsp = "maestro.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;

@@ -19,10 +19,10 @@ import java.util.List;
  *
  * @author ALEJANDRA MEDINA
  */
-public class GradosMs implements Grados{
-    
+public class GradosMs implements Grados {
+
     private final Connection con;
-    Mensajes m = null;
+    Mensajes m = new Mensajes();
 
     public GradosMs(Connection con) {
 
@@ -30,21 +30,19 @@ public class GradosMs implements Grados{
     }
 
     final String Insertar = "call LotusProject.gradosIn(?,?,?);";
-    final String Modificar = "call LotusProject.gradosMo(?,?,?);";
+    final String Modificar = "call LotusProject.gradosMo(?,?,?,?);";
     final String Eliminar = "call LotusProject.gradosEl(?);";
     final String Consultar = "call LotusProject.gradosCo(?);";
     final String ListarTodos = "call LotusProject.gradosLi();";
 
-    
-     @Override
+    @Override
     public Mensajes insertar(GradosTab g) {
-        String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, g.getGraNombre());
             stat.setString(2, g.getGraDetalles());
-          
+
             if (g.isGraEstado()) {
                 stat.setInt(3, 1);
             } else {
@@ -77,21 +75,20 @@ public class GradosMs implements Grados{
         }
         return m;
     }
-@Override
+
+    @Override
     public GradosTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("GraID");
         String nombre = rs.getString("GraNombre");
         String descripcion = rs.getString("GraDetalles");
-        int st = rs.getInt("GraEstado");
-        boolean status = st == 1;
-        GradosTab gTab = new GradosTab (Id, nombre, descripcion, status);
+        boolean status = rs.getInt("GraEstado") != 0;
+        GradosTab gTab = new GradosTab(Id, nombre, descripcion, status);
         return gTab;
     }
 
-        
- @Override
-     public List<GradosTab> listar() {
-    PreparedStatement stat = null;
+    @Override
+    public List<GradosTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<GradosTab> gModel = new ArrayList<>();
         try {
@@ -121,10 +118,10 @@ public class GradosMs implements Grados{
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return gModel;    
+        return gModel;
     }
-     
-     @Override
+
+    @Override
     public Mensajes modificar(GradosTab g) {
         PreparedStatement stat = null;
         try {
@@ -132,7 +129,7 @@ public class GradosMs implements Grados{
             stat.setInt(1, g.getGraId());
             stat.setString(2, g.getGraNombre());
             stat.setString(3, g.getGraDetalles());
-            
+
             if (g.isGraEstado()) {
                 stat.setInt(4, 1);
             } else {
@@ -165,7 +162,7 @@ public class GradosMs implements Grados{
         }
         return m;
     }
-    
+
     @Override
     public GradosTab obtener(Integer id) {
         PreparedStatement stat = null;
@@ -203,8 +200,6 @@ public class GradosMs implements Grados{
         return gMod;
     }
 
-
-    
     @Override
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
@@ -238,9 +233,4 @@ public class GradosMs implements Grados{
         return m;
     }
 
-   
-   
-
-
-    
 }

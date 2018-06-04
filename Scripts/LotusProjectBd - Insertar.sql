@@ -35,13 +35,14 @@ call LotusProject.permisoIn('Usuario', 'Usuario', 'Permisos de usuario', 'usuari
 call LotusProject.permisoIn('Rol', 'Usuario', 'Permisos de usuario', 'rol.jsp', 'assignment_ind', 1);
 call LotusProject.permisoIn('Permiso', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
 call LotusProject.permisoIn('AsignaPer', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
-call LotusProject.permisoIn('Postcosecha', 'Poscosecha', 'Permisos de poscosecha', 'poscosecha.jsp', 'business', 1);
+call LotusProject.permisoIn('Poscosecha', 'Poscosecha', 'Permisos de poscosecha', 'poscosecha.jsp', 'business', 1);
 call LotusProject.permisoIn('Cliente', 'Cliente', 'Permisos de cliente', 'cliente.jsp', 'local_mall', 1);
 call LotusProject.permisoIn('Producto', 'Producto', 'Permisos de producto', 'producto.jsp', 'local_florist', 1);
 call LotusProject.permisoIn('Marcación', 'Marcación', 'Permisos de marcación', 'marcacion.jsp', 'local_offer', 1);
 call LotusProject.permisoIn('Armado', 'Armado', 'Permisos de armado', 'armado.jsp', 'extension', 1);
 call LotusProject.permisoIn('Parametro', 'Producto', 'Permisos de parametros', 'parametros.jsp', 'tune', 1);
 call LotusProject.permisoIn('Variedad', 'Producto', 'Permisos de variedad', 'variedad.jsp', 'filter_vintage', 1);
+call LotusProject.permisoIn('Grado', 'Producto', 'Permisos de grado', 'grados.jsp', 'blur_linear', 1);
 -- call LotusProject.permisoIn('Probador', 'Pruebas', 'Para probar', 'Probar.jsp', 'test', 1);
 -- call LotusProject.permisoEl(7);
 -- call LotusProject.permisoCo(7);
@@ -62,6 +63,7 @@ call LotusProject.AsgPerIn(1, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 11, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 12, 1, 1, 1, 1);
 
 
 call LotusProject.AsgPerIn(2, 1, 1, 1, 1, 1);
@@ -75,6 +77,7 @@ call LotusProject.AsgPerIn(2, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 11, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 12, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(3, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 2, 1, 1, 1, 1);
@@ -87,6 +90,7 @@ call LotusProject.AsgPerIn(3, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 11, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 12, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(4, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 2, 1, 1, 1, 1);
@@ -99,6 +103,7 @@ call LotusProject.AsgPerIn(4, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 11, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 12, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(5, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 2, 1, 1, 1, 1);
@@ -111,6 +116,7 @@ call LotusProject.AsgPerIn(5, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 11, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 12, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(6, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 2, 1, 1, 1, 1);
@@ -123,6 +129,7 @@ call LotusProject.AsgPerIn(6, 8, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 11, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 12, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);

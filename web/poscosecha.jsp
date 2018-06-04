@@ -56,7 +56,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Dirección</th>
                         <th>Ext.</th>
                         <th>Estado</th>
                         <th>Editar</th>
@@ -100,8 +100,7 @@
                 <ul>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">business</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-
+                    
                 </ul>
             </div>
         </div>
@@ -128,9 +127,13 @@
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                        <div class="input-field col s6">
+                            <input id="Direccion" type="text" name="Direccion" class="validate" required="">
+                            <label for="Direccion">Dirección</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Telefono" type="text" name="Telefono" class="validate" required="">
+                            <label for="Telefono">Extención</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -141,7 +144,7 @@
                             </label>
                         </div>
 
-                    </div>    
+                    </div>   
                 </div>
 
 
@@ -163,17 +166,25 @@
                     <p>Modifica la informacion del la Poscosecha</p>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <input id="Nombre" type="text" name="Id" class="validate" value="<%=pS.getPosId()%> required="">
+                            <label for="Id">Id</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=pS.getPosNombre()%> required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                        <div class="input-field col s6">
+                            <input id="Direccion" type="text" name="Direccion" class="validate" value="<%=pS.getPosDireccion()%> required="">
+                            <label for="Direccion">Dirección</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Telefono" type="text" name="Telefono" class="validate" value="<%=pS.getPosTelefono()%>required="">
+                            <label for="Telefono">Extención</label>
                         </div>
                         <div class="switch">
                             <label>
                                 Inactivo
-                                <input type="checkbox" name="Estado">
+                                <input type="checkbox" name="Estado" <%if(pS.isPosEstado()){%> checked <%}%>>
                                 <span class="lever"></span>
                                 Activo
                             </label>
@@ -184,7 +195,7 @@
 
 
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
@@ -214,13 +225,13 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'poscosechas.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'poscosechas.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
