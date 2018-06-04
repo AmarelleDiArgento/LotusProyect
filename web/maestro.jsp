@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisM") != null) {
+        if (Ses.getAttribute("lisMae") != null) {
 
 
 %>
@@ -48,7 +48,7 @@
 
 
             <%
-                List<MaestroTab> LisM = (List<MaestroTab>) Ses.getAttribute("lisM");
+                List<MaestroTab> lisMae = (List<MaestroTab>) Ses.getAttribute("lisMae");
             %>
             <table class="centered striped">
                 <thead>
@@ -62,7 +62,7 @@
                 </thead>
 
                 <tbody>
-                    <% for (MaestroTab mt : LisM) {%>
+                    <% for (MaestroTab mt : lisMae) {%>
                     <tr>
                         <td><%=mt.getMaeId()%></td>
                         <td><%=mt.getMaeNombre()%></td>
@@ -89,7 +89,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">vpn_key</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -112,7 +112,7 @@
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="maestros.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Maestro</h4>
+                    <h4><i class="material-icons medium">vpn_key</i> Nuevo Maestro</h4>
                     <p>Registra la informacion del nuevo Maestro</p>
                     <div class="row">
                         <div class="input-field col s6">
@@ -142,7 +142,7 @@
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="maestros.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Maestro</h4>
+                    <h4><i class="material-icons medium">vpn_key</i> Nuevo Maestro</h4>
                     <p>Registra la informacion del nuevo Maestro</p>
                     <div class="row">
                         <div class="input-field col s6">
@@ -243,7 +243,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisM", null);
+    Ses.setAttribute("lisMae", null);
     Ses.setAttribute("Mae", null);
     Ses.setAttribute("msj", null);
 } else {%>

@@ -33,7 +33,7 @@ call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315'
 
 call LotusProject.permisoIn('Usuario', 'Usuario', 'Permisos de usuario', 'usuario.jsp', 'face', 1);
 call LotusProject.permisoIn('Rol', 'Usuario', 'Permisos de usuario', 'rol.jsp', 'assignment_ind', 1);
-call LotusProject.permisoIn('Permiso', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
+call LotusProject.permisoIn('Permiso', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'lock_open', 1);
 call LotusProject.permisoIn('AsignaPer', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
 call LotusProject.permisoIn('Poscosecha', 'Poscosecha', 'Permisos de poscosecha', 'poscosecha.jsp', 'business', 1);
 call LotusProject.permisoIn('Cliente', 'Cliente', 'Permisos de cliente', 'cliente.jsp', 'local_mall', 1);
@@ -43,6 +43,16 @@ call LotusProject.permisoIn('Armado', 'Armado', 'Permisos de armado', 'armado.js
 call LotusProject.permisoIn('Parametro', 'Producto', 'Permisos de parametros', 'parametros.jsp', 'tune', 1);
 call LotusProject.permisoIn('Variedad', 'Producto', 'Permisos de variedad', 'variedad.jsp', 'filter_vintage', 1);
 call LotusProject.permisoIn('Grado', 'Producto', 'Permisos de grado', 'grados.jsp', 'blur_linear', 1);
+call LotusProject.permisoIn('Parte', 'Producto', 'Permisos para parte', 'partes.jsp', 'blur_linear', 1);
+call LotusProject.permisoIn('Material Seco', 'Marcacion', 'Permisos para materiales secos', 'materialseco.jsp', 'style', 1);
+call LotusProject.permisoIn('Fitosanidad', 'Producto', 'Permisos para fitosanidad', 'fitosanidad.jsp', 'bug_report', 1);
+call LotusProject.permisoIn('Linea', 'Poscosecha', 'Permisos para linea', 'linea.jsp', 'label_outline', 1);
+call LotusProject.permisoIn('Producto maestro', 'Producto', 'Permisos para producto maestro', 'maestro.jsp', 'vpn_key', 1);
+call LotusProject.permisoIn('Menu', 'menu', 'Permisos de menu', 'menu.jsp', 'loyalty', 1);
+call LotusProject.permisoIn('Parametros', 'Producto', 'Permisos para ajuste de parametros', 'parametros.jsp', 'tune', 1);
+call LotusProject.permisoIn('Paso', 'Armado', 'Permisos para ajuste de pasos', 'paso.jsp', 'plus_one', 1);
+
+
 -- call LotusProject.permisoIn('Probador', 'Pruebas', 'Para probar', 'Probar.jsp', 'test', 1);
 -- call LotusProject.permisoEl(7);
 -- call LotusProject.permisoCo(7);
@@ -64,7 +74,14 @@ call LotusProject.AsgPerIn(1, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 11, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 12, 1, 1, 1, 1);
-
+call LotusProject.AsgPerIn(1, 13, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 14, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 15, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 16, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 17, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 18, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 19, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(1, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(2, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 2, 1, 1, 1, 1);
@@ -78,6 +95,14 @@ call LotusProject.AsgPerIn(2, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 11, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 12, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 13, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 14, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 15, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 16, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 17, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 18, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 19, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(2, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(3, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 2, 1, 1, 1, 1);
@@ -91,6 +116,15 @@ call LotusProject.AsgPerIn(3, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 11, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 12, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 13, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 14, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 15, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 16, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 17, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 18, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 19, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(3, 20, 1, 1, 1, 1);
+
 
 call LotusProject.AsgPerIn(4, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 2, 1, 1, 1, 1);
@@ -104,6 +138,14 @@ call LotusProject.AsgPerIn(4, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 11, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 12, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 13, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 14, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 15, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 16, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 17, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 18, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 19, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(4, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(5, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 2, 1, 1, 1, 1);
@@ -117,6 +159,14 @@ call LotusProject.AsgPerIn(5, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 11, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 12, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 13, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 14, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 15, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 16, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 17, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 18, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 19, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(5, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(6, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 2, 1, 1, 1, 1);
@@ -130,6 +180,14 @@ call LotusProject.AsgPerIn(6, 9, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 10, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 11, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 12, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 13, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 14, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 15, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 16, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 17, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 18, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 19, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 10, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);
@@ -329,13 +387,11 @@ call LotusProject.tipomsIn('girasol', 'amarilla');
 -- call LotusProject.preliminarLi(); 
 -- call LotusProject.preliminarCo(1); 
 
--- Procedimientos LotusProject Tabla Preliminar 
-call lotusproject.partesIn('rosa', 'amarilla');
+-- Procedimientos LotusProject Tabla Partes 
+call LotusProject.partesIn('Flor', 'Lo que no es la follaje ni el follaje');
+call LotusProject.partesIn('Tallo', 'Lo que no es la flor ni el follaje');
+call LotusProject.partesIn('Follaje', 'Lo que no es la flor ni el tallo');
 -- call lotusproject.partesMo(1234, 'rosas', 'verdes');
 -- call lotusproject.partesLi();
 -- call lotusproject.partesCo(1);
-
-
-
--- 
 

@@ -13,6 +13,7 @@
     if (Ses.getAttribute("log") != null) {
         if (Ses.getAttribute("lisPro") != null) {
 
+            if (Ses.getAttribute("lisMae") != null) {
 
 %>
 <html lang="es">
@@ -112,14 +113,16 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Producto"><i class="material-icons">extension</i></a></li>
-                    <li><a href="maestro.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Prodcto maestro"><i class="material-icons">group_work</i></a></li>
-                    <li><a href="parametros.jsp" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Parametros"><i class="material-icons">tune</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Producto"><i class="material-icons">local_florist</i></a></li>
+                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+
+                    <li><a href="maestro.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto maestro"><i class="material-icons">vpn_key</i></a></li>
+                    <li><a href="parametros.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Parametros"><i class="material-icons">tune</i></a></li>
                     <li><a href="grados.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Grados"><i class="material-icons">blur_linear</i></a></li>
                     <li><a href="fitosanidad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Fitosanidad"><i class="material-icons">bug_report</i></a></li>
                     <li><a href="partes.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Partes"><i class="material-icons">flip</i></a></li>
                     <li><a href="variedad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Variedades"><i class="material-icons">filter_vintage</i></a></li>
-                    
+
 
                 </ul>
             </div>
@@ -286,6 +289,9 @@
     </body>
 </html>
 <%
+    }else{
+response.sendRedirect("maestros.do?Listar");
+}
 
     Ses.setAttribute("lisPro", null);
     Ses.setAttribute("Pro", null);

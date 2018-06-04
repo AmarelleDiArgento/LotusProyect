@@ -79,7 +79,7 @@ public class MenuServ extends HttpServlet {
         try {
             AdminMs Asql = new AdminMs(pool);
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Portada = request.getParameter("MenPortada");
                         Superior = request.getParameter("MenSuperior");
@@ -99,7 +99,7 @@ public class MenuServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Portada = request.getParameter("MenPortada");
@@ -118,7 +118,7 @@ public class MenuServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getMenu().eliminar(Id);
@@ -128,13 +128,13 @@ public class MenuServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         me = Asql.getMenu().obtener(Id);
                         Ses.setAttribute("men", me);
                         m.setMsj("Se ha obtenido el menu con id: " + me.getId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

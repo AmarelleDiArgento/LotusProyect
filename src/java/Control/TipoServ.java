@@ -67,7 +67,7 @@ public class TipoServ extends HttpServlet {
         }
         TipoTab t = null;
         
-       int Id;
+       int TiMId;
        String Nombre;
        String Descripcion;
 
@@ -75,7 +75,7 @@ public class TipoServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("TiMNombre");
                         Descripcion = request.getParameter("TiMDescripcion");
@@ -90,12 +90,12 @@ public class TipoServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
+                        TiMId = Integer.parseInt(request.getParameter("TiMId"));
                         Nombre = request.getParameter("TiMNombre");
                         Descripcion = request.getParameter("TiMDescripcion");
-                        t = new TipoTab(Id,Nombre,Descripcion);
+                        t = new TipoTab(TiMId,Nombre,Descripcion);
                         m = Asql.getTipo().modificar(t);
                         m.setTipo("Ok");
 
@@ -104,23 +104,23 @@ public class TipoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getTipo().eliminar(Id);
+                        TiMId = Integer.parseInt(request.getParameter("Id"));
+                        m = Asql.getTipo().eliminar(TiMId);
                         m.setTipo("Ok");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
-                        Id = Integer.parseInt(request.getParameter("Id"));
-                        t = Asql.getTipo().obtener(Id);
+                        TiMId = Integer.parseInt(request.getParameter("TiMId"));
+                        t = Asql.getTipo().obtener(TiMId);
                         Ses.setAttribute("Ti", t);
                         m.setMsj("Se ha obtenido el tipo con id: " + t.getTiMId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

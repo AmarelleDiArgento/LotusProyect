@@ -74,7 +74,7 @@
                         <td><%=pt.getPerDescripcion()%></td>
                         <td><i class="material-icons medium gray-text text-darken-4"><%=pt.getPerIco()%></i></td>
                         <td><%=pt.getPerUrl()%></td>
-                       
+
                         <td>
                             <a href="#">
                                 <i class="material-icons medium<% if (pt.getPerEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
@@ -141,9 +141,13 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Rol</h4>
                     <p>Registra la informacion del nuevo rol</p>
-                    <div class="row">
+                    <div class="row">                        
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Modulo" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">

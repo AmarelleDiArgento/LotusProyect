@@ -131,7 +131,7 @@ public class Probador {
              */
             List<AsignaPermisoTab> ap = Asql.getAsignaPer().PerSession("1070949");
             for (AsignaPermisoTab lp : ap) {
-                if (lp.getnPermiso().equalsIgnoreCase("Grado")) {
+                if (lp.getnPermiso().equalsIgnoreCase("Parte")) {
                     System.out.println("Permisos Ok");
                 }
             }

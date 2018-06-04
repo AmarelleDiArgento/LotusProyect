@@ -90,7 +90,7 @@ public class ControlCambiosServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         CCId = Integer.parseInt(request.getParameter("Id"));
                         CCAntes = request.getParameter("Antes");
@@ -104,7 +104,7 @@ public class ControlCambiosServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         CCId = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getControlCambios().eliminar(CCId);
@@ -113,13 +113,13 @@ public class ControlCambiosServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         CCId = Integer.parseInt(request.getParameter("Id"));
                         c = Asql.getControlCambios().obtener(CCId);
                         Ses.setAttribute("Cont", c);
                         m.setMsj("Se ha obtenido el ControlCambios con id: " + c.getCCId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

@@ -77,7 +77,7 @@ public class PreliminarServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Fecha = request.getParameter("PreFecha");
                         Posnombre =request.getParameter("Poscosecha_Posnombre");
@@ -93,7 +93,7 @@ public class PreliminarServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Fecha = request.getParameter("PreFecha");
@@ -108,7 +108,7 @@ public class PreliminarServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getPreliminar().eliminar(Id);
@@ -118,13 +118,13 @@ public class PreliminarServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         pr = Asql.getPreliminar().obtener(Id);
                         Ses.setAttribute("Pro", pr);
                         m.setMsj("Se ha obtenido el preliminar con id: " + pr.getPreId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

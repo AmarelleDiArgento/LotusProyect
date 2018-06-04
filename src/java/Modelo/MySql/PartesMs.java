@@ -22,18 +22,18 @@ import java.util.List;
 public class PartesMs implements Partes {
 
     private final Connection con;
-    Mensajes m;
+    Mensajes m = new Mensajes();
 
     public PartesMs(Connection con) {
 
         this.con = con;
     }
 
-    final String Insertar = "";
-    final String Modificar = "";
-    final String Eliminar = "";
-    final String Consultar = "";
-    final String ListarTodos = "";
+    final String Insertar = "call LotusProject.partesIn(?,?);";
+    final String Modificar = "call LotusProject.partesMo(?,?;?);";
+    final String Eliminar = "call LotusProject.partesEl(?);";
+    final String Consultar = "call LotusProject.partesCo(?);";
+    final String ListarTodos = "call LotusProject.partesLi();";
 
     @Override
     public Mensajes insertar(PartesTab p) {

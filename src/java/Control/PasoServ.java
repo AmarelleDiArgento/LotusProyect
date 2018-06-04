@@ -76,7 +76,7 @@ public class PasoServ extends HttpServlet {
         try {
             AdminMs Asql = new AdminMs(pool);
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Pasorden = Integer.parseInt(request.getParameter("Pasorden"));
                         PasDescripcion = request.getParameter("PasDescripcion");
@@ -92,7 +92,7 @@ public class PasoServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("PasId"));
                         Pasorden = Integer.parseInt(request.getParameter("Pasorden"));
@@ -107,7 +107,7 @@ public class PasoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getPaso().eliminar(Id);
@@ -117,13 +117,13 @@ public class PasoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         ps = Asql.getPaso().obtener(Id);
                         Ses.setAttribute("Pa", ps);
                         m.setMsj("Se ha obtenido el paso con id: " + ps.getPasId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
