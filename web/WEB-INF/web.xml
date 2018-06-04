@@ -27,27 +27,27 @@
     <servlet>
         <servlet-name>LineaServ</servlet-name>
         <servlet-class>Control.LineaServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>MaestroServ</servlet-name>
         <servlet-class>Control.MaestroServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>MaterialsecoServ</servlet-name>
         <servlet-class>Control.MaterialsecoServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>MenuServ</servlet-name>
         <servlet-class>Control.MenuServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>ParametroServ</servlet-name>
         <servlet-class>Control.ParametroServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>PasoServ</servlet-name>
         <servlet-class>Control.PasoServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>PermisoServ</servlet-name>
         <servlet-class>Control.PermisoServ</servlet-class>
@@ -55,11 +55,11 @@
     <servlet>
         <servlet-name>PoscosechaServ</servlet-name>
         <servlet-class>Control.PoscosechaServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>PreliminarServ</servlet-name>
         <servlet-class>Control.PreliminarServ</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet>
         <servlet-name>ProductoServ</servlet-name>
         <servlet-class>Control.ProductoServ</servlet-class>
@@ -80,10 +80,13 @@
         <servlet-name>VariedadServ</servlet-name>
         <servlet-class>Control.VariedadServ</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>MarcacionServ</servlet-name>
         <servlet-class>Control.MarcacionServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PartesServ</servlet-name>
+        <servlet-class>Control.PartesServ</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ArmadoServ</servlet-name>
@@ -165,11 +168,13 @@
         <servlet-name>VariedadServ</servlet-name>
         <url-pattern>/variedads.do</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet-mapping>
         <servlet-name>MarcacionServ</servlet-name>
         <url-pattern>/marcacions.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PartesServ</servlet-name>
+        <url-pattern>/partes.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -34,6 +34,8 @@ public interface Admin {
     Menu getMenu();
 
     Parametros getParametros();
+    
+    Partes getPartes();
 
     Paso getPaso();
 

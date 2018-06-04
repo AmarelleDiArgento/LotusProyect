@@ -32,6 +32,8 @@ import Modelo.Interface.Maestro;
 import Modelo.Interface.Marcacion;
 import Modelo.Interface.FitoProducto;
 import Modelo.Interface.MaterialSeco;
+import Modelo.Interface.Partes;
+
 
 
 /**
@@ -75,6 +77,7 @@ public class AdminMs implements Admin {
     private MaterialSeco  Mat = null;
     private Menu Me = null;
     private Parametros Par = null;
+    private Partes Part = null;
     private Paso Pas = null;
     private Permiso Per = null;
     private Poscosecha Pos = null;
@@ -184,6 +187,16 @@ public class AdminMs implements Admin {
         }
         return Par;
     }
+    
+    
+         @Override
+    public Partes getPartes() {
+        if (Part == null) {
+            Part = new PartesMs(con);
+        }
+        return Part;
+    }
+    
     
      @Override
     public Paso getPaso() {
