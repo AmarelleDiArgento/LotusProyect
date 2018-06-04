@@ -51,7 +51,7 @@
 
 
             <%
-                List<MarcacionTab> LisM = (List<MarcacionTab>) Ses.getAttribute("lisM");
+                List<MarcacionTab> LisM = (List<MarcacionTab>) Ses.getAttribute("lisMar");
             %>
             <table class="centered striped">
                 <thead>
@@ -101,7 +101,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Marcacion"><i class="material-icons">local_offer</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -123,17 +123,17 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">local_offer</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
-                         <div class="row">
+                    <div class="row">
                         <div class="input-field col s4">
                             <select name="ArmId">>
                                 <option value="" disabled selected>Armado</option>
-                                <%                        for (ArmadoTab pl :lisA) {%>
+                                <%                        for (ArmadoTab pl : lisA) {%>
                                 <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
                                 <%}%>
                             </select>
                             <label>Armado</label>
                         </div>
-                    <div class="row">
+
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -171,18 +171,17 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
-                    
+
                     <div class="row">
                         <div class="input-field col s4">
                             <select name="ArmId">>
                                 <option value="" disabled selected>Armado</option>
-                                <%                        for (ArmadoTab pl :lisA) {%>
+                                <%                        for (ArmadoTab pl : lisA) {%>
                                 <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
                                 <%}%>
                             </select>
                             <label>Armado</label>
                         </div>
-                    <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -199,16 +198,16 @@
                                 Activo
                             </label>
                         </div>
-
-                    </div>    
+                    </div>
                 </div>
-
-
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
+
             </form>
+
         </div>
+
 
         <%}%>
         <!--Scripts-->
@@ -288,7 +287,10 @@
     </body>
 </html>
 <%
-
+    } else {
+        response.sendRedirect("armados.do?accion=Listar");
+    }
+    Ses.setAttribute("lisA", null);
     Ses.setAttribute("lisMar", null);
     Ses.setAttribute("Mar", null);
     Ses.setAttribute("msj", null);
