@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.ArmadoTab"%>
 <%@page import="Modelo.Tabs.MarcacionTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -55,7 +56,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Portada</th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -120,6 +121,16 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">local_offer</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
+                         <div class="row">
+                        <div class="input-field col s4">
+                            <select name="ArmId">>
+                                <option value="" disabled selected>Armado</option>
+                                <%                        for (ArmadoTab pl :lisA) {%>
+                                <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Producto</label>
+                        </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">

@@ -11,60 +11,8 @@ import java.io.Serializable;
  *
  * @author ale-j
  */
-public class AsignaMarcacionTab implements Serializable{
-    private int PreId;
-    private int MarId;
-    private int NoRamos;
+public class AsignaMarcacionTab implements Serializable {
 
-    public AsignaMarcacionTab(int PreId, int MarId, int NoRamos) {
-        this.PreId = PreId;
-        this.MarId = MarId;
-        this.NoRamos = NoRamos;
-    }
-
-    /**
-     * @return the PreId
-     */
-    public int getPreId() {
-        return PreId;
-    }
-
-    /**
-     * @param PreId the PreId to set
-     */
-    public void setPreId(int PreId) {
-        this.PreId = PreId;
-    }
-
-    /**
-     * @return the MarId
-     */
-    public int getMarId() {
-        return MarId;
-    }
-
-    /**
-     * @param MarId the MarId to set
-     */
-    public void setMarId(int MarId) {
-        this.MarId = MarId;
-    }
-
-    /**
-     * @return the NoRamos
-     */
-    public int getNoRamos() {
-        return NoRamos;
-    }
-
-    /**
-     * @param NoRamos the NoRamos to set
-     */
-    public void setNoRamos(int NoRamos) {
-        this.NoRamos = NoRamos;
-    }
-    
-    
     private int PreId;
     private int MarId;
     private int NoRamos;
@@ -85,15 +33,13 @@ public class AsignaMarcacionTab implements Serializable{
         this.NoRamos = NoRamos;
     }
 
-    public AsignaMarcacionTab(int MarId,String MarNombre,int NoRamos) {
+    public AsignaMarcacionTab(int MarId, String MarNombre, int NoRamos) {
         this.MarId = MarId;
         this.MarNombre = MarNombre;
         this.NoRamos = NoRamos;
 
     }
-    
-    
-    
+
     /**
      * @return the PreId
      */
@@ -168,8 +114,5 @@ public class AsignaMarcacionTab implements Serializable{
     public String toString() {
         return "AsignaMarcacionTab{" + "PreId=" + PreId + ", MarId=" + MarId + ", NoRamos=" + NoRamos + ", PreNombre=" + PreNombre + ", MarNombre=" + MarNombre + '}';
     }
-    
-    
-    
-    
+
 }

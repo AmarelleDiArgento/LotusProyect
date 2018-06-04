@@ -211,6 +211,16 @@
                             <input type="text" id="Color" name="Color" class="autocomplete" value="<%=vS.getVarColor()%>">
                             <label for="Color">Color</label>
                         </div>
+                             <div class="input-field col s4">
+                            <input id="Tipo" type="text" name="Tipo" class="validate" required="">
+                            <label for="Tipo">Tipo</label>
+                        </div>
+                        
+                         <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
                         <div class="switch center col s4">
                             <label>
                                 Inactivo

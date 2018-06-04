@@ -55,8 +55,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Detalles</th>
-                        <th>Estado</th>
+                        <th>Descripcion</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -124,15 +123,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
+                        
                     </div>    
                 </div>
 
@@ -146,10 +137,10 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Mae") != null) {
-                MaestroTab mS = (MaestroTab) Ses.getAttribute("Rol");
+                MaestroTab mS = (MaestroTab) Ses.getAttribute("Mae");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="maestro.do">
+            <form method="get" action="maestros.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Maestro</h4>
                     <p>Registra la informacion del nuevo Maestro</p>
@@ -162,18 +153,10 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+                        
 
                     </div>    
                 </div>
-
 
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
@@ -212,7 +195,7 @@
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'maestros.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +

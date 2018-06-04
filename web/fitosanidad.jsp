@@ -55,7 +55,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Descripcion</th>
+                        <th>Tipo</th>
+                        <th>Imagen</th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -124,7 +126,7 @@
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva Fitosanidad</h4>
                     <p>Registra la informacion de la nueva Fitosanidad</p>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
@@ -132,7 +134,17 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        <div class="switch">
+                        <div class="input-field col s4">
+                            <input id="Tipo" type="text" name="Tipo" class="validate" required="">
+                            <label for="Tipo">Tipo</label>
+                        </div>
+                        
+                         <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
+                            <div class="switch">
                             <label>
                                 Inactivo
                                 <input type="checkbox" name="Estado">
@@ -154,7 +166,7 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Fit") != null) {
-                FitosanidadTab fS = (FitosanidadTab) Ses.getAttribute("Rol");
+                FitosanidadTab fS = (FitosanidadTab) Ses.getAttribute("Fit");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="fitosanidads.do">
@@ -220,7 +232,7 @@
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'fitosanidads.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +

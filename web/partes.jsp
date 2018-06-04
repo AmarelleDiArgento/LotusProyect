@@ -44,7 +44,7 @@
 
 
         <div class="container">
-          <h5>Armado</h5>
+          <h5>Partes</h5>
 
 
             <%
@@ -127,15 +127,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
+                       
                     </div>    
                 </div>
 
@@ -149,7 +141,7 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Part") != null) {
-                PartesTab pS = (PartesTab) Ses.getAttribute("Rol");
+                PartesTab pS = (PartesTab) Ses.getAttribute("Part");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="partes.do">
@@ -165,15 +157,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
+                        
                     </div>    
                 </div>
 
@@ -215,7 +199,7 @@
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'partes.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
