@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("LisA") != null) {
+        if (Ses.getAttribute("lisA") != null) {
 
 
 %>
@@ -211,15 +211,15 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'armados.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'armados.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
@@ -265,7 +265,7 @@
 </html>
 <%
 
-    Ses.setAttribute("LisA", null);
+    Ses.setAttribute("lisA", null);
     Ses.setAttribute("Arm", null);
     Ses.setAttribute("msj", null);
 } else {%>

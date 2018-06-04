@@ -12,7 +12,6 @@
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
         if (Ses.getAttribute("lisPro") != null) {
-
             if (Ses.getAttribute("lisMae") != null) {
 
 %>
@@ -289,10 +288,12 @@
     </body>
 </html>
 <%
-    }else{
-response.sendRedirect("maestros.do?Listar");
-}
+    } else {
 
+        response.sendRedirect("maestros.do?accion=Listar");
+    }
+
+    Ses.setAttribute("lisMae", null);
     Ses.setAttribute("lisPro", null);
     Ses.setAttribute("Pro", null);
     Ses.setAttribute("msj", null);

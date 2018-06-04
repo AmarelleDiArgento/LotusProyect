@@ -156,7 +156,7 @@ public class GradoServ extends HttpServlet {
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles: " + ex);
+            m.setDetalles("Detalles:" + ex);
 
         }
         //}else{

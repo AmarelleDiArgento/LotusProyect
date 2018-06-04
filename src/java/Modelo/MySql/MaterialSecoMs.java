@@ -23,7 +23,7 @@ import java.util.List;
 public class MaterialSecoMs implements MaterialSeco {
 
     private final Connection con;
-    Mensajes m = null;
+    Mensajes m = new Mensajes();
 
     public MaterialSecoMs(Connection con) {
 
@@ -38,7 +38,7 @@ public class MaterialSecoMs implements MaterialSeco {
 
     @Override
     public Mensajes insertar(MaterialSecoTab ms) {
-        String msj = "";
+        
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
@@ -67,7 +67,7 @@ public class MaterialSecoMs implements MaterialSeco {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -75,7 +75,7 @@ public class MaterialSecoMs implements MaterialSeco {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }
@@ -169,7 +169,7 @@ public class MaterialSecoMs implements MaterialSeco {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -177,7 +177,7 @@ public class MaterialSecoMs implements MaterialSeco {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }
@@ -237,7 +237,7 @@ public class MaterialSecoMs implements MaterialSeco {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -245,7 +245,7 @@ public class MaterialSecoMs implements MaterialSeco {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }

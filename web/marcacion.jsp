@@ -110,7 +110,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                            <label for="Descripcion">Descripciï¿½n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -181,33 +181,32 @@
                             </select>
                             <label>Armado</label>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                                <label for="Nombre">Nombre</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                                <label for="Descripcion">Descripción</label>
-                            </div>
-                            <div class="switch">
-                                <label>
-                                    Inactivo
-                                    <input type="checkbox" name="Estado">
-                                    <span class="lever"></span>
-                                    Activo
-                                </label>
-                            </div>
+                        <div class="input-field col s6">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
                         </div>
-                        </div>    
+                        <div class="input-field col s12">
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <label for="Descripcion">Descripciï¿½n</label>
+                        </div>
+                        <div class="switch">
+                            <label>
+                                Inactivo
+                                <input type="checkbox" name="Estado">
+                                <span class="lever"></span>
+                                Activo
+                            </label>
+                        </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                </div>
 
-
-                    <div class="modal-footer">
-                        <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                    </div>
             </form>
+
         </div>
+
 
         <%}%>
         <!--Scripts-->
@@ -226,7 +225,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "¿Estas seguro?",
+                                            title: "ï¿½Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
@@ -287,7 +286,10 @@
     </body>
 </html>
 <%
-
+    } else {
+        response.sendRedirect("armados.do?accion=Listar");
+    }
+    Ses.setAttribute("lisA", null);
     Ses.setAttribute("lisMar", null);
     Ses.setAttribute("Mar", null);
     Ses.setAttribute("msj", null);

@@ -55,7 +55,7 @@ public class ArmadoServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Armado")) {
                 acc = a;
             }
         }
@@ -63,7 +63,7 @@ public class ArmadoServ extends HttpServlet {
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
-            ruta = "rol.jsp";
+            ruta = "armado.jsp";
         }
         ArmadoTab a = null;
         int Id;
@@ -80,8 +80,8 @@ public class ArmadoServ extends HttpServlet {
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        Estado = request.getParameter("Estado") !=null;
+                        
                         a = new ArmadoTab(Nombre, Descripcion, Estado);
                         m = Asql.getArmado().insertar(a);
 
@@ -97,8 +97,7 @@ public class ArmadoServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        Estado = request.getParameter("Estado") !=null;
                         a = new ArmadoTab(Id, Nombre, Descripcion, Estado);
                         m = Asql.getArmado().modificar(a);
 
@@ -144,12 +143,12 @@ public class ArmadoServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles:" + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles: " + ex);
 
         }
         //}else{

@@ -314,10 +314,10 @@ call LotusProject.pasoIn(23,'Hacer y hacer! 23','img/Armado/Bloomstar Rainbow co
 
 
 -- Procedimientos LotusProject Tabla grados 
-call lotusproject.armadoIn('rosa', 'amarilla', 1);
--- call lotusproject.armadoMo(1234, 'rosa', 'verde', 1);
--- call lotusproject.armadoLi();
--- call lotusproject.armadoCo(2);
+call LotusProject.armadoIn('rosa', 'amarilla', 1);
+-- call LotusProject.armadoMo(1234, 'rosa', 'verde', 1);
+-- call LotusProject.armadoLi();
+-- call LotusProject.armadoCo(2);
 
 
 -- Procedimientos LotusProject Tabla grados 
@@ -342,15 +342,15 @@ call LotusProject.maestroIn('roja', 'verde');
  
  
 -- Procedimientos LotusProject Tabla marcacion 
-call lotusproject.marcacionIn('rosa verde', 'abcd', 1, 1);
- -- call lotusproject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
--- call lotusproject.marcacionLi();
--- call lotusproject.marcacionCo(3);
+call LotusProject.marcacionIn('rosa verde', 'abcd', 1, 1);
+ -- call LotusProject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
+-- call LotusProject.marcacionLi();
+-- call LotusProject.marcacionCo(3);
  
  
 -- Procedimientos LotusProject Tabla materialseco 
 call LotusProject.materialsecoIn('rosa', 'asdf', 'roja', 1, 1, 1, 1, 1); 
--- call lotusproject.materialsecoMo(1, 'rosa', 'abcd', 'verde', 1, 1, 1, 1, 1);
+-- call LotusProject.materialsecoMo(1, 'rosa', 'abcd', 'verde', 1, 1, 1, 1, 1);
 -- call LotusProject.materialsecoLi(); 
 -- call LotusProject.materialsecoCo(2); 
  
@@ -391,7 +391,7 @@ call LotusProject.tipomsIn('girasol', 'amarilla');
 call LotusProject.partesIn('Flor', 'Lo que no es la follaje ni el follaje');
 call LotusProject.partesIn('Tallo', 'Lo que no es la flor ni el follaje');
 call LotusProject.partesIn('Follaje', 'Lo que no es la flor ni el tallo');
--- call lotusproject.partesMo(1234, 'rosas', 'verdes');
--- call lotusproject.partesLi();
--- call lotusproject.partesCo(1);
+-- call LotusProject.partesMo(1234, 'rosas', 'verdes');
+-- call LotusProject.partesLi();
+-- call LotusProject.partesCo(1);
 
