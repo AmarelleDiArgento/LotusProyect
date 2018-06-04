@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisA") != null) {
+        if (Ses.getAttribute("LisA") != null) {
 
 
 %>
@@ -265,7 +265,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisA", null);
+    Ses.setAttribute("LisA", null);
     Ses.setAttribute("Arm", null);
     Ses.setAttribute("msj", null);
 } else {%>

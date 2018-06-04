@@ -12,7 +12,9 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisM") != null) {
+        if (Ses.getAttribute("lisMar") != null) {
+            if (Ses.getAttribute("lisA") != null) {
+                List<ArmadoTab> lisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
 
 
 %>
@@ -129,7 +131,7 @@
                                 <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
                                 <%}%>
                             </select>
-                            <label>Producto</label>
+                            <label>Armado</label>
                         </div>
                     <div class="row">
                         <div class="input-field col s6">
@@ -162,13 +164,24 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Mar") != null) {
-                MarcacionTab mS = (MarcacionTab) Ses.getAttribute("Rol");
+                MarcacionTab mS = (MarcacionTab) Ses.getAttribute("Mar");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="marcacions.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
+                    
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <select name="ArmId">>
+                                <option value="" disabled selected>Armado</option>
+                                <%                        for (ArmadoTab pl :lisA) {%>
+                                <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Armado</label>
+                        </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
@@ -228,7 +241,7 @@
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'marcacions.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
@@ -276,7 +289,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisM", null);
+    Ses.setAttribute("lisMar", null);
     Ses.setAttribute("Mar", null);
     Ses.setAttribute("msj", null);
 } else {%>

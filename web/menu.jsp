@@ -12,7 +12,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisM") != null) {
+        if (Ses.getAttribute("lisMen") != null) {
 
 
 %>
@@ -54,9 +54,13 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Orden</th>
+                        <th>Portada</th>
+                        <th>Superior</th>
+                        <th>Longitud</th>
+                        <th>Cauchos</th>
                         <th>Estado</th>
+                        <th>Descripcion</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -129,6 +133,15 @@
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <label for="Descripcion">Descripción</label>
+                        </div>
+                        
+                        <div class="input-field col s12">
+                            <textarea id="Portada" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <label for="Portada">Portada</label>
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
