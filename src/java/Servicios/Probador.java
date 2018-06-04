@@ -7,10 +7,13 @@ package Servicios;
 
 import Modelo.Interface.Parametros;
 import Modelo.MySql.AdminMs;
+import Modelo.MySql.GradosMs;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
+import Modelo.Tabs.GradosTab;
 import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.PermisoTab;
+import Modelo.Tabs.PoscosechaTab;
 import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
@@ -126,9 +129,16 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            VariedadTab v = new VariedadTab("Rosita", "img\\Producto\\Roses\\Rosita.jpg", "Red", 1, true);
-            m = Asql.getVariedad().insertar(v);
- 
+            List<AsignaPermisoTab> ap = Asql.getAsignaPer().PerSession("1070949");
+            for (AsignaPermisoTab lp : ap) {
+                if (lp.getnPermiso().equalsIgnoreCase("Grado")) {
+                    System.out.println("Permisos Ok");
+                }
+            }
+
+            GradosTab g = Asql.getGrados().obtener(5);
+            System.out.println(g.toString());
+            
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error " + ex.getLocalizedMessage());

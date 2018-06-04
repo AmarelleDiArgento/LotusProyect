@@ -44,11 +44,11 @@
 
 
         <div class="container">
-           <h5>Grados</h5>
+            <h5>Grados</h5>
 
 
             <%
-                List<GradosTab> LisG = (List<GradosTab>) Ses.getAttribute("LisG");
+                List<GradosTab> LisG = (List<GradosTab>) Ses.getAttribute("lisG");
             %>
             <table class="centered striped">
                 <thead>
@@ -69,19 +69,20 @@
                         <td><%=gt.getGraNombre()%></td>
                         <td><%=gt.getGraDetalles()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (gt.isGraEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
+                            <a href="#">
+                                <i class="material-icons medium<% if (gt.isGraEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            </a>
                         </td>
+
+
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=gt.getGraId()%>)" > edit </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=gt.getGraId()%>)" >edit</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=gt.getGraId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=gt.getGraId()%>)">delete</i>
                             </a>
                         </td>
                     </tr>
@@ -95,10 +96,10 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo grado"><i class="material-icons">blur_linear</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -118,7 +119,7 @@
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="grados.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevos Grados</h4>
+                    <h4><i class="material-icons medium">blur_linear</i> Nuevos Grados</h4>
                     <p>Registra la informacion de los nuevos Grados</p>
                     <div class="row">
                         <div class="input-field col s6">
@@ -151,26 +152,28 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Gra") != null) {
-                GradosTab gS = (GradosTab) Ses.getAttribute("Rol");
+                GradosTab gS = (GradosTab) Ses.getAttribute("Gra");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="grados.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevos Grados</h4>
+                    <h4><i class="material-icons medium">blur_linear</i> Nuevos Grados</h4>
                     <p>Registra la informacion de los nuevos Grados</p>
                     <div class="row">
+                        <input id="Id" type="text" name="Id" class="validate" value="<%=gS.getGraId()%>" required="" hidden>
+
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=gS.getGraNombre()%>" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate"  required><%=gS.getGraDetalles()%></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
                         <div class="switch">
                             <label>
                                 Inactivo
-                                <input type="checkbox" name="Estado">
+                                <input type="checkbox" name="Estado" <%if (gS.isGraEstado()) {%>checked<%}%>>
                                 <span class="lever"></span>
                                 Activo
                             </label>
@@ -181,7 +184,7 @@
 
 
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
@@ -211,15 +214,15 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'grados.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'grados.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
@@ -271,7 +274,7 @@
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="Grados.do" method="post" >
+        <form id="lista" action="grados.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

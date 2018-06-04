@@ -22,7 +22,7 @@ import java.util.List;
 public class PoscosechaMs implements Poscosecha {
 
     private final Connection con;
-    Mensajes m = null;
+    Mensajes m = new Mensajes();
 
     public PoscosechaMs(Connection con) {
 
@@ -46,9 +46,9 @@ public class PoscosechaMs implements Poscosecha {
             stat.setString(3, p.getPosTelefono());
 
             if (p.isPosEstado()) {
-                stat.setInt(3, 1);
+                stat.setInt(4, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(4, 0);
             }
             if (stat.executeUpdate() == 0) {
 

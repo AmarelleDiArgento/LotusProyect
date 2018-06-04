@@ -55,7 +55,7 @@ public class PoscosechaServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Poscosecha")) {
                 acc = a;
             }
         }
@@ -63,7 +63,7 @@ public class PoscosechaServ extends HttpServlet {
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
-            ruta = "rol.jsp";
+            ruta = "poscosecha.jsp";
         }
         PoscosechaTab pos = null;
         int Id;
@@ -76,13 +76,12 @@ public class PoscosechaServ extends HttpServlet {
         try {
             AdminMs Asql = new AdminMs(pool);
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
-                        PosNombre = request.getParameter("PosNombre");
-                        PosDireccion = request.getParameter("PosDireccion");
-                        PosTelefono = request.getParameter("PosTelefono");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
+                        PosNombre = request.getParameter("Nombre");
+                        PosDireccion = request.getParameter("Direccion");
+                        PosTelefono = request.getParameter("Telefono");
+                        Estado = request.getParameter("Estado") !=null;
                         pos = new PoscosechaTab(PosNombre,PosDireccion,PosTelefono,Estado);
                         m= Asql.getPoscosecha().insertar(pos);
 
@@ -93,12 +92,12 @@ public class PoscosechaServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        PosNombre = request.getParameter("PosNombre");
-                        PosDireccion = request.getParameter("PosDireccion");
-                        PosTelefono = request.getParameter("PosTelefono");
+                        PosNombre = request.getParameter("Nombre");
+                        PosDireccion = request.getParameter("Direccion");
+                        PosTelefono = request.getParameter("Telefono");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
                         pos = new PoscosechaTab(Id,PosNombre,PosDireccion,PosTelefono,Estado);
@@ -109,7 +108,7 @@ public class PoscosechaServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getPoscosecha().eliminar(Id);
@@ -119,7 +118,7 @@ public class PoscosechaServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         pos = Asql.getPoscosecha().obtener(Id);
