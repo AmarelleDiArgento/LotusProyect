@@ -18,10 +18,16 @@
             <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
 
         </a>
+<!-- <div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">more_vert</i></a>
 
         <ul class="right hide-on-med-and-down">
+        
             <li>
                 <form>
                     <div class="input-field">
