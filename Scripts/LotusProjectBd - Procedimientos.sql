@@ -213,6 +213,19 @@ group by p.PerModulo
 order by p.PerId asc;
 end $$
 delimiter $$
+
+delimiter $$
+create procedure perConf(in uCedula int(11), in pModulo varchar(45))
+begin
+Select p.PerId, p.PerNombre, p.PerUrl, p.PerIco
+from usuario as u
+inner join rol as r on u.RolId = r.RolId
+inner join asignapermiso as ap on r.RolId = ap.RolId
+inner join permiso as p on ap.PerId = p.PerId
+where p.PerModulo = pModulo and u.UsuCedula = uCedula and p.PerEstado =1 and ap.rolperLeer = 1
+order by p.PerId asc;
+end
+delimiter $$
 -- -----------------------------------------------------
 -- Consultar x id
 -- -----------------------------------------------------
@@ -281,12 +294,13 @@ delimiter $$
 delimiter $$
 create procedure AsgPerSession (in uCedula int(11))
 begin
-Select p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
+Select p.PerModulo, p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
-where u.UsuCedula = uCedula;
+where u.UsuCedula = uCedula and p.PerEstado = 1 
+order by PerModulo asc, PerNombre asc;
 end $$
 delimiter $$
 
@@ -573,7 +587,7 @@ delimiter $$
 create procedure gradosIn (in gNombre varchar(45), in gDetalles mediumtext,in gEstado tinyint(1))
 begin
 insert into grados (GraNombre,GraDetalles,GraEstado) values (gNombre,gDetalles,gEstado);
-end $$GraID
+end $$
 delimiter $$
 
 -- -----------------------------------------------------
@@ -606,7 +620,7 @@ delimiter $$
 delimiter $$
 create procedure gradosCo (in gId INT)
 begin
-select GraNombre,GraDetalles,GraEstado from grados where GraID = gID;
+select GraID,GraNombre,GraDetalles,GraEstado from grados where GraID = gID;
 end $$
 delimiter $$
 
@@ -1413,7 +1427,7 @@ delimiter $$
 delimiter $$
 create procedure asignafitoIn (in asgPate_AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
 begin
-insert into asignafito (asignaParte_AsPrtID,AsfImagen,AsfDescripcion) values (asgPate_AsPrtID,asfImagen,asfDescripcion);
+insert into asignafito (AsPrtID,AsfImagen,AsfDescripcion) values (asgPate_AsPrtID,asfImagen,asfDescripcion);
 end $$
 delimiter $$
 
@@ -1422,9 +1436,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure asignafitoMo (in fito_FitId int(11),asignaParte_AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
+create procedure asignafitoMo (in fito_FitId int(11),AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
 begin
-update asignafito SET AsfImagen=asfImagen, AsfDescripcion=asfDescripcion,asignaParte_AsPrtID=asgPate_AsPrtID where fitosanidad_FitId=fito_FitId;
+update asignafito SET AsfImagen=asfImagen, AsfDescripcion=asfDescripcion,AsPrtID=asgPate_AsPrtID where FitId=fito_FitId;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -1434,8 +1448,8 @@ delimiter $$
 delimiter $$
 create procedure asignafitoLi ()
 begin
-select asfi.fitosanidad_FitId,asfi.asignaParte_AsPrtID,asfi.AsfImagen,asfi.AsfDescripcion,aspar.AsPrtID
-from asignafito as asfi inner join asignaparte as aspar on asfi.asignaParte_AsPrtID = aspar.AsPrtID;
+select asfi.FitId,asfi.AsPrtID,asfi.AsfImagen,asfi.AsfDescripcion,aspar.AsPrtID
+from asignafito as asfi inner join asignaparte as aspar on asfi.AsPrtID = aspar.AsPrtID;
 end $$
 delimiter $$ 
 -- -----------------------------------------------------
@@ -1445,8 +1459,8 @@ delimiter $$
 delimiter $$
 create procedure asignafitoCo ()
 begin
-select asfit.fitosanidad_FitId,asfit.asignaParte_AsPrtID,asfit.AsfImagen,asfit.AsfDescripcion,aspar.AsPrtID
-from asignafito as asfit inner join asignaparte as aspar on asfit.asignaParte_AsPrtID = aspar.AsPrtID;
+select asfit.FitId,asfit.AsPrtID,asfit.AsfImagen,asfit.AsfDescripcion,aspar.AsPrtID
+from asignafito as asfit inner join asignaparte as aspar on asfit.AsPrtID = aspar.AsPrtID;
 end $$
 delimiter $$
 
@@ -1457,7 +1471,7 @@ delimiter $$
 delimiter $$
 create procedure asignafitoEl (in fito_FitId INT)
 begin
-delete from asignafito where  fitosanidad_FitId = fito_FitId;
+delete from asignafito where  FitId = fito_FitId;
 end $$
 delimiter $$
 

@@ -198,30 +198,25 @@ public class AsignaPermisoMs implements AsignaPermiso {
         String Rol = rs.getString("RolNombre");
         int PerId = Integer.parseInt(rs.getString("PerId"));
         String Permiso = rs.getString("PerNombre");
-        int l = rs.getInt("rolperLeer");
-        boolean leer = l == 1;
-        int n = rs.getInt("rolperNuevo");
-        boolean nuevo = n == 1;
-        int m = rs.getInt("rolperEditar");
-        boolean modificar = m == 1;
-        int e = rs.getInt("rolperEliminar");
-        boolean eliminar = e == 1;
-        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, leer, nuevo, modificar, eliminar);
+        String Modulo = rs.getString("PerModulo");
+        boolean leer = rs.getInt("rolperLeer") == 1;
+        boolean nuevo = rs.getInt("rolperNuevo") == 1;
+        boolean modificar = rs.getInt("rolperModificar") == 1;
+        boolean eliminar = rs.getInt("rolperEliminar") == 1;
+        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, Modulo, leer, nuevo, eliminar, eliminar);
         return apModel;
     }
 
     public AsignaPermisoTab coSession(ResultSet rs) throws SQLException {
 
+        String Modulo = rs.getString("PerModulo");
         String Permiso = rs.getString("PerNombre");
-        int l = rs.getInt("rolperLeer");
-        boolean leer = l == 1;
-        int n = rs.getInt("rolperNuevo");
-        boolean nuevo = n == 1;
-        int m = rs.getInt("rolperEditar");
-        boolean modificar = m == 1;
-        int e = rs.getInt("rolperEliminar");
-        boolean eliminar = e == 1;
-        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, leer, nuevo, modificar, eliminar);
+        boolean leer = rs.getInt("rolperLeer") == 1;
+        boolean nuevo = rs.getInt("rolperNuevo") == 1;
+        boolean modificar = rs.getInt("rolperEditar") == 1;
+        boolean eliminar = rs.getInt("rolperEliminar") == 1;
+
+        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, Modulo, leer, nuevo, eliminar, eliminar);
         return apModel;
     }
 

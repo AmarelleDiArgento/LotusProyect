@@ -16,6 +16,7 @@ public class AsignaPermisoTab implements Serializable{
     private String Roln; 
     private int PerId;
     private String nPermiso;
+    private String nModulo;
     private boolean rpLeer;
     private boolean rpNuevo;
     private boolean rpEditar;
@@ -30,24 +31,28 @@ public class AsignaPermisoTab implements Serializable{
         this.rpEliminar = rpEliminar;
     }
 
-    public AsignaPermisoTab(int RolId, String Roln, int PerId, String nPermiso, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
+    public AsignaPermisoTab(String nPermiso, String nModulo, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
+        this.nPermiso = nPermiso;
+        this.nModulo = nModulo;
+        this.rpLeer = rpLeer;
+        this.rpNuevo = rpNuevo;
+        this.rpEditar = rpEditar;
+        this.rpEliminar = rpEliminar;
+        
+    }
+
+    public AsignaPermisoTab(int RolId, String Roln, int PerId, String nPermiso, String nModulo, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
         this.RolId = RolId;
         this.Roln = Roln;
         this.PerId = PerId;
         this.nPermiso = nPermiso;
+        this.nModulo = nModulo;
         this.rpLeer = rpLeer;
         this.rpNuevo = rpNuevo;
         this.rpEditar = rpEditar;
         this.rpEliminar = rpEliminar;
     }
-
-    public AsignaPermisoTab(String nPermiso, boolean rpLeer, boolean rpNuevo, boolean rpEditar, boolean rpEliminar) {
-        this.nPermiso = nPermiso;
-        this.rpLeer = rpLeer;
-        this.rpNuevo = rpNuevo;
-        this.rpEditar = rpEditar;
-        this.rpEliminar = rpEliminar;
-    }
+    
     
 
     /**
@@ -107,6 +112,20 @@ public class AsignaPermisoTab implements Serializable{
     }
 
     /**
+     * @return the nModulo
+     */
+    public String getnModulo() {
+        return nModulo;
+    }
+
+    /**
+     * @param nModulo the nModulo to set
+     */
+    public void setnModulo(String nModulo) {
+        this.nModulo = nModulo;
+    }
+
+    /**
      * @return the rpLeer
      */
     public boolean isRpLeer() {
@@ -161,18 +180,9 @@ public class AsignaPermisoTab implements Serializable{
     public void setRpEliminar(boolean rpEliminar) {
         this.rpEliminar = rpEliminar;
     }
+    
 
-
-    @Override
-    public String toString() {
-        return "AsignaPermisoTab{" + "RolId=" + RolId + ", PerId=" + PerId + ", rpLeer=" + rpLeer + ", rpNuevo=" + rpNuevo + ", rpEditar=" + rpEditar + ", rpEliminar=" + rpEliminar + '}';
-    }
- 
-    
-    
-    
-    
-    
-    
     
 }
+    
+

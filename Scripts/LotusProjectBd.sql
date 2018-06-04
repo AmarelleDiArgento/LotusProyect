@@ -496,9 +496,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table LotusProject Partes
+-- Table LotusProject partes
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS LotusProject.Partes (
+CREATE TABLE IF NOT EXISTS LotusProject.partes (
   prtId INT AUTO_INCREMENT NOT NULL,
   PrtNombre VARCHAR(45) NULL,
   PrtDescripcion MEDIUMTEXT NULL,
@@ -514,14 +514,14 @@ CREATE TABLE IF NOT EXISTS LotusProject.asignaparte (
   PrtId INT NOT NULL,
   ProId INT(11) NOT NULL,
   PRIMARY KEY (AsPrtID, PrtId, ProId),
-  INDEX fk_Partes_has_producto_producto1_idx (ProId ASC),
-  INDEX fk_Partes_has_producto_Partes1_idx (PrtId ASC),
-  CONSTRAINT fk_Partes_has_producto_Partes1
+  INDEX fk_partes_has_producto_producto1_idx (ProId ASC),
+  INDEX fk_partes_has_producto_partes1_idx (PrtId ASC),
+  CONSTRAINT fk_partes_has_producto_partes1
     FOREIGN KEY (PrtId)
-    REFERENCES LotusProject.Partes (prtId)
+    REFERENCES LotusProject.partes (prtId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_Partes_has_producto_producto1
+  CONSTRAINT fk_partes_has_producto_producto1
     FOREIGN KEY (ProId)
     REFERENCES LotusProject.producto (ProId)
     ON DELETE NO ACTION
@@ -533,20 +533,20 @@ ENGINE = InnoDB;
 -- Table LotusProject asignafito
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS LotusProject.asignafito (
-  asignaParte_AsPrtID INT NOT NULL,
-  fitosanidad_FitId INT(11) NOT NULL,
+  AsPrtID INT NOT NULL,
+  FitId INT(11) NOT NULL,
   AsfImagen VARCHAR(45) NULL,
   AsfDescripcion MEDIUMTEXT NULL,
-  PRIMARY KEY (asignaParte_AsPrtID, fitosanidad_FitId),
-  INDEX fk_asignaParte_has_fitosanidad_fitosanidad1_idx (fitosanidad_FitId ASC),
-  INDEX fk_asignaParte_has_fitosanidad_asignaParte1_idx (asignaParte_AsPrtID ASC),
+  PRIMARY KEY (AsPrtID, FitId),
+  INDEX fk_asignaParte_has_fitosanidad_fitosanidad1_idx (FitId ASC),
+  INDEX fk_asignaParte_has_fitosanidad_asignaParte1_idx (AsPrtID ASC),
   CONSTRAINT fk_asignaParte_has_fitosanidad_asignaParte1
-    FOREIGN KEY (asignaParte_AsPrtID)
+    FOREIGN KEY (AsPrtID)
     REFERENCES LotusProject.asignaparte (AsPrtID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_asignaParte_has_fitosanidad_fitosanidad1
-    FOREIGN KEY (fitosanidad_FitId)
+    FOREIGN KEY (FitId)
     REFERENCES LotusProject.fitosanidad (FitId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

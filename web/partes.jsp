@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPrt") != null) {
 
 
 %>
@@ -48,7 +48,7 @@
 
 
             <%
-                List<PartesTab> LisP = (List<PartesTab>) Ses.getAttribute("lisA");
+                List<PartesTab> LisPrt = (List<PartesTab>) Ses.getAttribute("lisPrt");
             %>
             <table class="centered striped">
                 <thead>
@@ -62,16 +62,12 @@
                 </thead>
 
                 <tbody>
-                    <% for (PartesTab at : LisP) {%>
+                    <% for (PartesTab at : LisPrt) {%>
                     <tr>
                         <td><%=at.getprtId()%></td>
-                        <td><a href="pasos.do?accion=Listar&Id=<%=at.getprtId()%>"><%=at.getPrtNombre()%></a></td>
+                        <td><%=at.getPrtNombre()%></td>
                         <td><%=at.getPrtDescripcion()%></td>
-                        <td>
-                            <label>
-                                <span></span>
-                            </label>
-                        </td>
+
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=at.getprtId()%>)" > edit </i>
@@ -93,7 +89,7 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
+                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva parte"><i class="material-icons">flip</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
                     
@@ -116,7 +112,7 @@
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="partes.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Parte</h4>
+                    <h4><i class="material-icons medium">flip</i> Nueva Parte</h4>
                     <p>Registra la informacion de la nueva parte</p>
                     <div class="row">
                         <div class="input-field col s6">
@@ -140,21 +136,21 @@
 
 
         <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Part") != null) {
-                PartesTab pS = (PartesTab) Ses.getAttribute("Part");
+        <%if (Ses.getAttribute("Prt") != null) {
+                PartesTab pS = (PartesTab) Ses.getAttribute("Prt");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="partes.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva Parte</h4>
+                    <h4><i class="material-icons medium">flip</i> Nueva Parte</h4>
                     <p>Registra la informacion de la nueva parte</p>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=pS.getPrtNombre()%>" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required><%=pS.getPrtDescripcion()%></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
                         
@@ -193,7 +189,7 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'partes.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
@@ -201,7 +197,7 @@
                                     function consultar(id) {
                                         var url = 'partes.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);
@@ -247,8 +243,8 @@
 </html>
 <%
 
-    Ses.setAttribute("lisP", null);
-    Ses.setAttribute("Part", null);
+    Ses.setAttribute("lisPrt", null);
+    Ses.setAttribute("Prt", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
