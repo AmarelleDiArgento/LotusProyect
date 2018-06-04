@@ -155,8 +155,17 @@ public class UsuarioServ extends HttpServlet {
                     }
                     break;
 
-                case "Subir":
+                case "Cargar":
+                    Usuario = request.getParameter("Usuario");
+                    Part arc = request.getPart("IMG");
+                    String extension = "";
 
+                    int i = arc.getSubmittedFileName().lastIndexOf('.');
+                    if (i >= 0) {
+                        extension = arc.getSubmittedFileName().substring(i + 1);
+                    }
+                    Url = "Usuario/" + Usuario + "." + extension;
+                    m = af.subirImg(arc, Url);
                     break;
 
                 default:

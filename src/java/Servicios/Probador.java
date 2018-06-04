@@ -14,6 +14,7 @@ import Modelo.Tabs.PermisoTab;
 import Modelo.Tabs.ProductoTab;
 import Modelo.Tabs.RolTab;
 import Modelo.Tabs.UsuarioTab;
+import Modelo.Tabs.VariedadTab;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -125,8 +126,8 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            ParametrosTab par = Asql.getParametros().obtener(3);
-            System.out.println(par.getParNombre());
+            VariedadTab v = new VariedadTab("Rosita", "img\\Producto\\Roses\\Rosita.jpg", "Red", 1, true);
+            m = Asql.getVariedad().insertar(v);
  
         } catch (SQLException ex) {
             m.setTipo("Error");

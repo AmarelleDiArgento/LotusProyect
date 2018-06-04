@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class UsuarioMs implements Usuario {
 
-    Mensajes m = new Mensajes();
     private final Connection con;
+    Mensajes m = new Mensajes();
 
     public UsuarioMs(Connection con) {
 
@@ -139,7 +139,7 @@ public class UsuarioMs implements Usuario {
                 stat.setInt(9, 0);
             }
             stat.setInt(10, u.getRolId());
-            
+
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");
                 m.setMsj("Error Mysql");

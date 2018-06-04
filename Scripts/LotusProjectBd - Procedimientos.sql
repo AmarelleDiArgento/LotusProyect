@@ -20,6 +20,7 @@ select max(RolId) from rol;
 end $$
 delimiter $$
 
+
 -- -----------------------------------------------------
 -- Modificar
 -- -----------------------------------------------------
@@ -108,6 +109,17 @@ Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTele
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 order by u.UsuNombre;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Avatar de Usuario
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure usuarioAvatar (in uAvatar varchar(255), in uId int)
+begin
+update usuario SET UsuAvatar=uAvatar where UsuCedula = uId;
 end $$
 delimiter $$
 
@@ -754,9 +766,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$ 
-create procedure marcacionMo(in marId int(11),in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1),in armId int(11)) 
+create procedure marcacionMo(in mId int(11),in mNombre varchar(45), in mPortada mediumtext,in mEstado tinyint(1),in armId int(11)) 
 begin 
-update marcacion SET MarNombre=marNombre, MarPortada=marPortada,MarEstado=marEstado, ArmId=armId where MarId=marId; 
+update marcacion SET MarNombre=mNombre, MarPortada=mPortada,MarEstado=mEstado, ArmId=armId where MarId=mId; 
 end $$ 
 delimiter $$ 
 
@@ -777,10 +789,12 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure marcacionCo ()
+create procedure marcacionCo (in mId int)
 begin
-select mar.MarId,mar.MarNombre,mar.MarPortada,mar.MarEstado,a.ArmId,a.ArmNombre
-from marcacion as mar inner join armado as a on mar.ArmId = a.ArmId;
+select m.MarId, m.MarNombre, m.MarPortada, m.MarEstado, a.ArmId, a.ArmNombre
+from marcacion as m 
+inner join armado as a on m.ArmId = a.ArmId
+where m.MarId = mId;
 end $$
 delimiter $$
 -- ----------
@@ -814,9 +828,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure materialsecoMo(in msId int (11), in msNombre varchar(45), in msImagen mediumtext,in msDescripcion mediumtext, in msEstado tinyint(1), in msAlto int(3),in msAncho int(3),in msProfundo int(3),in msTiMId int(11)) 
+create procedure materialsecoMo(in mId int (11), in mNombre varchar(45), in mImagen mediumtext,in mDescripcion mediumtext, in mEstado tinyint(1), in mAlto int(3),in mAncho int(3),in mProfundo int(3),in mTiMId int(11)) 
 begin 
-update materialseco SET MsNombre=msNombre, MsImagen=msImagen,MsDescripcion=msDescripcion, MsEstado=msEstado,MsAlto=msAlto,MsAncho=msAncho,MsProfundo=msProfundo,TiMId=msTiMId where MsId=msId; 
+update materialseco SET MsNombre=mNombre, MsImagen=mImagen,MsDescripcion=mDescripcion, MsEstado=mEstado,MsAlto=mAlto,MsAncho=mAncho,MsProfundo=mProfundo,TiMId=mTiMId where MsId=mId; 
 end $$ 
 delimiter $$ 
 
@@ -1290,9 +1304,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11),in VarImagen varchar(45),in VarColor varchar(15))
+create procedure variedadMo (in varId int(11),in varNombre varchar(45), in varEstado tinyint(1),in ProId int(11), in VarColor varchar(15))
 begin
-update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarImagen=varImagen,VarColor=varColor where VarId=varId;
+update variedad SET VarId=varId, VarNombre=varNombre,VarEstado=varEstado,ProId=proId,VarColor=varColor where VarId=varId;
 end $$
 delimiter $$
 -- -----------------------------------------------------
@@ -1312,9 +1326,12 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure variedadCo (in tId INT)
+create procedure variedadCo (in vId INT)
 begin
-select VarId,VarNombre,VarEstado,ProId,VarImagen,VarColor from variedad where VarId = varId;
+select v.VarId,v.VarNombre,v.ProId,p.ProNombre,v.VarColor, v.VarImagen,v.VarEstado
+from variedad as v
+inner join producto as p on v.ProId = p.ProId
+where VarId = vId;
 end $$
 delimiter $$
 
@@ -1330,6 +1347,63 @@ end $$
 delimiter $$
 
 
+ -- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla partes
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesIn (in ptNombre varchar(45),in ptDescripcion mediumtext)
+begin
+insert into partes (PrtNombre,PrtDescripcion) values (ptNombre,ptDescripcion);
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesMo (in ptId int(11), in ptNombre varchar(45),in ptDescripcion mediumtext)
+begin
+update partes SET PrtNombre=ptNombre,PrtDescripcion=ptDescripcion where prtId=ptId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure partesLi ()
+begin
+select prtId,PrtNombre,PrtDescripcion from partes;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesCo (in ptId INT)
+begin
+select prtId,PrtNombre,PrtDescripcion from partes where prtId = ptId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesEl (in ptId INT)
+begin
+delete from partes where  prtId = ptId;
+end $$
+delimiter $$
+
+
+
 
  -- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla asignafito
@@ -1337,7 +1411,7 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure asignafitoIn (asgPate_AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
+create procedure asignafitoIn (in asgPate_AsPrtID int(11),in asfImagen varchar(45), in asfDescripcion mediumtext)
 begin
 insert into asignafito (asignaParte_AsPrtID,AsfImagen,AsfDescripcion) values (asgPate_AsPrtID,asfImagen,asfDescripcion);
 end $$
@@ -1516,15 +1590,16 @@ delete from asignamatseco where  MsId = aMsId;
 end $$ 
 delimiter $$ 
 
+
 -- ----------------------------------------------------- 
 -- Procedimientos LotusProject Tabla asignaparte 
 -- Insertar 
 -- ----------------------------------------------------- 
  
 delimiter $$ 
-create procedure asignaparteIn (in aAsPrtID int(11), in aPrtId int(11),in aProId int(11)) 
+create procedure asignaparteIn (in aPrtId int(11),in aProId int(11)) 
 begin 
-insert into asignaparte(AsPrtID,PrtId,ProId) values (aAsPrtID,aPrtId,aProId); 
+insert into asignaparte(PrtId,ProId) values (aPrtId,aProId); 
 end $$ 
 delimiter $$ 
  
@@ -1535,7 +1610,7 @@ delimiter $$
 delimiter $$ 
 create procedure asignaparteMo (in aAsPrtID int(11), in aPrtId int(11),in aProId int(11)) 
 begin 
-update asignamarcacion SET AsPrtID=aAsPrtID,PrtId=aPrtId,ProId=aProId where AsPrtID=aAsPrtID; 
+update asignaparte SET PrtId=aPrtId,ProId=aProId where AsPrtID=aAsPrtID; 
 end $$ 
 delimiter $$ 
  

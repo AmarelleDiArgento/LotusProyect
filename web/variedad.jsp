@@ -76,7 +76,12 @@
                         <td>
                             <div class="user-view">
                                 <a href="#">
-                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="<%=vt.getVarImagen()%>">
+                                    <img class="circle materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (vt.getVarImagen() != null) {
+                                            out.println(vt.getVarImagen());
+                                        } else {
+                                            out.println("img/en proceso.png");
+                                            
+                                        }%>">
                                 </a>
                             </div>
                         </td>
@@ -127,13 +132,13 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="variedads.do">
+            <form method="get" action="variedads.do" enctype="multipart/form-data">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
                     <p>Registra la informacion de la nueva Variedad</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <select name="Producto">>
+                            <select name="ProId">>
                                 <option value="" disabled selected>Producto</option>
                                 <%                        for (ProductoTab pl : LisPro) {%>
                                 <option value="<%=pl.getProId()%>"><%=pl.getProNombre()%></option>
@@ -179,43 +184,37 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Var") != null) {
-                VariedadTab vS = (VariedadTab) Ses.getAttribute("Rol");
+                VariedadTab vS = (VariedadTab) Ses.getAttribute("Var");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="variedads.do">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
-                    <p>Registra la informacion de la nueva Variedad</p>
+                    <p>Registra la informacion lo cambios de la Variedad</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <select name="Producto">>
-                                <option value="" disabled selected>Producto</option>
+                            <input id="Nombre" type="text" name="Id" class="validate" required value="<%=vS.getVarId()%>" hidden>
+                            <select name="ProId">>
+                                <option value="" disabled >Producto</option>
                                 <%                        for (ProductoTab pl : LisPro) {%>
-                                <option value="<%=pl.getProId()%>"><%=pl.getProNombre()%></option>
+                                <option value="<%=pl.getProId()%>"  <%if (vS.getProId()==pl.getProId()) {%> selected <%}%> ><%=pl.getProNombre()%> </option>
                                 <%}%>
                             </select>
                             <label>Producto</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required value="<%=vS.getVarNombre()%>">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s4">
                             <i class="material-icons prefix">color_lens</i>
-                            <input type="text" id="Color" name="Color" class="autocomplete">
+                            <input type="text" id="Color" name="Color" class="autocomplete" value="<%=vS.getVarColor()%>">
                             <label for="Color">Color</label>
-                        </div>
-                        <div class="file-field input-field col s4">
-
-                            <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
-
                         </div>
                         <div class="switch center col s4">
                             <label>
                                 Inactivo
-                                <input type="checkbox" name="Estado">
+                                <input type="checkbox" name="Estado"  <%if (vS.isVarEstado()) {%> checked <%}%>>
                                 <span class="lever"></span>
                                 Activo
                             </label>
@@ -223,7 +222,7 @@
                     </div>    
                 </div>
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
@@ -253,15 +252,15 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'variedads.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'variedads.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);

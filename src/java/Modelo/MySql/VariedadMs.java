@@ -22,7 +22,7 @@ import java.util.List;
 public class VariedadMs implements Variedad {
 
     private final Connection con;
-    Mensajes m = null;
+    Mensajes m = new Mensajes();
 
     public VariedadMs(Connection con) {
 
@@ -30,7 +30,7 @@ public class VariedadMs implements Variedad {
     }
 
     final String Insertar = "call LotusProject.variedadIn(?,?,?,?,?);";
-    final String Modificar = "call LotusProject.variedadMo(?,?,?,?,?,?);";
+    final String Modificar = "call LotusProject.variedadMo(?,?,?,?,?);";
     final String Eliminar = "call LotusProject.variedadEl(?);";
     final String Consultar = "call LotusProject.variedadCo(?);";
     final String ListarTodos = "call LotusProject.variedadLi();";
@@ -42,14 +42,15 @@ public class VariedadMs implements Variedad {
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, v.getVarNombre());
-            stat.setString(2, v.getVarImagen());
-            stat.setString(2, v.getVarColor());
-
             if (v.isVarEstado()) {
-                stat.setInt(3, 1);
+                stat.setInt(2, 1);
             } else {
-                stat.setInt(9, 0);
+                stat.setInt(2, 0);
             }
+            stat.setInt(3, v.getProId());
+            stat.setString(4, v.getVarImagen());
+            stat.setString(5, v.getVarColor());
+
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -88,7 +89,7 @@ public class VariedadMs implements Variedad {
         String Pnombre = rs.getString("ProNombre");
         int st = rs.getInt("VarEstado");
         boolean status = st == 1;
-        VariedadTab vTab = new VariedadTab(Id, Pnombre, imagen, color, ProId, Pnombre, status);
+        VariedadTab vTab = new VariedadTab(Id, nombre, imagen, color, ProId, Pnombre, status);
         return vTab;
     }
 
@@ -170,13 +171,13 @@ public class VariedadMs implements Variedad {
             stat = con.prepareStatement(Modificar);
             stat.setInt(1, v.getVarId());
             stat.setString(2, v.getVarNombre());
-            stat.setString(3, v.getVarImagen());
-            stat.setString(4, v.getVarColor());
             if (v.isVarEstado()) {
-                stat.setInt(5, 1);
+                stat.setInt(3, 1);
             } else {
-                stat.setInt(4, 0);
+                stat.setInt(3, 0);
             }
+            stat.setInt(4, v.getProId());
+            stat.setString(5, v.getVarColor());
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -190,7 +191,7 @@ public class VariedadMs implements Variedad {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al modificar los datos:" + ex.getMessage());
         } finally {
             if (stat != null) {
                 try {

@@ -499,7 +499,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table LotusProject Partes
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS LotusProject.Partes (
-  prtId INT NOT NULL,
+  prtId INT AUTO_INCREMENT NOT NULL,
   PrtNombre VARCHAR(45) NULL,
   PrtDescripcion MEDIUMTEXT NULL,
   PRIMARY KEY (prtId))

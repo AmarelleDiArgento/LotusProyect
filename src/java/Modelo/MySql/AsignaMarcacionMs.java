@@ -19,8 +19,8 @@ import Modelo.Tabs.AsignaMarcacionTab;
  *
  * @author ale-j
  */
-public class AsignaMarcacionMs implements AsignaMarcacion  {
-  
+public class AsignaMarcacionMs implements AsignaMarcacion {
+
     private final Connection con;
     Mensajes m;
 
@@ -28,25 +28,23 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
 
         this.con = con;
     }
-    
+
     final String Insertar = "";
     final String Modificar = "";
     final String Eliminar = "";
     final String Consultar = "";
     final String ListarTodos = "";
-    
+
     @Override
     public AsignaMarcacionTab convertir(ResultSet rs) throws SQLException {
         int MarId = rs.getInt("MarId");
         int PreId = rs.getInt("PreId");
-        String MarNombre = rs.getString("MarNombre");
-        String PreNombre = rs.getString("PreNombre");
-        int ramos = rs.getInt("NoRamos");
+        int NoTallos = rs.getInt("NoRamos");
 
-        AsignaMarcacionTab mTab = new AsignaMarcacionTab(MarId,PreId,ramos,MarNombre,PreNombre);
+        AsignaMarcacionTab mTab = new AsignaMarcacionTab(PreId, MarId, NoTallos);
         return mTab;
     }
-    
+
     @Override
     public List<AsignaMarcacionTab> listar() {
         PreparedStatement stat = null;
@@ -81,16 +79,16 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
         }
         return amTab;
     }
-    
-    public Mensajes insertar(AsignaMarcacionTab a) {
+
+    public Mensajes insertar(AsignaMarcacionTab am) {
 
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
-            
-          stat.setInt(1, a.getNoRamos());
-          stat.setString(2, a.getMarNombre());
-          stat.setString(3, a.getPreNombre());
+
+            stat.setInt(1, am.getPreId());
+            stat.setInt(2, am.getPreId());
+            stat.setInt(3, am.getNoRamos());
 
             if (stat.executeUpdate() == 0) {
                 m.setTipo("Error");
@@ -98,7 +96,7 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
                 m.setDetalles("Error al ingresar los datos");
             } else {
                 m.setTipo("Ok");
-                m.setMsj(a.getNoRamos() + " agregado exitosamente");
+                m.setMsj(am.getNoRamos() + " agregado exitosamente");
             }
 
         } catch (SQLException ex) {
@@ -119,8 +117,8 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
         }
         return m;
     }
-    
-     @Override
+
+    @Override
     public AsignaMarcacionTab obtener(Integer id) {
         PreparedStatement stat = null;
         ResultSet rs = null;
@@ -155,7 +153,7 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
         }
         return aModel;
     }
-    
+
     @Override
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
@@ -188,20 +186,17 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
         }
         return m;
     }
-    
+
     @Override
-    public Mensajes modificar(AsignaMarcacionTab a) {
+    public Mensajes modificar(AsignaMarcacionTab am) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Modificar);
-            
-          stat.setInt(1, a.getNoRamos());
-          stat.setString(2, a.getMarNombre());
-          stat.setString(3, a.getPreNombre());
-          stat.setInt(4, a.getPreId());
-          stat.setInt(5, a.getMarId());
-          
-            
+
+            stat.setInt(1, am.getPreId());
+            stat.setInt(2, am.getPreId());
+            stat.setInt(3, am.getNoRamos());
+
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -209,7 +204,7 @@ public class AsignaMarcacionMs implements AsignaMarcacion  {
                 m.setDetalles("Error al modificar los datos");
             } else {
                 m.setTipo("Ok");
-                m.setMsj(a.getMarNombre() + " modificado exitosamente");
+                m.setMsj(am.getNoRamos() + " modificado exitosamente");
             }
 
         } catch (SQLException ex) {

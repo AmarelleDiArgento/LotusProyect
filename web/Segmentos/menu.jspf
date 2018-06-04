@@ -51,7 +51,7 @@
             <div class="background">
                 <img src="img\LotoLila.jpg">
             </div>
-            <a href="#"><img class="circle" src="<%=u.getAvatar()%>"></a>
+            <a href="#"><img class="circle modal-trigger" href="#ModalImg"  src="<%=u.getAvatar()%>"></a>
             <a href="#!name"><span class="white-text name"><%=u.toFullName()%></span></a>
             <a href="#!email"><span class="white-text email"><%=u.getnRol()%></span></a>
         </div>
@@ -67,9 +67,38 @@
     <li ><a href="sessionFinally.jsp"><i class="material-icons">exit_to_app</i>Cerrar session</a></li>
 </ul>
 
+<!-- Modal Structure -->
+<div id="ModalImg" class="modal">
+    <form method="post" action="usuarios.do" enctype="multipart/form-data">
+        <div class="modal-content">
+            <h4>Selecciona el avatar para:</h4>
+
+            <div class="row center">
+                <input name="Usuario" type="text" value="<%=u.getLoger()%>" hidden />
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" name="IMG">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <input name="accion" value="Cargar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+
+        </div>
+    </form>
+
+</div>
+
+
 
 <%    } else {//
-response.sendRedirect("permisos.do?accion=menu");
-}
+        response.sendRedirect("permisos.do?accion=menu");
+    }
 
 %>

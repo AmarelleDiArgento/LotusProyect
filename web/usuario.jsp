@@ -75,7 +75,7 @@
                     %>
                     <tr>
                         <td><div class="user-view">
-                                <a href="#">
+                                <a >
                                     <img class="circle" style="height: 3.5rem; width: 3.5rem" src="<%=ut.getAvatar()%>">
                                 </a>
                             </div>
@@ -92,7 +92,7 @@
                                 <i class="material-icons medium<% if (ut.getEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
-                        
+
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="consultar(<%=ut.getCedula()%>)">edit</i>
@@ -296,9 +296,6 @@
                             <label>Rol</label>
                         </div>
 
-
-                        <%
-                        %>
                         <div class="input-field col s4">
                             <select multiple>
                                 <option value="" disabled >Poscosecha</option>
@@ -321,13 +318,45 @@
 
                     </div>    
                 </div>
-
                 <div class="modal-footer">
                     <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
         <%}%>
+
+        <!-- Modal Modificar Imagen -->
+
+
+
+        <!-- Modal Structure -->
+        <div id="ModalImg" class="modal">
+            <form method="post" action="usuarios.do" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <h4>Selecciona el avatar para:</h4>
+
+                    <div class="row center">
+                        <input name="Usuario" type="text" value="almoreno" hidden />
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" name="IMG">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input name="accion" value="Cargar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+
+                </div>
+            </form>
+
+        </div>
+
         <!--Scripts-->
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
