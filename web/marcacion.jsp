@@ -51,7 +51,7 @@
 
 
             <%
-                List<MarcacionTab> LisM = (List<MarcacionTab>) Ses.getAttribute("lisMar");
+                List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
             %>
             <table class="centered striped">
                 <thead>
@@ -66,7 +66,7 @@
                 </thead>
 
                 <tbody>
-                    <% for (MarcacionTab mt : LisM) {%>
+                    <% for (MarcacionTab mt : lisMar) {%>
                     <tr>
                         <td><%=mt.getMarId()%></td>
                         <td><%=mt.getMarNombre()%></td>
@@ -110,7 +110,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -133,14 +133,13 @@
                             </select>
                             <label>Armado</label>
                         </div>
-
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                            <label for="Descripcion">Descripciï¿½n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -151,13 +150,13 @@
                             </label>
                         </div>
 
-                    </div>    
-                </div>
+                    </div>
+                    </div>
 
 
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
+                    <div class="modal-footer">
+                        <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    </div>
             </form>
         </div>
 
@@ -188,7 +187,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                            <label for="Descripcion">Descripciï¿½n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -226,7 +225,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "¿Estas seguro?",
+                                            title: "ï¿½Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
