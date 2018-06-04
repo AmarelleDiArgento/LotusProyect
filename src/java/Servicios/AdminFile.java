@@ -40,7 +40,7 @@ public class AdminFile {
 
     public Mensajes subirImg(Part img, String url) {
         url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/" + url;
-        Mensajes msj = new Mensajes();
+        Mensajes m = new Mensajes();
         try {
             in = img.getInputStream();
             arch = new File(url);
@@ -54,15 +54,15 @@ public class AdminFile {
             out.close();
             in.close();
         } catch (IOException ex) {
-            msj.setTipo("Error");
-            msj.setMsj("IO Exception");
-            msj.setDetalles(ex.getMessage());
+            m.setTipo("Error");
+            m.setMsj("IO Exception");
+            m.setDetalles(ex.getMessage());
         }
 
-        msj.setTipo("Ok");
-        msj.setMsj(img.getName());
-        msj.setDetalles("Subido exitosamente");
-        return msj;
+        m.setTipo("Ok");
+        m.setMsj(img.getName());
+        m.setDetalles("Subido exitosamente");
+        return m;
     }
 
 //SO  = SO.substring(0, 3);

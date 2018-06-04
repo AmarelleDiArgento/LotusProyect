@@ -20,6 +20,7 @@ select max(RolId) from rol;
 end $$
 delimiter $$
 
+
 -- -----------------------------------------------------
 -- Modificar
 -- -----------------------------------------------------
@@ -108,6 +109,17 @@ Select UsuCedula,UsuNombre,UsuApellido,UsuLoger,UsuPassword,UsuExtencion,UsuTele
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 order by u.UsuNombre;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Avatar de Usuario
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure usuarioAvatar (in uAvatar varchar(255), in uId int)
+begin
+update usuario SET UsuAvatar=uAvatar where UsuCedula = uId;
 end $$
 delimiter $$
 
