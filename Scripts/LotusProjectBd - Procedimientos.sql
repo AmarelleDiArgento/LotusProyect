@@ -754,9 +754,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$ 
-create procedure marcacionMo(in marId int(11),in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1),in armId int(11)) 
+create procedure marcacionMo(in mId int(11),in mNombre varchar(45), in mPortada mediumtext,in mEstado tinyint(1),in armId int(11)) 
 begin 
-update marcacion SET MarNombre=marNombre, MarPortada=marPortada,MarEstado=marEstado, ArmId=armId where MarId=marId; 
+update marcacion SET MarNombre=mNombre, MarPortada=mPortada,MarEstado=mEstado, ArmId=armId where MarId=mId; 
 end $$ 
 delimiter $$ 
 
@@ -777,10 +777,12 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure marcacionCo ()
+create procedure marcacionCo (in mId int)
 begin
-select mar.MarId,mar.MarNombre,mar.MarPortada,mar.MarEstado,a.ArmId,a.ArmNombre
-from marcacion as mar inner join armado as a on mar.ArmId = a.ArmId;
+select m.MarId, m.MarNombre, m.MarPortada, m.MarEstado, a.ArmId, a.ArmNombre
+from marcacion as m 
+inner join armado as a on m.ArmId = a.ArmId
+where m.MarId = mId;
 end $$
 delimiter $$
 -- ----------
@@ -814,9 +816,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$
-create procedure materialsecoMo(in msId int (11), in msNombre varchar(45), in msImagen mediumtext,in msDescripcion mediumtext, in msEstado tinyint(1), in msAlto int(3),in msAncho int(3),in msProfundo int(3),in msTiMId int(11)) 
+create procedure materialsecoMo(in mId int (11), in mNombre varchar(45), in mImagen mediumtext,in mDescripcion mediumtext, in mEstado tinyint(1), in mAlto int(3),in mAncho int(3),in mProfundo int(3),in mTiMId int(11)) 
 begin 
-update materialseco SET MsNombre=msNombre, MsImagen=msImagen,MsDescripcion=msDescripcion, MsEstado=msEstado,MsAlto=msAlto,MsAncho=msAncho,MsProfundo=msProfundo,TiMId=msTiMId where MsId=msId; 
+update materialseco SET MsNombre=mNombre, MsImagen=mImagen,MsDescripcion=mDescripcion, MsEstado=mEstado,MsAlto=mAlto,MsAncho=mAncho,MsProfundo=mProfundo,TiMId=mTiMId where MsId=mId; 
 end $$ 
 delimiter $$ 
 
@@ -1331,6 +1333,63 @@ begin
 delete from variedad where  VarId = rId;
 end $$
 delimiter $$
+
+
+ -- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla partes
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesIn (in ptNombre varchar(45),in ptDescripcion mediumtext)
+begin
+insert into partes (PrtNombre,PrtDescripcion) values (ptNombre,ptDescripcion);
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesMo (in ptId int(11), in ptNombre varchar(45),in ptDescripcion mediumtext)
+begin
+update partes SET PrtNombre=ptNombre,PrtDescripcion=ptDescripcion where prtId=ptId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Listar todos
+-- ----------------------------------------- ------------
+
+delimiter $$
+create procedure partesLi ()
+begin
+select prtId,PrtNombre,PrtDescripcion from partes;
+end $$
+delimiter $$
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesCo (in ptId INT)
+begin
+select prtId,PrtNombre,PrtDescripcion from partes where prtId = ptId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure partesEl (in ptId INT)
+begin
+delete from partes where  prtId = ptId;
+end $$
+delimiter $$
+
 
 
 
