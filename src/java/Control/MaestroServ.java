@@ -75,7 +75,7 @@ public class MaestroServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
@@ -89,7 +89,7 @@ public class MaestroServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
@@ -102,7 +102,7 @@ public class MaestroServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getMaestro().eliminar(Id);
@@ -111,13 +111,13 @@ public class MaestroServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         ma = Asql.getMaestro().obtener(Id);
                         Ses.setAttribute("Mae", m);
                         m.setMsj("Se ha obtenido el maestro con id: " + ma.getMaeId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
@@ -127,7 +127,7 @@ public class MaestroServ extends HttpServlet {
                 case "Listar":
                     //if (acc.isRpLeer()) {
                     List<MaestroTab> ml = Asql.getMaestro().listar();
-                    Ses.setAttribute("lisM", ml);
+                    Ses.setAttribute("lisMae", ml);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}

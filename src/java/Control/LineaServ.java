@@ -76,7 +76,7 @@ public class LineaServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         PosNombre = request.getParameter("PosNombre");
                         E = request.getParameter("Estado");
@@ -91,7 +91,7 @@ public class LineaServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         PosNombre = request.getParameter("PosNombre");
@@ -105,7 +105,7 @@ public class LineaServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getLinea().eliminar(Id);
@@ -114,13 +114,13 @@ public class LineaServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         l = Asql.getLinea().obtener(Id);
                         Ses.setAttribute("Lin", l);
                         m.setMsj("Se ha obtenido la linea con id: " + l.getLinId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

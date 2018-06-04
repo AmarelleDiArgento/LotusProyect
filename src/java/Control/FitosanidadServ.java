@@ -78,7 +78,7 @@ public class FitosanidadServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("FitNombre");
                         Descripcion = request.getParameter("FitDescripcion");
@@ -96,7 +96,7 @@ public class FitosanidadServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
@@ -113,7 +113,7 @@ public class FitosanidadServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getFitosanidad().eliminar(Id);
@@ -122,13 +122,13 @@ public class FitosanidadServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         f = Asql.getFitosanidad().obtener(Id);
                         Ses.setAttribute("Fit", f);
                         m.setMsj("Se ha obtenido la fitosanidad con id: " + f.getFitId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");

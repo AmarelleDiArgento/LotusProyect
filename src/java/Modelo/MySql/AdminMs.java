@@ -30,7 +30,6 @@ import Modelo.Interface.Grados;
 import Modelo.Interface.Linea;
 import Modelo.Interface.Maestro;
 import Modelo.Interface.Marcacion;
-import Modelo.Interface.FitoProducto;
 import Modelo.Interface.MaterialSeco;
 import Modelo.Interface.Partes;
 
@@ -68,7 +67,6 @@ public class AdminMs implements Admin {
     private Armado Arm = null;
     private AsignaPermiso AsgPer = null;
     private ControlCambios Cont = null;
-    private FitoProducto Fitp = null;
     private Fitosanidad Fit = null;
     private Grados Gra = null;
     private Linea Lin = null;
@@ -112,14 +110,6 @@ public class AdminMs implements Admin {
         return Cont;      
         
      }
-        
-    @Override
-        public FitoProducto getFitoProducto() {
-        if (Fitp == null) {
-            Fitp = new FitoProductoMs(con);
-        }
-        return Fitp;  
-    }  
         
   @Override
     public Fitosanidad getFitosanidad() {

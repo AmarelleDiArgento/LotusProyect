@@ -1,4 +1,5 @@
 
+<%@page import="Modelo.Tabs.TipoTab"%>
 <%@page import="Modelo.Tabs.MaterialSecoTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -12,7 +13,9 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisM") != null) {
+        if (Ses.getAttribute("lisMs") != null) {
+            if (Ses.getAttribute("lisT") != null) {
+                List<TipoTab> lisT = (List<TipoTab>) Ses.getAttribute("lisT");
 
 
 %>
@@ -49,22 +52,25 @@
 
 
             <%
-                List<MaterialSecoTab> LisM = (List<MaterialSecoTab>) Ses.getAttribute("lisM");
+                List<MaterialSecoTab> lisMs = (List<MaterialSecoTab>) Ses.getAttribute("lisMs");
             %>
             <table class="centered striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Descripcion</th>
                         <th>Estado</th>
+                        <th>Alto</th>
+                        <th>Ancho</th>
+                        <th>Profundo</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <% for (MaterialSecoTab mt : LisM) {%>
+                    <% for (MaterialSecoTab mt : lisMs) {%>
                     <tr>
                         <td><%=mt.getMsId()%></td>
                         <td><%=mt.getTipoMs_TimId()%></td>
@@ -72,8 +78,8 @@
                         <td><%=mt.getMsImagen()%></td>
                         <td><%=mt.getMsDescripcion()%></td>
                         <td><%=mt.getMsAlto()%></td>
-                          <td><%=mt.getMsAncho()%></td>
-                            <td><%=mt.getMsProfundo()%></td>
+                        <td><%=mt.getMsAncho()%></td>
+                        <td><%=mt.getMsProfundo()%></td>
                         <td>
                             <label>
                                 <input type="checkbox" <% if (mt.isMsEstado()) {%> checked="checked" <% }%> /> 
@@ -127,6 +133,16 @@
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo MaterialSeco</h4>
                     <p>Registra la informacion del nuevo MaterialSeco</p>
                     <div class="row">
+                        <div class="input-field col s4">
+                            <select name="ProId">>
+                                <option value="" disabled selected>Producto</option>
+                                <%                        for (TipoTab pl : lisT) {%>
+                                <option value="<%=pl.getTiMId()%>"><%=pl.getTiMNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Tipo</label>
+                        </div>
+                    <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -134,6 +150,29 @@
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
+                        </div>
+                        
+                        <div class="file-field input-field col s4">
+
+                            <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
+                       
+                        <div class="input-field col s6">
+                            <input id="Alto" type="number" name="Alto" class="validate" required="">
+                            <label for="Alto">Alto</label>
+                        </div>
+                        
+                        <div class="input-field col s6">
+                            <input id="Ancho" type="number" name="Ancho" class="validate" required="">
+                            <label for="Ancho">Ancho</label>
+                        </div>
+                        
+                         <div class="input-field col s6">
+                            <input id="Profundo" type="number" name="Profundo" class="validate" required="">
+                            <label for="Profundo">Profundo</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -157,14 +196,24 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Mat") != null) {
-                MaterialSecoTab mS = (MaterialSecoTab) Ses.getAttribute("Rol");
+                MaterialSecoTab mS = (MaterialSecoTab) Ses.getAttribute("Mat");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="materialsecos.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
-                    <p>Registra la informacion del nuevo Armado</p>
+                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Material Seco</h4>
+                    <p>Registra la informacion del nuevo Material Seco</p>
                     <div class="row">
+                        <div class="input-field col s4">
+                            <input id="Nombre" type="text" name="Id" class="validate" required value="<%=mS.getMsId()%>" hidden>
+                            <select name="TiMId">>
+                                <option value="" disabled >Tipo</option>
+                                <%                        for (TipoTab tl : lisT) {%>
+                                <option value="<%=tl.getTiMId()%>"  <%if (mS.getTiMId()==tl.getTiMId()) {%> selected <%}%> ><%=tl.getTiMNombre()%> </option>
+                                <%}%>
+                            </select>
+                            <label>Tipo Materialseco</label>
+                        </div>
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -173,6 +222,22 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
+                    
+                        <div class="input-field col s6">
+                            <input id="Alto" type="number" name="Alto" class="validate" required="">
+                            <label for="Alto">Alto</label>
+                        </div>
+                        
+                        <div class="input-field col s6">
+                            <input id="Ancho" type="number" name="Ancho" class="validate" required="">
+                            <label for="Ancho">Ancho</label>
+                        </div>
+                        
+                         <div class="input-field col s6">
+                            <input id="Profundo" type="number" name="Profundo" class="validate" required="">
+                            <label for="Profundo">Profundo</label>
+                        </div>
+                        
                         <div class="switch">
                             <label>
                                 Inactivo
@@ -223,7 +288,7 @@
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'materialsecos.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
@@ -271,11 +336,15 @@
 </html>
 <%
 
-    Ses.setAttribute("lisM", null);
+    } else {
+        response.sendRedirect("tipos.do?accion=Listar");
+}
+    Ses.setAttribute("lisMs", null);
     Ses.setAttribute("Mat", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
+
     <body onload="document.getElementById('lista').submit()">
         <form id="lista" action="materialsecos.do" method="post" >
             <input name="accion" value="Listar" hidden/>

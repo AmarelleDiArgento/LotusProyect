@@ -81,7 +81,7 @@ public class MaterialsecoServ extends HttpServlet {
         try {
             AdminMs Asql = new AdminMs(pool);
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("MsNombre");
                         Imagen = request.getParameter("MsImagen");
@@ -102,7 +102,7 @@ public class MaterialsecoServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpNuevo()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("MsNombre");
@@ -122,22 +122,22 @@ public class MaterialsecoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getRol().eliminar(Id);
+                        m = Asql.getMaterialSeco().eliminar(Id);
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         ms = Asql.getMaterialSeco().obtener(Id);
                         Ses.setAttribute("men", ms);
                         m.setMsj("Se ha obtenido el material seco con id: " + ms.getMsId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
@@ -154,7 +154,7 @@ public class MaterialsecoServ extends HttpServlet {
                     break;
 
                 default:
-                    ruta = "MaterialSeco.jsp";
+                    ruta = "materialSeco.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");

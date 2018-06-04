@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisM") != null) {
+        if (Ses.getAttribute("lisMae") != null) {
 
 
 %>
@@ -48,7 +48,7 @@
 
 
             <%
-                List<MaestroTab> LisM = (List<MaestroTab>) Ses.getAttribute("lisM");
+                List<MaestroTab> lisMae = (List<MaestroTab>) Ses.getAttribute("lisMae");
             %>
             <table class="centered striped">
                 <thead>
@@ -62,7 +62,7 @@
                 </thead>
 
                 <tbody>
-                    <% for (MaestroTab mt : LisM) {%>
+                    <% for (MaestroTab mt : lisMae) {%>
                     <tr>
                         <td><%=mt.getMaeId()%></td>
                         <td><%=mt.getMaeNombre()%></td>
@@ -243,7 +243,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisM", null);
+    Ses.setAttribute("lisMae", null);
     Ses.setAttribute("Mae", null);
     Ses.setAttribute("msj", null);
 } else {%>
