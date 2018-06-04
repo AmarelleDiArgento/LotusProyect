@@ -1,4 +1,5 @@
 
+<%@page import="Modelo.Tabs.MarcacionTab"%>
 <%@page import="Modelo.Tabs.MenuTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -13,6 +14,8 @@
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
         if (Ses.getAttribute("lisMen") != null) {
+            if (Ses.getAttribute("lisMar") != null) {
+                List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
 
 
 %>
@@ -130,6 +133,15 @@
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Menu</h4>
                     <p>Registra la informacion del nuevo Menu</p>
                     <div class="row">
+                        <div class="input-field col s4">
+                            <select name="MarId">>
+                                <option value="" disabled selected>Marcacion</option>
+                                <%  for (MarcacionTab ml : lisMar) {%>
+                                <option value="<%=ml.getMarId()%>"><%=ml.getMarNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Marcacion</label>
+                        </div>
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -143,10 +155,19 @@
                             <textarea id="Portada" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Portada">Portada</label>
                         </div>
+                         <div class="input-field col s12">
+                            <textarea id="Superior" class="materialize-textarea" name="Superior" class="validate" required></textarea>
+                            <label for="Superior">Superior</label>
+                         </div> 
                         <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                            <textarea id="Longitud" class="materialize-textarea" name="Longitud" class="validate" required></textarea>
+                            <label for="Longitud">Longitud</label>
                         </div>
+                        <div class="input-field col s12">
+                            <textarea id="Cauchos" class="materialize-textarea" name="Cauchos" class="validate" required></textarea>
+                            <label for="Cauchos">Cauchos</label>
+                        </div>
+                       
                         <div class="switch">
                             <label>
                                 Inactivo
@@ -169,7 +190,7 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Me") != null) {
-                MenuTab mS = (MenuTab) Ses.getAttribute("Rol");
+                MenuTab mS = (MenuTab) Ses.getAttribute("Menu");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="menus.do">
@@ -177,6 +198,16 @@
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Menu</h4>
                     <p>Registra la informacion del nuevo Menu</p>
                     <div class="row">
+                         <div class="input-field col s4">
+                            <input id="Nombre" type="text" name="Id" class="validate" required value="<%=mS.getId()%>" hidden>
+                            <select name="MarId">>
+                                <option value="" disabled >Marcacion</option>
+                                <%  for (MarcacionTab ml : lisMar) {%>
+                                <option value="<%=ml.getMarId()%>"  <%if (mS.getMarId()==ml.getMarId()) {%> selected <%}%> ><%=ml.getMarNombre()%> </option>
+                                <%}%>
+                            </select>
+                            <label>Marcacion</label>
+                        </div>
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -184,6 +215,23 @@
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
+                        </div>
+                           
+                            <div class="input-field col s12">
+                            <textarea id="Portada" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <label for="Portada">Portada</label>
+                        </div>
+                         <div class="input-field col s12">
+                            <textarea id="Superior" class="materialize-textarea" name="Superior" class="validate" required></textarea>
+                            <label for="Superior">Superior</label>
+                         </div> 
+                        <div class="input-field col s12">
+                            <textarea id="Longitud" class="materialize-textarea" name="Longitud" class="validate" required></textarea>
+                            <label for="Longitud">Longitud</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="Cauchos" class="materialize-textarea" name="Cauchos" class="validate" required></textarea>
+                            <label for="Cauchos">Cauchos</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -235,7 +283,7 @@
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
+                                        var url = 'menus.do';
                                         var form = $('<form action="' + url + '" method="get">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
@@ -282,6 +330,9 @@
     </body>
 </html>
 <%
+     } else {
+        response.sendRedirect("marcacions.do?accion=Listar");
+    }
 
     Ses.setAttribute("lisM", null);
     Ses.setAttribute("Me", null);

@@ -51,7 +51,7 @@
 
 
             <%
-                List<MarcacionTab> LisM = (List<MarcacionTab>) Ses.getAttribute("lisM");
+                List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
             %>
             <table class="centered striped">
                 <thead>
@@ -66,7 +66,7 @@
                 </thead>
 
                 <tbody>
-                    <% for (MarcacionTab mt : LisM) {%>
+                    <% for (MarcacionTab mt : lisMar) {%>
                     <tr>
                         <td><%=mt.getMarId()%></td>
                         <td><%=mt.getMarNombre()%></td>
@@ -101,7 +101,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Marcacion"><i class="material-icons">local_offer</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -123,17 +123,16 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">local_offer</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
-                         <div class="row">
+                    <div class="row">
                         <div class="input-field col s4">
                             <select name="ArmId">>
                                 <option value="" disabled selected>Armado</option>
-                                <%                        for (ArmadoTab pl :lisA) {%>
+                                <%                        for (ArmadoTab pl : lisA) {%>
                                 <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
                                 <%}%>
                             </select>
                             <label>Armado</label>
                         </div>
-                    <div class="row">
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
@@ -151,13 +150,13 @@
                             </label>
                         </div>
 
-                    </div>    
-                </div>
+                    </div>
+                    </div>
 
 
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
+                    <div class="modal-footer">
+                        <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    </div>
             </form>
         </div>
 
@@ -171,42 +170,42 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
-                    
+
                     <div class="row">
                         <div class="input-field col s4">
                             <select name="ArmId">>
                                 <option value="" disabled selected>Armado</option>
-                                <%                        for (ArmadoTab pl :lisA) {%>
+                                <%                        for (ArmadoTab pl : lisA) {%>
                                 <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
                                 <%}%>
                             </select>
                             <label>Armado</label>
                         </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                                <label for="Nombre">Nombre</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                                <label for="Descripcion">Descripción</label>
+                            </div>
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
-                    </div>    
-                </div>
+                        </div>    
+                    </div>
 
 
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
+                    <div class="modal-footer">
+                        <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    </div>
             </form>
         </div>
 
