@@ -42,6 +42,7 @@ public class PoscosechaServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
+        if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
@@ -68,7 +69,7 @@ public class PoscosechaServ extends HttpServlet {
         
          if (acc == null) {
             m.setTipo("Error");
-            m.setMsj("Permisos insuficientes");
+            m.setMsj("Poscosecha: Permisos insuficientes");
             m.setDetalles("No tienes permiso para ingresar a esta area");
             ruta = "main.jsp";
         }
@@ -171,10 +172,9 @@ public class PoscosechaServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
+    }
 
-        
-        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

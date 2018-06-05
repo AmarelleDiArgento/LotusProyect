@@ -232,7 +232,7 @@
                                     ;
                                     function consultar(id) {
                                         var url = 'rols.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');

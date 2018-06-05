@@ -388,7 +388,7 @@
                                     ;
                                     function consultar(id) {
                                         var url = 'usuarios.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="Cedula" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');

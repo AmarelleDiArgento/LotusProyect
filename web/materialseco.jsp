@@ -110,7 +110,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Materialseco"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -142,54 +142,54 @@
                             </select>
                             <label>Tipo</label>
                         </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
-                        
-                        <div class="file-field input-field col s4">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                                <label for="Nombre">Nombre</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                                <label for="Descripcion">Descripción</label>
+                            </div>
 
-                            <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
+                            <div class="file-field input-field col s4">
 
-                        </div>
-                       
-                        <div class="input-field col s6">
-                            <input id="Alto" type="number" name="Alto" class="validate" required="">
-                            <label for="Alto">Alto</label>
-                        </div>
-                        
-                        <div class="input-field col s6">
-                            <input id="Ancho" type="number" name="Ancho" class="validate" required="">
-                            <label for="Ancho">Ancho</label>
-                        </div>
-                        
-                         <div class="input-field col s6">
-                            <input id="Profundo" type="number" name="Profundo" class="validate" required="">
-                            <label for="Profundo">Profundo</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+                                <i class="material-icons prefix">image</i>
+                                <input type="file" name="image">
+                                <input class="file-path validate" name ="Archivo" type="text">
 
-                    </div>    
-                </div>
+                            </div>
+
+                            <div class="input-field col s6">
+                                <input id="Alto" type="number" name="Alto" class="validate" required="">
+                                <label for="Alto">Alto</label>
+                            </div>
+
+                            <div class="input-field col s6">
+                                <input id="Ancho" type="number" name="Ancho" class="validate" required="">
+                                <label for="Ancho">Ancho</label>
+                            </div>
+
+                            <div class="input-field col s6">
+                                <input id="Profundo" type="number" name="Profundo" class="validate" required="">
+                                <label for="Profundo">Profundo</label>
+                            </div>
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
+
+                        </div>    
+                    </div>
 
 
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
+                    <div class="modal-footer">
+                        <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    </div>
             </form>
         </div>
 
@@ -209,7 +209,7 @@
                             <select name="TiMId">>
                                 <option value="" disabled >Tipo</option>
                                 <%                        for (TipoTab tl : lisT) {%>
-                                <option value="<%=tl.getTiMId()%>"  <%if (mS.getTiMId()==tl.getTiMId()) {%> selected <%}%> ><%=tl.getTiMNombre()%> </option>
+                                <option value="<%=tl.getTiMId()%>"  <%if (mS.getMsId() == tl.getTiMId()) {%> selected <%}%> ><%=tl.getTiMNombre()%> </option>
                                 <%}%>
                             </select>
                             <label>Tipo Materialseco</label>
@@ -222,22 +222,22 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                    
+
                         <div class="input-field col s6">
                             <input id="Alto" type="number" name="Alto" class="validate" required="">
                             <label for="Alto">Alto</label>
                         </div>
-                        
+
                         <div class="input-field col s6">
                             <input id="Ancho" type="number" name="Ancho" class="validate" required="">
                             <label for="Ancho">Ancho</label>
                         </div>
-                        
-                         <div class="input-field col s6">
+
+                        <div class="input-field col s6">
                             <input id="Profundo" type="number" name="Profundo" class="validate" required="">
                             <label for="Profundo">Profundo</label>
                         </div>
-                        
+
                         <div class="switch">
                             <label>
                                 Inactivo
@@ -282,14 +282,14 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'materialsecos.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
                                         var url = 'materialsecos.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
@@ -338,7 +338,7 @@
 
     } else {
         response.sendRedirect("tipos.do?accion=Listar");
-}
+    }
     Ses.setAttribute("lisMs", null);
     Ses.setAttribute("Mat", null);
     Ses.setAttribute("msj", null);

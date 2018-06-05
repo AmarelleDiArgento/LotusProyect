@@ -42,17 +42,23 @@ public class PermisoServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
+        if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+        if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "permiso.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
         UsuarioTab uSes = (UsuarioTab) Ses.getAttribute("log");
-        /*
+
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
@@ -60,12 +66,13 @@ public class PermisoServ extends HttpServlet {
                 acc = a;
             }
         }
-         */
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "permiso.jsp";
+        if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permiso: Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+
         PermisoTab p = null;
         int Id;
         String Nombre;
@@ -188,6 +195,9 @@ public class PermisoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
+    }
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

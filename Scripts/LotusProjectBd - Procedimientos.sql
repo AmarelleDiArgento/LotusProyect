@@ -278,7 +278,7 @@ delimiter $$
 delimiter $$
 create procedure AsgPerLi (in apRol int(11))
 begin
-Select ap.RolId, r.RolNombre, ap.PerId, p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
+Select ap.RolId, p.PerModulo, r.RolNombre, ap.PerId, p.PerNombre, ap.rolperLeer ,ap.rolperNuevo ,ap.rolperEditar ,ap.rolperEliminar
 from rol as r
 inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId

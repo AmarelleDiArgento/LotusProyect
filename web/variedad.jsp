@@ -271,7 +271,7 @@
                                     ;
                                     function consultar(id) {
                                         var url = 'variedads.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
@@ -390,6 +390,7 @@
     } else {
         response.sendRedirect("productos.do?accion=Listar");
     }
+    Ses.setAttribute("lisPro", null);
     Ses.setAttribute("lisV", null);
     Ses.setAttribute("Var", null);
     Ses.setAttribute("msj", null);

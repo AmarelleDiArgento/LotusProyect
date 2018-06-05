@@ -42,14 +42,15 @@ public class FitosanidadServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
+        if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
-        
-         if (Ses.getAttribute("jsp") != null) {
+
+        if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "fitosanidad.jsp";
@@ -65,10 +66,10 @@ public class FitosanidadServ extends HttpServlet {
                 acc = a;
             }
         }
-        
+
         if (acc == null) {
             m.setTipo("Error");
-            m.setMsj("Permisos insuficientes");
+            m.setMsj("Fitosanidad: Permisos insuficientes");
             m.setDetalles("No tienes permiso para ingresar a esta area");
             ruta = "main.jsp";
         }
@@ -94,12 +95,14 @@ public class FitosanidadServ extends HttpServlet {
                         Imagen = request.getParameter("FitImagen");
                         E = request.getParameter("FitEstado");
                         Estado = E.equals("on");
-                        f = new FitosanidadTab(Nombre, Descripcion,Tipo,Imagen,Estado);
+                        f = new FitosanidadTab(Nombre, Descripcion, Tipo, Imagen, Estado);
                         m = Asql.getFitosanidad().insertar(f);
 
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer registros");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para hacer registros");
+                        ruta = "main.jsp";
                     }
 
                     break;
@@ -113,12 +116,14 @@ public class FitosanidadServ extends HttpServlet {
                         Imagen = request.getParameter("FitImagen");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        f = new FitosanidadTab(Id,Nombre, Descripcion,Tipo,Imagen,Estado);
+                        f = new FitosanidadTab(Id, Nombre, Descripcion, Tipo, Imagen, Estado);
                         m = Asql.getFitosanidad().modificar(f);
 
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer modificaciones");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para hacer modificaciones");
+                        ruta = "main.jsp";
                     }
                     break;
                 case "Eliminar":
@@ -127,7 +132,9 @@ public class FitosanidadServ extends HttpServlet {
                         m = Asql.getFitosanidad().eliminar(Id);
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para eliminar registros");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para eliminar registros");
+                        ruta = "main.jsp";
                     }
                     break;
                 case "Obtener":
@@ -139,21 +146,29 @@ public class FitosanidadServ extends HttpServlet {
                         m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para consultar registros");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para consultar registros");
+                        ruta = "main.jsp";
                     }
 
                     break;
                 case "Listar":
-                    //if (acc.isRpLeer()) {
-                    List<FitosanidadTab> fl = Asql.getFitosanidad().listar();
-                    Ses.setAttribute("lisF", fl);
-                    //} else {
-                    // msj = "No tienes permisos para consultar registros";
-                    //}
+                    if (acc.isRpLeer()) {
+                        List<FitosanidadTab> fl = Asql.getFitosanidad().listar();
+                        Ses.setAttribute("lisF", fl);
+                    } else {
+                        m.setTipo("Error");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para consultar registros");
+                        ruta = "main.jsp";
+                    }
                     break;
 
                 default:
-                    ruta = "fitosanidad.jsp";
+                    m.setTipo("Error");
+                    m.setMsj("Permisos insuficientes");
+                    m.setDetalles("No tienes permiso para ingresar a esta area");
+                    ruta = "main.jsp";
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
@@ -174,10 +189,9 @@ public class FitosanidadServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
+    }
 
-        
-        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

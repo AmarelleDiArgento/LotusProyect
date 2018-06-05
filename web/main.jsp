@@ -7,8 +7,8 @@
     String jsp = "main.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
-    Mensajes msj = null;
 
+    Mensajes msj = new Mensajes();
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
 
@@ -23,6 +23,12 @@
         <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+
+        <meta http-equiv="Expires" content="0">
+        <meta http-equiv="Last-Modified" content="0">
+        <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+        <meta http-equiv="Pragma" content="no-cache">
 
     </head>
     <body
@@ -56,10 +62,10 @@
             </div>
 
 
-            
-                <%--<a href="test.jsp">Test</a>--%>
 
-            
+            <%--<a href="test.jsp">Test</a>--%>
+
+
 
             <footer class="footer">
                 <div>
@@ -123,6 +129,10 @@
 </html>
 <%
     } else {
+
+        if (msj.getTipo() != null) {
+            Ses.setAttribute("msj", msj);
+        }
         response.sendRedirect("index.jsp");
     }
 %>

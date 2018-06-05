@@ -43,12 +43,12 @@ call LotusProject.permisoIn('Armado', 'Armado', 'Permisos de armado', 'armado.js
 call LotusProject.permisoIn('Parametro', 'Producto', 'Permisos de parametros', 'parametros.jsp', 'tune', 1);
 call LotusProject.permisoIn('Variedad', 'Producto', 'Permisos de variedad', 'variedad.jsp', 'filter_vintage', 1);
 call LotusProject.permisoIn('Grado', 'Producto', 'Permisos de grado', 'grados.jsp', 'blur_linear', 1);
-call LotusProject.permisoIn('Parte', 'Producto', 'Permisos para parte', 'partes.jsp', 'blur_linear', 1);
+call LotusProject.permisoIn('Parte', 'Producto', 'Permisos para parte', 'partes.jsp', 'flip', 1);
 call LotusProject.permisoIn('Material Seco', 'Marcacion', 'Permisos para materiales secos', 'materialseco.jsp', 'style', 1);
 call LotusProject.permisoIn('Fitosanidad', 'Producto', 'Permisos para fitosanidad', 'fitosanidad.jsp', 'bug_report', 1);
 call LotusProject.permisoIn('Linea', 'Poscosecha', 'Permisos para linea', 'linea.jsp', 'label_outline', 1);
 call LotusProject.permisoIn('Producto maestro', 'Producto', 'Permisos para producto maestro', 'maestro.jsp', 'vpn_key', 1);
-call LotusProject.permisoIn('Menu', 'Marcación', 'Permisos de menu', 'menu.jsp', 'loyalty', 1);
+call LotusProject.permisoIn('Menú', 'Marcación', 'Permisos de menu', 'menu.jsp', 'loyalty', 1);
 call LotusProject.permisoIn('Parametros', 'Producto', 'Permisos para ajuste de parametros', 'parametros.jsp', 'tune', 1);
 call LotusProject.permisoIn('Paso', 'Armado', 'Permisos para ajuste de pasos', 'paso.jsp', 'plus_one', 1);
 

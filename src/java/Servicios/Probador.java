@@ -130,10 +130,10 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            List<AsignaPermisoTab> ap = Asql.getAsignaPer().listar(1);
+            List<AsignaPermisoTab> ap = Asql.getAsignaPer().listar(2);
             for (AsignaPermisoTab lp : ap) {
                 if (lp.getnPermiso().equalsIgnoreCase("Parte")) {
-                    //System.out.println(ap.toString());
+                    System.out.println(ap.toString());
                 }
             }
 

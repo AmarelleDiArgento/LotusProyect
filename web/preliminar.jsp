@@ -70,7 +70,7 @@
                         <td><%=pt.getPoscosecha_Posnombre()%></td>
                         <td>
                             <label>
-                                <input type="checkbox" <% if (pt.isEstado()) {%> checked="checked" <% }%> /> 
+                                <input type="checkbox" <% if (pt.isPreEstado()) {%> checked="checked" <% }%> /> 
                                 <span></span>
                             </label>
                         </td>
@@ -211,14 +211,14 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'preliminars.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'rols.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var url = 'preliminars.do';
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');

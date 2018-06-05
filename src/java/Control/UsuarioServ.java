@@ -52,145 +52,147 @@ public class UsuarioServ extends HttpServlet {
         }
 
         String ruta;
-
-        //if (Ses.getAttribute("log") != null) {
-        String Accion = request.getParameter("accion");
-
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "usuario.jsp";
         }
 
-        UsuarioTab u = null;
-        AdminFile af = new AdminFile();
+        String Accion = request.getParameter("accion");
 
-        String Cedula;
-        String Nombre;
-        String Apellido;
-        String Usuario;
-        String Password;
-        String Extencion;
-        String Celular;
-        String Email;
-        String Genero;
-        String Url;
-        String Avatar;
-        Boolean Estado;
-        int RolId;
-        String nRol;
+        if (Ses.getAttribute("log") != null || Accion.equalsIgnoreCase("Ingresar")) {
 
-        try {
-            AdminMs Asql = new AdminMs(pool);
+            UsuarioTab u = null;
+            AdminFile af = new AdminFile();
 
-            switch (Accion) {
-                case "Registrar":
-                    Cedula = request.getParameter("Cedula");
-                    Nombre = request.getParameter("Nombre");
-                    Apellido = request.getParameter("Apellido");
-                    Usuario = request.getParameter("Usuario");
-                    Password = request.getParameter("Password");
-                    Extencion = request.getParameter("Extencion");
-                    Celular = request.getParameter("Celular");
-                    Email = request.getParameter("Email");
-                    Genero = request.getParameter("Genero");
-                    Estado = request.getParameter("Estado") != null;
-                    RolId = Integer.parseInt(request.getParameter("Rol"));
-                    if (Genero.equalsIgnoreCase("M")) {
-                        Url = "img/Usuario/Usuario.png";
-                    } else {
-                        Url = "img/Usuario/Usuaria.png";
-                    }
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Url, Estado, RolId);
-                    m = Asql.getUsuario().insertar(u);
+            String Cedula;
+            String Nombre;
+            String Apellido;
+            String Usuario;
+            String Password;
+            String Extencion;
+            String Celular;
+            String Email;
+            String Genero;
+            String Url;
+            String Avatar;
+            Boolean Estado;
+            int RolId;
+            String nRol;
 
-                    break;
+            try {
+                AdminMs Asql = new AdminMs(pool);
 
-                case "Modificar":
-                    Cedula = request.getParameter("Cedula");
-                    Nombre = request.getParameter("Nombre");
-                    Apellido = request.getParameter("Apellido");
-                    Usuario = request.getParameter("Usuario");
-                    Extencion = request.getParameter("Extencion");
-                    Celular = request.getParameter("Celular");
-                    Email = request.getParameter("Email");
-                    Genero = request.getParameter("Genero");
-                    Estado = request.getParameter("Estado") != null;
-                    RolId = Integer.parseInt(request.getParameter("Rol"));
-                    u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Extencion, Celular, Email, Genero, Estado, RolId);
-                    m = Asql.getUsuario().modificar(u);
-                    
-                    break;
+                switch (Accion) {
+                    case "Registrar":
+                        Cedula = request.getParameter("Cedula");
+                        Nombre = request.getParameter("Nombre");
+                        Apellido = request.getParameter("Apellido");
+                        Usuario = request.getParameter("Usuario");
+                        Password = request.getParameter("Password");
+                        Extencion = request.getParameter("Extencion");
+                        Celular = request.getParameter("Celular");
+                        Email = request.getParameter("Email");
+                        Genero = request.getParameter("Genero");
+                        Estado = request.getParameter("Estado") != null;
+                        RolId = Integer.parseInt(request.getParameter("Rol"));
+                        if (Genero.equalsIgnoreCase("M")) {
+                            Url = "img/Usuario/Usuario.png";
+                        } else {
+                            Url = "img/Usuario/Usuaria.png";
+                        }
+                        u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Password, Extencion, Celular, Email, Genero, Url, Estado, RolId);
+                        m = Asql.getUsuario().insertar(u);
 
-                case "Eliminar":
-                    Cedula = request.getParameter("Id");
-                    m = Asql.getUsuario().eliminar(Cedula);
-                    break;
+                        break;
 
-                case "Obtener":
-                    Cedula = request.getParameter("Cedula");
-                    u = Asql.getUsuario().obtener(Cedula);
-                    Ses.setAttribute("Usu", u);
-                    m.setTipo("Mod");
-                    break;
+                    case "Modificar":
+                        Cedula = request.getParameter("Cedula");
+                        Nombre = request.getParameter("Nombre");
+                        Apellido = request.getParameter("Apellido");
+                        Usuario = request.getParameter("Usuario");
+                        Extencion = request.getParameter("Extencion");
+                        Celular = request.getParameter("Celular");
+                        Email = request.getParameter("Email");
+                        Genero = request.getParameter("Genero");
+                        Estado = request.getParameter("Estado") != null;
+                        RolId = Integer.parseInt(request.getParameter("Rol"));
+                        u = new UsuarioTab(Cedula, Nombre, Apellido, Usuario, Extencion, Celular, Email, Genero, Estado, RolId);
+                        m = Asql.getUsuario().modificar(u);
 
-                case "Listar":
-                    List<UsuarioTab> ul = Asql.getUsuario().listar();
-                    Ses.setAttribute("lisU", ul);
-                    break;
+                        break;
 
-                case "Ingresar":
-                    Usuario = request.getParameter("Usuario");
-                    Password = request.getParameter("Password");
-                    UsuarioTab Us = Asql.getUsuario().login(Usuario, Password);
-                    if (Us != null) {
-                        Ses.setAttribute("log", Us);
-                        ruta = "asignapers.do?accion=session";
-                    } else {
-                        m.setDetalles("Usuario o contraseña invalidos");
-                        m.setMsj("Error de usuario");
+                    case "Eliminar":
+                        Cedula = request.getParameter("Id");
+                        m = Asql.getUsuario().eliminar(Cedula);
+                        break;
+
+                    case "Obtener":
+                        Cedula = request.getParameter("Cedula");
+                        u = Asql.getUsuario().obtener(Cedula);
+                        Ses.setAttribute("Usu", u);
+                        m.setTipo("Mod");
+                        break;
+
+                    case "Listar":
+                        List<UsuarioTab> ul = Asql.getUsuario().listar();
+                        Ses.setAttribute("lisU", ul);
+                        break;
+
+                    case "Ingresar":
+                        Usuario = request.getParameter("Usuario");
+                        Password = request.getParameter("Password");
+                        UsuarioTab Us = Asql.getUsuario().login(Usuario, Password);
+                        if (Us != null) {
+                            Ses.setAttribute("log", Us);
+                            ruta = "asignapers.do?accion=session";
+                        } else {
+                            m.setDetalles("Usuario o contraseña invalidos");
+                            m.setMsj("Error de usuario");
+                            m.setTipo("Error");
+                            ruta = "index.jsp";
+                        }
+                        break;
+
+                    case "Cargar":
+                        Usuario = request.getParameter("Usuario");
+                        Part arc = request.getPart("IMG");
+                        String extension = "";
+
+                        int i = arc.getSubmittedFileName().lastIndexOf('.');
+                        if (i >= 0) {
+                            extension = arc.getSubmittedFileName().substring(i + 1);
+                        }
+                        Url = "img/Usuario/";
+                        Avatar = Usuario + "." + extension;
+                        m = af.subirImg(arc, Url, Avatar);
+                        break;
+
+                    default:
                         m.setTipo("Error");
-                        ruta = "index.jsp";
-                    }
-                    break;
+                        m.setMsj("Error desconocido");
+                        m.setDetalles("No se que paso o_oU");
 
-                case "Cargar":
-                    Usuario = request.getParameter("Usuario");
-                    Part arc = request.getPart("IMG");
-                    String extension = "";
+                }
+            } catch (SQLException ex) {
+                m.setTipo("Error");
+                m.setMsj("MySql Servlet Error");
+                m.setDetalles("Detalles" + ex);
 
-                    int i = arc.getSubmittedFileName().lastIndexOf('.');
-                    if (i >= 0) {
-                        extension = arc.getSubmittedFileName().substring(i + 1);
-                    }
-                    Url = "img/Usuario/";
-                    Avatar = Usuario + "." + extension;
-                    m = af.subirImg(arc, Url, Avatar);
-                    break;
-
-                default:
-                    m.setTipo("Error");
-                    m.setMsj("Error desconocido");
-                    m.setDetalles("No se que paso o_oU");
+            } catch (Exception ex) {
+                m.setTipo("Error");
+                m.setMsj("Error Servlet");
+                m.setDetalles("Detalles " + ex);
 
             }
-        } catch (SQLException ex) {
-            m.setTipo("Error");
-            m.setMsj("MySql Servlet Error");
-            m.setDetalles("Detalles" + ex);
+            if (m.getTipo() != null) {
+                Ses.setAttribute("msj", m);
+            }
 
-        } catch (Exception ex) {
-            m.setTipo("Error");
-            m.setMsj("Error Servlet");
-            m.setDetalles("Detalles " + ex);
-
-        }
-        if (m.getTipo() != null) {
-            Ses.setAttribute("msj", m);
+            request.getRequestDispatcher(ruta).forward(request, response);
         }
 
-        request.getRequestDispatcher(ruta).forward(request, response);
-
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

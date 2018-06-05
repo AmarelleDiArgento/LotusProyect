@@ -235,14 +235,14 @@
                             })
                                     .then((willDelete) => {
                                         if (willDelete) {
-                                            window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                            window.location = 'productos.do?accion=Eliminar&Id=' + id;
                                         }
                                     });
                         }
                         ;
                         function consultar(id) {
-                            var url = 'rols.do';
-                            var form = $('<form action="' + url + '" method="get">' +
+                            var url = 'productos.do';
+                            var form = $('<form action="' + url + '" method="Post">' +
                                     '<input type="text" name="id" value="' + id + '" hidden/>' +
                                     '<input type="text" name="accion" value="Obtener" hidden/>' +
                                     '</form>');

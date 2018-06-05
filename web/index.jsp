@@ -20,6 +20,12 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 
+        <meta http-equiv="Expires" content="0">
+        <meta http-equiv="Last-Modified" content="0">
+        <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+
+
     </head>
     <body
         <%        if (Ses.getAttribute("msj") != null) {
@@ -124,13 +130,15 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="js/sweetalert.min.js"></script>
-    <%
-        if (msj != null) {
-    %>
+
     <script type="text/javascript">
 
+
+
+        <% if (msj != null) {%>
+
         <%if (msj.getTipo().equals("Error")) {%>
-        function msjError(Msj) {
+        function msjError() {
             swal({
                 title: "<%=msj.getMsj()%>",
                 text: "<%=msj.getDetalles()%>",
@@ -138,42 +146,24 @@
             });
         }
         ;
-        <% } else if (msj.getTipo().equals("Conf")) {
 
-        %>
-        function msjConf(id)
-        {
-            swal({
-                title: "¿Estas seguro?",
-                text: "Se eliminara el registro con el ID: " + id,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            window.location = 'usuarios.do?accion=Eliminar&Id=' + id;
-                        }
-                    });
-        }
-        ;
+
+
+
         <%} else if (msj.getTipo().equals("Ok")) {%>
-        function msjMsj()
-        {
+        function msjOk() {
             swal({
-
-                title: "¡Excelente!",
-                text: "<%=msj.getMsj()%>",
+                title: "<%=msj.getMsj()%>",
+                text: "<%=msj.getDetalles()%>",
                 icon: "success"
             });
         }
         ;
-        <%}%>
-    </script>
-    <%
+        <%
+                }
+            }
+        %>
 
-            Ses.setAttribute("msj", null);
-        }
-    %>
+    </script>
 
 </html>

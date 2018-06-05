@@ -232,7 +232,7 @@
                                     ;
                                     function consultar(id) {
                                         var url = 'poscosechas.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');

@@ -41,12 +41,19 @@ public class RolServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
+        if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+
+        if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "rol.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
@@ -59,11 +66,13 @@ public class RolServ extends HttpServlet {
             }
         }
 
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "rol.jsp";
+        if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Fitosanidad: Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+
         RolTab r = null;
         int Id;
         String Nombre;
@@ -86,7 +95,9 @@ public class RolServ extends HttpServlet {
                         }
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer registros");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para hacer registros");
+                        ruta = "main.jsp";
                     }
 
                     break;
@@ -102,7 +113,9 @@ public class RolServ extends HttpServlet {
 
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer modificaciones");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para hacer modificaciones");
+                        ruta = "main.jsp";
                     }
                     break;
                 case "Eliminar":
@@ -111,11 +124,13 @@ public class RolServ extends HttpServlet {
                         m = Asql.getRol().eliminar(Id);
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para eliminar registros");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para eliminar registros");
+                        ruta = "main.jsp";
                     }
                     break;
                 case "Obtener":
-                    if (acc.isRpLeer()) {
+                    if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         r = Asql.getRol().obtener(Id);
                         Ses.setAttribute("Rol", r);
@@ -124,17 +139,23 @@ public class RolServ extends HttpServlet {
                         m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
-                        m.setMsj("No tienes permisos para consultar registros");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para editar registros");
+                        ruta = "main.jsp";
                     }
 
                     break;
                 case "Listar":
-                    //if (acc.isRpLeer()) {
-                    List<RolTab> rl = Asql.getRol().listar();
-                    Ses.setAttribute("lisR", rl);
-                    //} else {
-                    // msj = "No tienes permisos para consultar registros";
-                    //}
+                    if (acc.isRpLeer()) {
+                        List<RolTab> rl = Asql.getRol().listar();
+                        Ses.setAttribute("lisR", rl);
+                    } else {
+                        m.setTipo("Error");
+                        m.setMsj("Permisos insuficientes");
+                        m.setDetalles("No tienes permisos para consultar registros");
+                        ruta = "main.jsp";
+
+                    }
                     break;
 
                 default:
@@ -159,6 +180,9 @@ public class RolServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
+    }
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

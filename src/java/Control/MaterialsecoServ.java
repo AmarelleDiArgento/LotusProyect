@@ -42,6 +42,7 @@ public class MaterialsecoServ extends HttpServlet {
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
+        if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
@@ -60,7 +61,7 @@ public class MaterialsecoServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Materialseco")) {
+            if (a.getnPermiso().equalsIgnoreCase("Material Seco")) {
                 acc = a;
             }
         }
@@ -181,10 +182,9 @@ public class MaterialsecoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
+    }
 
-        
-        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

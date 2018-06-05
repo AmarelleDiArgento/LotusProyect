@@ -42,125 +42,125 @@ public class ControlCambiosServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
+        if (Ses.getAttribute("log") != null) {
 
-        Mensajes m = new Mensajes();
-        if (Ses.getAttribute("msj") != null) {
-            m = (Mensajes) Ses.getAttribute("msj");
-        }
-        String ruta;
-
-        //if (Ses.getAttribute("log") != null) {
-        String Accion = request.getParameter("accion");
-
-        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
-        AsignaPermisoTab acc = null;
-        for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
-                acc = a;
+            Mensajes m = new Mensajes();
+            if (Ses.getAttribute("msj") != null) {
+                m = (Mensajes) Ses.getAttribute("msj");
             }
-        }
+            String ruta;
 
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "rol.jsp";
-        }
-        ControlCambioTab c = null;
-        int CCId;
-        String CCAntes;
-        String CCDespues;
-        String CCUsuarios;
+            //if (Ses.getAttribute("log") != null) {
+            String Accion = request.getParameter("accion");
 
-        try {
-            AdminMs Asql = new AdminMs(pool);
-
-            switch (Accion) {
-                case "Insertar":
-                    if (acc.isRpNuevo()) {
-                        CCAntes = request.getParameter("Antes");
-                        CCDespues = request.getParameter("Despues");
-                        CCUsuarios = request.getParameter("Usuarios");
-                        c = new ControlCambioTab(CCAntes, CCDespues,CCUsuarios);
-                        m = Asql.getControlCambios().insertar(c);
-
-                    } else {
-                        m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer registros");
-                    }
-
-                    break;
-
-                case "Modificar":
-                    if (acc.isRpEditar()) {
-                        CCId = Integer.parseInt(request.getParameter("Id"));
-                        CCAntes = request.getParameter("Antes");
-                        CCDespues = request.getParameter("Despues");
-                        CCUsuarios = request.getParameter("Usuarios");
-                        c = new ControlCambioTab(CCAntes, CCDespues,CCUsuarios);
-                        m = Asql.getControlCambios().modificar(c);
-
-                    } else {
-                        m.setTipo("Error");
-                        m.setMsj("No tienes permisos para hacer modificaciones");
-                    }
-                    break;
-                case "Eliminar":
-                    if (acc.isRpEliminar()) {
-                        CCId = Integer.parseInt(request.getParameter("Id"));
-                        m = Asql.getControlCambios().eliminar(CCId);
-                    } else {
-                        m.setTipo("Error");
-                        m.setMsj("No tienes permisos para eliminar registros");
-                    }
-                    break;
-                case "Obtener":
-                    if (acc.isRpLeer()) {
-                        CCId = Integer.parseInt(request.getParameter("Id"));
-                        c = Asql.getControlCambios().obtener(CCId);
-                        Ses.setAttribute("Cont", c);
-                        m.setMsj("Se ha obtenido el ControlCambios con id: " + c.getCCId());
-                        m.setTipo("Mod");
-                    } else {
-                        m.setTipo("Error");
-                        m.setMsj("No tienes permisos para consultar registros");
-                    }
-
-                    break;
-                case "Listar":
-                    //if (acc.isRpLeer()) {
-                    List<ControlCambioTab> cl = Asql.getControlCambios().listar();
-                    Ses.setAttribute("lisC", cl);
-                    //} else {
-                    // msj = "No tienes permisos para consultar registros";
-                    //}
-                    break;
-
-                default:
-                    ruta = "ControlCambios.jsp";
+            List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+            AsignaPermisoTab acc = null;
+            for (AsignaPermisoTab a : ap) {
+                if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+                    acc = a;
+                }
             }
-        } catch (SQLException ex) {
-            m.setTipo("Error");
-            m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
 
-        } catch (Exception ex) {
-            m.setTipo("Error");
-            m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            if (Ses.getAttribute("jsp") != null) {
+                ruta = (String) Ses.getAttribute("jsp");
+            } else {
+                ruta = "rol.jsp";
+            }
+            ControlCambioTab c = null;
+            int CCId;
+            String CCAntes;
+            String CCDespues;
+            String CCUsuarios;
 
+            try {
+                AdminMs Asql = new AdminMs(pool);
+
+                switch (Accion) {
+                    case "Insertar":
+                        if (acc.isRpNuevo()) {
+                            CCAntes = request.getParameter("Antes");
+                            CCDespues = request.getParameter("Despues");
+                            CCUsuarios = request.getParameter("Usuarios");
+                            c = new ControlCambioTab(CCAntes, CCDespues, CCUsuarios);
+                            m = Asql.getControlCambios().insertar(c);
+
+                        } else {
+                            m.setTipo("Error");
+                            m.setMsj("No tienes permisos para hacer registros");
+                        }
+
+                        break;
+
+                    case "Modificar":
+                        if (acc.isRpEditar()) {
+                            CCId = Integer.parseInt(request.getParameter("Id"));
+                            CCAntes = request.getParameter("Antes");
+                            CCDespues = request.getParameter("Despues");
+                            CCUsuarios = request.getParameter("Usuarios");
+                            c = new ControlCambioTab(CCAntes, CCDespues, CCUsuarios);
+                            m = Asql.getControlCambios().modificar(c);
+
+                        } else {
+                            m.setTipo("Error");
+                            m.setMsj("No tienes permisos para hacer modificaciones");
+                        }
+                        break;
+                    case "Eliminar":
+                        if (acc.isRpEliminar()) {
+                            CCId = Integer.parseInt(request.getParameter("Id"));
+                            m = Asql.getControlCambios().eliminar(CCId);
+                        } else {
+                            m.setTipo("Error");
+                            m.setMsj("No tienes permisos para eliminar registros");
+                        }
+                        break;
+                    case "Obtener":
+                        if (acc.isRpLeer()) {
+                            CCId = Integer.parseInt(request.getParameter("Id"));
+                            c = Asql.getControlCambios().obtener(CCId);
+                            Ses.setAttribute("Cont", c);
+                            m.setMsj("Se ha obtenido el ControlCambios con id: " + c.getCCId());
+                            m.setTipo("Mod");
+                        } else {
+                            m.setTipo("Error");
+                            m.setMsj("No tienes permisos para consultar registros");
+                        }
+
+                        break;
+                    case "Listar":
+                        //if (acc.isRpLeer()) {
+                        List<ControlCambioTab> cl = Asql.getControlCambios().listar();
+                        Ses.setAttribute("lisC", cl);
+                        //} else {
+                        // msj = "No tienes permisos para consultar registros";
+                        //}
+                        break;
+
+                    default:
+                        ruta = "ControlCambios.jsp";
+                }
+            } catch (SQLException ex) {
+                m.setTipo("Error");
+                m.setMsj("MySql Error");
+                m.setDetalles("Detalles" + ex.getMessage());
+
+            } catch (Exception ex) {
+                m.setTipo("Error");
+                m.setMsj("Error");
+                m.setDetalles("Detalles" + ex.getMessage());
+
+            }
+            //}else{
+            //    ruta = "index.jsp";
+            //    msj = "No has iniciado sesión";
+            //}
+            if (m.getTipo() != null) {
+                Ses.setAttribute("msj", m);
+            }
+            request.getRequestDispatcher(ruta).forward(request, response);
         }
-        //}else{
-        //    ruta = "index.jsp";
-        //    msj = "No has iniciado sesión";
-        //}
-        if (m.getTipo() != null) {
-            Ses.setAttribute("msj", m);
-        }
-        request.getRequestDispatcher(ruta).forward(request, response);
-    
 
-        
-        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

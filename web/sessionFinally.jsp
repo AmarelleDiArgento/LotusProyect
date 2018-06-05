@@ -4,6 +4,7 @@
     Author     : Freyd
 --%>
 
+<%@page import="Servicios.Mensajes"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,8 +15,15 @@
     <body>
         <h1>Hello World!</h1>
         <%
-        session.invalidate();
-        response.sendRedirect("index.jsp"); 
+            session.invalidate();
+            
+            Mensajes m = new Mensajes();
+            m.setTipo("Msj");
+            m.setMsj("Vuelve pronto");
+            HttpSession Ses = request.getSession(true);
+            Ses.setAttribute("msj", m);
+            response.sendRedirect("index.jsp");
+
         %> 
     </body>
 </html>
