@@ -11,8 +11,8 @@ import java.io.Serializable;
  *
  * @author ALEJANDRA MEDINA
  */
-public class MarcacionTab implements Serializable{
-    
+public class MarcacionTab implements Serializable {
+
     private int MarId;
     private String MarNombre;
     private String MarPortada;
@@ -20,29 +20,30 @@ public class MarcacionTab implements Serializable{
     private int ArmId;
     private String ArmNombre;
 
-    public MarcacionTab(int MarId, String MarNombre, String MarPortada,String ArmNombre, Boolean MarEstado) {
-        this.MarId = MarId;
+    public MarcacionTab(String MarNombre, String MarPortada, Boolean MarEstado, int ArmId) {
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
-        this.ArmNombre = ArmNombre;
         this.MarEstado = MarEstado;
+        this.ArmId = ArmId;
     }
 
-    public MarcacionTab(String MarNombre, String MarPortada,String ArmNombre, Boolean MarEstado) {
-        this.MarNombre = MarNombre;
-        this.MarPortada = MarPortada;
-        this.ArmNombre = ArmNombre;
-        this.MarEstado = MarEstado;
-
-    }
-
-    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado) {
+    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId) {
         this.MarId = MarId;
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
         this.MarEstado = MarEstado;
+        this.ArmId = ArmId;
     }
-    
+
+    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, String ArmNombre) {
+        this.MarId = MarId;
+        this.MarNombre = MarNombre;
+        this.MarPortada = MarPortada;
+        this.MarEstado = MarEstado;
+        this.ArmId = ArmId;
+        this.ArmNombre = ArmNombre;
+    }
+
     /**
      * @return the MarId
      */
@@ -86,17 +87,17 @@ public class MarcacionTab implements Serializable{
     }
 
     /**
-     * @param MarEstado the ArmEstado to set
-     */
-    public void setMarEstado(Boolean MarEstado) {
-        this.MarEstado = MarEstado;
-    }
-
-    /**
-     * @return the ArmEstado
+     * @return the MarEstado
      */
     public Boolean isMarEstado() {
         return MarEstado;
+    }
+
+    /**
+     * @param MarEstado the MarEstado to set
+     */
+    public void setMarEstado(Boolean MarEstado) {
+        this.MarEstado = MarEstado;
     }
 
     /**
@@ -129,7 +130,7 @@ public class MarcacionTab implements Serializable{
 
     @Override
     public String toString() {
-        return "MarcacionTab{" + "MarId=" + MarId + ", MarNombre=" + MarNombre + ", MarPortada=" + MarPortada + ", MarEstado=" + MarEstado + ", ArmNombre=" + ArmNombre + '}';
+        return "MarcacionTab{" + "MarId=" + MarId + ", MarNombre=" + MarNombre + ", MarPortada=" + MarPortada + ", MarEstado=" + MarEstado + ", ArmId=" + ArmId + ", ArmNombre=" + ArmNombre + '}';
     }
 
 }

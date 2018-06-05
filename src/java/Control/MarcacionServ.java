@@ -8,6 +8,7 @@ package Control;
 import Modelo.MySql.AdminMs;
 import Modelo.Tabs.MarcacionTab;
 import Modelo.Tabs.AsignaPermisoTab;
+import Servicios.AdminFile;
 import Servicios.Mensajes;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
 /**
@@ -48,8 +50,8 @@ public class MarcacionServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
-        
-         if (Ses.getAttribute("jsp") != null) {
+
+        if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "marcacion.jsp";
@@ -61,11 +63,11 @@ public class MarcacionServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Marcación")) {
                 acc = a;
             }
         }
-        
+
         if (acc == null) {
             m.setTipo("Error");
             m.setMsj("Permisos insuficientes");
@@ -73,14 +75,16 @@ public class MarcacionServ extends HttpServlet {
             ruta = "main.jsp";
         }
 
-       
         MarcacionTab ma = null;
+        AdminFile af = new AdminFile();
+
         int Id;
-        String ArmNombre;
+        int ArmId;
         String Nombre;
         String Portada;
+        String Url;
+        String extension = "";
         Boolean Estado;
-        String E;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -90,10 +94,9 @@ public class MarcacionServ extends HttpServlet {
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
                         Portada = request.getParameter("Portada");
-                        ArmNombre = request.getParameter("ArmNombre");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
-                        ma = new MarcacionTab(Nombre, Portada,ArmNombre, Estado);
+                        Estado = request.getParameter("Estado") != null;
+                        ArmId = Integer.parseInt(request.getParameter("ArmId"));
+                        ma = new MarcacionTab(Nombre, Portada, Estado, ArmId);
                         m = Asql.getMarcacion().insertar(ma);
 
                     } else {
@@ -107,11 +110,18 @@ public class MarcacionServ extends HttpServlet {
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
-                        Portada = request.getParameter("Portada");
-                        ArmNombre = request.getParameter("ArmNombre");
-                        E = request.getParameter("Estado");
-                        Estado = E.equals("on");
-                        ma = new MarcacionTab(Id, Nombre, Portada,ArmNombre,Estado);
+                        Part arc = request.getPart("Portada");
+                        int i = arc.getSubmittedFileName().lastIndexOf('.');
+                        if (i >= 0) {
+                            extension = arc.getSubmittedFileName().substring(i + 1);
+                        }
+                        Url = "img/Marcacion/" + Nombre;
+                        Portada = Nombre + "." + extension;
+                        m = af.subirImg(arc, Url, Portada);
+
+                        Estado = request.getParameter("Estado") != null;
+                        ArmId = Integer.parseInt(request.getParameter("ArmId"));
+                        ma = new MarcacionTab(Id, Nombre, Url + Portada, Estado, ArmId);
                         m = Asql.getMarcacion().modificar(ma);
 
                     } else {
@@ -129,7 +139,7 @@ public class MarcacionServ extends HttpServlet {
                     }
                     break;
                 case "Obtener":
-                    if (acc.isRpLeer()) {
+                    if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         ma = Asql.getMarcacion().obtener(Id);
                         Ses.setAttribute("Mar", ma);
@@ -152,16 +162,20 @@ public class MarcacionServ extends HttpServlet {
 
                 default:
                     ruta = "marcacion.jsp";
+
+                    m.setTipo("Error");
+                    m.setMsj("MySql Error");
+                    m.setDetalles("No paso nada!!!");
             }
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles :" + ex);
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles :" + ex);
+            m.setDetalles("Detalles: " + ex);
 
         }
         //}else{
@@ -172,10 +186,7 @@ public class MarcacionServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

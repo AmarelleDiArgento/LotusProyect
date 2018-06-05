@@ -22,7 +22,7 @@ import java.util.List;
 public class ArmadoMs implements Armado {
 
     private final Connection con;
-    Mensajes m;
+    Mensajes m = new Mensajes();
 
     public ArmadoMs(Connection con) {
 
@@ -61,7 +61,7 @@ public class ArmadoMs implements Armado {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -69,7 +69,7 @@ public class ArmadoMs implements Armado {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
 
@@ -187,7 +187,7 @@ public class ArmadoMs implements Armado {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -195,7 +195,7 @@ public class ArmadoMs implements Armado {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }
@@ -220,7 +220,7 @@ public class ArmadoMs implements Armado {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -228,7 +228,7 @@ public class ArmadoMs implements Armado {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }

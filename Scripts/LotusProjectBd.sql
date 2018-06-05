@@ -21,7 +21,7 @@ USE LotusProject ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS LotusProject.armado (
   ArmId INT(11) NOT NULL AUTO_INCREMENT,
-  ArmNombre VARCHAR(45) NULL DEFAULT NULL,
+  ArmNombre VARCHAR(45) NULL UNIQUE,
   ArmDescripcion MEDIUMTEXT NULL DEFAULT NULL,
   ArmEstado TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (ArmId))

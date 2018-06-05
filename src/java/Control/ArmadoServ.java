@@ -49,6 +49,12 @@ public class ArmadoServ extends HttpServlet {
         }
         String ruta;
 
+        if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "armado.jsp";
+        }
+
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
 
@@ -60,11 +66,13 @@ public class ArmadoServ extends HttpServlet {
             }
         }
 
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "armado.jsp";
+        if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+        
         ArmadoTab a = null;
         int Id;
         String Nombre;
@@ -80,8 +88,8 @@ public class ArmadoServ extends HttpServlet {
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
-                        Estado = request.getParameter("Estado") !=null;
-                        
+                        Estado = request.getParameter("Estado") != null;
+
                         a = new ArmadoTab(Nombre, Descripcion, Estado);
                         m = Asql.getArmado().insertar(a);
 
@@ -97,7 +105,7 @@ public class ArmadoServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("Nombre");
                         Descripcion = request.getParameter("Descripcion");
-                        Estado = request.getParameter("Estado") !=null;
+                        Estado = request.getParameter("Estado") != null;
                         a = new ArmadoTab(Id, Nombre, Descripcion, Estado);
                         m = Asql.getArmado().modificar(a);
 
@@ -159,10 +167,7 @@ public class ArmadoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

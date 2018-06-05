@@ -19,14 +19,14 @@ public class AdminFile {
 
     public AdminFile() {
     }
-
+    Mensajes m = new Mensajes();
     String SO = System.getProperty("os.name");
     InputStream in = null;
     FileOutputStream out = null;
     File arch = null;
     int pack;
 
-    public String capetas() {
+    public void capetas() {
         File folder = null;
         SO = SO.substring(0, 4);
         if (SO.equals("Windo")) {
@@ -34,13 +34,19 @@ public class AdminFile {
         } else if (SO.equals("Linux")) {
             folder = new File("/media/devtroce/java");
         }
-
-        return SO;
+        ;
     }
 
-    public Mensajes subirImg(Part img, String url) {
-        url = "/home/freyd/NetBeansProjects/LotusProyect/web/img/" + url;
-        Mensajes m = new Mensajes();
+    public Mensajes subirImg(Part img, String url, String file) {
+
+        url = "/home/freyd/NetBeansProjects/LotusProyect/web/" + url;
+
+        File folder = new File(url);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        url = url + "/" + file;
+
         try {
             in = img.getInputStream();
             arch = new File(url);
@@ -59,10 +65,16 @@ public class AdminFile {
             m.setDetalles(ex.getMessage());
         }
 
-        m.setTipo("Ok");
+        m.setTipo(
+                "Ok");
         m.setMsj(img.getName());
-        m.setDetalles("Subido exitosamente");
+        m.setDetalles(
+                "Subido exitosamente");
         return m;
+    }
+
+    public void LinuxArch() {
+
     }
 
 //SO  = SO.substring(0, 3);

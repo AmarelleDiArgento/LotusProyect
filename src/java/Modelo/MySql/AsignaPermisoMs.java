@@ -201,7 +201,7 @@ public class AsignaPermisoMs implements AsignaPermiso {
         String Modulo = rs.getString("PerModulo");
         boolean leer = rs.getInt("rolperLeer") == 1;
         boolean nuevo = rs.getInt("rolperNuevo") == 1;
-        boolean modificar = rs.getInt("rolperModificar") == 1;
+        boolean modificar = rs.getInt("rolperEditar") == 1;
         boolean eliminar = rs.getInt("rolperEliminar") == 1;
         AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, Modulo, leer, nuevo, eliminar, eliminar);
         return apModel;

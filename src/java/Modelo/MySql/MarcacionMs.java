@@ -20,35 +20,35 @@ import java.util.List;
  * @author ALEJANDRA MEDINA
  */
 public class MarcacionMs implements Marcacion {
-    
-     private final Connection con;
-    Mensajes m = null;
+
+    private final Connection con;
+    Mensajes m = new Mensajes();
 
     public MarcacionMs(Connection con) {
 
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.marcacionIn(?,?,?);";
-    final String Modificar = "call LotusProject.marcacionMo(?,?,?);";
+    final String Insertar = "call LotusProject.marcacionIn(?,?,?.?);";
+    final String Modificar = "call LotusProject.marcacionMo(?,?,?,?,?);";
     final String Eliminar = "call LotusProject.marcacionEl(?);";
     final String Consultar = "call LotusProject.marcacionCo(?);";
     final String ListarTodos = "call LotusProject.marcacionLi();";
-    
+
     @Override
     public Mensajes insertar(MarcacionTab ma) {
-        String msj = "";
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);
             stat.setString(1, ma.getMarNombre());
             stat.setString(2, ma.getMarPortada());
-          
+
             if (ma.isMarEstado()) {
                 stat.setInt(3, 1);
             } else {
                 stat.setInt(3, 0);
             }
+            stat.setInt(4, ma.getArmId());
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -76,20 +76,22 @@ public class MarcacionMs implements Marcacion {
         }
         return m;
     }
-    
-     @Override
+
+    @Override
     public MarcacionTab convertir(ResultSet rs) throws SQLException {
         int Id = rs.getInt("MarId");
         String nombre = rs.getString("MarNombre");
-        String portada= rs.getString("MarPortada");
-        int st = rs.getInt("MarEstado");
-        boolean status = st == 1;
-        MarcacionTab mTab = new MarcacionTab (Id, nombre, portada, status);
+        String portada = rs.getString("MarPortada");
+        boolean status = rs.getInt("MarEstado") == 1;
+        int aId = rs.getInt("ArmId");
+        String nArmado = rs.getString("ArmNombre");
+        MarcacionTab mTab = new MarcacionTab(Id, nombre, portada, status, aId, nArmado);
         return mTab;
     }
-  @Override
-     public List<MarcacionTab> listar() {
-    PreparedStatement stat = null;
+
+    @Override
+    public List<MarcacionTab> listar() {
+        PreparedStatement stat = null;
         ResultSet rs = null;
         List<MarcacionTab> mModel = new ArrayList<>();
         try {
@@ -119,10 +121,10 @@ public class MarcacionMs implements Marcacion {
         } catch (SQLException ex) {
             System.out.println("Error sql: " + ex);
         }
-        return mModel;    
-     }
-     
-     @Override
+        return mModel;
+    }
+
+    @Override
     public MarcacionTab obtener(Integer id) {
         PreparedStatement stat = null;
         ResultSet rs = null;
@@ -159,7 +161,7 @@ public class MarcacionMs implements Marcacion {
         return mMod;
     }
 
-     @Override
+    @Override
     public Mensajes modificar(MarcacionTab mar) {
         PreparedStatement stat = null;
         try {
@@ -200,7 +202,6 @@ public class MarcacionMs implements Marcacion {
         return m;
     }
 
-    
     @Override
     public Mensajes eliminar(Integer id) {
         PreparedStatement stat = null;
@@ -233,5 +234,5 @@ public class MarcacionMs implements Marcacion {
         }
         return m;
     }
-    
+
 }
