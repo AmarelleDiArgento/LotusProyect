@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.PoscosechaTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Poscosecha")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisP") != null) {
 
 
 %>
@@ -59,8 +68,13 @@
                         <th>Dirección</th>
                         <th>Ext.</th>
                         <th>Estado</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -77,32 +91,43 @@
                                 <i class="material-icons medium<% if (pt.isPosEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
+
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="consultar(<%=pt.getPosId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                            if (acc.isRpEliminar()) {%>
+
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="msjConf(<%=pt.getPosId()%>)"> delete </i>
                             </a>
                         </td>
+                        <%}%>
+
+
                     </tr>
 
                     <%}%>
                 </tbody>
             </table>
 
+            <%if (acc.isRpEditar()) {%>
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large pink">
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">business</i></a></li>
+
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    
+
                 </ul>
             </div>
+            <%}%>
         </div>
 
         <footer class="footer">
@@ -184,7 +209,7 @@
                         <div class="switch">
                             <label>
                                 Inactivo
-                                <input type="checkbox" name="Estado" <%if(pS.isPosEstado()){%> checked <%}%>>
+                                <input type="checkbox" name="Estado" <%if (pS.isPosEstado()) {%> checked <%}%>>
                                 <span class="lever"></span>
                                 Activo
                             </label>
@@ -292,8 +317,12 @@
 </html>
 <%
 
-        }
+            }
 
+        } else {
+
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

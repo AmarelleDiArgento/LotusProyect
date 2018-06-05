@@ -1,4 +1,5 @@
 
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.MarcacionTab"%>
 <%@page import="Modelo.Tabs.MenuTab"%>
 <%@page import="Servicios.Mensajes"%>
@@ -13,9 +14,17 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisMen") != null) {
-            if (Ses.getAttribute("lisMar") != null) {
-                List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Menú")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisMen") != null) {
+                if (Ses.getAttribute("lisMar") != null) {
+                    List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
 
 
 %>
@@ -48,7 +57,7 @@
 
 
         <div class="container">
-           <h5>Menu</h5>
+            <h5>Menu</h5>
 
             <%
                 List<MenuTab> LisM = (List<MenuTab>) Ses.getAttribute("lisM");
@@ -64,8 +73,13 @@
                         <th>Cauchos</th>
                         <th>Estado</th>
                         <th>Descripcion</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -79,24 +93,31 @@
                         <td><%=mt.getLongitud()%></td>
                         <td><%=mt.getCauchos()%></td>
                         <td><%=mt.getDescripcion()%></td>
-                      
+
                         <td>
                             <label>
                                 <input type="checkbox" <% if (mt.isEstado()) {%> checked="checked" <% }%> /> 
                                 <span></span>
                             </label>
                         </td>
+
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=mt.getId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                            if (acc.isRpEliminar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="msjConf(<%=mt.getId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
+                    <%}%>
+
+
 
                     <%}%>
                 </tbody>
@@ -107,10 +128,12 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
+                    <%if (acc.isRpNuevo()) {%>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Menu"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+                        <%}%>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -127,6 +150,7 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
+        <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="menus.do">
                 <div class="modal-content">
@@ -150,15 +174,15 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        
+
                         <div class="input-field col s12">
                             <textarea id="Portada" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Portada">Portada</label>
                         </div>
-                         <div class="input-field col s12">
+                        <div class="input-field col s12">
                             <textarea id="Superior" class="materialize-textarea" name="Superior" class="validate" required></textarea>
                             <label for="Superior">Superior</label>
-                         </div> 
+                        </div> 
                         <div class="input-field col s12">
                             <textarea id="Longitud" class="materialize-textarea" name="Longitud" class="validate" required></textarea>
                             <label for="Longitud">Longitud</label>
@@ -167,7 +191,7 @@
                             <textarea id="Cauchos" class="materialize-textarea" name="Cauchos" class="validate" required></textarea>
                             <label for="Cauchos">Cauchos</label>
                         </div>
-                       
+
                         <div class="switch">
                             <label>
                                 Inactivo
@@ -187,8 +211,10 @@
             </form>
         </div>
 
-
+        <%}%>
         <!-- Modal Modificar Registro -->
+
+        <%if (acc.isRpEditar()) {%>
         <%if (Ses.getAttribute("Me") != null) {
                 MenuTab mS = (MenuTab) Ses.getAttribute("Menu");
         %>
@@ -198,12 +224,12 @@
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Menu</h4>
                     <p>Registra la informacion del nuevo Menu</p>
                     <div class="row">
-                         <div class="input-field col s4">
+                        <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Id" class="validate" required value="<%=mS.getId()%>" hidden>
                             <select name="MarId">>
                                 <option value="" disabled >Marcacion</option>
                                 <%  for (MarcacionTab ml : lisMar) {%>
-                                <option value="<%=ml.getMarId()%>"  <%if (mS.getMarId()==ml.getMarId()) {%> selected <%}%> ><%=ml.getMarNombre()%> </option>
+                                <option value="<%=ml.getMarId()%>"  <%if (mS.getMarId() == ml.getMarId()) {%> selected <%}%> ><%=ml.getMarNombre()%> </option>
                                 <%}%>
                             </select>
                             <label>Marcacion</label>
@@ -216,15 +242,15 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                           
-                            <div class="input-field col s12">
+
+                        <div class="input-field col s12">
                             <textarea id="Portada" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Portada">Portada</label>
                         </div>
-                         <div class="input-field col s12">
+                        <div class="input-field col s12">
                             <textarea id="Superior" class="materialize-textarea" name="Superior" class="validate" required></textarea>
                             <label for="Superior">Superior</label>
-                         </div> 
+                        </div> 
                         <div class="input-field col s12">
                             <textarea id="Longitud" class="materialize-textarea" name="Longitud" class="validate" required></textarea>
                             <label for="Longitud">Longitud</label>
@@ -244,7 +270,7 @@
 
                     </div>    
                 </div>
-
+                <%}%>
 
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
@@ -330,7 +356,7 @@
     </body>
 </html>
 <%
-     } else {
+    } else {
         response.sendRedirect("marcacions.do?accion=Listar");
     }
 
@@ -347,8 +373,12 @@
 </html>
 <%
 
-        }
+            }
 
+        } else {
+
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

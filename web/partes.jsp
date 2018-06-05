@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.PartesTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisPrt") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Parte")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisPrt") != null) {
 
 
 %>
@@ -44,7 +53,7 @@
 
 
         <div class="container">
-          <h5>Partes</h5>
+            <h5>Partes</h5>
 
 
             <%
@@ -56,8 +65,13 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -68,16 +82,21 @@
                         <td><%=at.getPrtNombre()%></td>
                         <td><%=at.getPrtDescripcion()%></td>
 
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=at.getprtId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                            if (acc.isRpEliminar()) {%>
+
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="msjConf(<%=at.getprtId()%>)"> delete </i>
                             </a>
                         </td>
+                        <%}%>
                     </tr>
 
                     <%}%>
@@ -89,10 +108,17 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
+                    <%if (acc.isRpNuevo()) {%>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva parte"><i class="material-icons">flip</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+                        <%}%>
+                    <li><a href="producto.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto"><i class="material-icons">local_florist</i></a></li>
+                    <li><a href="maestro.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto maestro"><i class="material-icons">vpn_key</i></a></li>
+                    <li><a href="parametros.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Parametros"><i class="material-icons">tune</i></a></li>
+                    <li><a href="grados.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Grados"><i class="material-icons">blur_linear</i></a></li>
+                    <li><a href="fitosanidad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Fitosanidad"><i class="material-icons">bug_report</i></a></li>
+                    <li><a href="variedad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Variedades"><i class="material-icons">filter_vintage</i></a></li>
+
                 </ul>
             </div>
         </div>
@@ -109,6 +135,8 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
+
+        <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="partes.do">
                 <div class="modal-content">
@@ -123,7 +151,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                       
+
                     </div>    
                 </div>
 
@@ -133,9 +161,11 @@
                 </div>
             </form>
         </div>
-
+        <%}%>
 
         <!-- Modal Modificar Registro -->
+
+        <%if (acc.isRpNuevo()) {%>
         <%if (Ses.getAttribute("Prt") != null) {
                 PartesTab pS = (PartesTab) Ses.getAttribute("Prt");
         %>
@@ -153,7 +183,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required><%=pS.getPrtDescripcion()%></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        
+
                     </div>    
                 </div>
 
@@ -164,6 +194,7 @@
             </form>
         </div>
 
+        <%}%>
         <%}%>
         <!--Scripts-->
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -256,8 +287,12 @@
 </html>
 <%
 
-        }
+            }
 
+        } else {
+
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

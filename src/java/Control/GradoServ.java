@@ -42,7 +42,7 @@ public class GradoServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        // if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
@@ -55,7 +55,7 @@ public class GradoServ extends HttpServlet {
         } else {
             ruta = "grados.jsp";
         }
-        
+
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
 
@@ -168,10 +168,11 @@ public class GradoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
+        //}
+
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

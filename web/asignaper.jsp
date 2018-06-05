@@ -11,7 +11,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisAp") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("AsignaPer")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisAp") != null) {
 
 
 %>
@@ -66,8 +74,10 @@
                         <th>Permiso</th>
                         <th>Leer</th>
                         <th>Nuevo</th>
-                        <th>Modificar</th>
+                        <th>Editar</th>
+
                         <th>Eliminar</th>
+
                     </tr>
                 </thead>
 
@@ -96,9 +106,12 @@
                     </tr>
 
                     <%}%>
+                    <%if (acc.isRpEditar()) {%>
+
                 <div class="row center-align">
                     <input class="waves-effect waves-orange btn-flat" type="submit" name="accion" value="modificar" />
                 </div>
+                <%}%>
                 </tbody>
             </table>
 
@@ -107,10 +120,9 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
                     <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
+                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
 
                 </ul>
             </div>
@@ -265,8 +277,11 @@
 </html>
 <%
 
-        }
+            }
+        } else {
 
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

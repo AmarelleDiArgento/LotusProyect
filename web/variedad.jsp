@@ -1,3 +1,5 @@
+
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.ProductoTab"%>
 <%@page import="Modelo.Tabs.VariedadTab"%>
 <%@page import="Servicios.Mensajes"%>
@@ -12,9 +14,17 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisV") != null) {
-            if (Ses.getAttribute("lisPro") != null) {
-                List<ProductoTab> LisPro = (List<ProductoTab>) Ses.getAttribute("lisPro");
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Variedad")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisV") != null) {
+                if (Ses.getAttribute("lisPro") != null) {
+                    List<ProductoTab> LisPro = (List<ProductoTab>) Ses.getAttribute("lisPro");
 
 
 %>
@@ -61,8 +71,13 @@
                         <th>Color</th>
                         <th>Imagen</th>
                         <th>Estado</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -90,16 +105,23 @@
                                 <i class="material-icons medium<% if (vt.isVarEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons medium purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                                if (acc.isRpEliminar()) {%>
+
                         <td>
                             <a href="#">
                                 <i class="material-icons medium purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
                             </a>
                         </td>
+                        <%}%>
+
+
                     </tr>
 
                     <%}%>
@@ -114,6 +136,13 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Variedad"><i class="material-icons">filter_vintage</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="producto.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto"><i class="material-icons">local_florist</i></a></li>
+
+                    <li><a href="maestro.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto maestro"><i class="material-icons">vpn_key</i></a></li>
+                    <li><a href="parametros.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Parametros"><i class="material-icons">tune</i></a></li>
+                    <li><a href="grados.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Grados"><i class="material-icons">blur_linear</i></a></li>
+                    <li><a href="fitosanidad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Fitosanidad"><i class="material-icons">bug_report</i></a></li>
+                    <li><a href="partes.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Partes"><i class="material-icons">flip</i></a></li>
+                    <li><a href="variedad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Variedades"><i class="material-icons">filter_vintage</i></a></li>
 
                 </ul>
             </div>
@@ -404,6 +433,11 @@
 </html>
 <%
 
+            }
+
+        } else {
+
+            response.sendRedirect("main.jsp");
         }
 
     } else {

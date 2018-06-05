@@ -39,10 +39,10 @@ public class MaterialsecoServ extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
@@ -72,18 +72,18 @@ public class MaterialsecoServ extends HttpServlet {
             m.setDetalles("No tienes permiso para ingresar a esta area");
             ruta = "main.jsp";
         }
-        
-    MaterialSecoTab ms = null;   
-     int Id;
-     String TiMNombre;
-     String Nombre;
-     String Imagen;
-     String Descripcion;
-     int Alto;
-     int Ancho;
-     int Profundo;
-     Boolean Estado;
-     String E;
+
+        MaterialSecoTab ms = null;
+        int Id;
+        String TiMNombre;
+        String Nombre;
+        String Imagen;
+        String Descripcion;
+        int Alto;
+        int Ancho;
+        int Profundo;
+        Boolean Estado;
+        String E;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -99,7 +99,7 @@ public class MaterialsecoServ extends HttpServlet {
                         TiMNombre = request.getParameter("TiMNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        ms = new MaterialSecoTab(Nombre,Imagen,Descripcion,Alto,Ancho,Profundo,TiMNombre,Estado);
+                        ms = new MaterialSecoTab(Nombre, Imagen, Descripcion, Alto, Ancho, Profundo, TiMNombre, Estado);
                         m = Asql.getMaterialSeco().insertar(ms);
 
                     } else {
@@ -121,7 +121,7 @@ public class MaterialsecoServ extends HttpServlet {
                         TiMNombre = request.getParameter("TiMNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        ms = new MaterialSecoTab(Id,Nombre,Imagen,Descripcion,Alto,Ancho,Profundo,TiMNombre,Estado);
+                        ms = new MaterialSecoTab(Id, Nombre, Imagen, Descripcion, Alto, Ancho, Profundo, TiMNombre, Estado);
                         m = Asql.getMaterialSeco().modificar(ms);
 
                     } else {
@@ -184,9 +184,8 @@ public class MaterialsecoServ extends HttpServlet {
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    }
-
+    //request.getRequestDispatcher("index.jsp").forward(request, response);
+    //}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -227,4 +226,3 @@ public class MaterialsecoServ extends HttpServlet {
     }// </editor-fold>
 
 }
-

@@ -13,6 +13,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
+        UsuarioTab uSesion = (UsuarioTab) Ses.getAttribute("log");
         if (Ses.getAttribute("lisU") != null) {
             if (Ses.getAttribute("lisP") != null) {
                 List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
@@ -53,7 +54,7 @@
             <%
                 List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>Avatar</th>
@@ -71,8 +72,11 @@
                 </thead>
 
                 <tbody>
+                    
                     <%                        for (UsuarioTab ut : LisU) {
+                            if (!ut.getCedula().equals(uSesion.getCedula()) ) {
                     %>
+
                     <tr>
                         <td><div class="user-view">
                                 <a >
@@ -105,7 +109,8 @@
                         </td>
 
                     </tr>
-                    <%}%>
+                    <%}
+                        }%>
                 </tbody>
             </table>
 
@@ -146,7 +151,7 @@
                     <p>Registra la informacion del nuevo usuario</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input id="Cedula" type="text" name="Cedula" class="validate">
+                            <input id="Cedula" type="text" name="Cedula" class="validate" >
                             <label for="Cedula">Cedula</label>
                         </div>
                         <div class="input-field col s4">
