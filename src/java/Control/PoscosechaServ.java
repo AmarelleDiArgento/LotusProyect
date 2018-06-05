@@ -48,6 +48,12 @@ public class PoscosechaServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+        
+          if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "poscosecha.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
@@ -59,12 +65,15 @@ public class PoscosechaServ extends HttpServlet {
                 acc = a;
             }
         }
-
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "poscosecha.jsp";
+        
+         if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+
+      
         PoscosechaTab pos = null;
         int Id;
          String PosNombre;
@@ -124,7 +133,7 @@ public class PoscosechaServ extends HttpServlet {
                         pos = Asql.getPoscosecha().obtener(Id);
                         Ses.setAttribute("Pos", pos);
                         m.setMsj("Se ha obtenido el poscosecha con id: " + pos.getPosId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
@@ -146,12 +155,12 @@ public class PoscosechaServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles :" + ex);
 
         }
         //}else{

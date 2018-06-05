@@ -1,4 +1,3 @@
-
 <%@page import="Modelo.Tabs.RolTab"%>
 <%@page import="Modelo.Tabs.PoscosechaTab"%>
 <%@page import="Servicios.Mensajes"%>
@@ -49,8 +48,7 @@
 
 
         <div class="container">
-            <h3>Usuario</h3>
-
+            <h5>Usuarios</h5>
 
             <%
                 List<UsuarioTab> LisU = (List<UsuarioTab>) Ses.getAttribute("lisU");
@@ -66,6 +64,7 @@
                         <th>Cel.</th>
                         <th>Email</th>
                         <th>Rol</th>
+                        <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -76,8 +75,8 @@
                     %>
                     <tr>
                         <td><div class="user-view">
-                                <a href="#">
-                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="img\<%=ut.getAvatar()%>">
+                                <a >
+                                    <img class="circle" style="height: 3.5rem; width: 3.5rem" src="<%=ut.getAvatar()%>">
                                 </a>
                             </div>
                         </td>
@@ -89,13 +88,19 @@
                         <td><%=ut.getEmail()%></td>
                         <td><%=ut.getnRol()%></td>
                         <td>
+                            <a href="#"> 
+                                <i class="material-icons medium<% if (ut.getEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            </a>
+                        </td>
+
+                        <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=ut.getCedula()%>)">edit</i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=ut.getCedula()%>)">edit</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=ut.getCedula()%>)">delete</i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=ut.getCedula()%>)">delete</i>
                             </a>
                         </td>
 
@@ -131,7 +136,7 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="post" action="usuarios.do" enctype="multipart/form-data">
+            <form method="get" action="usuarios.do" enctype="multipart/form-data">
 
 
 
@@ -140,49 +145,55 @@
                     <h4><i class="material-icons medium">face</i> Nuevo Usuario</h4>
                     <p>Registra la informacion del nuevo usuario</p>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Cedula" type="text" name="Cedula" class="validate">
                             <label for="Cedula">Cedula</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Nombre" class="validate">
                             <label for="Nombre">Nombre</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Apellido" type="text" name="Apellido" class="validate">
                             <label for="Apellido">Apellido</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Usuario" type="text" name="Usuario" class="validate">
                             <label for="Usuario">Usuario</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Password" type="Password" name="Password" class="validate">
                             <label for="Password">Password</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
                             <label for="Extencion">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
 
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
                             <label for="Celular">Celular</label>
                             <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
                         </div>
 
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="Email" type="Email" name="Email" class="validate">
                             <label for="Email">Email</label>
-                            <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
+                            <span class="helper-text" data-error="Digita un correo valido" ></span>
                         </div>
 
 
-
-
-                        <div class="input-field col s6">
-                            <select>
+                        <div class="input-field col s4">
+                            <select name="Genero">
+                                <option selected disabled >Genero</option>
+                                <option value="M" >Masculino</option>
+                                <option value="F" >Femenino</option>
+                            </select>
+                            <label>Genero</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <select name="Rol">>
                                 <option value="" disabled selected>Rol</option>
                                 <%                        for (RolTab rl : LisR) {%>
                                 <option value="<%=rl.getRolId()%>"><%=rl.getRolNombre()%></option>
@@ -194,7 +205,7 @@
 
                         <%
                         %>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <select multiple>
                                 <option value="" disabled selected>Poscosecha</option>
                                 <%                        for (PoscosechaTab pl : LisP) {%>
@@ -204,17 +215,8 @@
                             <label>Poscosecha</label>
                         </div>
 
-                        <div class="input-field  file-field col s6">
-                            <div class="btwaves-button-inputn">
-                                <span>Avatar</span>
-                                <input type="file" name="imagen" accept="image/*">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
 
-                        <div class="input-field col s6 center">
+                        <div class="input-field col s4 center">
                             <div class="switch">
                                 <label>
                                     Inactivo
@@ -261,10 +263,6 @@
                             <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="PasswordM" type="Password" name="Password" class="validate"value="<%=uS.getPassword()%>">
-                            <label for="PasswordM">Password</label>
-                        </div>
-                        <div class="input-field col s4">
                             <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
                             <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
@@ -278,24 +276,87 @@
                             <input id="EmailM" type="Email" name="Email" class="validate" value="<%=uS.getEmail()%>">
                             <label for="EmailM">Email</label>
                         </div>
-                        <div class="switch col s4" >
-                            <label>
-                                Inactivo
-                                <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
+
+                        <div class="input-field col s4">
+                            <select name="Genero">
+                                <option value="" disabled >Rol</option>
+                                <option value="M"" <%if (uS.getGenero().equalsIgnoreCase("M")) {%> selected <%}%> >Masculino</option>
+                                <option value="F"" <%if (uS.getGenero().equalsIgnoreCase("F")) {%>selected<%}%>>Femenino</option>
+                            </select>
+                            <label>Genero</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <select name="Rol">
+                                <option value="" disabled >Rol</option>
+                                <%                        for (RolTab rlm : LisR) {%>
+                                <option value="<%=rlm.getRolId()%>" <%if (rlm.getRolId() == uS.getRolId()) {%>selected<%}%>><%=rlm.getRolNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Rol</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <select multiple>
+                                <option value="" disabled >Poscosecha</option>
+                                <%                        for (PoscosechaTab plm : LisP) {%>
+                                <option value="<%=plm.getPosId()%>"><%=plm.getPosNombre()%></option>
+                                <%}%>
+                            </select>
+                            <label>Poscosecha</label>
+                        </div>
+                        <div class="input-field col s4 center">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" <%if (uS.getEstado()) {%>checked<%}%> name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
 
                     </div>    
                 </div>
-
                 <div class="modal-footer">
                     <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
         <%}%>
+
+        <!-- Modal Modificar Imagen -->
+
+
+
+        <!-- Modal Structure -->
+        <div id="ModalImg" class="modal">
+            <form method="post" action="usuarios.do" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <h4>Selecciona el avatar para:</h4>
+
+                    <div class="row center">
+                        <input name="Usuario" type="text" value="almoreno" hidden />
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" name="IMG">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input name="accion" value="Cargar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+
+                </div>
+            </form>
+
+        </div>
+
         <!--Scripts-->
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>

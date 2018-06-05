@@ -48,6 +48,12 @@ public class PreliminarServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+        
+         if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "preliminar.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
@@ -55,17 +61,18 @@ public class PreliminarServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Preliminar")) {
                 acc = a;
             }
         }
-
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "rol.jsp";
-        }
         
+         if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
+        }
+ 
         PreliminarTab pr = null;
         int Id;
         String Posnombre;

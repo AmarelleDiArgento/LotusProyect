@@ -48,6 +48,12 @@ public class FitosanidadServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+        
+         if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "fitosanidad.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
@@ -55,16 +61,18 @@ public class FitosanidadServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("fitosanidad")) {
                 acc = a;
             }
         }
-
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "rol.jsp";
+        
+        if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+
         FitosanidadTab f = null;
         int Id;
         String Nombre;
@@ -150,12 +158,12 @@ public class FitosanidadServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles : " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles : " + ex);
 
         }
         //}else{

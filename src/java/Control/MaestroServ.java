@@ -48,6 +48,12 @@ public class MaestroServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+        
+          if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "maestro.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
@@ -60,11 +66,13 @@ public class MaestroServ extends HttpServlet {
             }
         }
 
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "maestro.jsp";
+           if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+           
         MaestroTab ma = null;
         int Id;
         String Nombre;
@@ -139,12 +147,12 @@ public class MaestroServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles: " + ex);
 
         }
         //}else{

@@ -2713,11 +2713,11 @@ i.small {
 }
 
 i.medium {
-  font-size: 4rem;
+  font-size: 2.5rem;
 }
 
 i.large {
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 img.responsive-img,
@@ -2747,7 +2747,7 @@ video.responsive-video {
 }
 
 .pagination li.active {
-  background-color: #ee6e73;
+  background-color: #9c27b0;
 }
 
 .pagination li.disabled a {
@@ -6049,7 +6049,7 @@ button.btn-floating {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #292929;
+  background-color: #ad82ac80;
   z-index: 1000;
   will-change: opacity;
 }

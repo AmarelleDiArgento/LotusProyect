@@ -11,7 +11,7 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisP") != null) {
+        if (Ses.getAttribute("lisPe") != null) {
 
 
 %>
@@ -44,11 +44,11 @@
 
 
         <div class="container">
-               <h3>Permiso</h3>
+            <h5>Permiso</h5>
 
 
             <%
-                List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisP");
+                List<PermisoTab> LisP = (List<PermisoTab>) Ses.getAttribute("lisPe");
             %>
             <table class="centered striped">
                 <thead>
@@ -57,6 +57,8 @@
                         <th>Nombre</th>
                         <th>Modulo</th>
                         <th>Detalles</th>
+                        <th>Icon</th>
+                        <th>URL</th>
                         <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -70,21 +72,22 @@
                         <td><%=pt.getPerNombre()%></td>
                         <td><%=pt.getPerModulo()%></td>
                         <td><%=pt.getPerDescripcion()%></td>
-                        <td><i class="material-icons gray-text"><%=pt.getPerIco()%></i></td>
+                        <td><i class="material-icons medium gray-text text-darken-4"><%=pt.getPerIco()%></i></td>
                         <td><%=pt.getPerUrl()%></td>
-                        <td>
-                            <input class="switchstad" type="checkbox" id="switch<%=pt.getPerId()%>" <%if (pt.getPerEstado()) {%>checked <%}%>/><label class="labelstad" for="switch<%=pt.getPerId()%>">Toggle</label>    
 
-
-                        </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=pt.getPerId()%>)" > edit </i>
+                                <i class="material-icons medium<% if (pt.getPerEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=pt.getPerId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=pt.getPerId()%>)" > edit </i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=pt.getPerId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -101,11 +104,25 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Rol"><i class="material-icons">assignment_ind</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
-                    <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
+                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
 
                 </ul>
             </div>
         </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="pagination center">
+                    <li><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+        </div>
+
 
         <footer class="footer">
             <div>
@@ -124,9 +141,13 @@
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Rol</h4>
                     <p>Registra la informacion del nuevo rol</p>
-                    <div class="row">
+                    <div class="row">                        
                         <div class="input-field col s6">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Modulo" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">
@@ -237,7 +258,7 @@
 </html>
 <%
 
-    Ses.setAttribute("lisP", null);
+    Ses.setAttribute("lisPe", null);
     Ses.setAttribute("Per", null);
     Ses.setAttribute("msj", null);
 } else {%>

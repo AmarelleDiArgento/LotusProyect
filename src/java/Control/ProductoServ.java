@@ -48,6 +48,12 @@ public class ProductoServ extends HttpServlet {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
+        
+            if (Ses.getAttribute("jsp") != null) {
+            ruta = (String) Ses.getAttribute("jsp");
+        } else {
+            ruta = "producto.jsp";
+        }
 
         //if (Ses.getAttribute("log") != null) {
         String Accion = request.getParameter("accion");
@@ -59,12 +65,15 @@ public class ProductoServ extends HttpServlet {
                 acc = a;
             }
         }
-
-        if (Ses.getAttribute("jsp") != null) {
-            ruta = (String) Ses.getAttribute("jsp");
-        } else {
-            ruta = "producto.jsp";
+        
+         if (acc == null) {
+            m.setTipo("Error");
+            m.setMsj("Permisos insuficientes");
+            m.setDetalles("No tienes permiso para ingresar a esta area");
+            ruta = "main.jsp";
         }
+
+    
         ProductoTab pr = null;
         int Id;
         String Nombre;
@@ -76,7 +85,7 @@ public class ProductoServ extends HttpServlet {
             AdminMs Asql = new AdminMs(pool);
 
             switch (Accion) {
-                case "Insertar":
+                case "Registrar":
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("ProNombre");
                         Imagen = request.getParameter("ProImagen");
@@ -92,7 +101,7 @@ public class ProductoServ extends HttpServlet {
 
                     break;
 
-                case "modificar":
+                case "Modificar":
                     if (acc.isRpEditar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         Nombre = request.getParameter("ProNombre");
@@ -107,7 +116,7 @@ public class ProductoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para hacer modificaciones");
                     }
                     break;
-                case "eliminar":
+                case "Eliminar":
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getProducto().eliminar(Id);
@@ -117,13 +126,13 @@ public class ProductoServ extends HttpServlet {
                         m.setMsj("No tienes permisos para eliminar registros");
                     }
                     break;
-                case "obtener":
+                case "Obtener":
                     if (acc.isRpLeer()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         pr = Asql.getProducto().obtener(Id);
                         Ses.setAttribute("Pro", pr);
                         m.setMsj("Se ha obtenido el productos con id: " + pr.getProId());
-                        m.setTipo("Ok");
+                        m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para consultar registros");
@@ -145,12 +154,12 @@ public class ProductoServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles" + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex.getMessage());
+            m.setDetalles("Detalles" + ex);
 
         }
         //}else{
