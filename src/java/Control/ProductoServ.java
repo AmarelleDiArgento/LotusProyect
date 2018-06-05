@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
+import javax.servlet.ServletException;  
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +61,7 @@ public class ProductoServ extends HttpServlet {
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Rol")) {
+            if (a.getnPermiso().equalsIgnoreCase("Producto")) {
                 acc = a;
             }
         }
@@ -154,12 +154,12 @@ public class ProductoServ extends HttpServlet {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("MySql Error");
-            m.setDetalles("Detalles" + ex);
+            m.setDetalles("Detalles: " + ex);
 
         } catch (Exception ex) {
             m.setTipo("Error");
             m.setMsj("Error");
-            m.setDetalles("Detalles" + ex);
+            m.setDetalles("Detalles: " + ex);
 
         }
         //}else{
