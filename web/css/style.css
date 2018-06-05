@@ -203,6 +203,6 @@ input:checked + .labelstad:after {
 }
 
 .labelstad:active:after {
-    width: 10px;
+    width: 1rem;
 }
 

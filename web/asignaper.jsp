@@ -90,8 +90,9 @@
                     </tr>
 
                     <%}%>
-                <input type="submit" name="accion" value="modificar">
-
+                <div class="row center-align">
+                    <input class="waves-effect waves-orange btn-flat" type="submit" name="accion" value="modificar" />
+                </div>
                 </tbody>
             </table>
 

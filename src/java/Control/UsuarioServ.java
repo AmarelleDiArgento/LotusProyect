@@ -63,7 +63,6 @@ public class UsuarioServ extends HttpServlet {
         }
 
         UsuarioTab u = null;
-
         AdminFile af = new AdminFile();
 
         String Cedula;
@@ -164,8 +163,9 @@ public class UsuarioServ extends HttpServlet {
                     if (i >= 0) {
                         extension = arc.getSubmittedFileName().substring(i + 1);
                     }
-                    Url = "Usuario/" + Usuario + "." + extension;
-                    m = af.subirImg(arc, Url);
+                    Url = "img/Usuario/";
+                    Avatar = Usuario + "." + extension;
+                    m = af.subirImg(arc, Url, Avatar);
                     break;
 
                 default:

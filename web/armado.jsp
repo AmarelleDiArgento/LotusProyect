@@ -44,7 +44,7 @@
 
 
         <div class="container">
-          <h5>Armado</h5>
+            <h5>Armado</h5>
 
 
             <%
@@ -69,19 +69,19 @@
                         <td><a href="pasos.do?accion=Listar&Id=<%=at.getArmId()%>"><%=at.getArmNombre()%></a></td>
                         <td><%=at.getArmDescripcion()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (at.isArmEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
+                            <a href="#">
+                                <i class="material-icons medium<% if (at.isArmEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            </a>
                         </td>
+
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=at.getArmId()%>)" > edit </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=at.getArmId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=at.getArmId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=at.getArmId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -98,7 +98,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -151,7 +151,7 @@
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Arm") != null) {
-                ArmadoTab aS = (ArmadoTab) Ses.getAttribute("Rol");
+                ArmadoTab aS = (ArmadoTab) Ses.getAttribute("Arm");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
             <form method="get" action="armados.do">
@@ -159,18 +159,19 @@
                     <h4><i class="material-icons medium">assignment_ind</i> Nuevo Armado</h4>
                     <p>Registra la informacion del nuevo Armado</p>
                     <div class="row">
+                        <input id="Id" type="text" name="Id" class="validate" value="<%=aS.getArmId()%>" required="" hidden>
                         <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                        <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=aS.getArmNombre()%>" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
                         <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required> <%=aS.getArmDescripcion()%> </textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
                         <div class="switch">
                             <label>
                                 Inactivo
-                                <input type="checkbox" name="Estado">
+                                <input type="checkbox" name="Estado" <%if(aS.isArmEstado()){%>checked<%}%>>
                                 <span class="lever"></span>
                                 Activo
                             </label>
@@ -181,7 +182,7 @@
 
 
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>

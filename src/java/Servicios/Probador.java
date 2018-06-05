@@ -11,6 +11,7 @@ import Modelo.MySql.GradosMs;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
 import Modelo.Tabs.GradosTab;
+import Modelo.Tabs.MarcacionTab;
 import Modelo.Tabs.ParametrosTab;
 import Modelo.Tabs.PermisoTab;
 import Modelo.Tabs.PoscosechaTab;
@@ -129,14 +130,14 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            List<AsignaPermisoTab> ap = Asql.getAsignaPer().PerSession("1070949");
+            List<AsignaPermisoTab> ap = Asql.getAsignaPer().listar(1);
             for (AsignaPermisoTab lp : ap) {
                 if (lp.getnPermiso().equalsIgnoreCase("Parte")) {
-                    System.out.println("Permisos Ok");
+                    //System.out.println(ap.toString());
                 }
             }
 
-            GradosTab g = Asql.getGrados().obtener(5);
+            MarcacionTab g = Asql.getMarcacion().obtener(1);
             System.out.println(g.toString());
             
         } catch (SQLException ex) {

@@ -72,19 +72,19 @@
                         <td><%=mt.getMarNombre()%></td>
                         <td><%=mt.getMarPortada()%></td>
                         <td>
-                            <label>
-                                <input type="checkbox" <% if (mt.isMarEstado()) {%> checked="checked" <% }%> /> 
-                                <span></span>
-                            </label>
+                            <a href="#"> 
+                                <i class="material-icons medium<% if (mt.isMarEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            </a>
                         </td>
+
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=mt.getMarId()%>)" > edit </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=mt.getMarId()%>)" > edit </i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=mt.getMarId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=mt.getMarId()%>)"> delete </i>
                             </a>
                         </td>
                     </tr>
@@ -119,11 +119,23 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="marcacions.do">
+            <form method="post" action="marcacions.do" enctype="multipart/form-data">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">local_offer</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
                     <div class="row">
+
+                        <div class="input-field col s4">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+
+                        <div class="file-field input-field col s3">
+                            <i class="material-icons prefix">image</i>
+                            <input type="file" name="Portada">
+                            <input class="file-path validate" name ="Archivo" type="text">
+                        </div>
+
                         <div class="input-field col s4">
                             <select name="ArmId">>
                                 <option value="" disabled selected>Armado</option>
@@ -133,30 +145,24 @@
                             </select>
                             <label>Armado</label>
                         </div>
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripciï¿½n</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
+
+                        <div class="input-field col s4">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
 
                     </div>
-                    </div>
+                </div>
 
-
-                    <div class="modal-footer">
-                        <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                    </div>
+                <div class="modal-footer">
+                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                </div>
             </form>
         </div>
 
@@ -166,12 +172,24 @@
                 MarcacionTab mS = (MarcacionTab) Ses.getAttribute("Mar");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="marcacions.do">
+            <form method="get" action="marcacions.do" enctype="multipart/form-data">
                 <div class="modal-content">
                     <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
                     <p>Registra la informacion de la nueva marcacion</p>
 
                     <div class="row">
+
+                        <div class="input-field col s4">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+
+                        <div class="file-field input-field col s3">
+                            <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+                        </div>
+
                         <div class="input-field col s4">
                             <select name="ArmId">>
                                 <option value="" disabled selected>Armado</option>
@@ -181,26 +199,22 @@
                             </select>
                             <label>Armado</label>
                         </div>
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
+
+                        <div class="input-field col s4">
+                            <div class="switch">
+                                <label>
+                                    Inactivo
+                                    <input type="checkbox" name="Estado">
+                                    <span class="lever"></span>
+                                    Activo
+                                </label>
+                            </div>
                         </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripciï¿½n</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
 
             </form>
@@ -225,7 +239,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "ï¿½Estas seguro?",
+                                            title: "¿Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
@@ -233,7 +247,7 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'marcacions.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
@@ -241,7 +255,7 @@
                                     function consultar(id) {
                                         var url = 'marcacions.do';
                                         var form = $('<form action="' + url + '" method="get">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
                                         $('body').append(form);

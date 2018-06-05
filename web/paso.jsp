@@ -51,20 +51,14 @@
                 List<PasoTab> LisP = (List<PasoTab>) Ses.getAttribute("lisPa");
             %>
 
-<div class="carousel">
-    <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
-    <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/250/250/nature/2"></a>
-    <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/250/250/nature/3"></a>
-    <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/250/250/nature/4"></a>
-    <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
-  </div>
 
-         <div class="row">
+
+            <div class="row">
                 <% for (PasoTab pt : LisP) {%>
-                <div class="col s1">
+                <div class="col s3">
                     <div class="card">
                         <div class="card-image">
-                            <img src="<%=pt.getPasImagen()%>" class="materialboxed" >
+                            <img src="<%=pt.getPasImagen()%>" style="max-height: 6.5rem;" class="materialboxed" >
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons" onclick="consultar(<%=pt.getPasId()%>)">edit</i></a>
                         </div>
                         <div class="card-content">
@@ -91,169 +85,169 @@
                 </ul>
             </div>
         </div>
+    </div>
+</li>
+
+
+<footer class="footer">
+    <div>
+        <div>
+            <p class="center-align">
+                LOTUS - ELITE FLOWER © 2017 Copyright Text
+            </p>
         </div>
-      </li>
-            
+    </div>
+</footer>
 
-        <footer class="footer">
-            <div>
-                <div>
-                    <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
-                    </p>
+
+<!-- Modal Insertar Nuevo registro -->
+<div id="modalNuevo" class="modal modal-fixed-footer">
+    <form method="get" action="Pasos.do">
+        <div class="modal-content">
+            <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
+            <p>Registra la informacion del nuevo Paso</p>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                    <label for="Nombre">Nombre</label>
                 </div>
-            </div>
-        </footer>
-
-
-        <!-- Modal Insertar Nuevo registro -->
-        <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="Pasos.do">
-                <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
-                    <p>Registra la informacion del nuevo Paso</p>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class= "validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
-                    </div>    
+                <div class="input-field col s12">
+                    <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class= "validate" required></textarea>
+                    <label for="Descripcion">Descripción</label>
+                </div>
+                <div class="switch">
+                    <label>
+                        Inactivo
+                        <input type="checkbox" name="Estado">
+                        <span class="lever"></span>
+                        Activo
+                    </label>
                 </div>
 
-
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
+            </div>    
         </div>
 
 
-        <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Pas") != null) {
-                PasoTab pS = (PasoTab) Ses.getAttribute("Rol");
-        %>
-        <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="pasos.do">
-                <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
-                    <p>Registra la informacion del nuevo Paso</p>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+        <div class="modal-footer">
+            <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+        </div>
+    </form>
+</div>
 
-                    </div>    
+
+<!-- Modal Modificar Registro -->
+<%if (Ses.getAttribute("Pas") != null) {
+        PasoTab pS = (PasoTab) Ses.getAttribute("Rol");
+%>
+<div id="modalModificar" class="modal modal-fixed-footer">
+    <form method="get" action="pasos.do">
+        <div class="modal-content">
+            <h4><i class="material-icons medium">assignment_ind</i> Nuevo Paso</h4>
+            <p>Registra la informacion del nuevo Paso</p>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                    <label for="Nombre">Nombre</label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                    <label for="Descripcion">Descripción</label>
+                </div>
+                <div class="switch">
+                    <label>
+                        Inactivo
+                        <input type="checkbox" name="Estado">
+                        <span class="lever"></span>
+                        Activo
+                    </label>
                 </div>
 
-
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
+            </div>    
         </div>
 
-        <%}%>
-        <!--Scripts-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
-                                function modalMod() {
+        <div class="modal-footer">
+            <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+        </div>
+    </form>
+</div>
 
-                                    var elem = document.querySelector('#modalModificar');
-                                    var instance = M.Modal.init(elem);
-                                    instance.open();
-                                }
-                                ;
-                                function msjConf(id) {
-                                    swal({
-                                        title: "¿Estas seguro?",
-                                        text: "Se eliminara el registro con el ID: " + id,
-                                        icon: "warning",
-                                        buttons: true,
-                                        dangerMode: true
-                                    })
-                                            .then((willDelete) => {
-                                                if (willDelete) {
-                                                    window.location = 'rols.do?accion=Eliminar&Id=' + id;
-                                                }
-                                            });
-                                }
-                                ;
-                                function consultar(id) {
-                                    var url = 'rols.do';
-                                    var form = $('<form action="' + url + '" method="get">' +
-                                            '<input type="text" name="id" value="' + id + '" hidden/>' +
-                                            '<input type="text" name="accion" value="Obtener" hidden/>' +
-                                            '</form>');
-                                    $('body').append(form);
-                                    (form).submit();
-                                }
-            <% if (msj != null) {%>
+<%}%>
+<!--Scripts-->
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-            <%if (msj.getTipo().equals("Error")) {%>
-                                function msjError() {
-                                    swal({
-                                        title: "<%=msj.getMsj()%>",
-                                        text: "<%=msj.getDetalles()%>",
-                                        icon: "error"
+<script type="text/javascript">
+                        function modalMod() {
+
+                            var elem = document.querySelector('#modalModificar');
+                            var instance = M.Modal.init(elem);
+                            instance.open();
+                        }
+                        ;
+                        function msjConf(id) {
+                            swal({
+                                title: "¿Estas seguro?",
+                                text: "Se eliminara el registro con el ID: " + id,
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+                                            window.location = 'rols.do?accion=Eliminar&Id=' + id;
+                                        }
                                     });
-                                }
-                                ;
+                        }
+                        ;
+                        function consultar(id) {
+                            var url = 'rols.do';
+                            var form = $('<form action="' + url + '" method="get">' +
+                                    '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                    '<input type="text" name="accion" value="Obtener" hidden/>' +
+                                    '</form>');
+                            $('body').append(form);
+                            (form).submit();
+                        }
+    <% if (msj != null) {%>
+
+    <%if (msj.getTipo().equals("Error")) {%>
+                        function msjError() {
+                            swal({
+                                title: "<%=msj.getMsj()%>",
+                                text: "<%=msj.getDetalles()%>",
+                                icon: "error"
+                            });
+                        }
+                        ;
 
 
-            <%} else if (msj.getTipo().equals("Msj")) {%>
-                                function msjMsj() {
+    <%} else if (msj.getTipo().equals("Msj")) {%>
+                        function msjMsj() {
 
-                                    swal("<%=msj.getMsj()%>", {
-                                        button: false
-                                    });
-                                }
-                                ;
+                            swal("<%=msj.getMsj()%>", {
+                                button: false
+                            });
+                        }
+                        ;
 
-            <%} else if (msj.getTipo().equals("Ok")) {%>
-                                function msjOk()
-                                {
-                                    swal({
-                                        title: "<%=msj.getMsj()%>",
-                                        text: "<%=msj.getDetalles()%>",
-                                        icon: "success"
-                                    });
-                                }
-                                ;
-            <%}
-                }%>
+    <%} else if (msj.getTipo().equals("Ok")) {%>
+                        function msjOk()
+                        {
+                            swal({
+                                title: "<%=msj.getMsj()%>",
+                                text: "<%=msj.getDetalles()%>",
+                                icon: "success"
+                            });
+                        }
+                        ;
+    <%}
+        }%>
 
-        </script>
-    </body>
+</script>
+</body>
 </html>
 <%
 

@@ -48,7 +48,7 @@ call LotusProject.permisoIn('Material Seco', 'Marcacion', 'Permisos para materia
 call LotusProject.permisoIn('Fitosanidad', 'Producto', 'Permisos para fitosanidad', 'fitosanidad.jsp', 'bug_report', 1);
 call LotusProject.permisoIn('Linea', 'Poscosecha', 'Permisos para linea', 'linea.jsp', 'label_outline', 1);
 call LotusProject.permisoIn('Producto maestro', 'Producto', 'Permisos para producto maestro', 'maestro.jsp', 'vpn_key', 1);
-call LotusProject.permisoIn('Menu', 'menu', 'Permisos de menu', 'menu.jsp', 'loyalty', 1);
+call LotusProject.permisoIn('Menu', 'Marcación', 'Permisos de menu', 'menu.jsp', 'loyalty', 1);
 call LotusProject.permisoIn('Parametros', 'Producto', 'Permisos para ajuste de parametros', 'parametros.jsp', 'tune', 1);
 call LotusProject.permisoIn('Paso', 'Armado', 'Permisos para ajuste de pasos', 'paso.jsp', 'plus_one', 1);
 
@@ -187,7 +187,7 @@ call LotusProject.AsgPerIn(6, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(6, 10, 1, 1, 1, 1);
+call LotusProject.AsgPerIn(6, 20, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);
@@ -195,6 +195,8 @@ call LotusProject.AsgPerIn(6, 10, 1, 1, 1, 1);
 -- call LotusProject.AsgPerSession(1070949);
 -- call LotusProject.AsgPerEl(3, 6);
 
+-- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla maestro 
 -- -----------------------------------------------------
 
 call LotusProject.maestroIn('Green', 'Agrupa los productos verdes, sin flor ');
@@ -209,6 +211,13 @@ call LotusProject.maestroIn('Disbud', 'Agrupa los producto familiares del pompon
 call LotusProject.maestroIn('Gerberas', 'Agrupa los producto familiares de la gerbera');
 call LotusProject.maestroIn('Roses', 'Agrupa los producto familiares de la rosa estandar');
 
+-- call LotusProject.maestroMo(123, 'rosa', 'amarilla'); 
+-- call LotusProject.maestroLi(); 
+-- call LotusProject.maestroCo(12); 
+
+-- -----------------------------------------------------
+-- Procedimientos LotusProject poscosecha
+-- -----------------------------------------------------
 call LotusProject.poscosechaIn('A. Carnations', 'Km x ', '1234', 1);
 call LotusProject.poscosechaIn('A. Las Palmas', 'Km x ', '1234', 1);
 call LotusProject.poscosechaIn('A. Las Palmas Alstroemeria', 'Km x ', '1234', 1);
@@ -224,7 +233,10 @@ call LotusProject.poscosechaIn('Postcosecha San Valentino', 'Km x ', '1234', 1);
 call LotusProject.poscosechaIn('Santamaria', 'Km x ', '1234', 1);
 call LotusProject.poscosechaIn('Valdaya', 'Km x ', '1234', 1);
 call LotusProject.poscosechaIn('Vista - Elite', 'Km x ', '1234', 1);
-
+-- call LotusProject.poscosechaIn('rosa amarilla', 'cra 21a numero 13a 64', '1234567', 1); 
+-- call LotusProject.poscosechaMo(123, 'rosa amarilla', 'cra 21a numero 13a 64', '567890', 1); 
+-- call LotusProject.poscosechaLi(); 
+-- call LotusProject.poscosechaCo(16); 
 
 call LotusProject.productoIn('Acacia','img/Maestro/Producto/acacia.png',1,1);
 call LotusProject.productoIn('Adenanthus','img/Maestro/Producto/adenanthus.png',1,1);
@@ -285,7 +297,18 @@ call LotusProject.productoIn('Sunflower','img/Maestro/Producto/sunflower.png',1,
 call LotusProject.productoIn('Trachelium','img/Maestro/Producto/trachelium.png',1,7);
 call LotusProject.productoIn('Viburnum','img/Maestro/Producto/viburnum.png',1,1);
 
+-- -----------------------------------------------------
+-- Procedimientos LotusProject armado
+-- -----------------------------------------------------
+
 call LotusProject.armadoIn('Bloomstar Rainbow', 'Armado de 24 tallos', 1);
+-- call lotusproject.armadoMo(1234, 'rosa', 'verde', 1);
+-- call lotusproject.armadoLi();
+-- call lotusproject.armadoCo(2);
+
+-- -----------------------------------------------------
+-- Procedimientos LotusProject paso
+-- -----------------------------------------------------
 
 call LotusProject.pasoIn(1, 'Hacer y hacer 1', 'img/Armado/Bloomstar Rainbow con lamina/1ro.png', 1);
 call LotusProject.pasoIn(2, 'Hacer y hacer 2', 'img/Armado/Bloomstar Rainbow con lamina/2do.png', 1);
@@ -310,88 +333,103 @@ call LotusProject.pasoIn(20,'Hacer y hacer! 20','img/Armado/Bloomstar Rainbow co
 call LotusProject.pasoIn(21,'Hacer y hacer! 21','img/Armado/Bloomstar Rainbow con lamina/21vo.png',1);
 call LotusProject.pasoIn(22,'Hacer y hacer! 22','img/Armado/Bloomstar Rainbow con lamina/22vo.png',1);
 call LotusProject.pasoIn(23,'Hacer y hacer! 23','img/Armado/Bloomstar Rainbow con lamina/23vo.png',1);
+-- call LotusProject.pasoMo(1, 12345, 'rosa amarilla', 'abcd', 12345); 
+-- call LotusProject.pasoLi(); 
+-- call LotusProject.pasoCo(1); 
 
+-- -----------------------------------------------------
+-- Procedimientos LotusProject grados
+-- -----------------------------------------------------
 
-
--- Procedimientos LotusProject Tabla grados 
-call LotusProject.armadoIn('rosa', 'amarilla', 1);
--- call LotusProject.armadoMo(1234, 'rosa', 'verde', 1);
--- call LotusProject.armadoLi();
--- call LotusProject.armadoCo(2);
-
-
--- Procedimientos LotusProject Tabla grados 
-call LotusProject.gradosIn('rosa', 'roja', 1); 
+call LotusProject.gradosIn('40', 'Rosas de 42 a 52 cm', 1); 
+call LotusProject.gradosIn('50', 'Rosas de 52 a 62 cm', 1); 
+call LotusProject.gradosIn('60', 'Rosas de 62 a 72 cm', 1); 
+call LotusProject.gradosIn('70', 'Rosas de 72 a 82 cm', 1); 
+call LotusProject.gradosIn('80', 'Rosas de 82 a 92 cm', 1); 
+call LotusProject.gradosIn('90', 'Rosas de 92 a 102 cm', 1); 
+call LotusProject.gradosIn('Standard', 'Rosas de 42 a 52 cm', 1); 
+call LotusProject.gradosIn('Fancy', 'Rosas de 42 a 52 cm', 1); 
+call LotusProject.gradosIn('Select', 'Rosas de 42 a 52 cm', 1); 
+call LotusProject.gradosIn('Premium', 'Rosas de 42 a 52 cm', 1); 
 -- call LotusProject.gradosMo(12345, 'rosa', 'amarillo', 1); 
 -- call LotusProject.gradosLi(); 
 -- call LotusProject.gradosCo(1); 
- 
+
+-- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla linea 
+-- -----------------------------------------------------
+
 call LotusProject.lineaIn(1, 1); 
 -- call LotusProject.lineaMo(1, 1, 1); 
 -- call LotusProject.lineaLi(); 
 -- call LotusProject.lineaCo(); 
- 
- 
- 
--- Procedimientos LotusProject Tabla maestro 
-call LotusProject.maestroIn('roja', 'verde'); 
--- call LotusProject.maestroMo(123, 'rosa', 'amarilla'); 
--- call LotusProject.maestroLi(); 
--- call LotusProject.maestroCo(12); 
- 
- 
+
+-- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla marcacion 
-call LotusProject.marcacionIn('rosa verde', 'abcd', 1, 1);
- -- call LotusProject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
--- call LotusProject.marcacionLi();
--- call LotusProject.marcacionCo(3);
- 
- 
--- Procedimientos LotusProject Tabla materialseco 
-call LotusProject.materialsecoIn('rosa', 'asdf', 'roja', 1, 1, 1, 1, 1); 
--- call LotusProject.materialsecoMo(1, 'rosa', 'abcd', 'verde', 1, 1, 1, 1, 1);
--- call LotusProject.materialsecoLi(); 
--- call LotusProject.materialsecoCo(2); 
- 
- 
--- Procedimientos LotusProject Tabla Paso 
--- call LotusProject.pasoIn(12345, 'rosa amarilla', 'abcd', 1); 
--- call LotusProject.pasoMo(1, 12345, 'rosa amarilla', 'abcd', 12345); 
--- call LotusProject.pasoLi(); 
--- call LotusProject.pasoCo(1); 
- 
- 
--- Procedimientos LotusProject Tabla Parametros 
-call LotusProject.parametrosIn('rosita', 1); 
--- call LotusProject.parametrosMo(123, 'rosita', 1); 
--- call LotusProject.parametrosLi(); 
--- call LotusProject.parametrosCo(1); 
- 
--- Procedimientos LotusProject Tabla Poscosecha 
--- call LotusProject.poscosechaIn('rosa amarilla', 'cra 21a numero 13a 64', '1234567', 1); 
--- call LotusProject.poscosechaMo(123, 'rosa amarilla', 'cra 21a numero 13a 64', '567890', 1); 
--- call LotusProject.poscosechaLi(); 
--- call LotusProject.poscosechaCo(16); 
- 
+-- -----------------------------------------------------
+
+call LotusProject.marcacionIn('Bloomstar Rainbow 24 tallos', 'abcd', 1, 1);
+ -- call lotusproject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
+-- call lotusproject.marcacionLi();
+-- call lotusproject.marcacionCo(3);
+
+-- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla tipoms 
-call LotusProject.tipomsIn('girasol', 'amarilla'); 
+-- -----------------------------------------------------
+
+call LotusProject.tipomsIn('Capuchon', 'Capuchon'); 
+call LotusProject.tipomsIn('UPC', 'UPC'); 
+call LotusProject.tipomsIn('Lamina', 'Lamina'); 
+call LotusProject.tipomsIn('Candado', 'Candado'); 
+call LotusProject.tipomsIn('Flower Food', 'Flower Food'); 
+call LotusProject.tipomsIn('Pick', 'Pick'); 
 -- call LotusProject.tipomsMo(123, 'girasol ', 'verde'); 
 -- call LotusProject.tipomsLi(); 
 -- call LotusProject.tipomsCo(1); 
 
- 
+-- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla materialseco
+-- -----------------------------------------------------
+
+-- call LotusProject.materialsecoIn('', 'asdf', 'roja', 1, 1, 1, 1, 1); 
+-- call lotusproject.materialsecoMo(1, 'rosa', 'abcd', 'verde', 1, 1, 1, 1, 1);
+-- call LotusProject.materialsecoLi(); 
+-- call LotusProject.materialsecoCo(2); 
+
+-- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla Parametros 
+-- -----------------------------------------------------
+
+call LotusProject.parametrosIn('Longitud de solo tallo', 1); 
+call LotusProject.parametrosIn('Longitud de punta a punta', 1); 
+call LotusProject.parametrosIn('Nivel de follaje', 1); 
+call LotusProject.parametrosIn('Tamaño de cabeza', 1); 
+call LotusProject.parametrosIn('Diametro de cabeza', 1); 
+call LotusProject.parametrosIn('Grosor de tallo', 1);  
+call LotusProject.parametrosIn('Numero de puntos', 1);  
+call LotusProject.parametrosIn('Inflorescencia', 1);  
+call LotusProject.parametrosIn('Punto de corte', 1);
+-- call LotusProject.parametrosMo(123, 'rosita', 1); 
+-- call LotusProject.parametrosLi(); 
+-- call LotusProject.parametrosCo(1); 
+
+-- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla Preliminar 
+-- -----------------------------------------------------
+ 
  call LotusProject.preliminarIn('2018-12-12', 'pendiente', 1); 
 -- call LotusProject.preliminarMo(12345, '2018-12-12', '1', 1); 
 -- call LotusProject.preliminarLi(); 
 -- call LotusProject.preliminarCo(1); 
 
+-- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla Partes 
+-- -----------------------------------------------------
+
 call LotusProject.partesIn('Flor', 'Lo que no es la follaje ni el follaje');
 call LotusProject.partesIn('Tallo', 'Lo que no es la flor ni el follaje');
 call LotusProject.partesIn('Follaje', 'Lo que no es la flor ni el tallo');
--- call LotusProject.partesMo(1234, 'rosas', 'verdes');
--- call LotusProject.partesLi();
--- call LotusProject.partesCo(1);
+-- call lotusproject.partesMo(1234, 'rosas', 'verdes');
+-- call lotusproject.partesLi();
+-- call lotusproject.partesCo(1);
 

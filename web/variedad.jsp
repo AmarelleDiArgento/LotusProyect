@@ -80,7 +80,7 @@
                                             out.println(vt.getVarImagen());
                                         } else {
                                             out.println("img/en proceso.png");
-                                            
+
                                         }%>">
                                 </a>
                             </div>
@@ -155,7 +155,7 @@
                             <input type="text" id="Color" name="Color" class="autocomplete">
                             <label for="Color">Color</label>
                         </div>
-                        <div class="file-field input-field col s4">
+                        <div class="file-field input-field col s3">
 
                             <i class="material-icons prefix">image</i>
                             <input type="file" name="image">
@@ -197,7 +197,7 @@
                             <select name="ProId">>
                                 <option value="" disabled >Producto</option>
                                 <%                        for (ProductoTab pl : LisPro) {%>
-                                <option value="<%=pl.getProId()%>"  <%if (vS.getProId()==pl.getProId()) {%> selected <%}%> ><%=pl.getProNombre()%> </option>
+                                <option value="<%=pl.getProId()%>"  <%if (vS.getProId() == pl.getProId()) {%> selected <%}%> ><%=pl.getProNombre()%> </option>
                                 <%}%>
                             </select>
                             <label>Producto</label>
@@ -211,12 +211,14 @@
                             <input type="text" id="Color" name="Color" class="autocomplete" value="<%=vS.getVarColor()%>">
                             <label for="Color">Color</label>
                         </div>
-                             <div class="input-field col s4">
+                        <div class="input-field col s4">
                             <input id="Tipo" type="text" name="Tipo" class="validate" required="">
                             <label for="Tipo">Tipo</label>
                         </div>
-                        
-                         <i class="material-icons prefix">image</i>
+
+                        <div class="file-field input-field col s3">
+
+                            <i class="material-icons prefix">image</i>
                             <input type="file" name="image">
                             <input class="file-path validate" name ="Archivo" type="text">
 
