@@ -42,15 +42,15 @@ public class MenuServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
-        
-          if (Ses.getAttribute("jsp") != null) {
+
+        if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "menu.jsp";
@@ -66,8 +66,7 @@ public class MenuServ extends HttpServlet {
                 acc = a;
             }
         }
-        
-        
+
         if (acc == null) {
             m.setTipo("Error");
             m.setMsj("Permisos insuficientes");
@@ -75,16 +74,15 @@ public class MenuServ extends HttpServlet {
             ruta = "main.jsp";
         }
 
-      
         MenuTab me = null;
         int Id;
-     String Portada;
-     String Superior;
-     String Longitud;
-     String Cauchos;
-     String Descripcion;
-     String Marcacion;
-     Boolean Estado;
+        String Portada;
+        String Superior;
+        String Longitud;
+        String Cauchos;
+        String Descripcion;
+        String Marcacion;
+        Boolean Estado;
         String E;
 
         try {
@@ -100,7 +98,7 @@ public class MenuServ extends HttpServlet {
                         Marcacion = request.getParameter("Marcacion");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        me = new MenuTab(Portada,Superior,Longitud,Cauchos,Descripcion,Marcacion,Estado);
+                        me = new MenuTab(Portada, Superior, Longitud, Cauchos, Descripcion, Marcacion, Estado);
                         m = Asql.getMenu().insertar(me);
 
                     } else {
@@ -121,9 +119,9 @@ public class MenuServ extends HttpServlet {
                         Marcacion = request.getParameter("Marcacion");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        me = new MenuTab(Id,Portada,Superior,Longitud,Cauchos,Descripcion,Marcacion,Estado);
-                        m =Asql.getMenu().modificar(me);
-                        
+                        me = new MenuTab(Id, Portada, Superior, Longitud, Cauchos, Descripcion, Marcacion, Estado);
+                        m = Asql.getMenu().modificar(me);
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para hacer modificaciones");
@@ -133,7 +131,7 @@ public class MenuServ extends HttpServlet {
                     if (acc.isRpEliminar()) {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         m = Asql.getMenu().eliminar(Id);
-                        
+
                     } else {
                         m.setTipo("Error");
                         m.setMsj("No tienes permisos para eliminar registros");
@@ -185,9 +183,8 @@ public class MenuServ extends HttpServlet {
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    }
-
+    //request.getRequestDispatcher("index.jsp").forward(request, response);
+    //}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

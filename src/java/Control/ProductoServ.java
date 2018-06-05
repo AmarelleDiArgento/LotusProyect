@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.ServletException;  
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,15 +42,15 @@ public class ProductoServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
-        
-            if (Ses.getAttribute("jsp") != null) {
+
+        if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "producto.jsp";
@@ -66,15 +66,14 @@ public class ProductoServ extends HttpServlet {
                 acc = a;
             }
         }
-        
-         if (acc == null) {
+
+        if (acc == null) {
             m.setTipo("Error");
             m.setMsj("Permisos insuficientes");
             m.setDetalles("No tienes permiso para ingresar a esta area");
             ruta = "main.jsp";
         }
 
-    
         ProductoTab pr = null;
         int Id;
         String Nombre;
@@ -171,9 +170,9 @@ public class ProductoServ extends HttpServlet {
             Ses.setAttribute("msj", m);
         }
         request.getRequestDispatcher(ruta).forward(request, response);
-    }
+        //}
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

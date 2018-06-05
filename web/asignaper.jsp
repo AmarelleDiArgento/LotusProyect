@@ -11,7 +11,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisAp") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("AsignaPer")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisAp") != null) {
 
 
 %>
@@ -66,8 +74,10 @@
                         <th>Permiso</th>
                         <th>Leer</th>
                         <th>Nuevo</th>
-                        <th>Modificar</th>
+                        <th>Editar</th>
+
                         <th>Eliminar</th>
+
                     </tr>
                 </thead>
 
@@ -96,9 +106,12 @@
                     </tr>
 
                     <%}%>
+                    <%if (acc.isRpEditar()) {%>
+
                 <div class="row center-align">
                     <input class="waves-effect waves-orange btn-flat" type="submit" name="accion" value="modificar" />
                 </div>
+                <%}%>
                 </tbody>
             </table>
 
@@ -265,8 +278,11 @@
 </html>
 <%
 
-        }
+            }
+        } else {
 
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

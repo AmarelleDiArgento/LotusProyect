@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.LineaTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisL") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Linea")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisL") != null) {
 
 
 %>
@@ -50,7 +59,7 @@
 
 
         <div class="container">
-         <h5>Linea</h5>
+            <h5>Linea</h5>
 
 
             <%
@@ -63,8 +72,13 @@
                         <th>Nombre</th>
                         <th>Detalles</th>
                         <th>Estado</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+                        %>
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -78,16 +92,22 @@
                                 <span></span>
                             </label>
                         </td>
+
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=at.getLinId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                            if (acc.isRpEliminar()) {%>
+                        %>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="msjConf(<%=at.getLinId()%>)"> delete </i>
                             </a>
                         </td>
+                        <%}%>
                     </tr>
 
                     <%}%>
@@ -99,10 +119,12 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
+                    <%if (acc.isRpNuevo()) {%>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+                        <%}%>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -119,6 +141,7 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
+        <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="lineas.do">
                 <div class="modal-content">
@@ -145,15 +168,16 @@
                     </div>    
                 </div>
 
-
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
+        <%}%>
 
 
         <!-- Modal Modificar Registro -->
+        <%if (acc.isRpEditar()) {%>
         <%if (Ses.getAttribute("LIn") != null) {
                 LineaTab lS = (LineaTab) Ses.getAttribute("Rol");
         %>
@@ -189,6 +213,7 @@
                 </div>
             </form>
         </div>
+        <%}%>
 
         <%}%>
         <!--Scripts-->
@@ -282,6 +307,11 @@
 </html>
 <%
 
+            }
+
+        } else {
+
+            response.sendRedirect("main.jsp");
         }
 
     } else {

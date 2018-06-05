@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.GradosTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisG") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Poscosecha")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisG") != null) {
 
 
 %>
@@ -63,8 +72,13 @@
                         <th>Nombre</th>
                         <th>Detalles</th>
                         <th>Estado</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+                        %>
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -81,16 +95,23 @@
                         </td>
 
 
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="consultar(<%=gt.getGraId()%>)" >edit</i>
                             </a>
                         </td>
+                        <%}
+                            if (acc.isRpEliminar()) {%>
+                        %>
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="msjConf(<%=gt.getGraId()%>)">delete</i>
                             </a>
                         </td>
+                        <%}%>
+
+
                     </tr>
 
                     <%}%>
@@ -102,8 +123,10 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
+                    <%if (acc.isRpNuevo()) {%>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo grado"><i class="material-icons">blur_linear</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+                        <%}%>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
 
                 </ul>
@@ -122,6 +145,8 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
+
+        <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="grados.do">
                 <div class="modal-content">
@@ -154,9 +179,10 @@
                 </div>
             </form>
         </div>
-
+        <%}%>
 
         <!-- Modal Modificar Registro -->
+        <%if (acc.isRpEditar()) {%>
         <%if (Ses.getAttribute("Gra") != null) {
                 GradosTab gS = (GradosTab) Ses.getAttribute("Gra");
         %>
@@ -194,6 +220,7 @@
                 </div>
             </form>
         </div>
+        <%} %>
 
         <%}%>
         <!--Scripts-->
@@ -287,8 +314,12 @@
 </html>
 <%
 
-        }
+            }
 
+        } else {
+
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

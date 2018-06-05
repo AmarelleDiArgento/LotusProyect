@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.MaestroTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisMae") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Linea")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisMae") != null) {
 
 
 %>
@@ -74,7 +83,7 @@
                         <td><%=mt.getMaeNombre()%></td>
                         <td><%=mt.getMaeDescripcion()%></td>
                         <td>
-                        
+
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=mt.getMaeId()%>)" > edit </i>
                             </a>
@@ -95,10 +104,12 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
+                    <%if (acc.isRpNuevo()) {%>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">vpn_key</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+                        <%}%>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -115,6 +126,7 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
+        <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="maestros.do">
                 <div class="modal-content">
@@ -129,7 +141,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        
+
                     </div>    
                 </div>
 
@@ -139,7 +151,7 @@
                 </div>
             </form>
         </div>
-
+        <%}%>
 
         <!-- Modal Modificar Registro -->
         <%if (Ses.getAttribute("Mae") != null) {
@@ -159,7 +171,7 @@
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
                             <label for="Descripcion">Descripción</label>
                         </div>
-                        
+
 
                     </div>    
                 </div>
@@ -262,6 +274,11 @@
 </html>
 <%
 
+            }
+
+        } else {
+
+            response.sendRedirect("main.jsp");
         }
 
     } else {

@@ -42,7 +42,7 @@ public class LineaServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
@@ -67,7 +67,7 @@ public class LineaServ extends HttpServlet {
             ruta = "rol.jsp";
         }
         LineaTab l = null;
-        
+
         int Id;
         String PosNombre;
         Boolean Estado;
@@ -82,7 +82,7 @@ public class LineaServ extends HttpServlet {
                         PosNombre = request.getParameter("PosNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        l = new LineaTab(PosNombre,Estado);
+                        l = new LineaTab(PosNombre, Estado);
                         m = Asql.getLinea().insertar(l);
 
                     } else {
@@ -98,7 +98,7 @@ public class LineaServ extends HttpServlet {
                         PosNombre = request.getParameter("PosNombre");
                         E = request.getParameter("Estado");
                         Estado = E.equals("on");
-                        l = new LineaTab(Id,PosNombre,Estado);
+                        l = new LineaTab(Id, PosNombre, Estado);
                         m = Asql.getLinea().modificar(l);
 
                     } else {
@@ -161,9 +161,8 @@ public class LineaServ extends HttpServlet {
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    }
-
+    //request.getRequestDispatcher("index.jsp").forward(request, response);
+    //}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

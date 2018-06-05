@@ -44,7 +44,7 @@ public class AsignaPerServ extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //f (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
@@ -165,9 +165,9 @@ public class AsignaPerServ extends HttpServlet {
                 Ses.setAttribute("msj", m);
             }
             request.getRequestDispatcher(ruta).forward(request, response);
-        }
+        //}
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

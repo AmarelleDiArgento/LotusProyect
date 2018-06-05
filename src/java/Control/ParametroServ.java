@@ -41,15 +41,14 @@ public class ParametroServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
-        
-        
+
         if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
@@ -67,8 +66,7 @@ public class ParametroServ extends HttpServlet {
             }
         }
 
-        
-          if (acc == null) {
+        if (acc == null) {
             m.setTipo("Error");
             m.setMsj("Parametro: Permisos insuficientes");
             m.setDetalles("No tienes permiso para ingresar a esta area");
@@ -164,9 +162,9 @@ public class ParametroServ extends HttpServlet {
         }
 
         request.getRequestDispatcher(ruta).forward(request, response);
-    }
+        //}
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

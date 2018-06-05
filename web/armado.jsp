@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.ArmadoTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,8 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisA") != null) {
-
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Armado")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisA") != null) {
 
 %>
 <html lang="es">
@@ -32,7 +40,7 @@
         <meta http-equiv="Last-Modified" content="0">
         <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
         <meta http-equiv="Pragma" content="no-cache">
-        
+
     </head>
 
 
@@ -64,8 +72,13 @@
                         <th>Nombre</th>
                         <th>Detalles</th>
                         <th>Estado</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+                        %>
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -81,16 +94,24 @@
                             </a>
                         </td>
 
+
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="consultar(<%=at.getArmId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                            if (acc.isRpEliminar()) {%>
+                        %>
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="msjConf(<%=at.getArmId()%>)"> delete </i>
                             </a>
                         </td>
+                        <%}%>
+                        </td>
+
                     </tr>
 
                     <%}%>
@@ -286,8 +307,12 @@
 </html>
 <%
 
-        }
+            }
 
+        } else {
+
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

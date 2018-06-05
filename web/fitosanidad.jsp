@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.FitosanidadTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,15 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisF") != null) {
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("AsignaPer")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisF") != null) {
 
 
 %>
@@ -50,7 +59,7 @@
 
 
         <div class="container">
-           <h5>Fitosanidad</h5>
+            <h5>Fitosanidad</h5>
 
 
             <%
@@ -65,8 +74,13 @@
                         <th>Tipo</th>
                         <th>Imagen</th>
                         <th>Estado</th>
+                            <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
+                            <%}
+                                if (acc.isRpEliminar()) {%>
+                        %>
                         <th>Eliminar</th>
+                            <%}%>
                     </tr>
                 </thead>
 
@@ -85,16 +99,22 @@
                                 <span></span>
                             </label>
                         </td>
+
+                        <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="consultar(<%=ft.getFitId()%>)" > edit </i>
                             </a>
                         </td>
+                        <%}
+                                if (acc.isRpEliminar()) {%>
+                        %>
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="msjConf(<%=ft.getFitId()%>)"> delete </i>
                             </a>
                         </td>
+                        <%}%>
                     </tr>
 
                     <%}%>
@@ -109,7 +129,7 @@
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -144,77 +164,77 @@
                             <input id="Tipo" type="text" name="Tipo" class="validate" required="">
                             <label for="Tipo">Tipo</label>
                         </div>
-                        
-                         <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
 
-                        </div>
-                            <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+                        <i class="material-icons prefix">image</i>
+                        <input type="file" name="image">
+                        <input class="file-path validate" name ="Archivo" type="text">
 
-                    </div>    
-                </div>
+                    </div>
+                    <div class="switch">
+                        <label>
+                            Inactivo
+                            <input type="checkbox" name="Estado">
+                            <span class="lever"></span>
+                            Activo
+                        </label>
+                    </div>
 
-
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
+                </div>    
         </div>
 
 
-        <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("Fit") != null) {
-                FitosanidadTab fS = (FitosanidadTab) Ses.getAttribute("Fit");
-        %>
-        <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="fitosanidads.do">
-                <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nuevo Fitosanidad</h4>
-                    <p>Registra la informacion de la nueva Fitosanidad</p>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
+        <div class="modal-footer">
+            <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+        </div>
+    </form>
+</div>
 
-                    </div>    
+
+<!-- Modal Modificar Registro -->
+<%if (Ses.getAttribute("Fit") != null) {
+        FitosanidadTab fS = (FitosanidadTab) Ses.getAttribute("Fit");
+%>
+<div id="modalModificar" class="modal modal-fixed-footer">
+    <form method="get" action="fitosanidads.do">
+        <div class="modal-content">
+            <h4><i class="material-icons medium">assignment_ind</i> Nuevo Fitosanidad</h4>
+            <p>Registra la informacion de la nueva Fitosanidad</p>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                    <label for="Nombre">Nombre</label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
+                    <label for="Descripcion">Descripción</label>
+                </div>
+                <div class="switch">
+                    <label>
+                        Inactivo
+                        <input type="checkbox" name="Estado">
+                        <span class="lever"></span>
+                        Activo
+                    </label>
                 </div>
 
-
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
+            </div>    
         </div>
 
-        <%}%>
-        <!--Scripts-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
+        <div class="modal-footer">
+            <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+        </div>
+    </form>
+</div>
+
+<%}%>
+<!--Scripts-->
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="js/sweetalert.min.js"></script>
+
+<script type="text/javascript">
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');
@@ -246,9 +266,9 @@
                                         $('body').append(form);
                                         (form).submit();
                                     }
-            <% if (msj != null) {%>
+    <% if (msj != null) {%>
 
-            <%if (msj.getTipo().equals("Error")) {%>
+    <%if (msj.getTipo().equals("Error")) {%>
                                     function msjError() {
                                         swal({
                                             title: "<%=msj.getMsj()%>",
@@ -259,7 +279,7 @@
                                     ;
 
 
-            <%} else if (msj.getTipo().equals("Msj")) {%>
+    <%} else if (msj.getTipo().equals("Msj")) {%>
                                     function msjMsj() {
 
                                         swal("<%=msj.getMsj()%>", {
@@ -268,7 +288,7 @@
                                     }
                                     ;
 
-            <%} else if (msj.getTipo().equals("Ok")) {%>
+    <%} else if (msj.getTipo().equals("Ok")) {%>
                                     function msjOk()
                                     {
                                         swal({
@@ -278,11 +298,11 @@
                                         });
                                     }
                                     ;
-            <%}
-                }%>
+    <%}
+        }%>
 
-        </script>
-    </body>
+</script>
+</body>
 </html>
 <%
 
@@ -299,8 +319,12 @@
 </html>
 <%
 
-        }
+            }
 
+        } else {
+
+            response.sendRedirect("main.jsp");
+        }
     } else {
 
         response.sendRedirect("index.jsp");

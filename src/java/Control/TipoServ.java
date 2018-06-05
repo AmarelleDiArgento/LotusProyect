@@ -42,15 +42,15 @@ public class TipoServ extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession Ses = request.getSession(true);
-        if (Ses.getAttribute("log") != null) {
+        //if (Ses.getAttribute("log") != null) {
 
         Mensajes m = new Mensajes();
         if (Ses.getAttribute("msj") != null) {
             m = (Mensajes) Ses.getAttribute("msj");
         }
         String ruta;
-        
-          if (Ses.getAttribute("jsp") != null) {
+
+        if (Ses.getAttribute("jsp") != null) {
             ruta = (String) Ses.getAttribute("jsp");
         } else {
             ruta = "tipoms.jsp";
@@ -66,18 +66,18 @@ public class TipoServ extends HttpServlet {
                 acc = a;
             }
         }
-        
-         if (acc == null) {
+
+        if (acc == null) {
             m.setTipo("Error");
             m.setMsj("Permisos insuficientes");
             m.setDetalles("No tienes permiso para ingresar a esta area");
             ruta = "main.jsp";
         }
         TipoTab t = null;
-        
-       int TiMId;
-       String Nombre;
-       String Descripcion;
+
+        int TiMId;
+        String Nombre;
+        String Descripcion;
 
         try {
             AdminMs Asql = new AdminMs(pool);
@@ -87,7 +87,7 @@ public class TipoServ extends HttpServlet {
                     if (acc.isRpNuevo()) {
                         Nombre = request.getParameter("TiMNombre");
                         Descripcion = request.getParameter("TiMDescripcion");
-                        t = new TipoTab(Nombre,Descripcion);
+                        t = new TipoTab(Nombre, Descripcion);
                         m = Asql.getTipo().insertar(t);
                         m.setTipo("Ok");
 
@@ -103,7 +103,7 @@ public class TipoServ extends HttpServlet {
                         TiMId = Integer.parseInt(request.getParameter("TiMId"));
                         Nombre = request.getParameter("TiMNombre");
                         Descripcion = request.getParameter("TiMDescripcion");
-                        t = new TipoTab(TiMId,Nombre,Descripcion);
+                        t = new TipoTab(TiMId, Nombre, Descripcion);
                         m = Asql.getTipo().modificar(t);
                         m.setTipo("Ok");
 
@@ -168,9 +168,8 @@ public class TipoServ extends HttpServlet {
         request.getRequestDispatcher(ruta).forward(request, response);
     }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    }
-
+    //request.getRequestDispatcher("index.jsp").forward(request, response);
+    //}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

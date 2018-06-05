@@ -107,8 +107,10 @@
                     <i class="large material-icons">settings</i>
                 </a>
                 <ul>
+                    <%if (acc.isRpNuevo()) {%>
                     <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Materialseco"><i class="material-icons">extension</i></a></li>
                     <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
+                   <%}%>
                     <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">extension</i></a></li>
 
                 </ul>
@@ -127,6 +129,7 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
+                <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
             <form method="get" action="materialsecos.do">
                 <div class="modal-content">
@@ -192,6 +195,7 @@
                     </div>
             </form>
         </div>
+                            <%}%>
 
 
         <!-- Modal Modificar Registro -->
@@ -350,13 +354,17 @@
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>
-</html>
-<%
+    <%
 
+                }
+
+            } else {
+
+                response.sendRedirect("main.jsp");
+            }
+
+        } else {
+
+            response.sendRedirect("index.jsp");
         }
-
-    } else {
-
-        response.sendRedirect("index.jsp");
-    }
-%>
+    %>

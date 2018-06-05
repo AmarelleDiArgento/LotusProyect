@@ -1,3 +1,4 @@
+<%@page import="Modelo.Tabs.AsignaPermisoTab"%>
 <%@page import="Modelo.Tabs.ArmadoTab"%>
 <%@page import="Modelo.Tabs.MarcacionTab"%>
 <%@page import="Servicios.Mensajes"%>
@@ -12,9 +13,17 @@
 
 //Confirmar sesion del usuario
     if (Ses.getAttribute("log") != null) {
-        if (Ses.getAttribute("lisMar") != null) {
-            if (Ses.getAttribute("lisA") != null) {
-                List<ArmadoTab> lisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
+        List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
+        AsignaPermisoTab acc = null;
+        for (AsignaPermisoTab a : ap) {
+            if (a.getnPermiso().equalsIgnoreCase("Linea")) {
+                acc = a;
+            }
+        }
+        if (acc.isRpLeer()) {
+            if (Ses.getAttribute("lisMar") != null) {
+                if (Ses.getAttribute("lisA") != null) {
+                    List<ArmadoTab> lisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
 
 
 %>
@@ -323,6 +332,11 @@
 </html>
 <%
 
+            }
+
+        } else {
+
+            response.sendRedirect("main.jsp");
         }
 
     } else {
