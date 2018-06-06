@@ -140,7 +140,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -171,7 +171,7 @@
                             </div>
                             <div class="input-field col s12">
                                 <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                                <label for="Descripcion">Descripción</label>
+                                <label for="Descripcion">Descripciï¿½n</label>
                             </div>
 
                             <div class="file-field input-field col s4">
@@ -244,7 +244,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripción</label>
+                            <label for="Descripcion">Descripciï¿½n</label>
                         </div>
 
                         <div class="input-field col s6">
@@ -299,7 +299,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "¿Estas seguro?",
+                                            title: "ï¿½Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,

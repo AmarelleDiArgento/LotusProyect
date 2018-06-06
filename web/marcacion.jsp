@@ -16,7 +16,7 @@
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Marcación")) {
+            if (a.getnPermiso().equalsIgnoreCase("Marcaciï¿½n")) {
                 acc = a;
             }
         }
@@ -268,7 +268,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "¿Estas seguro?",
+                                            title: "ï¿½Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,

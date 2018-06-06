@@ -65,7 +65,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Dirección</th>
+                        <th>Direcciï¿½n</th>
                         <th>Ext.</th>
                         <th>Estado</th>
                             <%if (acc.isRpEditar()) {%>
@@ -134,7 +134,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -154,11 +154,11 @@
                         </div>
                         <div class="input-field col s6">
                             <input id="Direccion" type="text" name="Direccion" class="validate" required="">
-                            <label for="Direccion">Dirección</label>
+                            <label for="Direccion">Direcciï¿½n</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="Telefono" type="text" name="Telefono" class="validate" required="">
-                            <label for="Telefono">Extención</label>
+                            <label for="Telefono">Extenciï¿½n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -200,11 +200,11 @@
                         </div>
                         <div class="input-field col s6">
                             <input id="Direccion" type="text" name="Direccion" class="validate" value="<%=pS.getPosDireccion()%> required="">
-                            <label for="Direccion">Dirección</label>
+                            <label for="Direccion">Direcciï¿½n</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="Telefono" type="text" name="Telefono" class="validate" value="<%=pS.getPosTelefono()%>required="">
-                            <label for="Telefono">Extención</label>
+                            <label for="Telefono">Extenciï¿½n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -242,7 +242,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "¿Estas seguro?",
+                                            title: "ï¿½Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
