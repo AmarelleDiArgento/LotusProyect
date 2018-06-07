@@ -50,7 +50,7 @@
             <%
                 List<TipoTab> LisT = (List<TipoTab>) Ses.getAttribute("lisT");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>

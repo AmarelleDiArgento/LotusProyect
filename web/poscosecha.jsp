@@ -60,7 +60,7 @@
                 List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
             %>
 
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -129,6 +129,17 @@
             </div>
             <%}%>
         </div>
+    <div class="center">
+    <ul class="pagination">
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+    </div>
 
         <footer class="footer">
             <div>

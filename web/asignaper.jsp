@@ -67,7 +67,7 @@
             <input name="Rol" value="<%=LisAp.get(1).getRolId()%>" hidden />
             <%}
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>Rol</th>

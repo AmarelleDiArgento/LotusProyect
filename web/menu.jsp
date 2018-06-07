@@ -62,7 +62,7 @@
             <%
                 List<MenuTab> LisM = (List<MenuTab>) Ses.getAttribute("lisM");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>

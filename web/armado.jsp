@@ -65,7 +65,7 @@
             <%
                 List<ArmadoTab> LisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>

@@ -63,7 +63,7 @@
             <%
                 List<MaterialSecoTab> lisMs = (List<MaterialSecoTab>) Ses.getAttribute("lisMs");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>

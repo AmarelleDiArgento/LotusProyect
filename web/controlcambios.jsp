@@ -50,7 +50,7 @@
             <%
                 List<ControlCambioTab> LisC = (List<ControlCambioTab>) Ses.getAttribute("lisC");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>

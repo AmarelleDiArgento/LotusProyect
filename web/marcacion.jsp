@@ -68,7 +68,7 @@
             <%
                 List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>

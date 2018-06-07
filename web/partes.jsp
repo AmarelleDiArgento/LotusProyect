@@ -59,7 +59,7 @@
             <%
                 List<PartesTab> LisPrt = (List<PartesTab>) Ses.getAttribute("lisPrt");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
