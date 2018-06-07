@@ -47,7 +47,7 @@
 
 
         <div class="container">
-            <h5>Paso</h5>
+            <h5>Pasos</h5>
 
 
             <%
@@ -55,67 +55,25 @@
             %>
 
        <div class="carousel carousel-slider">
+
+                <% for (PasoTab pt : LisP) {%>
         <a class="carousel-item" href="#one!">
         <div class="col s12 m7">
-                <h2 class="header">Horizontal Card</h2>
+                <h2 class="header">Paso <%=pt.getPasorden()%></h2>
                 <div class="card horizontal">
                   <div class="card-image">
-                    <img width="500px" src="https://lorempixel.com/100/190/nature/6" class="materialboxed">
+                    <img width="500px" src="<%=pt.getPasImagen()%>" class="materialboxed">
                   </div>
                   <div class="card-stacked">
                     <div class="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information.</p>
+                      <p><%=pt.getPasDescripcion()%></p>
                     </div>
                   </div>
                 </div>
             </div>
         </a>
-        <a class="carousel-item" href="#two!">
-           <div class="col s12 m7">
-                <h2 class="header">Horizontal Card</h2>
-                <div class="card horizontal">
-                  <div class="card-image">
-                    <img src="https://lorempixel.com/100/190/nature/6" class="materialboxed">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information.</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
-        </a>
-        <a class="carousel-item" href="#three!">
-            <div class="col s12 m7">
-                <h2 class="header">Horizontal Card</h2>
-                <div class="card horizontal">
-                  <div class="card-image">
-                    <img src="https://lorempixel.com/100/190/nature/6" class="materialboxed">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information.</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </a>
-        <a class="carousel-item" href="#four!">
-            <div class="col s12 m7">
-                <h2 class="header">Horizontal Card</h2>
-                <div class="card horizontal">
-                  <div class="card-image">
-                    <img src="https://lorempixel.com/100/190/nature/6" class="materialboxed">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information.</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </a>
+                <%}%>
+        
       </div>
 
 
