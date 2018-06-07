@@ -11,6 +11,7 @@
     $('.tabs').tabs();
     $('select').formSelect();
     $('.carousel').carousel();
+    $('.carousel.carousel-slider').carousel();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
