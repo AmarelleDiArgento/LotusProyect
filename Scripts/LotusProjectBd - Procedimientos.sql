@@ -119,7 +119,9 @@ delimiter $$
 delimiter $$
 create procedure usuarioAvatar (in uAvatar varchar(255), in uId int)
 begin
-update usuario SET UsuAvatar=uAvatar where UsuCedula = uId;
+SET SQL_SAFE_UPDATES = 0;
+update usuario SET UsuAvatar = uAvatar where UsuCedula = uId;
+SET SQL_SAFE_UPDATES = 1;
 end $$
 delimiter $$
 
@@ -209,7 +211,7 @@ inner join rol as r on u.RolId = r.RolId
 inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
 where u.UsuCedula= uCedula and p.PerEstado=1 and ap.rolperLeer = 1
-order by p.PerId asc;
+order by p.PerModulo DESC, p.PerId ASC;
 end $$
 delimiter $$
 

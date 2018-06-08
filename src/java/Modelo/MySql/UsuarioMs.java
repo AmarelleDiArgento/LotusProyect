@@ -30,9 +30,12 @@ public class UsuarioMs implements Usuario {
     final String Consultar = "call LotusProject.usuarioCo(?);";
     final String ListarTodos = "call LotusProject.usuarioLi();";
     final String Login = "call LotusProject.usuarioLogin(?,?);";
+    final String Avatar = "call LotusProject.usuarioAvatar(?,?);";
 
     @Override
     public UsuarioTab login(String cedula, String pass) {
+        
+        
         PreparedStatement stat = null;
         ResultSet rs = null;
         UsuarioTab uModel = null;
@@ -104,7 +107,7 @@ public class UsuarioMs implements Usuario {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -112,7 +115,7 @@ public class UsuarioMs implements Usuario {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }
@@ -153,7 +156,7 @@ public class UsuarioMs implements Usuario {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -161,7 +164,7 @@ public class UsuarioMs implements Usuario {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }
@@ -189,7 +192,7 @@ public class UsuarioMs implements Usuario {
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error Mysql");
-            m.setDetalles("Error al ingresar los datos:" + ex.getMessage());
+            m.setDetalles("Error al ingresar los datos:" + ex);
         } finally {
             if (stat != null) {
                 try {
@@ -197,7 +200,7 @@ public class UsuarioMs implements Usuario {
                 } catch (SQLException ex) {
                     m.setTipo("Error");
                     m.setMsj("Error Mysql Statement");
-                    m.setDetalles("Error Statement, ingresar los datos:" + ex.getMessage());
+                    m.setDetalles("Error Statement, ingresar los datos:" + ex);
                 }
             }
         }
@@ -296,6 +299,44 @@ public class UsuarioMs implements Usuario {
             System.out.println("Error sql: " + ex);
         }
         return uModel;
+    }
+
+    @Override
+    public Mensajes Avatar(String cedula, String img) {
+        
+        PreparedStatement stat = null;
+        try {
+            stat = con.prepareStatement(Avatar);
+            stat.setString(1, img);
+            stat.setString(2, cedula);
+
+            if (stat.executeUpdate() == 0) {
+                m.setTipo("Error");
+                m.setMsj("Error Mysql");
+                m.setDetalles("Error al modificar los datos");
+            } else {
+                m.setTipo("Ok");
+                m.setMsj("Avatar modificado exitosamente");
+                m.setDetalles("Reinicia tu sesion para que el cambio tenga efecto");
+            }
+
+        } catch (SQLException ex) {
+            m.setTipo("Error");
+            m.setMsj("Error Mysql");
+            m.setDetalles("Error al ingresar los datos:" + ex);
+        } finally {
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    m.setTipo("Error");
+                    m.setMsj("Error Mysql Statement");
+                    m.setDetalles("Error Statement: " + ex);
+                }
+            }
+        }
+
+        return m;
     }
 
 }

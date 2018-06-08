@@ -7,6 +7,7 @@ package Modelo.Interface;
 
 import Modelo.Dao.DAO;
 import Modelo.Tabs.UsuarioTab;
+import Servicios.Mensajes;
 import java.sql.ResultSet;
 
 /**
@@ -16,4 +17,5 @@ import java.sql.ResultSet;
 public interface Usuario extends DAO<ResultSet, UsuarioTab, String> {
 
     UsuarioTab login(String cedula, String pass);
+    Mensajes Avatar (String cedula, String Avatar);
 }

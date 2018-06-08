@@ -95,18 +95,14 @@
     <form method="post" action="usuarios.do" enctype="multipart/form-data">
         <div class="modal-content">
             <h4>Selecciona el avatar para:</h4>
+            
+                <input name="Usuario" type="text" value="<%=u.getCedula()%>" hidden />
+            <div class="file-field input-field col s3">
 
-            <div class="row center">
-                <input name="Usuario" type="text" value="<%=u.getLoger()%>" hidden />
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
-                        <input type="file" name="IMG">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
+                <i class="material-icons prefix">image</i>
+                <input type="file" name="IMG">
+                <input class="file-path validate" type="text">
+
             </div>
 
         </div>
@@ -120,13 +116,11 @@
 
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large pink">
-        <i class="large material-icons">settings</i>
+        <i class="large material-icons">
+            settings
+        </i>
     </a>
     <ul>
-
-
-
-
         <%
             String Mod = "";
             String jsps = (String) SesM.getAttribute("jsp");
@@ -134,34 +128,44 @@
                 if (m.getPerUrl().equalsIgnoreCase(jsps)) {
                     Mod = m.getPerModulo();
         %>            
-        <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva <%=m.getPerNombre()%>"><i class="material-icons"><%=m.getPerIco()%></i></a></li>
-
+        <li>
+            <a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuev@ <%=m.getPerNombre()%>">
+                <i class="material-icons">
+                    <%=m.getPerIco()%>
+                </i>
+            </a>
+        </li>
         <%
                 }
             }
+            if (!Mod.equalsIgnoreCase("")) {
         %>
-        <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-
-
+        <li>
+            <a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls <%=Mod%>">
+                <i class="material-icons">
+                    attach_file
+                </i>
+            </a>
+        </li>
         <%
+            }
             for (PermisoTab m : menu) {
                 if (m.getPerModulo().equalsIgnoreCase(Mod) && !m.getPerUrl().equalsIgnoreCase(jsps)) {
 
         %>            
-        <li><a href="<%=m.getPerUrl()%>" class="btn-floating purple tooltipped" data-position="left" data-tooltip="<%=m.getPerNombre()%>"><i class="material-icons"><%=m.getPerIco()%></i></a></li>
+        <li>
+            <a href="<%=m.getPerUrl()%>" class="btn-floating purple tooltipped" data-position="left" data-tooltip="<%=m.getPerNombre()%>">
+                <i class="material-icons">
+                    <%=m.getPerIco()%>
+                </i>
+            </a>
+        </li>
 
         <%                }
             }
-
         %>
-
-
-
     </ul>
 </div>
-
-
-
 
 <%    } else {//
         response.sendRedirect("permisos.do?accion=menu");

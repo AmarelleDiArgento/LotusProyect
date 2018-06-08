@@ -165,6 +165,7 @@ public class UsuarioServ extends HttpServlet {
                     Url = "img/Usuario/";
                     Avatar = Usuario + "." + extension;
                     m = af.subirImg(arc, Url, Avatar);
+                    m = Asql.getUsuario().Avatar(Usuario, Url + Avatar);
                     break;
 
                 default:
