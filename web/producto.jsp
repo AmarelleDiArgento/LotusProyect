@@ -15,7 +15,7 @@
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Parametro")) {
+            if (a.getnPermiso().equalsIgnoreCase("Producto")) {
                 acc = a;
             }
         }

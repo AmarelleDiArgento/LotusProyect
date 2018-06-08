@@ -16,7 +16,7 @@
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Marcaci�n")) {
+            if (a.getnPermiso().equalsIgnoreCase("Marcacion")) {
                 acc = a;
             }
         }

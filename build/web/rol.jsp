@@ -48,7 +48,7 @@
             <%
                 List<RolTab> LisR = (List<RolTab>) Ses.getAttribute("lisR");
             %>
-            <table class="centered striped">
+            <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -232,7 +232,7 @@
                                     ;
                                     function consultar(id) {
                                         var url = 'rols.do';
-                                        var form = $('<form action="' + url + '" method="get">' +
+                                        var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
                                                 '</form>');
