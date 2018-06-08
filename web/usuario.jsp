@@ -114,18 +114,7 @@
                 </tbody>
             </table>
 
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large pink">
-                    <i class="large material-icons">settings</i>
-                </a>
-                <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Usuario"><i class="material-icons">person_add</i></a></li>
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
-                    <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
-
-                </ul>
-            </div>
+            
         </div>
 
         <footer class="footer">

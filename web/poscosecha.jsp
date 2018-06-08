@@ -115,31 +115,19 @@
                 </tbody>
             </table>
 
-            <%if (acc.isRpEditar()) {%>
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large pink">
-                    <i class="large material-icons">settings</i>
-                </a>
-                <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva Poscosecha"><i class="material-icons">business</i></a></li>
 
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-
-                </ul>
-            </div>
-            <%}%>
         </div>
-    <div class="center">
-    <ul class="pagination">
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    </ul>
-    </div>
+        <div class="center">
+            <ul class="pagination">
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#!">1</a></li>
+                <li class="waves-effect"><a href="#!">2</a></li>
+                <li class="waves-effect"><a href="#!">3</a></li>
+                <li class="waves-effect"><a href="#!">4</a></li>
+                <li class="waves-effect"><a href="#!">5</a></li>
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+        </div>
 
         <footer class="footer">
             <div>

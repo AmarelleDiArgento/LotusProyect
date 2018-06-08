@@ -118,24 +118,14 @@
                 </tbody>
             </table>
 
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large pink">
-                    <i class="large material-icons">settings</i>
-                </a>
-                <ul>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuevo Armado"><i class="material-icons">extension</i></a></li>
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                    <li><a href="paso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Paso"><i class="material-icons">extension</i></a></li>
 
-                </ul>
-            </div>
         </div>
 
         <footer class="footer">
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -155,7 +145,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripciï¿½n</label>
+                            <label for="Descripcion">Descripci©n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -194,7 +184,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required> <%=aS.getArmDescripcion()%> </textarea>
-                            <label for="Descripcion">Descripciï¿½n</label>
+                            <label for="Descripcion">Descripci©n</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -232,7 +222,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "ï¿½Estas seguro?",
+                                            title: "©Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,

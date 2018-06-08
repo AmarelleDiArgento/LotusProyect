@@ -37,7 +37,7 @@ public class VariedadMs implements Variedad {
 
     @Override
     public Mensajes insertar(VariedadTab v) {
-        String msj = "";
+        
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Insertar);

@@ -103,24 +103,6 @@
                 </tbody>
             </table>
 
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large pink">
-                    <i class="large material-icons">settings</i>
-                </a>
-                <ul>
-                    <%if (acc.isRpNuevo()) {%>
-                    <li><a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nueva parte"><i class="material-icons">flip</i></a></li>
-                    <li><a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls"><i class="material-icons">attach_file</i></a></li>
-                        <%}%>
-                    <li><a href="producto.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto"><i class="material-icons">local_florist</i></a></li>
-                    <li><a href="maestro.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Producto maestro"><i class="material-icons">vpn_key</i></a></li>
-                    <li><a href="parametros.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Parametros"><i class="material-icons">tune</i></a></li>
-                    <li><a href="grados.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Grados"><i class="material-icons">blur_linear</i></a></li>
-                    <li><a href="fitosanidad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Fitosanidad"><i class="material-icons">bug_report</i></a></li>
-                    <li><a href="variedad.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Variedades"><i class="material-icons">filter_vintage</i></a></li>
-
-                </ul>
-            </div>
         </div>
 
         <footer class="footer">

@@ -203,13 +203,12 @@ delimiter $$
 delimiter $$
 create procedure perMenu (in uCedula int(11))
 begin
-Select p.PerId, p.PerModulo, p.PerUrl, p.PerIco
+Select p.PerId, p.PerModulo,p.PerNombre ,p.PerUrl, p.PerIco
 from usuario as u
 inner join rol as r on u.RolId = r.RolId
 inner join asignapermiso as ap on r.RolId = ap.RolId
 inner join permiso as p on ap.PerId = p.PerId
 where u.UsuCedula= uCedula and p.PerEstado=1 and ap.rolperLeer = 1
-group by p.PerModulo
 order by p.PerId asc;
 end $$
 delimiter $$
@@ -1356,7 +1355,7 @@ delimiter $$
 delimiter $$
 create procedure variedadEl (in vId INT)
 begin
-delete from variedad where  VarId = rId;
+delete from variedad where  VarId = vId;
 end $$
 delimiter $$
 

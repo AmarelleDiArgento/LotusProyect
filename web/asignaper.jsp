@@ -14,7 +14,7 @@
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("AsignaPer")) {
+            if (a.getnPermiso().equalsIgnoreCase("Permiso")) {
                 acc = a;
             }
         }
@@ -115,17 +115,7 @@
                 </tbody>
             </table>
 
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large pink">
-                    <i class="large material-icons">settings</i>
-                </a>
-                <ul>
-                    <li><a href="usuario.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Usuarios"><i class="material-icons">face</i></a></li>
-                    <li><a href="permiso.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Permisos"><i class="material-icons">developer_board</i></a></li>
-                    <li><a href="rol.jsp" class="btn-floating purple tooltipped" data-position="left" data-tooltip="Roles"><i class="material-icons">assignment_ind</i></a></li>
 
-                </ul>
-            </div>
         </form>
     </div>
 

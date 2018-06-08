@@ -34,7 +34,6 @@ call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315'
 call LotusProject.permisoIn('Usuario', 'Usuario', 'Permisos de usuario', 'usuario.jsp', 'face', 1);
 call LotusProject.permisoIn('Rol', 'Usuario', 'Permisos de usuario', 'rol.jsp', 'assignment_ind', 1);
 call LotusProject.permisoIn('Permiso', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'lock_open', 1);
-call LotusProject.permisoIn('AsignaPer', 'Usuario', 'Permisos de usuario', 'permiso.jsp', 'developer_board', 1);
 call LotusProject.permisoIn('Poscosecha', 'Poscosecha', 'Permisos de poscosecha', 'poscosecha.jsp', 'business', 1);
 call LotusProject.permisoIn('Cliente', 'Cliente', 'Permisos de cliente', 'cliente.jsp', 'local_mall', 1);
 call LotusProject.permisoIn('Producto', 'Producto', 'Permisos de producto', 'producto.jsp', 'local_florist', 1);
@@ -44,7 +43,7 @@ call LotusProject.permisoIn('Parametro', 'Producto', 'Permisos de parametros', '
 call LotusProject.permisoIn('Variedad', 'Producto', 'Permisos de variedad', 'variedad.jsp', 'filter_vintage', 1);
 call LotusProject.permisoIn('Grado', 'Producto', 'Permisos de grado', 'grados.jsp', 'blur_linear', 1);
 call LotusProject.permisoIn('Parte', 'Producto', 'Permisos para parte', 'partes.jsp', 'flip', 1);
-call LotusProject.permisoIn('Material Seco', 'Marcacion', 'Permisos para materiales secos', 'materialseco.jsp', 'style', 1);
+call LotusProject.permisoIn('Material Seco', 'Marcación', 'Permisos para materiales secos', 'materialseco.jsp', 'style', 1);
 call LotusProject.permisoIn('Fitosanidad', 'Producto', 'Permisos para fitosanidad', 'fitosanidad.jsp', 'bug_report', 1);
 call LotusProject.permisoIn('Linea', 'Poscosecha', 'Permisos para linea', 'linea.jsp', 'label_outline', 1);
 call LotusProject.permisoIn('Producto maestro', 'Producto', 'Permisos para producto maestro', 'maestro.jsp', 'vpn_key', 1);
@@ -81,7 +80,6 @@ call LotusProject.AsgPerIn(1, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(1, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(2, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 2, 1, 1, 1, 1);
@@ -102,7 +100,6 @@ call LotusProject.AsgPerIn(2, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(2, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(3, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 2, 1, 1, 1, 1);
@@ -123,7 +120,6 @@ call LotusProject.AsgPerIn(3, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(3, 20, 1, 1, 1, 1);
 
 
 call LotusProject.AsgPerIn(4, 1, 1, 1, 1, 1);
@@ -145,7 +141,6 @@ call LotusProject.AsgPerIn(4, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(4, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(5, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 2, 1, 1, 1, 1);
@@ -166,7 +161,6 @@ call LotusProject.AsgPerIn(5, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(5, 20, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(6, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 2, 1, 1, 1, 1);
@@ -187,7 +181,6 @@ call LotusProject.AsgPerIn(6, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 18, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 19, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(6, 20, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);
@@ -371,7 +364,7 @@ call LotusProject.lineaIn(1, 1);
 call LotusProject.marcacionIn('Bloomstar Rainbow 24 tallos', 'abcd', 1, 1);
  -- call lotusproject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
 -- call lotusproject.marcacionLi();
--- call lotusproject.marcacionCo(3);
+-- call lotusproject.permisomarcacionCo(3);
 
 -- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla tipoms 

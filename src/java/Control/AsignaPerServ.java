@@ -68,7 +68,7 @@ public class AsignaPerServ extends HttpServlet {
             switch (Accion) {
                 case "Insertar":
 
-                    Rol = Integer.parseInt(request.getParameter("Rol"));
+                    Rol = Integer.parseInt(request.getParameter("Permiso"));
                     List<PermisoTab> Lp = Asql.getPermiso().listar();
 
                     L = false;

@@ -144,7 +144,7 @@ public class MarcacionServ extends HttpServlet {
                         Id = Integer.parseInt(request.getParameter("Id"));
                         ma = Asql.getMarcacion().obtener(Id);
                         Ses.setAttribute("Mar", ma);
-                        m.setMsj("Se ha obtenido el marcacion con id: " + ma.getMarId());
+                        m.setMsj("Se ha obtenido el tipo con id: " + ma.getMarId());
                         m.setTipo("Mod");
                     } else {
                         m.setTipo("Error");
