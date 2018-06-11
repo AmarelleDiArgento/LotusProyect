@@ -79,7 +79,7 @@
 
 
 
-            <div class="row">
+            <!-- <div class="row">
                 <% for (PasoTab pt : LisP) {%>
                 <div class="col s3">
                     <div class="card">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <%}%>
-            </div>
+            </div> -->
     
         </div>
 
