@@ -763,6 +763,67 @@ delete from maestro where MaeId = maId;
 end $$
 delimiter $$
 
+-- -----------------------------------------------------
+-- Procedimientos LotusProject Tabla Cliente
+-- Insertar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure clienteIn (in cNombre VARCHAR(45), in uCedula VARCHAR(11), in cLocal VARCHAR(45), in cLogo VARCHAR(255), in cEstado tinyint(1))
+begin
+insert into cliente (CliNombre,UsuCedula,CliLocalizacion,CliLogo,CliEstado) values (cNombre,uCedula,cLocal,cLogo,cEstado);
+end $$
+delimiter $$
+
+
+-- -----------------------------------------------------
+-- Modificar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure clienteMo (in cNombre VARCHAR(45), in uCedula VARCHAR(11), in cLocal VARCHAR(45), in cLogo VARCHAR(255), in cEstado tinyint(1))
+begin
+update cliente SET CliNombre=cNombre,UsuCedula=uCedula,CliLocalizacion=cLocal,CliLogo=cLogo,cEstado=CliEstado where CliId = cId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Eliminar
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure clienteEl (in cId INT)
+begin
+delete from cliente where CliId = cId;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Listar todos
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure clienteLi ()
+begin
+select c.CliId,c.CliNombre,c.UsuCedula,concat(u.UsuNombre," ",u.UsuApellido) as fullname, CliLocalizacion,CliLogo,CliEstado 
+from cliente as c
+inner join usuario as u on c.UsuCedula = u.UsuCedula;
+end $$
+delimiter $$
+
+-- -----------------------------------------------------
+-- Consultar x id
+-- -----------------------------------------------------
+
+delimiter $$
+create procedure clienteCo (in cId INT)
+begin
+select c.CliId,c.CliNombre,c.UsuCedula,concat(u.UsuNombre," ",u.UsuApellido) as fullname, CliLocalizacion,CliLogo,CliEstado 
+from cliente as c
+inner join usuario as u on c.UsuCedula = u.UsuCedula
+where cliId = cId;
+end $$
+delimiter $$
 
 -- -----------------------------------------------------
 -- Procedimientos LotusProject Tabla marcacion
@@ -770,9 +831,9 @@ delimiter $$
 -- ---------
 
 delimiter $$
- create procedure marcacionIn(in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1), in armId int(11))
+ create procedure marcacionIn(in marNombre varchar(45), in marPortada mediumtext,in marEstado tinyint(1), in armId int(11), in cId int)
  begin
- insert into marcacion (MarNombre,MarPortada,MarEstado,ArmId) values (marNombre,marPortada,marEstado,armId);
+ insert into marcacion (MarNombre,MarPortada,MarEstado,ArmId,CliId) values (marNombre,marPortada,marEstado,armId,cId);
  end $$
  delimiter $$
  
@@ -781,9 +842,9 @@ delimiter $$
 -- -----------------------------------------------------
 
 delimiter $$ 
-create procedure marcacionMo(in mId int(11),in mNombre varchar(45), in mPortada mediumtext,in mEstado tinyint(1),in armId int(11)) 
+create procedure marcacionMo(in mId int(11),in mNombre varchar(45), in mPortada mediumtext,in mEstado tinyint(1),in armId int(11), in cId int) 
 begin 
-update marcacion SET MarNombre=mNombre, MarPortada=mPortada,MarEstado=mEstado, ArmId=armId where MarId=mId; 
+update marcacion SET MarNombre=mNombre, MarPortada=mPortada,MarEstado=mEstado, ArmId=armId, CliId=cId where MarId=mId; 
 end $$ 
 delimiter $$ 
 
@@ -794,8 +855,10 @@ delimiter $$
 delimiter $$ 
 create procedure marcacionLi () 
 begin 
-select ma.MarId,ma.MarNombre,ma.MarPortada,ma.MarEstado,ar.ArmId,ar.ArmNombre 
-from marcacion as ma inner join armado as ar on ma.ArmId = ar.ArmId; 
+select ma.MarId,ma.MarNombre,ma.MarPortada,ma.MarEstado,ar.ArmId,ar.ArmNombre, c.CliId, CliNombre 
+from marcacion as ma 
+inner join armado as ar on ma.ArmId = ar.ArmId 
+inner join cliente as c on ma.CliId = c.CliId; 
 end $$ 
 delimiter $$ 
 
@@ -806,9 +869,10 @@ delimiter $$
 delimiter $$
 create procedure marcacionCo (in mId int)
 begin
-select m.MarId, m.MarNombre, m.MarPortada, m.MarEstado, a.ArmId, a.ArmNombre
+select m.MarId, m.MarNombre, m.MarPortada, m.MarEstado, a.ArmId, a.ArmNombre, c.CliId, CliNombre
 from marcacion as m 
-inner join armado as a on m.ArmId = a.ArmId
+inner join armado as a on m.ArmId = a.ArmId 
+inner join cliente as c on ma.CliId = c.CliId
 where m.MarId = mId;
 end $$
 delimiter $$
@@ -1007,7 +1071,7 @@ delimiter $$
 --------------------------------------------
 
 delimiter $$
- create procedure pasoIn(in pOrden int(11), in pDescripcion mediumtext, in pImagen varchar(255), in pArmId int)
+ create procedure pasoIn(in pOrden int(11), in pDescripcion mediumtext, in pImagen mediumtext, in pArmId int)
 begin
  insert into paso (PasOrden,PasDescripcion,PasImagen,ArmId) values (pOrden,pDescripcion,pImagen,pArmId);
  end $$ 

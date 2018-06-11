@@ -203,7 +203,7 @@ public class AsignaPermisoMs implements AsignaPermiso {
         boolean nuevo = rs.getInt("rolperNuevo") == 1;
         boolean modificar = rs.getInt("rolperEditar") == 1;
         boolean eliminar = rs.getInt("rolperEliminar") == 1;
-        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, Modulo, leer, nuevo, eliminar, eliminar);
+        AsignaPermisoTab apModel = new AsignaPermisoTab(RolId, Rol, PerId, Permiso, Modulo, leer, nuevo, modificar, eliminar);
         return apModel;
     }
 
@@ -216,7 +216,7 @@ public class AsignaPermisoMs implements AsignaPermiso {
         boolean modificar = rs.getInt("rolperEditar") == 1;
         boolean eliminar = rs.getInt("rolperEliminar") == 1;
 
-        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, Modulo, leer, nuevo, eliminar, eliminar);
+        AsignaPermisoTab apModel = new AsignaPermisoTab(Permiso, Modulo, leer, nuevo, modificar, eliminar);
         return apModel;
     }
 

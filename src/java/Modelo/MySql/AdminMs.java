@@ -16,6 +16,7 @@ import Modelo.Interface.Armado;
 import Modelo.Interface.Permiso;
 import Modelo.Interface.Rol;
 import Modelo.Interface.AsignaPermiso;
+import Modelo.Interface.Cliente;
 import Modelo.Interface.Menu;
 import Modelo.Interface.Parametros;
 import Modelo.Interface.Paso;
@@ -32,8 +33,6 @@ import Modelo.Interface.Maestro;
 import Modelo.Interface.Marcacion;
 import Modelo.Interface.MaterialSeco;
 import Modelo.Interface.Partes;
-
-
 
 /**
  *
@@ -63,16 +62,17 @@ public class AdminMs implements Admin {
         this.pool = ds;
         this.con = pool.getConnection();
     }
-    
+
     private Armado Arm = null;
     private AsignaPermiso AsgPer = null;
     private ControlCambios Cont = null;
+    private Cliente Cli = null;
     private Fitosanidad Fit = null;
     private Grados Gra = null;
     private Linea Lin = null;
     private Maestro Mae = null;
     private Marcacion Mar = null;
-    private MaterialSeco  Mat = null;
+    private MaterialSeco Mat = null;
     private Menu Me = null;
     private Parametros Par = null;
     private Partes Part = null;
@@ -86,14 +86,14 @@ public class AdminMs implements Admin {
     private Usuario Usu = null;
     private Variedad Var = null;
 
-      @Override
+    @Override
     public Armado getArmado() {
         if (Arm == null) {
             Arm = new ArmadoMs(con);
         }
         return Arm;
     }
-    
+
     @Override
     public AsignaPermiso getAsignaPer() {
         if (AsgPer == null) {
@@ -101,17 +101,17 @@ public class AdminMs implements Admin {
         }
         return AsgPer;
     }
-    
-     @Override
-        public ControlCambios getControlCambios() {
+
+    @Override
+    public ControlCambios getControlCambios() {
         if (Cont == null) {
             Cont = new ControlCambiosMs(con);
         }
-        return Cont;      
-        
-     }
-        
-  @Override
+        return Cont;
+
+    }
+
+    @Override
     public Fitosanidad getFitosanidad() {
         if (Fit == null) {
             Fit = new FitosanidadMs(con);
@@ -119,25 +119,25 @@ public class AdminMs implements Admin {
         return Fit;
 
     }
-    
-     @Override
+
+    @Override
     public Grados getGrados() {
         if (Gra == null) {
             Gra = new GradosMs(con);
         }
         return Gra;
     }
-        
-     @Override
+
+    @Override
     public Linea getLinea() {
         if (Lin == null) {
             Lin = new LineaMs(con);
         }
         return Lin;
     }
-    
+
     @Override
-        public Maestro getMaestro() {
+    public Maestro getMaestro() {
         if (Mae == null) {
             Mae = new MaestroMs(con);
         }
@@ -145,66 +145,62 @@ public class AdminMs implements Admin {
     }
 
     @Override
-        public Marcacion getMarcacion() {
+    public Marcacion getMarcacion() {
         if (Mar == null) {
             Mar = new MarcacionMs(con);
         }
         return Mar;
     }
-        
-        
-     @Override
-        public MaterialSeco getMaterialSeco() {
+
+    @Override
+    public MaterialSeco getMaterialSeco() {
         if (Mat == null) {
             Mat = new MaterialSecoMs(con);
         }
-        return Mat;   
-        
-      }
-        
-   @Override
-        public Menu getMenu() {
+        return Mat;
+
+    }
+
+    @Override
+    public Menu getMenu() {
         if (Me == null) {
             Me = new MenuMs(con);
         }
         return Me;
-    } 
-        
-         @Override
+    }
+
+    @Override
     public Parametros getParametros() {
         if (Par == null) {
             Par = new ParametrosMs(con);
         }
         return Par;
     }
-    
-    
-         @Override
+
+    @Override
     public Partes getPartes() {
         if (Part == null) {
             Part = new PartesMs(con);
         }
         return Part;
     }
-    
-    
-     @Override
+
+    @Override
     public Paso getPaso() {
         if (Pas == null) {
             Pas = new PasoMs(con);
         }
         return Pas;
     }
-    
-     @Override
+
+    @Override
     public Permiso getPermiso() {
         if (Per == null) {
             Per = new PermisoMs(con);
         }
         return Per;
     }
-    
-    
+
     @Override
     public Poscosecha getPoscosecha() {
         if (Pos == null) {
@@ -212,8 +208,8 @@ public class AdminMs implements Admin {
         }
         return Pos;
     }
-    
-     @Override
+
+    @Override
     public Preliminar getPreliminar() {
         if (Pre == null) {
             Pre = new PreliminarMs(con);
@@ -221,15 +217,15 @@ public class AdminMs implements Admin {
         return Pre;
 
     }
-    
-     @Override
+
+    @Override
     public Producto getProducto() {
         if (Pro == null) {
             Pro = new ProductoMs(con);
         }
         return Pro;
     }
-    
+
     @Override
     public Rol getRol() {
         if (Rol == null) {
@@ -237,15 +233,15 @@ public class AdminMs implements Admin {
         }
         return Rol;
     }
-    
-     @Override
+
+    @Override
     public Tipo getTipo() {
         if (Ti == null) {
             Ti = new TipomsMs(con);
         }
         return Ti;
     }
-    
+
     @Override
     public Usuario getUsuario() {
         if (Usu == null) {
@@ -253,13 +249,22 @@ public class AdminMs implements Admin {
         }
         return Usu;
     }
-       
+
     @Override
     public Variedad getVariedad() {
         if (Var == null) {
             Var = new VariedadMs(con);
-            }
-            return Var;
         }
-        
-     }
+        return Var;
+    }
+
+    @Override
+    public Cliente getCliente() {
+
+        if (Cli == null) {
+            Cli = new ClienteMs(con);
+        }
+        return Cli;
+    }
+
+}

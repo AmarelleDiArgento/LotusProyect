@@ -29,8 +29,8 @@ public class MarcacionMs implements Marcacion {
         this.con = con;
     }
 
-    final String Insertar = "call LotusProject.marcacionIn(?,?,?.?);";
-    final String Modificar = "call LotusProject.marcacionMo(?,?,?,?,?);";
+    final String Insertar = "call LotusProject.marcacionIn(?,?,?,?,?);";
+    final String Modificar = "call LotusProject.marcacionMo(?,?,?,?,?,?);";
     final String Eliminar = "call LotusProject.marcacionEl(?);";
     final String Consultar = "call LotusProject.marcacionCo(?);";
     final String ListarTodos = "call LotusProject.marcacionLi();";
@@ -49,6 +49,7 @@ public class MarcacionMs implements Marcacion {
                 stat.setInt(3, 0);
             }
             stat.setInt(4, ma.getArmId());
+            stat.setInt(5, ma.getCliId());
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -85,7 +86,9 @@ public class MarcacionMs implements Marcacion {
         boolean status = rs.getInt("MarEstado") == 1;
         int aId = rs.getInt("ArmId");
         String nArmado = rs.getString("ArmNombre");
-        MarcacionTab mTab = new MarcacionTab(Id, nombre, portada, status, aId, nArmado);
+        int cId = rs.getInt("CliId");
+        String nCliente = rs.getString("CliNombre");
+        MarcacionTab mTab = new MarcacionTab(Id, nombre, portada, status, aId, nArmado, cId, nCliente);
         return mTab;
     }
 
@@ -162,18 +165,22 @@ public class MarcacionMs implements Marcacion {
     }
 
     @Override
-    public Mensajes modificar(MarcacionTab mar) {
+    public Mensajes modificar(MarcacionTab ma) {
         PreparedStatement stat = null;
         try {
             stat = con.prepareStatement(Modificar);
-            stat.setInt(1, mar.getMarId());
-            stat.setString(2, mar.getMarNombre());
-            stat.setString(3, mar.getMarPortada());
-            if (mar.isMarEstado()) {
+            stat.setInt(1, ma.getMarId());
+            stat.setString(2, ma.getMarNombre());
+            stat.setString(3, ma.getMarPortada());
+            if (ma.isMarEstado()) {
                 stat.setInt(4, 1);
             } else {
                 stat.setInt(4, 0);
             }
+            
+            stat.setInt(5, ma.getArmId());
+            stat.setInt(6, ma.getCliId());
+            
             if (stat.executeUpdate() == 0) {
 
                 m.setTipo("Error");
@@ -181,7 +188,7 @@ public class MarcacionMs implements Marcacion {
                 m.setDetalles("Error al modificar los datos");
             } else {
                 m.setTipo("Ok");
-                m.setMsj(mar.getMarNombre() + " modificado exitosamente");
+                m.setMsj(ma.getMarNombre() + " modificado exitosamente");
             }
 
         } catch (SQLException ex) {

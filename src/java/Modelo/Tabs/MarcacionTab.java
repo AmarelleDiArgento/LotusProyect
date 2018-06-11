@@ -19,29 +19,34 @@ public class MarcacionTab implements Serializable {
     private Boolean MarEstado;
     private int ArmId;
     private String ArmNombre;
+    private int CliId;
+    private String CliNombre;
 
-    public MarcacionTab(String MarNombre, String MarPortada, Boolean MarEstado, int ArmId) {
+    public MarcacionTab(String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, int CliId) {
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
         this.MarEstado = MarEstado;
         this.ArmId = ArmId;
+        this.CliId = CliId;
     }
-
-    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId) {
+    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, int CliId) {
         this.MarId = MarId;
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
         this.MarEstado = MarEstado;
         this.ArmId = ArmId;
+        this.CliId = CliId;
     }
 
-    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, String ArmNombre) {
+    public MarcacionTab(int MarId, String MarNombre, String MarPortada, Boolean MarEstado, int ArmId, String ArmNombre, int CliId, String CliNombre) {
         this.MarId = MarId;
         this.MarNombre = MarNombre;
         this.MarPortada = MarPortada;
         this.MarEstado = MarEstado;
         this.ArmId = ArmId;
         this.ArmNombre = ArmNombre;
+        this.CliId = CliId;
+        this.CliNombre = CliNombre;
     }
 
     /**
@@ -128,9 +133,39 @@ public class MarcacionTab implements Serializable {
         this.ArmNombre = ArmNombre;
     }
 
-    @Override
-    public String toString() {
-        return "MarcacionTab{" + "MarId=" + MarId + ", MarNombre=" + MarNombre + ", MarPortada=" + MarPortada + ", MarEstado=" + MarEstado + ", ArmId=" + ArmId + ", ArmNombre=" + ArmNombre + '}';
+    /**
+     * @return the CliId
+     */
+    public int getCliId() {
+        return CliId;
     }
 
+    /**
+     * @param CliId the CliId to set
+     */
+    public void setCliId(int CliId) {
+        this.CliId = CliId;
+    }
+
+    /**
+     * @return the CliNombre
+     */
+    public String getCliNombre() {
+        return CliNombre;
+    }
+
+    /**
+     * @param CliNombre the CliNombre to set
+     */
+    public void setCliNombre(String CliNombre) {
+        this.CliNombre = CliNombre;
+    }
+
+    @Override
+    public String toString() {
+        return "MarcacionTab{" + "MarId=" + MarId + ", MarNombre=" + MarNombre + ", MarPortada=" + MarPortada + ", MarEstado=" + MarEstado + ", ArmId=" + ArmId + ", ArmNombre=" + ArmNombre + ", CliId=" + CliId + ", CliNombre=" + CliNombre + '}';
+    }
+
+    
+    
 }

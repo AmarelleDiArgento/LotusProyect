@@ -10,6 +10,7 @@ import Modelo.MySql.AdminMs;
 import Modelo.MySql.GradosMs;
 import Modelo.Tabs.ArmadoTab;
 import Modelo.Tabs.AsignaPermisoTab;
+import Modelo.Tabs.ClienteTab;
 import Modelo.Tabs.GradosTab;
 import Modelo.Tabs.MarcacionTab;
 import Modelo.Tabs.ParametrosTab;
@@ -130,16 +131,13 @@ public class Probador {
                 System.out.println(r.toString());
             }
              */
-            List<AsignaPermisoTab> ap = Asql.getAsignaPer().listar(2);
-            for (AsignaPermisoTab lp : ap) {
-                if (lp.getnPermiso().equalsIgnoreCase("Parte")) {
-                    System.out.println(ap.toString());
-                }
+            List<ClienteTab> ap = Asql.getCliente().listar();
+            for (ClienteTab lp : ap) {
+                System.out.println(ap.toString());
+
             }
 
-            MarcacionTab g = Asql.getMarcacion().obtener(1);
-            System.out.println(g.toString());
-            
+
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error " + ex.getLocalizedMessage());

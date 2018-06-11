@@ -1,12 +1,13 @@
+
 <%@page import="Modelo.Tabs.AsignaPermisoTab"%>
-<%@page import="Modelo.Tabs.ArmadoTab"%>
-<%@page import="Modelo.Tabs.MarcacionTab"%>
+<%@page import="Modelo.Tabs.ProductoTab"%>
+<%@page import="Modelo.Tabs.ClienteTab"%>
 <%@page import="Servicios.Mensajes"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%
 // nombrar jsp de estancia
-    String jsp = "marcacion.jsp";
+    String jsp = "cliente.jsp";
     HttpSession Ses = request.getSession(true);
     Ses.setAttribute("jsp", jsp);
     Mensajes msj = null;
@@ -16,14 +17,14 @@
         List<AsignaPermisoTab> ap = (List<AsignaPermisoTab>) Ses.getAttribute("ApSes");
         AsignaPermisoTab acc = null;
         for (AsignaPermisoTab a : ap) {
-            if (a.getnPermiso().equalsIgnoreCase("Marcación")) {
+            if (a.getnPermiso().equalsIgnoreCase("Cliente")) {
                 acc = a;
             }
         }
         if (acc.isRpLeer()) {
-            if (Ses.getAttribute("lisMar") != null) {
-                if (Ses.getAttribute("lisA") != null) {
-                    List<ArmadoTab> lisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
+            if (Ses.getAttribute("lisC") != null) {
+                if (Ses.getAttribute("lisU") != null) {
+                    List<UsuarioTab> LisUsc = (List<UsuarioTab>) Ses.getAttribute("lisU");
 
 
 %>
@@ -31,19 +32,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Marcacion</title>
+        <title>Lotus QA - Variedad</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
         <link href="css/material-icons.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-
-        <meta http-equiv="Expires" content="0">
-        <meta http-equiv="Last-Modified" content="0">
-        <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
-        <meta http-equiv="Pragma" content="no-cache">
     </head>
 
 
@@ -62,22 +57,22 @@
 
 
         <div class="container">
-            <h5>Marcacion</h5>
-
+            <h5>Cliente</h5>
 
             <%
-                List<MarcacionTab> lisMar = (List<MarcacionTab>) Ses.getAttribute("lisMar");
+                List<ClienteTab> LisC = (List<ClienteTab>) Ses.getAttribute("lisC");
             %>
             <table class="centered striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Cliente</th>
-                        <th>Nombre</th>
-                        <th>Portada</th>
-                        <th>Armado</th>
+                        <th>Comercial</th>
+                        <th>Localización</th>
+                        <th>Logo</th>
                         <th>Estado</th>
-                            <%if (acc.isRpEditar()) {%>
+
+                        <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
                             <%}
                                 if (acc.isRpEliminar()) {%>
@@ -88,47 +83,59 @@
                 </thead>
 
                 <tbody>
-                    <% for (MarcacionTab mt : lisMar) {%>
+                    <% for (ClienteTab ct : LisC) {%>
                     <tr>
-                        <td><%=mt.getMarId()%></td>
-                        <td><%=mt.getCliNombre()%></td>
-                        <td><%=mt.getMarNombre()%></td>
-                        <td><%=mt.getMarPortada()%></td>
-                        <td><%=mt.getArmNombre()%></td>
+                        <td><%=ct.getId()%></td>
+                        <td><%=ct.getNombre()%></td>
+                        <td><%=ct.getNombreUsu()%></td>
+                        <td><%=ct.getLocal()%></td>
                         <td>
-                            <a href="#"> 
-                                <i class="material-icons medium<% if (mt.isMarEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                            <div class="user-view">
+                                <a href="#">
+                                    <img class="circle materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (ct.getLogo() != null) {
+                                            out.println(ct.getLogo());
+                                        } else {
+                                            out.println("img/en proceso.png");
+
+                                        }%>">
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="material-icons medium<% if (ct.isEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
-                                <i class="material-icons small purple-text" onclick="consultar(<%=mt.getMarId()%>)" > edit </i>
+                                <i class="material-icons medium purple-text" onclick="consultar(<%=ct.getId()%>)" > edit </i>
                             </a>
                         </td>
                         <%}
                             if (acc.isRpEliminar()) {%>
-                        
+
                         <td>
                             <a href="#">
-                                <i class="material-icons small purple-text" onclick="msjConf(<%=mt.getMarId()%>)"> delete </i>
+                                <i class="material-icons medium purple-text" onclick="msjConf(<%=ct.getId()%>)"> delete </i>
                             </a>
                         </td>
                         <%}%>
+
+
                     </tr>
 
                     <%}%>
                 </tbody>
             </table>
 
-           
         </div>
 
         <footer class="footer">
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -136,112 +143,75 @@
 
 
         <!-- Modal Insertar Nuevo registro -->
-        <%if (acc.isRpNuevo()) {%>
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="post" action="marcacions.do" enctype="multipart/form-data">
+            <form method="get" action="variedads.do" enctype="multipart/form-data">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">local_offer</i> Nueva marcacion</h4>
-                    <p>Registra la informacion de la nueva marcacion</p>
+                    <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
+                    <p>Registra la informacion de la nueva Variedad</p>
                     <div class="row">
-
+                        <div class="input-field col s4">
+                            <select name="UsuId">>
+                                <option value="" disabled selected>Comercial</option>
+                                <%                        for (UsuarioTab ul : LisUsc) {%>
+                                <option value="<%=ul.getCedula()%>"><%=ul.toFullName()%></option>
+                                <%}%>
+                            </select>
+                            <label>Comercial</label>
+                        </div>
                         <div class="input-field col s4">
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
-
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">color_lens</i>
+                            <input type="text" id="Color" name="Color" class="autocomplete">
+                            <label for="Color">Color</label>
+                        </div>
                         <div class="file-field input-field col s3">
+
                             <i class="material-icons prefix">image</i>
-                            <input type="file" name="Portada">
+                            <input type="file" name="image">
                             <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
+                        <div class="switch center col s4">
+                            <label>
+                                Inactivo
+                                <input type="checkbox" name="Estado">
+                                <span class="lever"></span>
+                                Activo
+                            </label>
                         </div>
 
-                        <div class="input-field col s4">
-                            <select name="ArmId">>
-                                <option value="" disabled selected>Armado</option>
-                                <%                        for (ArmadoTab pl : lisA) {%>
-                                <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
-                                <%}%>
-                            </select>
-                            <label>Armado</label>
-                        </div>
-
-                        <div class="input-field col s4">
-                            <div class="switch">
-                                <label>
-                                    Inactivo
-                                    <input type="checkbox" name="Estado">
-                                    <span class="lever"></span>
-                                    Activo
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
+                    </div>    
                 </div>
+
 
                 <div class="modal-footer">
                     <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
             </form>
         </div>
-        <%}%>
+
 
         <!-- Modal Modificar Registro -->
-        <%if (acc.isRpEditar()) {%>
-        <%if (Ses.getAttribute("Mar") != null) {
-                MarcacionTab mS = (MarcacionTab) Ses.getAttribute("Mar");
+        <%if (Ses.getAttribute("Cli") != null) {
+                ClienteTab cS = (ClienteTab) Ses.getAttribute("Cli");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="marcacions.do" enctype="multipart/form-data">
+            <form method="get" action="variedads.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">assignment_ind</i> Nueva marcacion</h4>
-                    <p>Registra la informacion de la nueva marcacion</p>
-
+                    <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
+                    <p>Registra la informacion lo cambios de la Variedad</p>
                     <div class="row">
 
-                        <div class="input-field col s4">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-
-                        <div class="file-field input-field col s3">
-                            <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
-                        </div>
-
-                        <div class="input-field col s4">
-                            <select name="ArmId">>
-                                <option value="" disabled selected>Armado</option>
-                                <%                        for (ArmadoTab pl : lisA) {%>
-                                <option value="<%=pl.getArmId()%>"><%=pl.getArmNombre()%></option>
-                                <%}%>
-                            </select>
-                            <label>Armado</label>
-                        </div>
-
-                        <div class="input-field col s4">
-                            <div class="switch">
-                                <label>
-                                    Inactivo
-                                    <input type="checkbox" name="Estado">
-                                    <span class="lever"></span>
-                                    Activo
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
+                    </div>    
                 </div>
                 <div class="modal-footer">
                     <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
                 </div>
-
             </form>
-
         </div>
-
-        <%}%>
 
         <%}%>
         <!--Scripts-->
@@ -260,7 +230,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "ï¿½Estas seguro?",
+                                            title: "¿Estas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
@@ -268,13 +238,13 @@
                                         })
                                                 .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.location = 'marcacions.do?accion=Eliminar&Id=' + id;
+                                                        window.location = 'clientes.do?accion=Eliminar&Id=' + id;
                                                     }
                                                 });
                                     }
                                     ;
                                     function consultar(id) {
-                                        var url = 'marcacions.do';
+                                        var url = 'clientes.do';
                                         var form = $('<form action="' + url + '" method="Post">' +
                                                 '<input type="text" name="Id" value="' + id + '" hidden/>' +
                                                 '<input type="text" name="accion" value="Obtener" hidden/>' +
@@ -317,20 +287,23 @@
             <%}
                 }%>
 
+
         </script>
     </body>
 </html>
 <%
+
     } else {
-        response.sendRedirect("armados.do?accion=Listar");
+        response.sendRedirect("usuarios.do?accion=Listar");
     }
-    Ses.setAttribute("lisMar", null);
-    Ses.setAttribute("Mar", null);
+    Ses.setAttribute("lisU", null);
+    Ses.setAttribute("lisC", null);
+    Ses.setAttribute("Cli", null);
     Ses.setAttribute("msj", null);
 } else {%>
 <html>
     <body onload="document.getElementById('lista').submit()">
-        <form id="lista" action="marcacions.do" method="post" >
+        <form id="lista" action="clientes.do" method="post" >
             <input name="accion" value="Listar" hidden/>
         </form>
     </body>

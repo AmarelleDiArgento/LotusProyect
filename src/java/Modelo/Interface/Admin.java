@@ -17,6 +17,8 @@ public interface Admin {
 
     ControlCambios getControlCambios();
 
+    Cliente getCliente();
+    
     Fitosanidad getFitosanidad();
 
     Grados getGrados();
