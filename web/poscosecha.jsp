@@ -60,7 +60,7 @@
                 List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
             %>
 
-            <table class="centered striped responsive-table">
+            <table cellpadding="1" cellspacing="1" class="centered striped responsive-table  table-hover" id="myTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -115,123 +115,122 @@
                 </tbody>
             </table>
 
-
-        </div>
-        <div class="center">
-            <ul class="pagination">
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                <li class="active"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            </ul>
-        </div>
-
-        <footer class="footer">
-            <div>
-                <div>
-                    <p class="center-align">
-                        LOTUS - ELITE FLOWER � 2017 Copyright Text
-                    </p>
-                </div>
+            <div class="col-md-12 center text-center">
+                <span class="left" id="total_reg"></span>
+                <ul class="pagination pager" id="myPager"></ul>
             </div>
-        </footer>
-
-
-        <!-- Modal Insertar Nuevo registro -->
-        <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="poscosechas.do">
-                <div class="modal-content">
-                    <h4><i class="material-icons medium">business</i> Nueva Poscosecha</h4>
-                    <p>Registra la informacion del nueva Poscosecha</p>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Direccion" type="text" name="Direccion" class="validate" required="">
-                            <label for="Direccion">Direcci�n</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Telefono" type="text" name="Telefono" class="validate" required="">
-                            <label for="Telefono">Extenci�n</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado">
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
-                    </div>   
-                </div>
-
-
-                <div class="modal-footer">
-                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
         </div>
+    
 
 
-        <!-- Modal Modificar Registro -->
-        <%if (Ses.getAttribute("") != null) {
-                PoscosechaTab pS = (PoscosechaTab) Ses.getAttribute("Rol");
-        %>
-        <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="poscosechas.do">
-                <div class="modal-content">
-                    <h4><i class="material-icons medium">business</i> Nuevo Poscosecha</h4>
-                    <p>Modifica la informacion del la Poscosecha</p>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Id" class="validate" value="<%=pS.getPosId()%> required="">
-                            <label for="Id">Id</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=pS.getPosNombre()%> required="">
-                            <label for="Nombre">Nombre</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Direccion" type="text" name="Direccion" class="validate" value="<%=pS.getPosDireccion()%> required="">
-                            <label for="Direccion">Direcci�n</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="Telefono" type="text" name="Telefono" class="validate" value="<%=pS.getPosTelefono()%>required="">
-                            <label for="Telefono">Extenci�n</label>
-                        </div>
-                        <div class="switch">
-                            <label>
-                                Inactivo
-                                <input type="checkbox" name="Estado" <%if (pS.isPosEstado()) {%> checked <%}%>>
-                                <span class="lever"></span>
-                                Activo
-                            </label>
-                        </div>
-
-                    </div>    
-                </div>
 
 
-                <div class="modal-footer">
-                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
+    <footer class="footer">
+        <div>
+            <div>
+                <p class="center-align">
+                    LOTUS - ELITE FLOWER � 2017 Copyright Text
+                </p>
+            </div>
         </div>
+    </footer>
 
-        <%}%>
-        <!--Scripts-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
+    <!-- Modal Insertar Nuevo registro -->
+    <div id="modalNuevo" class="modal modal-fixed-footer">
+        <form method="get" action="poscosechas.do">
+            <div class="modal-content">
+                <h4><i class="material-icons medium">business</i> Nueva Poscosecha</h4>
+                <p>Registra la informacion del nueva Poscosecha</p>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                        <label for="Nombre">Nombre</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Direccion" type="text" name="Direccion" class="validate" required="">
+                        <label for="Direccion">Direcci�n</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Telefono" type="text" name="Telefono" class="validate" required="">
+                        <label for="Telefono">Extenci�n</label>
+                    </div>
+                    <div class="switch">
+                        <label>
+                            Inactivo
+                            <input type="checkbox" name="Estado">
+                            <span class="lever"></span>
+                            Activo
+                        </label>
+                    </div>
+
+                </div>   
+            </div>
+
+
+            <div class="modal-footer">
+                <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Modal Modificar Registro -->
+    <%if (Ses.getAttribute("") != null) {
+            PoscosechaTab pS = (PoscosechaTab) Ses.getAttribute("Rol");
+    %>
+    <div id="modalModificar" class="modal modal-fixed-footer">
+        <form method="get" action="poscosechas.do">
+            <div class="modal-content">
+                <h4><i class="material-icons medium">business</i> Nuevo Poscosecha</h4>
+                <p>Modifica la informacion del la Poscosecha</p>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Nombre" type="text" name="Id" class="validate" value="<%=pS.getPosId()%> required="">
+                        <label for="Id">Id</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=pS.getPosNombre()%> required="">
+                        <label for="Nombre">Nombre</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Direccion" type="text" name="Direccion" class="validate" value="<%=pS.getPosDireccion()%> required="">
+                        <label for="Direccion">Direcci�n</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="Telefono" type="text" name="Telefono" class="validate" value="<%=pS.getPosTelefono()%>required="">
+                        <label for="Telefono">Extenci�n</label>
+                    </div>
+                    <div class="switch">
+                        <label>
+                            Inactivo
+                            <input type="checkbox" name="Estado" <%if (pS.isPosEstado()) {%> checked <%}%>>
+                            <span class="lever"></span>
+                            Activo
+                        </label>
+                    </div>
+
+                </div>    
+            </div>
+
+
+            <div class="modal-footer">
+                <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+            </div>
+        </form>
+    </div>
+
+    <%}%>
+    <!--Scripts-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/pagination.js"></script>
+
+    <script type="text/javascript">
+
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');
@@ -263,9 +262,9 @@
                                         $('body').append(form);
                                         (form).submit();
                                     }
-            <% if (msj != null) {%>
+        <% if (msj != null) {%>
 
-            <%if (msj.getTipo().equals("Error")) {%>
+        <%if (msj.getTipo().equals("Error")) {%>
                                     function msjError() {
                                         swal({
                                             title: "<%=msj.getMsj()%>",
@@ -276,7 +275,7 @@
                                     ;
 
 
-            <%} else if (msj.getTipo().equals("Msj")) {%>
+        <%} else if (msj.getTipo().equals("Msj")) {%>
                                     function msjMsj() {
 
                                         swal("<%=msj.getMsj()%>", {
@@ -285,7 +284,7 @@
                                     }
                                     ;
 
-            <%} else if (msj.getTipo().equals("Ok")) {%>
+        <%} else if (msj.getTipo().equals("Ok")) {%>
                                     function msjOk()
                                     {
                                         swal({
@@ -295,11 +294,12 @@
                                         });
                                     }
                                     ;
-            <%}
-                }%>
+        <%}
+            }%>
+                                   
 
-        </script>
-    </body>
+    </script>
+</body>
 </html>
 <%
 
