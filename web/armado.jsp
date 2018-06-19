@@ -65,7 +65,7 @@
             <%
                 List<ArmadoTab> LisA = (List<ArmadoTab>) Ses.getAttribute("lisA");
             %>
-            <table class="centered striped responsive-table">
+            <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -103,7 +103,7 @@
                         </td>
                         <%}
                             if (acc.isRpEliminar()) {%>
-                        
+
                         <td>
                             <a href="#">
                                 <i class="material-icons small purple-text" onclick="msjConf(<%=at.getArmId()%>)"> delete </i>

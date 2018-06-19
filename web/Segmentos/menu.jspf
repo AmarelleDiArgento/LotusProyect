@@ -32,13 +32,14 @@
         <ul class="right hide-on-med-and-down">
 
             <li>
-                <form>
-                    <div class="input-field">
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
+                <div class="input-field">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">search</i>
+
+                        <input id="buscar" type="text" class="form-control" placeholder="Escriba algo para filtrar" />
                     </div>
-                </form>
+                </div>
+
             </li>
 
 
@@ -75,6 +76,15 @@
     <li>
         <div class="divider"></div>
     </li>
+    <li>
+        <form>
+            <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </li>   
     <%        for (PermisoTab m : menu) {
             if (!m.getPerModulo().equalsIgnoreCase(md)) {
 
@@ -95,8 +105,8 @@
     <form method="post" action="usuarios.do" enctype="multipart/form-data">
         <div class="modal-content">
             <h4>Selecciona el avatar para:</h4>
-            
-                <input name="Usuario" type="text" value="<%=u.getCedula()%>" hidden />
+
+            <input name="Usuario" type="text" value="<%=u.getCedula()%>" hidden />
             <div class="file-field input-field col s3">
 
                 <i class="material-icons prefix">image</i>

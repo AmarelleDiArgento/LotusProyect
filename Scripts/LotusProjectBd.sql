@@ -417,41 +417,26 @@ DEFAULT CHARACTER SET = utf8;
 -- LotusProject tabla asignaparametro
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS LotusProject.asignaparametro (
- GraID INT(11) NOT NULL,
+ GraID INT(11) NULL DEFAULT NULL,
  ParId INT(11) NOT NULL,
  MaeId INT(11) NOT NULL,
  ProId INT(11) NULL DEFAULT NULL,
  VarId INT(11) NULL DEFAULT NULL,
  PaProDescripcion MEDIUMTEXT NULL DEFAULT NULL,
  PaProFoto VARCHAR(45) NULL DEFAULT NULL,
- PRIMARY KEY (GraID, ParId, MaeId),
- INDEX fk_grados_has_parametros_parametros1 (ParId ASC),
- INDEX fk_parproducto_variedad1_idx (VarId ASC),
- INDEX fk_parproducto_producto1_idx (ProId ASC),
- INDEX fk_asignaparametro_maestro1_idx (MaeId ASC),
- CONSTRAINT fk_asignaparametro_maestro1
-  FOREIGN KEY (MaeId)
-  REFERENCES LotusProject.maestro (MaeId)
+  FOREIGN KEY (MaeId) REFERENCES LotusProject.maestro (MaeId) 
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
- CONSTRAINT fk_grados_has_parametros_grados1
-  FOREIGN KEY (GraID)
-  REFERENCES LotusProject.grados (GraID)
+  FOREIGN KEY (GraID) REFERENCES LotusProject.grados (GraID)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
- CONSTRAINT fk_grados_has_parametros_parametros1
-  FOREIGN KEY (ParId)
-  REFERENCES LotusProject.parametros (ParId)
+  FOREIGN KEY (ParId) REFERENCES LotusProject.parametros (ParId)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
- CONSTRAINT fk_parproducto_producto1
-  FOREIGN KEY (ProId)
-  REFERENCES LotusProject.producto (ProId)
+  FOREIGN KEY (ProId) REFERENCES LotusProject.producto (ProId)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
- CONSTRAINT fk_parproducto_variedad1
-  FOREIGN KEY (VarId)
-  REFERENCES LotusProject.variedad (VarId)
+  FOREIGN KEY (VarId) REFERENCES LotusProject.variedad (VarId)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION)
 ENGINE = InnoDB
