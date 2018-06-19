@@ -73,82 +73,14 @@
                 List<VariedadTab> lisV = (List<VariedadTab>) Ses.getAttribute("lisV");
 
             %>
+
+
+
             <div class="row">
-                <div class="input-field col s3">
-                    <select>
-                        <option value="" disabled selected>Choose your option</option>
-                        <% for (GradosTab gt : lisG) {%>
-                        <option value="<%=gt.getGraId()%>"> <%=gt.getGraNombre()%> </option>
-                        <%}%>
-                    </select>
-                    <label>Grado</label>
-                </div>
-                <div class="input-field col s3">
-                    <select>
-                        <option value="" disabled selected>Choose your option</option>
-                        <% for (MaestroTab mt : lisM) {%>
-                        <option value="<%=mt.getMaeId()%>"> <%=mt.getMaeNombre()%> </option>
-                        <%}%>
-                    </select>
-                    <label>Maestro</label>
-                </div>
-                <div class="input-field col s3">
-                    <select>
-                        <option value="" disabled selected>Choose your option</option>
-                        <% for (ProductoTab prt : lisPr) {%>
-                        <option value="<%=prt.getProId()%>"> <%=prt.getProNombre()%> </option>
-                        <%}%>
-                    </select>
-                    <label>Producto</label>
-                </div>
-                <div class="input-field col s3">
-                    <select>
-                        <option value="" disabled selected>Choose your option</option>
-                        <% for (VariedadTab vt : lisV) {%>
-                        <option value="<%=vt.getVarId()%>"> <%=vt.getVarNombre()%> </option>
-                        <%}%>
-                    </select>
-                    <label>Variedad</label>
+                <div class="col s1 ">
+                    <a href="#modal1"  class="btn red white-text modal-trigger z-depth-0 circle"><i class="material-icons">add</i></a>
                 </div>
             </div>
-
-
-            <form id="myForm">
-                <div id="input1" style="margin-bottom:4px;" class="clonedInput">
-                    <div class="row">
-                        <div class="input-field col s4">
-
-                            <i class="material-icons prefix">mode_edit</i>
-                            <select>
-                                <option value="" disabled selected>Choose your option</option>
-                                <% for (ParametrosTab pt : lisPar) {%>
-                                <option value="<%=pt.getParId()%>"> <%=pt.getParNombre()%> </option>
-                                <%}%>
-                            </select>
-                            <label>Materialize Select</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">mode_edit</i>
-                            <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                            <label for="icon_prefix2">First Name</label>
-                        </div>
-                        <div class="file-field input-field col s2">
-                            <div class="material-icons transparent blue-text z-depth-0">
-
-                                <i class="material-icons small">image</i>
-                                <input type="file">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div>
-                    <input type="button" id="btnAdd" value="+" />
-                    <input type="button" id="btnDel" value="-" />
-                </div>
-            </form>
 
 
         </div>
@@ -163,12 +95,93 @@
             </div>
         </footer>
 
+        <!-- Modal Trigger -->
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+
+                <div class="row">
+                    <div class="input-field col s3">
+                        <select>
+                            <option value="" disabled selected>Grado</option>
+                            <% for (GradosTab gt : lisG) {%>
+                            <option value="<%=gt.getGraId()%>"> <%=gt.getGraNombre()%> </option>
+                            <%}%>
+                        </select>
+                        <label>Grado</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select>
+                            <option value="" disabled selected>Maestro</option>
+                            <% for (MaestroTab mt : lisM) {%>
+                            <option value="<%=mt.getMaeId()%>"> <%=mt.getMaeNombre()%> </option>
+                            <%}%>
+                        </select>
+                        <label>Maestro</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select>
+                            <option value="" disabled selected>Producto</option>
+                            <% for (ProductoTab prt : lisPr) {%>
+                            <option value="<%=prt.getProId()%>"> <%=prt.getProNombre()%> </option>
+                            <%}%>
+                        </select>
+                        <label>Producto</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select>
+                            <option value="" disabled selected>Variedad</option>
+                            <% for (VariedadTab vt : lisV) {%>
+                            <option value="<%=vt.getVarId()%>"> <%=vt.getVarNombre()%> </option>
+                            <%}%>
+                        </select>
+                        <label>Variedad</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+
+                        <i class="material-icons prefix">mode_edit</i>
+                        <select>
+                            <option value="" disabled selected>Parametro</option>
+                            <% for (ParametrosTab pt : lisPar) {%>
+                            <option value="<%=pt.getParId()%>"> <%=pt.getParNombre()%> </option>
+                            <%}%>
+                        </select>
+                        <label>Parametro</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                        <label for="icon_prefix2">First Name</label>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="file-field input-field col s2">
+                        <div class="material-icons transparent blue-text z-depth-0">
+
+                            <i class="material-icons small">image</i>
+                            <input type="file">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
+
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/init.js"></script>
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
         <script type="text/javascript">
+            
             function modalMod() {
 
                 var elem = document.querySelector('#modalModificar');
@@ -234,42 +247,6 @@
             ;
             <%}
                 }%>
-            $(document).ready(function () {
-                $('#btnAdd').click(function () {
-                    var num = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
-                    var newNum = new Number(num + 1); // the numeric ID of the new input field being added
-
-                    // create the new element via clone(), and manipulate it's ID using newNum value
-                    var newElem = $('#input' + num).clone().attr('id', 'input' + newNum);
-
-                    // manipulate the name/id values of the input inside the new element
-                    newElem.children(':first').attr('id', 'name' + newNum).attr('name', 'name' + newNum);
-
-                    // insert the new element after the last "duplicatable" input field
-                    $('#input' + num).after(newElem);
-
-                    // enable the "remove" button
-                    $('#btnDel').attr('disabled', '');
-
-                    // business rule: you can only add 5 names
-                    if (newNum == 5)
-                        $('#btnAdd').attr('disabled', 'disabled');
-                });
-
-                $('#btnDel').click(function () {
-                    var num = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
-                    $('#input' + num).remove(); // remove the last element
-
-                    // enable the "add" button
-                    $('#btnAdd').attr('disabled', '');
-
-                    // if only one element remains, disable the "remove" button
-                    if (num - 1 == 1)
-                        $('#btnDel').attr('disabled', 'disabled');
-                });
-
-                $('#btnDel').attr('disabled', 'disabled');
-            });
         </script>
     </body>
 </html>

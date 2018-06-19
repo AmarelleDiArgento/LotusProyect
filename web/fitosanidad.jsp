@@ -65,7 +65,7 @@
             <%
                 List<FitosanidadTab> LisF = (List<FitosanidadTab>) Ses.getAttribute("lisF");
             %>
-            <table class="centered striped responsive-table">
+            <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -108,7 +108,7 @@
                         </td>
                         <%}
                             if (acc.isRpEliminar()) {%>
-                        
+
                         <td>
                             <a href="#">
                                 <i class="material-icons purple-text" onclick="msjConf(<%=ft.getFitId()%>)"> delete </i>
@@ -127,7 +127,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -224,6 +224,26 @@
 <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
 <script type="text/javascript">
+                                    document.querySelector("#buscar").onkeyup = function () {
+                                        $TableFilter("#tabla", this.value);
+                                    }
+                                    $TableFilter = function (id, value) {
+                                        var rows = document.querySelectorAll(id + ' tbody tr');
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var showRow = false;
+                                            var row = rows[i];
+                                            row.style.display = 'none';
+                                            for (var x = 0; x < row.childElementCount; x++) {
+                                                if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
+                                                    showRow = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (showRow) {
+                                                row.style.display = null;
+                                            }
+                                        }
+                                    };
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');

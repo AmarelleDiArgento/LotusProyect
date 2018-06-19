@@ -62,7 +62,7 @@
             <%
                 List<VariedadTab> LisV = (List<VariedadTab>) Ses.getAttribute("lisV");
             %>
-            <table class="centered striped responsive-table">
+            <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -108,7 +108,7 @@
                         <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
-                                <i class="material-icons medium purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=vt.getVarId()%>)" > edit </i>
                             </a>
                         </td>
                         <%}
@@ -116,7 +116,7 @@
 
                         <td>
                             <a href="#">
-                                <i class="material-icons medium purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=vt.getVarId()%>)"> delete </i>
                             </a>
                         </td>
                         <%}%>
@@ -258,6 +258,26 @@
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
         <script type="text/javascript">
+                                    document.querySelector("#buscar").onkeyup = function () {
+                                        $TableFilter("#tabla", this.value);
+                                    }
+                                    $TableFilter = function (id, value) {
+                                        var rows = document.querySelectorAll(id + ' tbody tr');
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var showRow = false;
+                                            var row = rows[i];
+                                            row.style.display = 'none';
+                                            for (var x = 0; x < row.childElementCount; x++) {
+                                                if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
+                                                    showRow = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (showRow) {
+                                                row.style.display = null;
+                                            }
+                                        }
+                                    };
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');

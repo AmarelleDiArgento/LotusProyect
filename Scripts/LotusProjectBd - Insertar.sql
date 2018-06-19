@@ -17,7 +17,7 @@
 -- Insertar LotusProject.Usuario
 -- -----------------------------------------------------
 
-call LotusProject.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com','M' ,'img/Usuario/almoreno.jpg',1, 1);
+call LotusProject.usuarioIn('1070949', 'Alexander', 'Moreno', 'almoreno', '1234', '2315', '301463', 'almoreno@eliteflower.com','M' ,'img/Usuario/almoreno.png',1, 1);
 call LotusProject.usuarioIn('1075', 'Neissy', 'Medina', 'nmedina', '1234', '2315', '301463', 'nmedina@eliteflower.com','F', 'img/Usuario/Usuaria.png',1, 1);
 call LotusProject.usuarioIn('1073', 'Erika', 'Guerrero', 'eguerrero', '1234', '2315', '301463', 'eguerrero@eliteflower.com','F', 'img/Usuario/Usuaria.png',1, 1);
 call LotusProject.usuarioIn('1075515', 'Camilo', 'Lara', 'clara', '1234', '2315', '301463', 'clara@eliteflower.com','M', 'img/Usuario/Usuario.png',1, 1);
@@ -48,7 +48,6 @@ call LotusProject.permisoIn('Fitosanidad', 'Producto', 'Permisos para fitosanida
 call LotusProject.permisoIn('Linea', 'Poscosecha', 'Permisos para linea', 'linea.jsp', 'label_outline', 1);
 call LotusProject.permisoIn('Producto maestro', 'Producto', 'Permisos para producto maestro', 'maestro.jsp', 'vpn_key', 1);
 call LotusProject.permisoIn('Menú', 'Marcación', 'Permisos de menu', 'menu.jsp', 'loyalty', 1);
-call LotusProject.permisoIn('Parametros', 'Producto', 'Permisos para ajuste de parametros', 'parametros.jsp', 'tune', 1);
 call LotusProject.permisoIn('Paso', 'Armado', 'Permisos para ajuste de pasos', 'paso.jsp', 'plus_one', 1);
 
 
@@ -79,7 +78,6 @@ call LotusProject.AsgPerIn(1, 15, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(1, 18, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(1, 19, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(2, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 2, 1, 1, 1, 1);
@@ -99,7 +97,6 @@ call LotusProject.AsgPerIn(2, 15, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(2, 18, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(2, 19, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(3, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 2, 1, 1, 1, 1);
@@ -119,7 +116,6 @@ call LotusProject.AsgPerIn(3, 15, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(3, 18, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(3, 19, 1, 1, 1, 1);
 
 
 call LotusProject.AsgPerIn(4, 1, 1, 1, 1, 1);
@@ -140,7 +136,6 @@ call LotusProject.AsgPerIn(4, 15, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(4, 18, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(4, 19, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(5, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 2, 1, 1, 1, 1);
@@ -160,7 +155,6 @@ call LotusProject.AsgPerIn(5, 15, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(5, 18, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(5, 19, 1, 1, 1, 1);
 
 call LotusProject.AsgPerIn(6, 1, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 2, 1, 1, 1, 1);
@@ -180,7 +174,6 @@ call LotusProject.AsgPerIn(6, 15, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 16, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 17, 1, 1, 1, 1);
 call LotusProject.AsgPerIn(6, 18, 1, 1, 1, 1);
-call LotusProject.AsgPerIn(6, 19, 1, 1, 1, 1);
 
 -- call LotusProject.AsgPerLi(1);
 -- call LotusProject.AsgPerMo(2, 1, 0, 0, 0, 0);
@@ -231,64 +224,64 @@ call LotusProject.poscosechaIn('Vista - Elite', 'Km x ', '1234', 1);
 -- call LotusProject.poscosechaLi(); 
 -- call LotusProject.poscosechaCo(16); 
 
-call LotusProject.productoIn('Acacia','img/Maestro/Producto/acacia.png',1,1);
-call LotusProject.productoIn('Adenanthus','img/Maestro/Producto/adenanthus.png',1,1);
-call LotusProject.productoIn('Agonis','img/Maestro/Producto/agonis.png',1,1);
+-- call LotusProject.productoIn('Acacia','img/Maestro/Producto/acacia.png',1,1);
+-- call LotusProject.productoIn('Adenanthus','img/Maestro/Producto/adenanthus.png',1,1);
+-- call LotusProject.productoIn('Agonis','img/Maestro/Producto/agonis.png',1,1);
 call LotusProject.productoIn('Alstroemeria','img/Maestro/Producto/alstroemeria.png',1,2);
-call LotusProject.productoIn('Anemonas','img/Maestro/Producto/anemonas.png',1,3);
-call LotusProject.productoIn('Aralia','img/Maestro/Producto/aralia.png',1,1);
-call LotusProject.productoIn('Arandano','img/Maestro/Producto/arandano.png',1,4);
-call LotusProject.productoIn('Asiatic','img/Maestro/Producto/asiatic.png',1,5);
-call LotusProject.productoIn('Aster','img/Maestro/Producto/aster.png',1,6);
-call LotusProject.productoIn('Brassicas','img/Maestro/Producto/brassicas.png',1,7);
-call LotusProject.productoIn('Button','img/Maestro/Producto/button.png',1,3);
-call LotusProject.productoIn('Callas','img/Maestro/Producto/callas.png',1,7);
-call LotusProject.productoIn('Carnation','img/Maestro/Producto/carnation.png',1,8);
-call LotusProject.productoIn('Cocculos','img/Maestro/Producto/cocculos.png',1,1);
-call LotusProject.productoIn('Craspedia','img/Maestro/Producto/craspedia.png',1,7);
-call LotusProject.productoIn('Cremon','img/Maestro/Producto/cremon.png',1,9);
-call LotusProject.productoIn('Cupressus','img/Maestro/Producto/cupressus.png',1,1);
-call LotusProject.productoIn('Cushion','img/Maestro/Producto/cushion.png',1,3);
-call LotusProject.productoIn('Cypres','img/Maestro/Producto/cypres.png',1,1);
-call LotusProject.productoIn('Daisy','img/Maestro/Producto/daisy.png',1,3);
-call LotusProject.productoIn('Delphinium','img/Maestro/Producto/delphinium.png',1,7);
-call LotusProject.productoIn('Dianthus','img/Maestro/Producto/dianthus.png',1,6);
-call LotusProject.productoIn('Eryngium','img/Maestro/Producto/eryngium.png',1,6);
-call LotusProject.productoIn('Eucaliptus','img/Maestro/Producto/eucaliptus.png',1,1);
-call LotusProject.productoIn('Euonymous','img/Maestro/Producto/euonymous.png',1,1);
-call LotusProject.productoIn('Garden Roses','img/Maestro/Producto/garden roses.png',1,11);
-call LotusProject.productoIn('Gerbera','img/Maestro/Producto/gerbera.png',1,10);
-call LotusProject.productoIn('Gerrondo','img/Maestro/Producto/gerrondo.png',1,10);
-call LotusProject.productoIn('Grevilleas','img/Maestro/Producto/grevilleas.png',1,1);
-call LotusProject.productoIn('Gypsophila','img/Maestro/Producto/gypsophila.png',1,6);
-call LotusProject.productoIn('Hydrangea','img/Maestro/Producto/hydrangea.png',1,7);
-call LotusProject.productoIn('Kalanchoe','img/Maestro/Producto/kalanchoe.png',1,7);
-call LotusProject.productoIn('Leucadendron','img/Maestro/Producto/leucadendron.png',1,1);
-call LotusProject.productoIn('Ligustrum','img/Maestro/Producto/ligustrum.png',1,1);
-call LotusProject.productoIn('Lilly Grass','img/Maestro/Producto/lilly grass.png',1,1);
-call LotusProject.productoIn('Limonium','img/Maestro/Producto/limonium.png',1,6);
-call LotusProject.productoIn('Lirios','img/Maestro/Producto/lirios.png',1,5);
+-- call LotusProject.productoIn('Anemonas','img/Maestro/Producto/anemonas.png',1,3);
+-- call LotusProject.productoIn('Aralia','img/Maestro/Producto/aralia.png',1,1);
+ call LotusProject.productoIn('Arandano','img/Maestro/Producto/arandano.png',1,4);
+ call LotusProject.productoIn('Asiatic','img/Maestro/Producto/asiatic.png',1,5);
+ call LotusProject.productoIn('Aster','img/Maestro/Producto/aster.png',1,6);
+-- call LotusProject.productoIn('Brassicas','img/Maestro/Producto/brassicas.png',1,7);
+ call LotusProject.productoIn('Button','img/Maestro/Producto/button.png',1,3);
+ call LotusProject.productoIn('Callas','img/Maestro/Producto/callas.png',1,7);
+ call LotusProject.productoIn('Carnation','img/Maestro/Producto/carnation.png',1,8);
+-- call LotusProject.productoIn('Cocculos','img/Maestro/Producto/cocculos.png',1,1);
+ call LotusProject.productoIn('Craspedia','img/Maestro/Producto/craspedia.png',1,7);
+ call LotusProject.productoIn('Cremon','img/Maestro/Producto/cremon.png',1,9);
+-- call LotusProject.productoIn('Cupressus','img/Maestro/Producto/cupressus.png',1,1);
+ -- call LotusProject.productoIn('Cushion','img/Maestro/Producto/cushion.png',1,3);
+ -- call LotusProject.productoIn('Cypres','img/Maestro/Producto/cypres.png',1,1);
+-- call LotusProject.productoIn('Daisy','img/Maestro/Producto/daisy.png',1,3);
+-- call LotusProject.productoIn('Delphinium','img/Maestro/Producto/delphinium.png',1,7);
+ call LotusProject.productoIn('Dianthus','img/Maestro/Producto/dianthus.png',1,6);
+ call LotusProject.productoIn('Eryngium','img/Maestro/Producto/eryngium.png',1,6);
+ call LotusProject.productoIn('Eucaliptus','img/Maestro/Producto/eucaliptus.png',1,1);
+-- call LotusProject.productoIn('Euonymous','img/Maestro/Producto/euonymous.png',1,1);
+ call LotusProject.productoIn('Garden Roses','img/Maestro/Producto/garden roses.png',1,11);
+ call LotusProject.productoIn('Gerbera','img/Maestro/Producto/gerbera.png',1,10);
+ call LotusProject.productoIn('Gerrondo','img/Maestro/Producto/gerrondo.png',1,10);
+-- call LotusProject.productoIn('Grevilleas','img/Maestro/Producto/grevilleas.png',1,1);
+ call LotusProject.productoIn('Gypsophila','img/Maestro/Producto/gypsophila.png',1,6);
+ call LotusProject.productoIn('Hydrangea','img/Maestro/Producto/hydrangea.png',1,7);
+-- call LotusProject.productoIn('Kalanchoe','img/Maestro/Producto/kalanchoe.png',1,7);
+-- call LotusProject.productoIn('Leucadendron','img/Maestro/Producto/leucadendron.png',1,1);
+-- call LotusProject.productoIn('Ligustrum','img/Maestro/Producto/ligustrum.png',1,1);
+-- call LotusProject.productoIn('Lilly Grass','img/Maestro/Producto/lilly grass.png',1,1);
+-- call LotusProject.productoIn('Limonium','img/Maestro/Producto/limonium.png',1,6);
+-- call LotusProject.productoIn('Lirios','img/Maestro/Producto/lirios.png',1,5);
 call LotusProject.productoIn('Matsumoto','img/Maestro/Producto/matsumoto.png',1,7);
-call LotusProject.productoIn('Micro','img/Maestro/Producto/micro.png',1,3);
-call LotusProject.productoIn('Gerbera Mini','img/Maestro/Producto/gerbera mini.png',1,10);
+-- call LotusProject.productoIn('Micro','img/Maestro/Producto/micro.png',1,3);
+-- call LotusProject.productoIn('Gerbera Mini','img/Maestro/Producto/gerbera mini.png',1,10);
 call LotusProject.productoIn('Minicarnation','img/Maestro/Producto/minicarnation.png',1,8);
-call LotusProject.productoIn('Novelty','img/Maestro/Producto/novelty.png',1,3);
+-- call LotusProject.productoIn('Novelty','img/Maestro/Producto/novelty.png',1,3);
 call LotusProject.productoIn('Oriental','img/Maestro/Producto/oriental.png',1,5);
-call LotusProject.productoIn('Photinia','img/Maestro/Producto/photinia.png',1,1);
-call LotusProject.productoIn('Gerbera Piccolin','img/Maestro/Producto/gerbera piccolin.png',1,10);
-call LotusProject.productoIn('Pompon','img/Maestro/Producto/pompon.png',1,3);
+-- call LotusProject.productoIn('Photinia','img/Maestro/Producto/photinia.png',1,1);
+-- call LotusProject.productoIn('Gerbera Piccolin','img/Maestro/Producto/gerbera piccolin.png',1,10);
+-- call LotusProject.productoIn('Pompon','img/Maestro/Producto/pompon.png',1,3);
 call LotusProject.productoIn('Roses','img/Maestro/Producto/roses.png',1,11);
-call LotusProject.productoIn('Ruscus','img/Maestro/Producto/ruscus.png',1,1);
+-- call LotusProject.productoIn('Ruscus','img/Maestro/Producto/ruscus.png',1,1);
 call LotusProject.productoIn('Santini','img/Maestro/Producto/santini.png',1,3);
-call LotusProject.productoIn('Scabiosa','img/Maestro/Producto/scabiosa.png',1,7);
-call LotusProject.productoIn('Solidago','img/Maestro/Producto/solidago.png',1,6);
-call LotusProject.productoIn('Gerbera Spider','img/Maestro/Producto/gerbera spider.png',1,10);
+-- call LotusProject.productoIn('Scabiosa','img/Maestro/Producto/scabiosa.png',1,7);
+-- call LotusProject.productoIn('Solidago','img/Maestro/Producto/solidago.png',1,6);
+-- call LotusProject.productoIn('Gerbera Spider','img/Maestro/Producto/gerbera spider.png',1,10);
 call LotusProject.productoIn('Roses Spray','img/Maestro/Producto/roses spray.png',1,11);
 call LotusProject.productoIn('Stock','img/Maestro/Producto/stock.png',1,6);
-call LotusProject.productoIn('Spider','img/Maestro/Producto/spider.png',1,3);
+-- call LotusProject.productoIn('Spider','img/Maestro/Producto/spider.png',1,3);
 call LotusProject.productoIn('Sunflower','img/Maestro/Producto/sunflower.png',1,7);
-call LotusProject.productoIn('Trachelium','img/Maestro/Producto/trachelium.png',1,7);
-call LotusProject.productoIn('Viburnum','img/Maestro/Producto/viburnum.png',1,1);
+-- call LotusProject.productoIn('Trachelium','img/Maestro/Producto/trachelium.png',1,7);
+-- call LotusProject.productoIn('Viburnum','img/Maestro/Producto/viburnum.png',1,1);
 
 -- -----------------------------------------------------
 -- Procedimientos LotusProject armado
@@ -436,3 +429,27 @@ call LotusProject.partesIn('Follaje', 'Lo que no es la flor ni el tallo');
 -- call lotusproject.partesLi();
 -- call lotusproject.partesCo(1);
 
+call LotusProject.variedadIn('Vendela', 1, 21, 'img/Producto/Roses/Rosita Vendela.png', 'Ligth Pink');
+call LotusProject.variedadIn('Vendela', 1, 21, 'img/Producto/Roses/Vendela.jpg', 'White');
+
+
+-- en prueba 
+
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES (null, '9', '11', null, null, 'Normal: de 4 a 5 petalos sueltos del centro', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('1', '1', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('1', '4', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('1', '5', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('1', '6', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('2', '1', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('2', '4', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('2', '5', '11', null, null, 'XD', 'XD');
+INSERT INTO LotusProject.asignaparametro (GraID, ParId, MaeId, ProId, VarId, PaProDescripcion, PaProFoto) VALUES ('2', '6', '11', null, null, 'XD', 'XD');
+
+
+
+
+SELECT ap.GraID, g.GraNombre, ap.MaeId, ma.MaeNombre, ap.ParId, pa.ParNombre, ap.PaProDescripcion, ap.PaProFoto
+FROM asignaparametro AS ap
+INNER JOIN grados AS g ON ap.GraID = g.GraID or ap.GraID = null
+INNER JOIN parametros AS pa ON ap.ParId = pa.ParId
+INNER JOIN maestro AS ma ON ap.MaeId = ma.MaeId;

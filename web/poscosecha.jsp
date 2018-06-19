@@ -60,12 +60,12 @@
                 List<PoscosechaTab> LisP = (List<PoscosechaTab>) Ses.getAttribute("lisP");
             %>
 
-            <table cellpadding="1" cellspacing="1" class="centered striped responsive-table  table-hover" id="myTable">
+            <table class="centered striped responsive-table" id="tabla">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Direcciï¿½n</th>
+                        <th>Dirección</th>
                         <th>Ext.</th>
                         <th>Estado</th>
                             <%if (acc.isRpEditar()) {%>
@@ -120,186 +120,206 @@
                 <ul class="pagination pager" id="myPager"></ul>
             </div>
         </div>
-    
 
 
 
 
-    <footer class="footer">
-        <div>
+
+        <footer class="footer">
             <div>
-                <p class="center-align">
-                    LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
-                </p>
+                <div>
+                    <p class="center-align">
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
+                    </p>
+                </div>
             </div>
+        </footer>
+
+
+        <!-- Modal Insertar Nuevo registro -->
+        <div id="modalNuevo" class="modal modal-fixed-footer">
+            <form method="get" action="poscosechas.do">
+                <div class="modal-content">
+                    <h4><i class="material-icons medium">business</i> Nueva Poscosecha</h4>
+                    <p>Registra la informacion del nueva Poscosecha</p>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Direccion" type="text" name="Direccion" class="validate" required="">
+                            <label for="Direccion">Dirección</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Telefono" type="text" name="Telefono" class="validate" required="">
+                            <label for="Telefono">Extención</label>
+                        </div>
+                        <div class="switch">
+                            <label>
+                                Inactivo
+                                <input type="checkbox" name="Estado">
+                                <span class="lever"></span>
+                                Activo
+                            </label>
+                        </div>
+
+                    </div>   
+                </div>
+
+
+                <div class="modal-footer">
+                    <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                </div>
+            </form>
         </div>
-    </footer>
 
 
-    <!-- Modal Insertar Nuevo registro -->
-    <div id="modalNuevo" class="modal modal-fixed-footer">
-        <form method="get" action="poscosechas.do">
-            <div class="modal-content">
-                <h4><i class="material-icons medium">business</i> Nueva Poscosecha</h4>
-                <p>Registra la informacion del nueva Poscosecha</p>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="Nombre" type="text" name="Nombre" class="validate" required="">
-                        <label for="Nombre">Nombre</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="Direccion" type="text" name="Direccion" class="validate" required="">
-                        <label for="Direccion">Direcciï¿½n</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="Telefono" type="text" name="Telefono" class="validate" required="">
-                        <label for="Telefono">Extenciï¿½n</label>
-                    </div>
-                    <div class="switch">
-                        <label>
-                            Inactivo
-                            <input type="checkbox" name="Estado">
-                            <span class="lever"></span>
-                            Activo
-                        </label>
-                    </div>
+        <!-- Modal Modificar Registro -->
+        <%if (Ses.getAttribute("") != null) {
+                PoscosechaTab pS = (PoscosechaTab) Ses.getAttribute("Rol");
+        %>
+        <div id="modalModificar" class="modal modal-fixed-footer">
+            <form method="get" action="poscosechas.do">
+                <div class="modal-content">
+                    <h4><i class="material-icons medium">business</i> Nuevo Poscosecha</h4>
+                    <p>Modifica la informacion del la Poscosecha</p>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="Nombre" type="text" name="Id" class="validate" value="<%=pS.getPosId()%> required="">
+                            <label for="Id">Id</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=pS.getPosNombre()%> required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Direccion" type="text" name="Direccion" class="validate" value="<%=pS.getPosDireccion()%> required="">
+                            <label for="Direccion">Dirección</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="Telefono" type="text" name="Telefono" class="validate" value="<%=pS.getPosTelefono()%>required="">
+                            <label for="Telefono">Extención</label>
+                        </div>
+                        <div class="switch">
+                            <label>
+                                Inactivo
+                                <input type="checkbox" name="Estado" <%if (pS.isPosEstado()) {%> checked <%}%>>
+                                <span class="lever"></span>
+                                Activo
+                            </label>
+                        </div>
 
-                </div>   
-            </div>
-
-
-            <div class="modal-footer">
-                <input name="accion" value="Registrar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-            </div>
-        </form>
-    </div>
-
-
-    <!-- Modal Modificar Registro -->
-    <%if (Ses.getAttribute("") != null) {
-            PoscosechaTab pS = (PoscosechaTab) Ses.getAttribute("Rol");
-    %>
-    <div id="modalModificar" class="modal modal-fixed-footer">
-        <form method="get" action="poscosechas.do">
-            <div class="modal-content">
-                <h4><i class="material-icons medium">business</i> Nuevo Poscosecha</h4>
-                <p>Modifica la informacion del la Poscosecha</p>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="Nombre" type="text" name="Id" class="validate" value="<%=pS.getPosId()%> required="">
-                        <label for="Id">Id</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="Nombre" type="text" name="Nombre" class="validate" value="<%=pS.getPosNombre()%> required="">
-                        <label for="Nombre">Nombre</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="Direccion" type="text" name="Direccion" class="validate" value="<%=pS.getPosDireccion()%> required="">
-                        <label for="Direccion">Direcciï¿½n</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="Telefono" type="text" name="Telefono" class="validate" value="<%=pS.getPosTelefono()%>required="">
-                        <label for="Telefono">Extenciï¿½n</label>
-                    </div>
-                    <div class="switch">
-                        <label>
-                            Inactivo
-                            <input type="checkbox" name="Estado" <%if (pS.isPosEstado()) {%> checked <%}%>>
-                            <span class="lever"></span>
-                            Activo
-                        </label>
-                    </div>
-
-                </div>    
-            </div>
+                    </div>    
+                </div>
 
 
-            <div class="modal-footer">
-                <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-            </div>
-        </form>
-    </div>
+                <div class="modal-footer">
+                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+                </div>
+            </form>
+        </div>
 
-    <%}%>
-    <!--Scripts-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/materialize.js"></script>
-    <script type="text/javascript" src="js/init.js"></script>
-    <script type="text/javascript" src="js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="js/pagination.js"></script>
+        <%}%>
+        <!--Scripts-->
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+        <script type="text/javascript" src="js/sweetalert.min.js"></script>
+        <script type="text/javascript" src="js/pagination.js"></script>
 
-    <script type="text/javascript">
-
-                                    function modalMod() {
-
-                                        var elem = document.querySelector('#modalModificar');
-                                        var instance = M.Modal.init(elem);
-                                        instance.open();
+        <script type="text/javascript">
+                                    document.querySelector("#buscar").onkeyup = function () {
+                                        $TableFilter("#tabla", this.value);
                                     }
-                                    ;
-                                    function msjConf(id) {
-                                        swal({
-                                            title: "ï¿½Estas seguro?",
-                                            text: "Se eliminara el registro con el ID: " + id,
-                                            icon: "warning",
-                                            buttons: true,
-                                            dangerMode: true
-                                        })
-                                                .then((willDelete) => {
-                                                    if (willDelete) {
-                                                        window.location = 'poscosechas.do?accion=Eliminar&Id=' + id;
-                                                    }
-                                                });
-                                    }
-                                    ;
-                                    function consultar(id) {
-                                        var url = 'poscosechas.do';
-                                        var form = $('<form action="' + url + '" method="Post">' +
-                                                '<input type="text" name="id" value="' + id + '" hidden/>' +
-                                                '<input type="text" name="accion" value="Obtener" hidden/>' +
-                                                '</form>');
-                                        $('body').append(form);
-                                        (form).submit();
-                                    }
-        <% if (msj != null) {%>
+                                    $TableFilter = function (id, value) {
+                                        var rows = document.querySelectorAll(id + ' tbody tr');
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var showRow = false;
+                                            var row = rows[i];
+                                            row.style.display = 'none';
+                                            for (var x = 0; x < row.childElementCount; x++) {
+                                                if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
+                                                    showRow = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (showRow) {
+                                                row.style.display = null;
+                                            }
+                                        }
+                                    };
 
-        <%if (msj.getTipo().equals("Error")) {%>
-                                    function msjError() {
-                                        swal({
-                                            title: "<%=msj.getMsj()%>",
-                                            text: "<%=msj.getDetalles()%>",
-                                            icon: "error"
-                                        });
-                                    }
-                                    ;
+                                        function modalMod() {
+
+                                            var elem = document.querySelector('#modalModificar');
+                                            var instance = M.Modal.init(elem);
+                                            instance.open();
+                                        }
+                                        ;
+                                        function msjConf(id) {
+                                            swal({
+                                                title: "ï¿½Estas seguro?",
+                                                text: "Se eliminara el registro con el ID: " + id,
+                                                icon: "warning",
+                                                buttons: true,
+                                                dangerMode: true
+                                            })
+                                                    .then((willDelete) => {
+                                                        if (willDelete) {
+                                                            window.location = 'poscosechas.do?accion=Eliminar&Id=' + id;
+                                                        }
+                                                    });
+                                        }
+                                        ;
+                                        function consultar(id) {
+                                            var url = 'poscosechas.do';
+                                            var form = $('<form action="' + url + '" method="Post">' +
+                                                    '<input type="text" name="id" value="' + id + '" hidden/>' +
+                                                    '<input type="text" name="accion" value="Obtener" hidden/>' +
+                                                    '</form>');
+                                            $('body').append(form);
+                                            (form).submit();
+                                        }
+            <% if (msj != null) {%>
+
+            <%if (msj.getTipo().equals("Error")) {%>
+                                        function msjError() {
+                                            swal({
+                                                title: "<%=msj.getMsj()%>",
+                                                text: "<%=msj.getDetalles()%>",
+                                                icon: "error"
+                                            });
+                                        }
+                                        ;
 
 
-        <%} else if (msj.getTipo().equals("Msj")) {%>
-                                    function msjMsj() {
+            <%} else if (msj.getTipo().equals("Msj")) {%>
+                                        function msjMsj() {
 
-                                        swal("<%=msj.getMsj()%>", {
-                                            button: false
-                                        });
-                                    }
-                                    ;
+                                            swal("<%=msj.getMsj()%>", {
+                                                button: false
+                                            });
+                                        }
+                                        ;
 
-        <%} else if (msj.getTipo().equals("Ok")) {%>
-                                    function msjOk()
-                                    {
-                                        swal({
-                                            title: "<%=msj.getMsj()%>",
-                                            text: "<%=msj.getDetalles()%>",
-                                            icon: "success"
-                                        });
-                                    }
-                                    ;
-        <%}
-            }%>
-                                   
+            <%} else if (msj.getTipo().equals("Ok")) {%>
+                                        function msjOk()
+                                        {
+                                            swal({
+                                                title: "<%=msj.getMsj()%>",
+                                                text: "<%=msj.getDetalles()%>",
+                                                icon: "success"
+                                            });
+                                        }
+                                        ;
+            <%}
+                }%>
 
-    </script>
-</body>
+
+        </script>
+    </body>
 </html>
 <%
 

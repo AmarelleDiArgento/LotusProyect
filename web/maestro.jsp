@@ -58,19 +58,23 @@
         </header>
 
 
-        <div class="container">
+        <div class="container row">
             <h5>Maestro</h5>
+            <div class="col s6 offset-s6">
+            </div>
 
 
             <%
                 List<MaestroTab> lisMae = (List<MaestroTab>) Ses.getAttribute("lisMae");
             %>
-            <table class="centered striped responsive-table">
+
+            <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
+                        <th>Name</th>
                         <th>Descripcion</th>
+                        <th>Configurar</th>
                             <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
                             <%}
@@ -87,11 +91,16 @@
                         <td><%=mt.getMaeId()%></td>
                         <td><%=mt.getMaeNombre()%></td>
                         <td><%=mt.getMaeDescripcion()%></td>
+                        <td>
+                            <a href="asignaper.jsp?Rol=<%=mt.getMaeId()%>">
+                                <i class="material-icons small purple-text"> settings_applications</i>
+                            </a>
+                        </td>
 
                         <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="consultar(<%=mt.getMaeId()%>)" > edit </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=mt.getMaeId()%>)" > edit </i>
                             </a>
                         </td>
                         <%}
@@ -99,7 +108,7 @@
 
                         <td>
                             <a href="#">
-                                <i class="material-icons purple-text" onclick="msjConf(<%=mt.getMaeId()%>)"> delete </i>
+                                <i class="material-icons small purple-text"  onclick="msjConf(<%=mt.getMaeId()%>)"> delete </i>
                             </a>
                         </td>
                         <%}%>
@@ -116,7 +125,7 @@
             <div>
                 <div>
                     <p class="center-align">
-                        LOTUS - ELITE FLOWER ï¿½ 2017 Copyright Text
+                        LOTUS - ELITE FLOWER © 2017 Copyright Text
                     </p>
                 </div>
             </div>
@@ -137,7 +146,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripciï¿½n</label>
+                            <label for="Descripcion">Descripción</label>
                         </div>
 
                     </div>    
@@ -168,7 +177,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripciï¿½n</label>
+                            <label for="Descripcion">Descripción</label>
                         </div>
 
 
@@ -190,6 +199,26 @@
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
         <script type="text/javascript">
+                                    document.querySelector("#buscar").onkeyup = function () {
+                                        $TableFilter("#tabla", this.value);
+                                    }
+                                    $TableFilter = function (id, value) {
+                                        var rows = document.querySelectorAll(id + ' tbody tr');
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var showRow = false;
+                                            var row = rows[i];
+                                            row.style.display = 'none';
+                                            for (var x = 0; x < row.childElementCount; x++) {
+                                                if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
+                                                    showRow = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (showRow) {
+                                                row.style.display = null;
+                                            }
+                                        }
+                                    };
                                     function modalMod() {
 
                                         var elem = document.querySelector('#modalModificar');
@@ -199,7 +228,7 @@
                                     ;
                                     function msjConf(id) {
                                         swal({
-                                            title: "ï¿½Estas seguro?",
+                                            title: "óEstas seguro?",
                                             text: "Se eliminara el registro con el ID: " + id,
                                             icon: "warning",
                                             buttons: true,
