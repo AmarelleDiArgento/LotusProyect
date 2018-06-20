@@ -16,133 +16,133 @@
 
 %>
 <html lang="es">
-<style>
-    .row > .column {
-  padding: 0 8px;
-}
+    <style>
+        .row > .column {
+            padding: 0 8px;
+        }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
 
-/* Create four equal columns that floats next to eachother */
-.column {
-  float: left;
-  width: 25%;
-}
+        /* Create four equal columns that floats next to eachother */
+        .column {
+            float: left;
+            width: 25%;
+        }
 
-/* The Modal (background) */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: black;
-}
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: black;
+        }
 
-/* Modal Content */
-.modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  width: 90%;
-  max-width: 1200px;
-}
+        /* Modal Content */lara
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+        }
 
-/* The Close Button */
-.close {
-  color: white;
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  font-size: 35px;
-  font-weight: bold;
-}
+        /* The Close Button */
+        .close {
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+        }
 
-.close:hover,
-.close:focus {
-  color: #999;
-  text-decoration: none;
-  cursor: pointer;
-}
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-/* Hide the slides by default */
-.mySlides {
-  display: none;
-}
+        /* Hide the slides by default */
+        .mySlides {
+            display: none;
+        }
 
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
 
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
 
-/* Caption text */
-.caption-container {
-  text-align: center;
-  background-color: black;
-  padding: 2px 16px;
-  color: white;
-}
+        /* Caption text */
+        .caption-container {
+            text-align: center;
+            background-color: black;
+            padding: 2px 16px;
+            color: white;
+        }
 
-img.demo {
-  opacity: 0.6;
-}
+        img.demo {
+            opacity: 0.6;
+        }
 
-.active,
-.demo:hover {
-  opacity: 1;
-}
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
 
-img.hover-shadow {
-  transition: 0.3s;
-}
+        img.hover-shadow {
+            transition: 0.3s;
+        }lara
 
-.hover-shadow:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-</style>
+        .hover-shadow:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -180,89 +180,82 @@ img.hover-shadow {
                 List<PasoTab> LisP = (List<PasoTab>) Ses.getAttribute("lisPa");
             %>
 
-       <div class="carousel carousel-slider">
 
-                <% for (PasoTab pt : LisP) {%>
-        <a class="carousel-item" href="#one!">
-        <div class="col s12 m7">
-                <h2 class="header">Paso <%=pt.getPasorden()%></h2>
-                <div class="card horizontal">
-                  <div class="card-image">
-                    <img width="500px" src="<%=pt.getPasImagen()%>" class="materialboxed">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      <p><%=pt.getPasDescripcion()%></p>
+            <div class="row">
+                <%
+                    for (PasoTab pt : LisP) {
+
+                %>
+                <div class="column">
+                    <img src="<%=pt.getPasImagen()%>" width="200px" onclick="openModal();currentSlide(<%=pt.getPasId()%>)" class="hover-shadow">
+                </div>
+                <%}%>
+            </div>
+        </div>
+
+            <!-- The Modal/Lightbox -->
+            <div id="myModal" class="modal">
+                <span class="close cursor" onclick="closeModal()">&times;</span>
+                <div class="modal-content">
+
+                    <%
+                        for (PasoTab pt : LisP) {
+                    %>
+                    <div class="mySlides">
+                        <div class="numbertext"><%=pt.getPasId()%> / <%=LisP.size()%> </div>
+                        <img width="80%" src="<%=pt.getPasImagen()%>">
                     </div>
-                  </div>
+                    <%}%>
+
+                    <!-- Next/previous controls -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>2
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                    <!-- Caption text -->
+                    <div class="caption-container">
+                        <p id="caption"></p>
+                    </div>
+
+                    <!-- Thumbnail image controls -->
+                    <%for (PasoTab pt : LisP) {%>
+
+                    <div class="column">
+                        <img class="demo" width="200px" src="<%=pt.getPasImagen()%>" onclick="currentSlide(<%=pt.getPasId()%>)" alt="<%=pt.getPasDescripcion()%>">
+                    </div>
+
+                    <%}%>
+
                 </div>
             </div>
-        </a>
-                <%}%>
-        
-      </div>
 
 
 
-    <div class="row">
-    <% for (PasoTab pt : LisP) {%>
-      <div class="column">
-        <img width="500px" src="<%=pt.getPasImagen()%>" onclick="openModal();currentSlide(1)" class="hover-shadow">
-      </div>
+
+<!-- <div class="row">
+<% for (PasoTab pt : LisP) {%>
+<div class="col s3">
+    <div class="card">
+        <div class="card-image">
+            <img src="<%=pt.getPasImagen()%>" style="max-height: 6.5rem;" class="materialboxed" >
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons" onclick="consultar(<%=pt.getPasId()%>)">edit</i></a>
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Paso <%=pt.getPasorden()%><i class="material-icons right">more_vert</i></span>
+
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">paso <%=pt.getPasorden()%><i class="material-icons right">close</i></span>
+            <p><%=pt.getPasDescripcion()%></p>
+        </div>
     </div>
+</div>
+<%}%>
+</div> -->
 
-    <!-- The Modal/Lightbox -->
-    <div id="myModal" class="modal">
-      <span class="close cursor" onclick="closeModal()">&times;</span>
-      <div class="modal-content">
+</div>
 
-        <div class="mySlides">
-          <div class="numbertext">1 / 4</div>
-          <img width="500px" src="<%=pt.getPasImagen()%>">
-        </div>
 
-        <!-- Next/previous controls -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-        <!-- Caption text -->
-        <div class="caption-container">
-          <p id="caption"></p>
-        </div>
-
-        <!-- Thumbnail image controls -->
-        <div class="column">
-          <img class="demo" width="500px" src="<%=pt.getPasImagen()%>" onclick="currentSlide(1)" alt="Nature">
-        </div>
-      </div>
-      <%}%>
-    </div>
-
-            <!-- <div class="row">
-                <% for (PasoTab pt : LisP) {%>
-                <div class="col s3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="<%=pt.getPasImagen()%>" style="max-height: 6.5rem;" class="materialboxed" >
-                            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons" onclick="consultar(<%=pt.getPasId()%>)">edit</i></a>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Paso <%=pt.getPasorden()%><i class="material-icons right">more_vert</i></span>
-
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">paso <%=pt.getPasorden()%><i class="material-icons right">close</i></span>
-                            <p><%=pt.getPasDescripcion()%></p>
-                        </div>
-                    </div>
-                </div>
-                <%}%>
-            </div> -->
-    
-        </div>
-
-            
-      
 
 <footer class="footer">
     <div>
@@ -290,13 +283,13 @@ img.hover-shadow {
                     <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class= "validate" required></textarea>
                     <label for="Descripcion">Descripción</label>
                 </div>
-                
+
                 <div class="file-field input-field col s3">
-                            <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
-                        </div>
-                
+                    <i class="material-icons prefix">image</i>
+                    <input type="file" name="image">
+                    <input class="file-path validate" name ="Archivo" type="text">
+                </div>
+
 
             </div>    
         </div>
@@ -353,111 +346,115 @@ img.hover-shadow {
 <script type="text/javascript" src="js/init.js"></script>
 <script type="text/javascript" src="js/sweetalert.min.js"></script>
 <script>
-// Open the Modal
-function openModal() {
-  document.getElementById('myModal').style.display = "block";
-}
+                            // Open the Modal
+                            function openModal() {
+                                document.getElementById('myModal').style.display = "block";
+                            }
 
-// Close the Modal
-function closeModal() {
-  document.getElementById('myModal').style.display = "none";
-}
+                            // Close the Modal
+                            function closeModal() {
+                                document.getElementById('myModal').style.display = "none";
+                            }
 
-var slideIndex = 1;
-showSlides(slideIndex);
+                            var slideIndex = 1;
+                            showSlides(slideIndex);
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+                            // Next/previous controls
+                            function plusSlides(n) {
+                                showSlides(slideIndex += n);
+                            }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+                            // Thumbnail image controls
+                            function currentSlide(n) {
+                                showSlides(slideIndex = n);
+                            }
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
-}
+                            function showSlides(n) {
+                                var i;
+                                var slides = document.getElementsByClassName("mySlides");
+                                var dots = document.getElementsByClassName("demo");
+                                var captionText = document.getElementById("caption");
+                                if (n > slides.length) {
+                                    slideIndex = 1
+                                }
+                                if (n < 1) {
+                                    slideIndex = slides.length
+                                }
+                                for (i = 0; i < slides.length; i++) {
+                                    slides[i].style.display = "none";
+                                }
+                                for (i = 0; i < dots.length; i++) {
+                                    dots[i].className = dots[i].className.replace(" active", "");
+                                }
+                                slides[slideIndex - 1].style.display = "block";
+                                dots[slideIndex - 1].className += " active";
+                                captionText.innerHTML = dots[slideIndex - 1].alt;
+                            }
 </script>
 <script type="text/javascript">
-                        function modalMod() {
+    function modalMod() {
 
-                            var elem = document.querySelector('#modalModificar');
-                            var instance = M.Modal.init(elem);
-                            instance.open();
-                        }
-                        ;
-                        function msjConf(id) {
-                            swal({
-                                title: "¿Estas seguro?",
-                                text: "Se eliminara el registro con el ID: " + id,
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            })
-                                    .then((willDelete) => {
-                                        if (willDelete) {
-                                            window.location = 'pasos.do?accion=Eliminar&Id=' + id;
-                                        }
-                                    });
-                        }
-                        ;
-                        function consultar(id) {
-                            var url = 'pasos.do';
-                            var form = $('<form action="' + url + '" method="Post">' +
-                                    '<input type="text" name="id" value="' + id + '" hidden/>' +
-                                    '<input type="text" name="accion" value="Obtener" hidden/>' +
-                                    '</form>');
-                            $('body').append(form);
-                            (form).submit();
-                        }
+        var elem = document.querySelector('#modalModificar');
+        var instance = M.Modal.init(elem);
+        instance.open();
+    }
+    ;
+    function msjConf(id) {
+        swal({
+            title: "¿Estas seguro?",
+            text: "Se eliminara el registro con el ID: " + id,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location = 'pasos.do?accion=Eliminar&Id=' + id;
+                    }
+                });
+    }
+    ;
+    function consultar(id) {
+        var url = 'pasos.do';
+        var form = $('<form action="' + url + '" method="Post">' +
+                '<input type="text" name="id" value="' + id + '" hidden/>' +
+                '<input type="text" name="accion" value="Obtener" hidden/>' +
+                '</form>');
+        $('body').append(form);
+        (form).submit();
+    }
     <% if (msj != null) {%>
 
     <%if (msj.getTipo().equals("Error")) {%>
-                        function msjError() {
-                            swal({
-                                title: "<%=msj.getMsj()%>",
-                                text: "<%=msj.getDetalles()%>",
-                                icon: "error"
-                            });
-                        }
-                        ;
+    function msjError() {
+        swal({
+            title: "<%=msj.getMsj()%>",
+            text: "<%=msj.getDetalles()%>",
+            icon: "error"
+        });
+    }
+    ;
 
 
     <%} else if (msj.getTipo().equals("Msj")) {%>
-                        function msjMsj() {
+    function msjMsj() {
 
-                            swal("<%=msj.getMsj()%>", {
-                                button: false
-                            });
-                        }
-                        ;
+        swal("<%=msj.getMsj()%>", {
+            button: false
+        });
+    }
+    ;
 
     <%} else if (msj.getTipo().equals("Ok")) {%>
-                        function msjOk()
-                        {
-                            swal({
-                                title: "<%=msj.getMsj()%>",
-                                text: "<%=msj.getDetalles()%>",
-                                icon: "success"
-                            });
-                        }
-                        ;
+    function msjOk()
+    {
+        swal({
+            title: "<%=msj.getMsj()%>",
+            text: "<%=msj.getDetalles()%>",
+            icon: "success"
+        });
+    }
+    ;
     <%}
         }%>
 
