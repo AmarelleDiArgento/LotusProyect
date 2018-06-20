@@ -71,10 +71,10 @@
             <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
+                        <th>Portada</th>
                         <th>ID</th>
                         <th>Cliente</th>
                         <th>Nombre</th>
-                        <th>Portada</th>
                         <th>Armado</th>
                         <th>Estado</th>
                             <%if (acc.isRpEditar()) {%>
@@ -90,10 +90,22 @@
                 <tbody>
                     <% for (MarcacionTab mt : lisMar) {%>
                     <tr>
+                                        <tr>
+                        <td>
+                            <div class="user-view">
+                                <a href="#">
+                                    <img class="redondeado materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (mt.getMarPortada() != null) {
+                                            out.println(mt.getMarPortada());
+                                        } else {
+                                            out.println("img/en proceso.png");
+
+                                        }%>">
+                                </a>
+                            </div>
+                        </td>
                         <td><%=mt.getMarId()%></td>
                         <td><%=mt.getCliNombre()%></td>
                         <td><%=mt.getMarNombre()%></td>
-                        <td><%=mt.getMarPortada()%></td>
                         <td><%=mt.getArmNombre()%></td>
                         <td>
                             <a href="#"> 

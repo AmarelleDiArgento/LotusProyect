@@ -65,11 +65,11 @@
             <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
+                        <th>Imagen</th>
                         <th>ID</th>
                         <th>Producto</th>
                         <th>Variedad</th>
                         <th>Color</th>
-                        <th>Imagen</th>
                         <th>Estado</th>
                             <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
@@ -84,14 +84,10 @@
                 <tbody>
                     <% for (VariedadTab vt : LisV) {%>
                     <tr>
-                        <td><%=vt.getVarId()%></td>
-                        <td><%=vt.getProNombre()%></td>
-                        <td><%=vt.getVarNombre()%></td>
-                        <td><%=vt.getVarColor()%></td>
                         <td>
                             <div class="user-view">
                                 <a href="#">
-                                    <img class="circle materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (vt.getVarImagen() != null) {
+                                    <img class="redondeado materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (vt.getVarImagen() != null) {
                                             out.println(vt.getVarImagen());
                                         } else {
                                             out.println("img/en proceso.png");
@@ -100,6 +96,10 @@
                                 </a>
                             </div>
                         </td>
+                        <td><%=vt.getVarId()%></td>
+                        <td><%=vt.getProNombre()%></td>
+                        <td><%=vt.getVarNombre()%></td>
+                        <td><%=vt.getVarColor()%></td>
                         <td>
                             <a href="#">
                                 <i class="material-icons medium<% if (vt.isVarEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>

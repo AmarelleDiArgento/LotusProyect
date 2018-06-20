@@ -80,7 +80,7 @@
                     <tr>
                         <td><div class="user-view">
                                 <a >
-                                    <img class="circle materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%=ut.getAvatar()%>">
+                                    <img class="redondeado materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%=ut.getAvatar()%>">
                                 </a>
                             </div>
                         </td>

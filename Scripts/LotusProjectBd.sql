@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS LotusProject.cliente (
  CliNombre VARCHAR(45) NOT NULL,
  UsuCedula VARCHAR(10) NOT NULL,
  CliLocalizacion VARCHAR(45) NOT NULL,
- CliLogo VARCHAR(255) NOT NULL,
+ CliLogo VARCHAR(255) NULL,
  CliEstado TINYINT NOT NULL,
  PRIMARY KEY (CliId),
  UNIQUE INDEX CliNombre_UNIQUE (CliNombre ASC),
@@ -581,8 +581,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS LotusProject.asignanota (
  NotId INT NOT NULL,
  VarId INT(11) NOT NULL,
- ProId INT(11) NULL,
- PRIMARY KEY (NotId, VarId, ProId),
+ ProId INT(11) NOT NULL,
  INDEX fk_Notas_has_variedad_variedad1_idx (VarId ASC, ProId ASC),
  INDEX fk_Notas_has_variedad_Notas1_idx (NotId ASC),
  CONSTRAINT fk_Notas_has_variedad_Notas1

@@ -65,11 +65,11 @@
             <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
+                        <th>Logo</th>
                         <th>ID</th>
                         <th>Cliente</th>
                         <th>Comercial</th>
                         <th>Localización</th>
-                        <th>Logo</th>
                         <th>Estado</th>
 
                         <%if (acc.isRpEditar()) {%>
@@ -85,14 +85,10 @@
                 <tbody>
                     <% for (ClienteTab ct : LisC) {%>
                     <tr>
-                        <td><%=ct.getId()%></td>
-                        <td><%=ct.getNombre()%></td>
-                        <td><%=ct.getNombreUsu()%></td>
-                        <td><%=ct.getLocal()%></td>
                         <td>
                             <div class="user-view">
                                 <a href="#">
-                                    <img class="circle materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (ct.getLogo() != null) {
+                                    <img class="redondeado materialboxed" style="height: 3.5rem; width: 3.5rem" src="<%if (ct.getLogo() != null) {
                                             out.println(ct.getLogo());
                                         } else {
                                             out.println("img/en proceso.png");
@@ -101,15 +97,19 @@
                                 </a>
                             </div>
                         </td>
+                        <td><%=ct.getId()%></td>
+                        <td><%=ct.getNombre()%></td>
+                        <td><%=ct.getNombreUsu()%></td>
+                        <td><%=ct.getLocal()%></td>
                         <td>
                             <a href="#">
-                                <i class="material-icons medium<% if (ct.isEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
+                                <i class="material-icons medium <% if (ct.isEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
                             </a>
                         </td>
                         <%if (acc.isRpEditar()) {%>
                         <td>
                             <a href="#">
-                                <i class="material-icons medium purple-text" onclick="consultar(<%=ct.getId()%>)" > edit </i>
+                                <i class="material-icons small purple-text" onclick="consultar(<%=ct.getId()%>)" > edit </i>
                             </a>
                         </td>
                         <%}
@@ -117,7 +117,7 @@
 
                         <td>
                             <a href="#">
-                                <i class="material-icons medium purple-text" onclick="msjConf(<%=ct.getId()%>)"> delete </i>
+                                <i class="material-icons small purple-text" onclick="msjConf(<%=ct.getId()%>)"> delete </i>
                             </a>
                         </td>
                         <%}%>

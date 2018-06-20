@@ -354,7 +354,7 @@ call LotusProject.lineaIn(1, 1);
 -- Procedimientos LotusProject Tabla cliente 
 -- -----------------------------------------------------
 
-call LotusProject.ClienteIn('Bloomstar', '1075515', 'Toronto (Canada)', 'p', 1);
+call LotusProject.ClienteIn('Bloomstar', '1075515', 'Toronto (Canada)', 'img\Cliente\BloomstarLogo.png', 1);
 -- call lotusproject.ClienteMo(1, 'rosa amarilla', 'abcd', 1, 1);
 -- call LotusProject.clienteLi();
 -- call lotusproject.ClienteCo(2);
@@ -364,7 +364,7 @@ call LotusProject.ClienteIn('Bloomstar', '1075515', 'Toronto (Canada)', 'p', 1);
 -- Procedimientos LotusProject Tabla marcacion 
 -- -----------------------------------------------------
 
-call LotusProject.marcacionIn('Bloomstar Rainbow 24 tallos', 'esta', 1, 1, 1);
+call LotusProject.marcacionIn('Bloomstar Rainbow 24 tallos', 'img\Cliente\Bloomstar\Bloomstar Rainbow 24 tallos.jpg', 1, 1, 1);
  -- call lotusproject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
 -- call lotusproject.marcacionLi();
 -- call lotusproject.permisomarcacionCo(3);
@@ -429,7 +429,7 @@ call LotusProject.partesIn('Follaje', 'Lo que no es la flor ni el tallo');
 -- call lotusproject.partesLi();
 -- call lotusproject.partesCo(1);
 
-call LotusProject.variedadIn('Vendela', 1, 21, 'img/Producto/Roses/Rosita Vendela.png', 'Ligth Pink');
+call LotusProject.variedadIn('Rosita Vendela', 1, 21, 'img/Producto/Roses/Rosita Vendela.png', 'Ligth Pink');
 call LotusProject.variedadIn('Vendela', 1, 21, 'img/Producto/Roses/Vendela.jpg', 'White');
 
 
