@@ -263,7 +263,8 @@ call LotusProject.productoIn('Alstroemeria','img/Maestro/Producto/alstroemeria.p
 -- call LotusProject.productoIn('Lirios','img/Maestro/Producto/lirios.png',1,5);
 call LotusProject.productoIn('Matsumoto','img/Maestro/Producto/matsumoto.png',1,7);
 -- call LotusProject.productoIn('Micro','img/Maestro/Producto/micro.png',1,3);
--- call LotusProject.productoIn('Gerbera Mini','img/Maestro/Producto/gerbera mini.png',1,10);
+-- call LotusProject.produimg\ClienteBloomstar\Bloomstar Rainbow 24 tallos.jpg
+call LotusProject.productoIn('Gerbera Mini','img/Maestro/Producto/gerbera mini.png',1,10);
 call LotusProject.productoIn('Minicarnation','img/Maestro/Producto/minicarnation.png',1,8);
 -- call LotusProject.productoIn('Novelty','img/Maestro/Producto/novelty.png',1,3);
 call LotusProject.productoIn('Oriental','img/Maestro/Producto/oriental.png',1,5);
@@ -354,7 +355,7 @@ call LotusProject.lineaIn(1, 1);
 -- Procedimientos LotusProject Tabla cliente 
 -- -----------------------------------------------------
 
-call LotusProject.ClienteIn('Bloomstar', '1075515', 'Toronto (Canada)', 'img\Cliente\BloomstarLogo.png', 1);
+call LotusProject.ClienteIn('Bloomstar', '1075515', 'Toronto (Canada)', 'img/Cliente/BloomstarLogo.png', 1);
 -- call lotusproject.ClienteMo(1, 'rosa amarilla', 'abcd', 1, 1);
 -- call LotusProject.clienteLi();
 -- call lotusproject.ClienteCo(2);
@@ -364,7 +365,7 @@ call LotusProject.ClienteIn('Bloomstar', '1075515', 'Toronto (Canada)', 'img\Cli
 -- Procedimientos LotusProject Tabla marcacion 
 -- -----------------------------------------------------
 
-call LotusProject.marcacionIn('Bloomstar Rainbow 24 tallos', 'img\Cliente\Bloomstar\Bloomstar Rainbow 24 tallos.jpg', 1, 1, 1);
+call LotusProject.marcacionIn('Bloomstar Rainbow 24 tallos', 'img/Cliente/Bloomstar/Bloomstar Rainbow 24 tallos.jpg', 1, 1, 1);
  -- call lotusproject.marcacionMo(1, 'rosa amarilla', 'abcd', 1, 1);
 -- call lotusproject.marcacionLi();
 -- call lotusproject.permisomarcacionCo(3);

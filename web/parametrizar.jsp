@@ -62,7 +62,6 @@
 
 
         <div class="container">
-            <h5>Parametros</h5>
 
 
             <%
@@ -74,6 +73,68 @@
 
             %>
 
+
+            <h5>Parametros</h5>
+            <!-- Page Layout here -->
+            <div class="row">
+                <div class="col s12 m4 l3 " > 
+
+                    <h6>Grados</h6>
+                    <div class="collection">
+                        <a href="#!" class="collection-item">Alan</a>
+                    </div>
+                    <!-- Note that "m4 l3" was added -->
+                    <!-- Grey navigation panel
+            
+                          This content will be:
+                      3-columns-wide on large screens,
+                      4-columns-wide on medium screens,
+                      12-columns-wide on small screens  -->
+
+                </div>
+
+                <div class="col s12 m8 l9" > <!-- Note that "m8 l9" was added -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Item Name</th>
+                                <th>Item Price</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select>
+                                        <option value="" disabled selected>Parametro</option>
+                                        <% for (ParametrosTab pt : lisPar) {%>
+                                        <option value="<%=pt.getParId()%>"> <%=pt.getParNombre()%> </option>
+                                        <%}%>
+                                    </select>
+                                    <label>Parametro</label>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="file-field input-field center">
+                                        <div class="material-icons transparent blue-text z-depth-0">
+
+                                            <i class="material-icons small">image</i>
+                                            <input type="file">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
 
             <div class="row">
@@ -138,37 +199,11 @@
                             <%}%>
                         </select>
                         <label>Variedad</label>
+                        <h5>Parametros</h5>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s4">
+                <h5>Parametros</h5>
 
-                        <i class="material-icons prefix">mode_edit</i>
-                        <select>
-                            <option value="" disabled selected>Parametro</option>
-                            <% for (ParametrosTab pt : lisPar) {%>
-                            <option value="<%=pt.getParId()%>"> <%=pt.getParNombre()%> </option>
-                            <%}%>
-                        </select>
-                        <label>Parametro</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">mode_edit</i>
-                        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                        <label for="icon_prefix2">First Name</label>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="file-field input-field col s2">
-                        <div class="material-icons transparent blue-text z-depth-0">
-
-                            <i class="material-icons small">image</i>
-                            <input type="file">
-                            <input class="file-path validate" type="text">
-                        </div>
-                    </div>
-                </div>   
             </div>
             <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
@@ -181,7 +216,7 @@
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
         <script type="text/javascript">
-            
+
             function modalMod() {
 
                 var elem = document.querySelector('#modalModificar');
