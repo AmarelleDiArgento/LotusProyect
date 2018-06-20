@@ -71,6 +71,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Detalles</th>
+                        <th>Paso</th>
                         <th>Estado</th>
                             <%if (acc.isRpEditar()) {%>
                         <th>Editar</th>
@@ -86,8 +87,13 @@
                     <% for (ArmadoTab at : LisA) {%>
                     <tr>
                         <td><%=at.getArmId()%></td>
-                        <td><a href="pasos.do?accion=Listar&Id=<%=at.getArmId()%>"><%=at.getArmNombre()%></a></td>
+                        <td><%=at.getArmNombre()%></td>
                         <td><%=at.getArmDescripcion()%></td>
+                        <td>
+                            <a href="pasos.do?accion=Listar&Id=<%=at.getArmId()%>">
+                                <i class="material-icons medium purple-text"> remove_red_eye</i>
+                            </a>
+                        </td>
                         <td>
                             <a href="#">
                                 <i class="material-icons medium<% if (at.isArmEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>

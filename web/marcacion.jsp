@@ -71,10 +71,10 @@
             <table class="centered striped responsive-table" id="tabla" >
                 <thead>
                     <tr>
+                        <th>Portada</th>
                         <th>ID</th>
                         <th>Cliente</th>
                         <th>Nombre</th>
-                        <th>Portada</th>
                         <th>Armado</th>
                         <th>Estado</th>
                             <%if (acc.isRpEditar()) {%>
@@ -90,10 +90,10 @@
                 <tbody>
                     <% for (MarcacionTab mt : lisMar) {%>
                     <tr>
+                        <td><%=mt.getMarPortada()%></td>
                         <td><%=mt.getMarId()%></td>
                         <td><%=mt.getCliNombre()%></td>
                         <td><%=mt.getMarNombre()%></td>
-                        <td><%=mt.getMarPortada()%></td>
                         <td><%=mt.getArmNombre()%></td>
                         <td>
                             <a href="#"> 
