@@ -40,9 +40,10 @@
             z-index: 1;
             padding-top: 100px;
             left: 0;
-            top: 0;
+            top: 75px;
             width: 100%;
             height: 100%;
+            max-height: 90% !important;
             overflow: auto;
             background-color: black;
         }
@@ -53,7 +54,7 @@
             background-color: #fefefe;
             margin: auto;
             padding: 0;
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
         }
 
@@ -137,7 +138,7 @@
 
         img.hover-shadow {
             transition: 0.3s;
-        }lara
+        }
 
         .hover-shadow:hover {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -187,7 +188,7 @@
 
                 %>
                 <div class="column">
-                    <img src="<%=pt.getPasImagen()%>" width="200px" onclick="openModal();currentSlide(<%=pt.getPasId()%>)" class="hover-shadow">
+                    <img src="<%=pt.getPasImagen()%>" width="100%" onclick="openModal();currentSlide(<%=pt.getPasId()%>)" class="hover-shadow">
                 </div>
                 <%}%>
             </div>
@@ -196,34 +197,35 @@
             <!-- The Modal/Lightbox -->
             <div id="myModal" class="modal">
                 <span class="close cursor" onclick="closeModal()">&times;</span>
-                <div class="modal-content">
+                <div class="modal-content card">
 
                     <%
                         for (PasoTab pt : LisP) {
                     %>
-                    <div class="mySlides">
+                    <div class="mySlides center">
                         <div class="numbertext"><%=pt.getPasId()%> / <%=LisP.size()%> </div>
-                        <img width="80%" src="<%=pt.getPasImagen()%>">
+                        <img width="60%" src="<%=pt.getPasImagen()%>">
                     </div>
                     <%}%>
 
                     <!-- Next/previous controls -->
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>2
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
+                    <div class="card-content">
+                      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
                     <!-- Caption text -->
                     <div class="caption-container">
                         <p id="caption"></p>
                     </div>
 
                     <!-- Thumbnail image controls -->
-                    <%for (PasoTab pt : LisP) {%>
-
-                    <div class="column">
-                        <img class="demo" width="200px" src="<%=pt.getPasImagen()%>" onclick="currentSlide(<%=pt.getPasId()%>)" alt="<%=pt.getPasDescripcion()%>">
-                    </div>
-
-                    <%}%>
+                    
 
                 </div>
             </div>
