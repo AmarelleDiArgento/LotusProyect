@@ -195,7 +195,7 @@
         </div>
 
             <!-- The Modal/Lightbox -->
-            <div id="myModal" class="modal">
+            <div id="myModal" class="modal" tabindex="none!important">
                 <span class="close cursor" onclick="closeModal()">&times;</span>
                 <div class="modal-content card">
 
@@ -203,7 +203,7 @@
                         for (PasoTab pt : LisP) {
                     %>
                     <div class="mySlides center">
-                        <div class="numbertext"><%=pt.getPasId()%> / <%=LisP.size()%> </div>
+                        <div class="numbertext"><%=pt.getPasId()%> / <%=LisP.size()%> </div><span class="close cursor" onclick="closeModal()">&times;</span>
                         <img width="60%" src="<%=pt.getPasImagen()%>">
                     </div>
                     <%}%>
@@ -218,14 +218,7 @@
                     <div class="card-reveal">
                       <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                       <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                    <!-- Caption text -->
-                    <div class="caption-container">
-                        <p id="caption"></p>
-                    </div>
-
-                    <!-- Thumbnail image controls -->
-                    
+                    </div>                   
 
                 </div>
             </div>
