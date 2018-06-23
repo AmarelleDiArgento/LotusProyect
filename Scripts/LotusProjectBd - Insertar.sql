@@ -431,7 +431,7 @@ call LotusProject.partesIn('Follaje', 'Lo que no es la flor ni el tallo');
 -- call lotusproject.partesCo(1);
 
 call LotusProject.variedadIn('Rosita Vendela', 1, 21, 'img/Producto/Roses/Rosita Vendela.png', 'Ligth Pink');
-call LotusProject.variedadIn('Vendela', 1, 21, 'img/Producto/Roses/Vendela.jpg', 'White');
+call LotusProject.variedadIn('Vendela', 1, 21, 'img/Producto/Roses/Vendela.png', 'White');
 
 
 -- en prueba 

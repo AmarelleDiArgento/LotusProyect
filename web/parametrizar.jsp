@@ -117,6 +117,7 @@
                                 <td>
                                     <div class="input-field">
                                         <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                                        <label for="icon_prefix2">First Name</label>
                                     </div>
                                 </td>
                                 <td>
