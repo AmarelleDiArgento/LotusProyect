@@ -151,7 +151,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripci©n</label>
+                            <label for="Descripcion">Descripcion</label>
                         </div>
                         <div class="switch">
                             <label>
@@ -190,7 +190,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required> <%=aS.getArmDescripcion()%> </textarea>
-                            <label for="Descripcion">Descripci©n</label>
+                            <label for="Descripcion">Descripcion</label>
                         </div>
                         <div class="switch">
                             <label>

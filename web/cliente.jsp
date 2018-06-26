@@ -32,7 +32,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <title>Lotus QA - Variedad</title>
+        <title>Lotus QA - Cliente</title>
         <link rel="shortcut icon" href="img\favicon.png" type="image/x-icon"/>
 
         <!-- CSS  -->
@@ -101,6 +101,7 @@
                         <td><%=ct.getNombre()%></td>
                         <td><%=ct.getNombreUsu()%></td>
                         <td><%=ct.getLocal()%></td>
+  
                         <td>
                             <a href="#">
                                 <i class="material-icons medium <% if (ct.isEstado()) {%> green-text <% } else { %> brown-text text-lighten-5 <%}%>"> settings_power</i>
@@ -144,10 +145,10 @@
 
         <!-- Modal Insertar Nuevo registro -->
         <div id="modalNuevo" class="modal modal-fixed-footer">
-            <form method="get" action="variedads.do" enctype="multipart/form-data">
+            <form method="get" action="clientes.do" enctype="multipart/form-data">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
-                    <p>Registra la informacion de la nueva Variedad</p>
+                    <h4><i class="material-icons medium">filter_vintage</i> Nuevo Cliente</h4>
+                    <p>Registra la informacion del nuevo cliente</p>
                     <div class="row">
                         <div class="input-field col s4">
                             <select name="UsuId">>
@@ -162,11 +163,12 @@
                             <input id="Nombre" type="text" name="Nombre" class="validate" required="">
                             <label for="Nombre">Nombre</label>
                         </div>
+
                         <div class="input-field col s4">
-                            <i class="material-icons prefix">color_lens</i>
-                            <input type="text" id="Color" name="Color" class="autocomplete">
-                            <label for="Color">Color</label>
-                        </div>
+                            <input id="Localizacion" type="text" name="Localizacion" class="validate" required="">
+                            <label for="Localizacion">Localizacion</label>
+                        </div> 
+
                         <div class="file-field input-field col s3">
 
                             <i class="material-icons prefix">image</i>
@@ -199,28 +201,66 @@
                 ClienteTab cS = (ClienteTab) Ses.getAttribute("Cli");
         %>
         <div id="modalModificar" class="modal modal-fixed-footer">
-            <form method="get" action="variedads.do">
+            <form method="get" action="clientes.do">
                 <div class="modal-content">
-                    <h4><i class="material-icons medium">filter_vintage</i> Nueva Variedad</h4>
-                    <p>Registra la informacion lo cambios de la Variedad</p>
+                    <h4><i class="material-icons medium">filter_vintage</i> Nuevo Cliente</h4>
+                    <p>Registra los cambios del  cliente</p>
                     <div class="row">
+                        <div class="input-field col s4">
+                            <select name="UsuId">>
+                                <option value="" disabled selected>Comercial</option>
+                                <%                        for (UsuarioTab ul : LisUsc) {%>
+                                <option value="<%=ul.getCedula()%>"><%=ul.toFullName()%></option>
+                                <%}%>
+                            </select>
+                            <label>Comercial</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="Nombre" type="text" name="Nombre" class="validate" required="">
+                            <label for="Nombre">Nombre</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <input id="Localizacion" type="text" name="Localizacion" class="validate" required="">
+                            <label for="Localizacion">Localizacion</label>
+                        </div> 
+
+                        <div class="file-field input-field col s3">
+
+                            <i class="material-icons prefix">image</i>
+                            <input type="file" name="image">
+                            <input class="file-path validate" name ="Archivo" type="text">
+
+                        </div>
+                        <div class="switch center col s4">
+                            <label>
+                                Inactivo
+                                <input type="checkbox" name="Estado">
+                                <span class="lever"></span>
+                                Activo
+                            </label>
+                        </div>
 
                     </div>    
                 </div>
-                <div class="modal-footer">
-                    <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
-                </div>
-            </form>
-        </div>
 
-        <%}%>
-        <!--Scripts-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
+        </div>    
+    </div>
+    <div class="modal-footer">
+        <input name="accion" value="Modificar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+    </div>
+</form>
+</div>
+
+<%}%>
+<!--Scripts-->
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="js/sweetalert.min.js"></script>
+
+<script type="text/javascript">
                                     document.querySelector("#buscar").onkeyup = function () {
                                         $TableFilter("#tabla", this.value);
                                     }
@@ -272,9 +312,9 @@
                                         $('body').append(form);
                                         (form).submit();
                                     }
-            <% if (msj != null) {%>
+    <% if (msj != null) {%>
 
-            <%if (msj.getTipo().equals("Error")) {%>
+    <%if (msj.getTipo().equals("Error")) {%>
                                     function msjError() {
                                         swal({
                                             title: "<%=msj.getMsj()%>",
@@ -285,7 +325,7 @@
                                     ;
 
 
-            <%} else if (msj.getTipo().equals("Msj")) {%>
+    <%} else if (msj.getTipo().equals("Msj")) {%>
                                     function msjMsj() {
 
                                         swal("<%=msj.getMsj()%>", {
@@ -294,7 +334,7 @@
                                     }
                                     ;
 
-            <%} else if (msj.getTipo().equals("Ok")) {%>
+    <%} else if (msj.getTipo().equals("Ok")) {%>
                                     function msjOk()
                                     {
                                         swal({
@@ -304,12 +344,12 @@
                                         });
                                     }
                                     ;
-            <%}
-                }%>
+    <%}
+        }%>
 
 
-        </script>
-    </body>
+</script>
+</body>
 </html>
 <%
 
