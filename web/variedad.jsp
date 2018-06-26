@@ -169,10 +169,10 @@
                         <div class="file-field input-field col s3">
 
                             <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
+                        <input type="file" name="image">
+                        <input class="file-path validate" name ="Archivo" type="text">
 
-                        </div>
+                    </div>
                         <div class="switch center col s4">
                             <label>
                                 Inactivo
@@ -229,11 +229,11 @@
 
                         <div class="file-field input-field col s3">
 
-                            <i class="material-icons prefix">image</i>
-                            <input type="file" name="image">
-                            <input class="file-path validate" name ="Archivo" type="text">
+                             <i class="material-icons prefix">image</i>
+                        <input type="file" name="image">
+                        <input class="file-path validate" name ="Archivo" type="text">
 
-                        </div>
+                    </div>
                         <div class="switch center col s4">
                             <label>
                                 Inactivo

@@ -147,7 +147,7 @@
                         </div>
                         <div class="input-field col s12">
                             <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                            <label for="Descripcion">Descripci�n</label>
+                            <label for="Descripcion">Descripcion</label>
                         </div>
                         <div class="input-field col s4">
                             <input id="Tipo" type="text" name="Tipo" class="validate" required="">
@@ -195,7 +195,7 @@
                 </div>
                 <div class="input-field col s12">
                     <textarea id="Descripcion" class="materialize-textarea" name="Descripcion" class="validate" required></textarea>
-                    <label for="Descripcion">Descripci�n</label>
+                    <label for="Descripcion">Descripcion</label>
                 </div>
                 <div class="switch">
                     <label>
