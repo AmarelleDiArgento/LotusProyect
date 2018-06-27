@@ -17,7 +17,7 @@
 %>
 <nav class="z-depth-0">
     <div class="nav-wrapper white">
-        <a href="#!" class="brand-logo">
+        <a href="javascript:history.back()" class="brand-logo">
             <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
 
         </a>
