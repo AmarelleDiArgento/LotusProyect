@@ -140,7 +140,7 @@
                     <p>Registra la informacion del nuevo usuario</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input id="Cedula" type="text" name="Cedula" class="validate" >
+                            <input id="Cedula" type="number" name="Cedula" class="validate" >
                             <label for="Cedula">Cedula</label>
                         </div>
                         <div class="input-field col s4">
@@ -241,7 +241,7 @@
                     <p>Modifica la informacion del usuario</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input id="CedulaM" type="text" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
+                            <input id="CedulaM" type="number" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
                             <label for="CedulaM">Cedula</label>
                         </div>
                         <div class="input-field col s4">
@@ -257,7 +257,7 @@
                             <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
+                            <input id="ExtencionM" type="number" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
                             <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
