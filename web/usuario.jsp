@@ -140,7 +140,7 @@
                     <p>Registra la informacion del nuevo usuario</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input id="Cedula" type="number" name="Cedula" class="validate" >
+                            <input id="Cedula" pattern="[0-9]{11}" type="number" name="Cedula" class="validate" >
                             <label for="Cedula">Cedula</label>
                         </div>
                         <div class="input-field col s4">
@@ -155,28 +155,7 @@
                             <input id="Usuario" type="text" name="Usuario" class="validate">
                             <label for="Usuario">Usuario</label>
                         </div>
-                        <div class="input-field col s4">
-                            <input id="Password" type="Password" name="Password" class="validate">
-                            <label for="Password">Password</label>
-                        </div>
-                        <div class="input-field col s4">
-                            <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
-                            <label for="Extencion">Extencion</label>
-                            <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
-                        </div>
-
-                        <div class="input-field col s4">
-                            <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
-                            <label for="Celular">Celular</label>
-                            <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
-                        </div>
-
-                        <div class="input-field col s4">
-                            <input id="Email" type="Email" name="Email" class="validate">
-                            <label for="Email">Email</label>
-                            <span class="helper-text" data-error="Digita un correo valido" ></span>
-                        </div>
-
+                       
 
                         <div class="input-field col s4">
                             <select name="Genero">
@@ -197,8 +176,6 @@
                         </div>
 
 
-                        <%
-                        %>
                         <div class="input-field col s4">
                             <select multiple>
                                 <option value="" disabled selected>Poscosecha</option>
@@ -208,7 +185,25 @@
                             </select>
                             <label>Poscosecha</label>
                         </div>
-
+                        <div class="input-field col s4">
+                            <input id="Password" type="Password" name="Password" class="validate">
+                            <label for="Password">Password</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="Email" type="Email" name="Email" class="validate">
+                            <label for="Email">Email</label>
+                            <span class="helper-text" data-error="Digita un correo valido" ></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="Celular" type="tel" pattern="^[|3]\d{9}$" name="Celular" class="validate">
+                            <label for="Celular">Celular</label>
+                            <span class="helper-text" data-error="Digita un numero de corporativo valido" ></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="Extencion" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate">
+                            <label for="Extencion">Extencion</label><!-- 
+                            <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span> -->
+                        </div>
 
                         <div class="input-field col s4 center">
                             <div class="switch">
@@ -241,7 +236,7 @@
                     <p>Modifica la informacion del usuario</p>
                     <div class="row">
                         <div class="input-field col s4">
-                            <input id="CedulaM" type="number" name="Cedula" class="validate" value="<%=uS.getCedula()%>">
+                            <input id="CedulaM" type="text" name="Cedula" class="validate" pattern="[0-9]{11}" value="<%=uS.getCedula()%>">
                             <label for="CedulaM">Cedula</label>
                         </div>
                         <div class="input-field col s4">
@@ -257,7 +252,7 @@
                             <label for="UsuarioM">Usuario</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="ExtencionM" type="number" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
+                            <input id="ExtencionM" type="text" name="Extencion" pattern="[0-9]{4}" maxlength="4" class="validate" value="<%=uS.getExtencion()%>">
                             <label for="ExtencionM">Extencion</label>
                             <span class="helper-text" data-error="Digita un extencion valida" data-success="right"></span>
                         </div>
